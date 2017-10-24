@@ -4,7 +4,7 @@ A modernized Angular 4+ query builder based on jquery QueryBuilder.
 # Getting Started
 
 ## Install
-`npm install @aqb/query-builder`
+`npm install angular2-query-builder`
 
 ## Demo
 Play with the [demo here](https://zebzhao.github.io/Angular-QueryBuilder/demo/).
