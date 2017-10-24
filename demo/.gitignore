@@ -1,0 +1,6 @@
+esm/dist
+esm/lib
+esm/src/**/*.ngfactory.ts
+esm/src/**/*.ngsummary.json
+node_modules
+umd/lib
