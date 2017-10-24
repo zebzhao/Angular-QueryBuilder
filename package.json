@@ -42,7 +42,7 @@
     "codecov": "cat coverage/lcov.info | codecov",
     "docs": "compodoc -p tsconfig.json -d docs --disableCoverage --disablePrivateOrInternalSupport",
     "explorer": "source-map-explorer ./dist/index.umd.js",
-    "gh-pages": "rimraf docs && npm run docs && gh-pages -d docs",
+    "gh-pages": "rimraf docs && npm run docs && gulp copy:demo && gh-pages -d docs",
     "lint": "npm run tslint 'src/**/*.ts'",
     "ngcompile": "node_modules/.bin/ngc -p tsconfig-aot.json",
     "postversion": "git push && git push --tags",
