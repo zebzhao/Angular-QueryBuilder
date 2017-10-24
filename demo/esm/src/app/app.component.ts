@@ -3,7 +3,7 @@ import { QueryBuilderConfig } from '../../lib/components/query-builder'
 
 @Component({
   selector: 'my-app',
-  template: `<vr-query-builder class='margin30' [data]='query' [config]='config'></vr-query-builder>
+  template: `<query-builder class='margin30' [data]='query' [config]='config'></query-builder>
   <div class='margin30'>
       <textarea >{{query | json}}</textarea>
   </div>`,

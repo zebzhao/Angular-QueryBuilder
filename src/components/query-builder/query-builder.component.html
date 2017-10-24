@@ -52,7 +52,7 @@
               <input class="form-control" [(ngModel)]="item.value" *ngSwitchCase="'checkbox'" type="checkbox">
             </ng-container>
         </ng-container>
-        <vr-query-builder *ngIf="local.ruleset" [data]="item" [parentData]="data" [config]="config" [typeMap]="typeMap" [operatorMap]="operatorMap"></vr-query-builder>
+        <query-builder *ngIf="local.ruleset" [data]="item" [parentData]="data" [config]="config" [typeMap]="typeMap" [operatorMap]="operatorMap"></query-builder>
         <p class="empty-warning" *ngIf="local.invalid">A ruleset cannot be empty. Please add a rule or remove it all together.</p>        
       </li>
     </ng-container>

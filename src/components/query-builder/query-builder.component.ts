@@ -2,7 +2,7 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/cor
 import { Field, Option, QueryBuilderConfig, Rule, RuleSet } from './query-builder.interfaces';
 
 @Component({
-  selector: 'vr-query-builder',
+  selector: 'query-builder',
   templateUrl: './query-builder.component.html',
   styleUrls: ['./query-builder.component.scss']
 })

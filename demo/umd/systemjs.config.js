@@ -37,7 +37,7 @@
       'ts': 'npm:plugin-typescript@5.2.7/lib/plugin.js',
       'typescript': 'npm:typescript@2.2.1/lib/typescript.js',
 
-      'ticktock': 'lib/index.umd.js'
+      'angular2-query-builder': 'lib/index.umd.js'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -48,7 +48,7 @@
       rxjs: {
         defaultExtension: 'js'
       },
-      ticktock: {
+      'angular2-query-builder': {
         defaultExtension: 'js'
       }
     }
