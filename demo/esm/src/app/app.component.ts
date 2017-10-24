@@ -10,7 +10,7 @@ import { QueryBuilderConfig } from '../../lib/components/query-builder'
   styles: ['.margin30 { margin: 30px; }', 'textarea { width: 100%; height: 250px; }']
 })
 export class AppComponent {
-  private query = {
+  public query = {
     condition: 'and',
     rules: [
       {field: 'age', operator: '<='},
@@ -25,7 +25,7 @@ export class AppComponent {
       }
     ]
   };
-  private config: QueryBuilderConfig = {
+  public config: QueryBuilderConfig = {
     fields: {
       'age': {name: 'Age', type: 'number'},
       'gender': {
