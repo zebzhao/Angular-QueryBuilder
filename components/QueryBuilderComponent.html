@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>@aqb/query-builder documentation</title>
+        <title>angular2-query-builder documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,7 +13,7 @@
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">@aqb/query-builder documentation</a>
+            <a href="../" class="navbar-brand">angular2-query-builder documentation</a>
             <button type="button" class="btn btn-default btn-menu fa fa-bars" id="btn-menu"></button>
         </div>
 
@@ -26,7 +26,7 @@
                 <ul class="list">
             
                     <li class="title">
-                        <a href="../index.html">@aqb/query-builder documentation</a>
+                        <a href="../index.html">angular2-query-builder documentation</a>
                     </li>
             
                     <li class="divider"></li>
@@ -198,7 +198,7 @@
                        <ul class="list">
                    
                            <li class="title">
-                               <a href="../index.html">@aqb/query-builder documentation</a>
+                               <a href="../index.html">angular2-query-builder documentation</a>
                            </li>
                    
                            <li class="divider"></li>
@@ -429,7 +429,7 @@
 
             <tr>
                 <td class="col-md-3">selector</td>
-                <td class="col-md-9"><code>vr-query-builder</code></td>
+                <td class="col-md-9"><code>query-builder</code></td>
             </tr>
 
             <tr>
@@ -1228,7 +1228,7 @@
 import { Field, Option, QueryBuilderConfig, Rule, RuleSet } from &#x27;./query-builder.interfaces&#x27;;
 
 @Component({
-  selector: &#x27;vr-query-builder&#x27;,
+  selector: &#x27;query-builder&#x27;,
   templateUrl: &#x27;./query-builder.component.html&#x27;,
   styleUrls: [&#x27;./query-builder.component.scss&#x27;]
 })
@@ -1424,7 +1424,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges {
               &lt;input class&#x3D;&quot;form-control&quot; [(ngModel)]&#x3D;&quot;item.value&quot; *ngSwitchCase&#x3D;&quot;&#x27;checkbox&#x27;&quot; type&#x3D;&quot;checkbox&quot;&gt;
             &lt;/ng-container&gt;
         &lt;/ng-container&gt;
-        &lt;vr-query-builder *ngIf&#x3D;&quot;local.ruleset&quot; [data]&#x3D;&quot;item&quot; [parentData]&#x3D;&quot;data&quot; [config]&#x3D;&quot;config&quot; [typeMap]&#x3D;&quot;typeMap&quot; [operatorMap]&#x3D;&quot;operatorMap&quot;&gt;&lt;/vr-query-builder&gt;
+        &lt;query-builder *ngIf&#x3D;&quot;local.ruleset&quot; [data]&#x3D;&quot;item&quot; [parentData]&#x3D;&quot;data&quot; [config]&#x3D;&quot;config&quot; [typeMap]&#x3D;&quot;typeMap&quot; [operatorMap]&#x3D;&quot;operatorMap&quot;&gt;&lt;/query-builder&gt;
         &lt;p class&#x3D;&quot;empty-warning&quot; *ngIf&#x3D;&quot;local.invalid&quot;&gt;A ruleset cannot be empty. Please add a rule or remove it all together.&lt;/p&gt;        
       &lt;/li&gt;
     &lt;/ng-container&gt;
@@ -1455,8 +1455,8 @@ export class QueryBuilderComponent implements OnInit, OnChanges {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="switch-field float-right">    <button (click)="addRule(data)"><i class="close-icon">➕</i> Rule</button>    <button (click)="addRuleSet(data)"><i class="close-icon">➕</i> Ruleset</button>    <ng-container *ngIf="!!parentData">        <button (click)="removeRuleSet(data, parentData)" class="danger"><i class="close-icon">❌</i></button>    </ng-container></div><div class="switch-field">    <input type="radio" [(ngModel)]="data.condition" value="and" #andOption/>    <label (click)="data.condition=andOption.value">AND</label>    <input type="radio" [(ngModel)]="data.condition" value="or" #orOption/>    <label (click)="data.condition=orOption.value">OR</label></div><ul class="query-tree">  <ng-container *ngFor="let item of data.rules">    <ng-container *ngIf="{ruleset: !!item.rules, invalid: !config.allowEmptyRuleset && item.rules && item.rules.length === 0} as local">      <li [ngClass]="{\'query-item\': true, \'rule\': !local.ruleset, \'ruleset\': local.ruleset, \'invalid-ruleset\': local.invalid}">        <ng-container *ngIf="!local.ruleset">            <div class="switch-field float-right">              <button class="danger" (click)="removeRule(item, data)"><i class="close-icon">❌</i></button>            </div>            <select class="form-control" [(ngModel)]="item.field" (change)="onFieldChange(item)">              <option *ngFor="let field of fieldNames" [ngValue]="field">                {{config.fields[field].name}}              </option>            </select>            <select class="form-control" [(ngModel)]="item.operator">              <option *ngFor="let operator of getOperators(item.field)" [ngValue]="operator">                {{operator}}              </option>            </select>            <ng-container [ngSwitch]="getInputType(item.field, item.operator)">              <input class="form-control" [(ngModel)]="item.value" *ngSwitchCase="\'text\'" type="text">              <input class="form-control" [(ngModel)]="item.value" *ngSwitchCase="\'date\'" type="date">              <input class="form-control" [(ngModel)]="item.value" *ngSwitchCase="\'number\'" type="number">              <select class="form-control" [(ngModel)]="item.value" *ngSwitchCase="\'select\'">                <option *ngFor="let opt of getOptions(item.field)" [ngValue]="opt.value">                  {{opt.name}}                </option>              </select>              <ng-container *ngSwitchCase="\'multiselect\'">                <div style="margin-bottom: 8px"></div>                <select class="form-control" [(ngModel)]="item.value" style="min-width: 200px" multiple>                  <option *ngFor="let opt of getOptions(item.field)" [ngValue]="opt.value">                    {{opt.name}}                  </option>                </select>              </ng-container>              <input class="form-control" [(ngModel)]="item.value" *ngSwitchCase="\'checkbox\'" type="checkbox">            </ng-container>        </ng-container>        <vr-query-builder *ngIf="local.ruleset" [data]="item" [parentData]="data" [config]="config" [typeMap]="typeMap" [operatorMap]="operatorMap"></vr-query-builder>        <p class="empty-warning" *ngIf="local.invalid">A ruleset cannot be empty. Please add a rule or remove it all together.</p>              </li>    </ng-container>  </ng-container></ul></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'my-app'},{'name': 'AppComponent', 'selector': 'my-app'},{'name': 'QueryBuilderComponent', 'selector': 'vr-query-builder'},{'name': 'QueryBuilderComponent', 'selector': 'vr-query-builder'}];
+        var COMPONENT_TEMPLATE = '<div><div class="switch-field float-right">    <button (click)="addRule(data)"><i class="close-icon">➕</i> Rule</button>    <button (click)="addRuleSet(data)"><i class="close-icon">➕</i> Ruleset</button>    <ng-container *ngIf="!!parentData">        <button (click)="removeRuleSet(data, parentData)" class="danger"><i class="close-icon">❌</i></button>    </ng-container></div><div class="switch-field">    <input type="radio" [(ngModel)]="data.condition" value="and" #andOption/>    <label (click)="data.condition=andOption.value">AND</label>    <input type="radio" [(ngModel)]="data.condition" value="or" #orOption/>    <label (click)="data.condition=orOption.value">OR</label></div><ul class="query-tree">  <ng-container *ngFor="let item of data.rules">    <ng-container *ngIf="{ruleset: !!item.rules, invalid: !config.allowEmptyRuleset && item.rules && item.rules.length === 0} as local">      <li [ngClass]="{\'query-item\': true, \'rule\': !local.ruleset, \'ruleset\': local.ruleset, \'invalid-ruleset\': local.invalid}">        <ng-container *ngIf="!local.ruleset">            <div class="switch-field float-right">              <button class="danger" (click)="removeRule(item, data)"><i class="close-icon">❌</i></button>            </div>            <select class="form-control" [(ngModel)]="item.field" (change)="onFieldChange(item)">              <option *ngFor="let field of fieldNames" [ngValue]="field">                {{config.fields[field].name}}              </option>            </select>            <select class="form-control" [(ngModel)]="item.operator">              <option *ngFor="let operator of getOperators(item.field)" [ngValue]="operator">                {{operator}}              </option>            </select>            <ng-container [ngSwitch]="getInputType(item.field, item.operator)">              <input class="form-control" [(ngModel)]="item.value" *ngSwitchCase="\'text\'" type="text">              <input class="form-control" [(ngModel)]="item.value" *ngSwitchCase="\'date\'" type="date">              <input class="form-control" [(ngModel)]="item.value" *ngSwitchCase="\'number\'" type="number">              <select class="form-control" [(ngModel)]="item.value" *ngSwitchCase="\'select\'">                <option *ngFor="let opt of getOptions(item.field)" [ngValue]="opt.value">                  {{opt.name}}                </option>              </select>              <ng-container *ngSwitchCase="\'multiselect\'">                <div style="margin-bottom: 8px"></div>                <select class="form-control" [(ngModel)]="item.value" style="min-width: 200px" multiple>                  <option *ngFor="let opt of getOptions(item.field)" [ngValue]="opt.value">                    {{opt.name}}                  </option>                </select>              </ng-container>              <input class="form-control" [(ngModel)]="item.value" *ngSwitchCase="\'checkbox\'" type="checkbox">            </ng-container>        </ng-container>        <query-builder *ngIf="local.ruleset" [data]="item" [parentData]="data" [config]="config" [typeMap]="typeMap" [operatorMap]="operatorMap"></query-builder>        <p class="empty-warning" *ngIf="local.invalid">A ruleset cannot be empty. Please add a rule or remove it all together.</p>              </li>    </ng-container>  </ng-container></ul></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'my-app'},{'name': 'AppComponent', 'selector': 'my-app'},{'name': 'QueryBuilderComponent', 'selector': 'query-builder'},{'name': 'QueryBuilderComponent', 'selector': 'query-builder'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'QueryBuilderComponent'};
 </script>

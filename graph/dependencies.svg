@@ -34,7 +34,7 @@
 </g>
 <g id="clust6" class="cluster">
 <title>cluster_AppModule_bootstrap</title>
-<polygon fill="none" stroke="#000000" points="16,-214 16,-266 140,-266 140,-214 16,-214"/>
+<polygon fill="none" stroke="#000000" points="88,-214 88,-266 212,-266 212,-214 88,-214"/>
 </g>
 <g id="clust8" class="cluster">
 <title>cluster_QueryBuilderModule</title>
@@ -57,50 +57,56 @@
 <!-- AppModule -->
 <g id="node2" class="node">
 <title>AppModule</title>
-<polygon fill="#8dd3c7" stroke="#000000" points="119.6571,-190 116.6571,-194 95.6571,-194 92.6571,-190 36.3429,-190 36.3429,-154 119.6571,-154 119.6571,-190"/>
-<text text-anchor="middle" x="78" y="-167.8" font-family="Times,serif" font-size="14.00" fill="#000000">AppModule</text>
+<polygon fill="#8dd3c7" stroke="#000000" points="191.6571,-190 188.6571,-194 167.6571,-194 164.6571,-190 108.3429,-190 108.3429,-154 191.6571,-154 191.6571,-190"/>
+<text text-anchor="middle" x="150" y="-167.8" font-family="Times,serif" font-size="14.00" fill="#000000">AppModule</text>
 </g>
 <!-- AppComponent&#45;&gt;AppModule -->
 <g id="edge1" class="edge">
 <title>AppComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M91.9427,-122.2228C91.9427,-122.2228 91.9427,-143.7269 91.9427,-143.7269"/>
-<polygon fill="#000000" stroke="#000000" points="88.4428,-143.7269 91.9427,-153.7269 95.4428,-143.727 88.4428,-143.7269"/>
+<path fill="none" stroke="#000000" d="M122.5369,-122.2228C122.5369,-122.2228 122.5369,-143.7269 122.5369,-143.7269"/>
+<polygon fill="#000000" stroke="#000000" points="119.037,-143.7269 122.5369,-153.7269 126.037,-143.727 119.037,-143.7269"/>
 </g>
 <!-- AppComponent&#45;&gt;AppModule -->
-<g id="edge3" class="edge">
+<g id="edge4" class="edge">
 <title>AppComponent&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M64.0573,-122.2228C64.0573,-122.2228 64.0573,-143.7269 64.0573,-143.7269"/>
-<polygon fill="#000000" stroke="#000000" points="60.5574,-143.7269 64.0573,-153.7269 67.5574,-143.727 60.5574,-143.7269"/>
+<path fill="none" stroke="#000000" d="M115.3544,-122.2228C115.3544,-122.2228 115.3544,-143.7269 115.3544,-143.7269"/>
+<polygon fill="#000000" stroke="#000000" points="111.8545,-143.7269 115.3544,-153.7269 118.8545,-143.727 111.8545,-143.7269"/>
 </g>
 <!-- AppComponent  -->
-<g id="node3" class="node">
+<g id="node4" class="node">
 <title>AppComponent </title>
-<polygon fill="#80b1d3" stroke="#000000" points="132.439,-258 23.561,-258 23.561,-222 132.439,-222 132.439,-258"/>
-<text text-anchor="middle" x="78" y="-235.8" font-family="Times,serif" font-size="14.00" fill="#000000">AppComponent </text>
+<polygon fill="#80b1d3" stroke="#000000" points="204.439,-258 95.561,-258 95.561,-222 204.439,-222 204.439,-258"/>
+<text text-anchor="middle" x="150" y="-235.8" font-family="Times,serif" font-size="14.00" fill="#000000">AppComponent </text>
 </g>
 <!-- AppModule&#45;&gt;AppComponent  -->
-<g id="edge2" class="edge">
+<g id="edge3" class="edge">
 <title>AppModule&#45;&gt;AppComponent </title>
-<path fill="none" stroke="#000000" stroke-dasharray="1,5" d="M64.0573,-190.2228C64.0573,-190.2228 64.0573,-211.7269 64.0573,-211.7269"/>
-<polygon fill="#000000" stroke="#000000" points="60.5574,-211.7269 64.0573,-221.7269 67.5574,-211.727 60.5574,-211.7269"/>
+<path fill="none" stroke="#000000" stroke-dasharray="1,5" d="M136.0573,-190.2228C136.0573,-190.2228 136.0573,-211.7269 136.0573,-211.7269"/>
+<polygon fill="#000000" stroke="#000000" points="132.5574,-211.7269 136.0573,-221.7269 139.5574,-211.727 132.5574,-211.7269"/>
 </g>
 <!-- AppModule&#45;&gt;AppComponent  -->
-<g id="edge5" class="edge">
+<g id="edge6" class="edge">
 <title>AppModule&#45;&gt;AppComponent </title>
-<path fill="none" stroke="#000000" stroke-dasharray="1,5" d="M91.9427,-190.2228C91.9427,-190.2228 91.9427,-211.7269 91.9427,-211.7269"/>
-<polygon fill="#000000" stroke="#000000" points="88.4428,-211.7269 91.9427,-221.7269 95.4428,-211.727 88.4428,-211.7269"/>
+<path fill="none" stroke="#000000" stroke-dasharray="1,5" d="M163.9427,-190.2228C163.9427,-190.2228 163.9427,-211.7269 163.9427,-211.7269"/>
+<polygon fill="#000000" stroke="#000000" points="160.4428,-211.7269 163.9427,-221.7269 167.4428,-211.727 160.4428,-211.7269"/>
 </g>
 <!-- QueryBuilderModule -->
-<g id="node4" class="node">
+<g id="node3" class="node">
 <title>QueryBuilderModule</title>
 <polygon fill="#8dd3c7" stroke="#000000" points="290.0254,-122 287.0254,-126 266.0254,-126 263.0254,-122 153.9746,-122 153.9746,-86 290.0254,-86 290.0254,-122"/>
 <text text-anchor="middle" x="222" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">QueryBuilderModule</text>
 </g>
 <!-- QueryBuilderModule&#45;&gt;AppModule -->
-<g id="edge4" class="edge">
+<g id="edge2" class="edge">
 <title>QueryBuilderModule&#45;&gt;AppModule</title>
-<path fill="none" stroke="#000000" d="M187.8689,-122.2479C187.8689,-145.0179 187.8689,-181 187.8689,-181 187.8689,-181 129.8501,-181 129.8501,-181"/>
-<polygon fill="#000000" stroke="#000000" points="129.8502,-177.5001 119.8501,-181 129.8501,-184.5001 129.8502,-177.5001"/>
+<path fill="none" stroke="#000000" d="M166.4345,-122.2228C166.4345,-122.2228 166.4345,-143.7269 166.4345,-143.7269"/>
+<polygon fill="#000000" stroke="#000000" points="162.9346,-143.7269 166.4345,-153.7269 169.9346,-143.727 162.9346,-143.7269"/>
+</g>
+<!-- QueryBuilderModule&#45;&gt;AppModule -->
+<g id="edge5" class="edge">
+<title>QueryBuilderModule&#45;&gt;AppModule</title>
+<path fill="none" stroke="#000000" d="M179.1314,-122.2228C179.1314,-122.2228 179.1314,-143.7269 179.1314,-143.7269"/>
+<polygon fill="#000000" stroke="#000000" points="175.6315,-143.7269 179.1314,-153.7269 182.6315,-143.727 175.6315,-143.7269"/>
 </g>
 <!-- QueryBuilderComponent  -->
 <g id="node6" class="node">
@@ -109,16 +115,16 @@
 <text text-anchor="middle" x="411" y="-167.8" font-family="Times,serif" font-size="14.00" fill="#000000">QueryBuilderComponent </text>
 </g>
 <!-- QueryBuilderModule&#45;&gt;QueryBuilderComponent  -->
-<g id="edge7" class="edge">
+<g id="edge8" class="edge">
 <title>QueryBuilderModule&#45;&gt;QueryBuilderComponent </title>
-<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M256.1312,-122.0225C256.1312,-139.3734 256.1312,-163 256.1312,-163 256.1312,-163 319.937,-163 319.937,-163"/>
-<polygon fill="#000000" stroke="#000000" points="319.9371,-166.5001 329.937,-163 319.937,-159.5001 319.9371,-166.5001"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M261.6647,-122.2667C261.6647,-140.5552 261.6647,-166 261.6647,-166 261.6647,-166 319.7773,-166 319.7773,-166"/>
+<polygon fill="#000000" stroke="#000000" points="319.7773,-169.5001 329.7773,-166 319.7772,-162.5001 319.7773,-169.5001"/>
 </g>
 <!-- QueryBuilderModule&#45;&gt;QueryBuilderComponent  -->
-<g id="edge9" class="edge">
+<g id="edge10" class="edge">
 <title>QueryBuilderModule&#45;&gt;QueryBuilderComponent </title>
-<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M222,-122.2228C222,-142.3652 222,-172 222,-172 222,-172 320.0245,-172 320.0245,-172"/>
-<polygon fill="#000000" stroke="#000000" points="320.0245,-175.5001 330.0245,-172 320.0245,-168.5001 320.0245,-175.5001"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M233.0671,-122.2921C233.0671,-144.2057 233.0671,-178 233.0671,-178 233.0671,-178 320.1036,-178 320.1036,-178"/>
+<polygon fill="#000000" stroke="#000000" points="320.1037,-181.5001 330.1036,-178 320.1036,-174.5001 320.1037,-181.5001"/>
 </g>
 <!-- QueryBuilderComponent -->
 <g id="node5" class="node">
@@ -127,13 +133,13 @@
 <text text-anchor="middle" x="595" y="-167.8" font-family="Times,serif" font-size="14.00" fill="#000000">QueryBuilderComponent</text>
 </g>
 <!-- QueryBuilderComponent&#45;&gt;QueryBuilderModule -->
-<g id="edge6" class="edge">
+<g id="edge7" class="edge">
 <title>QueryBuilderComponent&#45;&gt;QueryBuilderModule</title>
 <path fill="none" stroke="#000000" d="M621.3845,-153.7079C621.3845,-131.7943 621.3845,-98 621.3845,-98 621.3845,-98 300.2029,-98 300.2029,-98"/>
 <polygon fill="#000000" stroke="#000000" points="300.2029,-94.5001 290.2029,-98 300.2028,-101.5001 300.2029,-94.5001"/>
 </g>
 <!-- QueryBuilderComponent&#45;&gt;QueryBuilderModule -->
-<g id="edge8" class="edge">
+<g id="edge9" class="edge">
 <title>QueryBuilderComponent&#45;&gt;QueryBuilderModule</title>
 <path fill="none" stroke="#000000" d="M568.6155,-153.7333C568.6155,-135.4448 568.6155,-110 568.6155,-110 568.6155,-110 300.0665,-110 300.0665,-110"/>
 <polygon fill="#000000" stroke="#000000" points="300.0665,-106.5001 290.0665,-110 300.0665,-113.5001 300.0665,-106.5001"/>
