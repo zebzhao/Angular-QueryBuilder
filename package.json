@@ -1,5 +1,5 @@
 {
-  "name": "angular-query-builder",
+  "name": "@aqb/query-builder",
   "version": "0.0.1",
   "description": "A modernized Angular 2+ query builder based on jquery QueryBuilder",
   "main": "./dist/index.umd.js",
