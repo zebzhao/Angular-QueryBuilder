@@ -50,6 +50,14 @@ gulp.task('build:esm:watch', ['build:esm'], () => {
 });
 
 /**
+ * Copy demo builds to docs folder for gh-pages
+ */
+gulp.task('copy:demo', () => {
+  return gulp.src('demo/esm/dist/aot/**/*')
+    .pipe(gulp.dest('docs/demo'));
+});
+
+/**
  * Compile SASS to CSS.
  * @see https://github.com/ludohenin/gulp-inline-ng2-template
  * @see https://github.com/sass/node-sass
