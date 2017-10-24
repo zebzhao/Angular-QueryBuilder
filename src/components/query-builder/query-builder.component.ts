@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { Field, Option, QueryBuilderConfig, Rule, RuleSet } from "./query-builder.interfaces";
+import { Field, Option, QueryBuilderConfig, Rule, RuleSet } from './query-builder.interfaces';
 
 @Component({
   selector: 'vr-query-builder',
@@ -7,30 +7,30 @@ import { Field, Option, QueryBuilderConfig, Rule, RuleSet } from "./query-builde
   styleUrls: ['./query-builder.component.scss']
 })
 export class QueryBuilderComponent implements OnInit, OnChanges {
-  fieldNames: string[];
-  defaultEmptyList: any[] = [];
-  operatorsCache: {[key: string]: string[]};
+  public fieldNames: string[];
+  private defaultEmptyList: any[] = [];
+  private operatorsCache: {[key: string]: string[]};
 
   @Input() operatorMap: {[key: string]: string[]};
   @Input() typeMap: {[key: string]: string};
   @Input() parentData: RuleSet;
-  @Input() data: RuleSet;
-  @Input() config: QueryBuilderConfig;
+  @Input() data: RuleSet = { condition: 'and', rules: [] };
+  @Input() config: QueryBuilderConfig = { fields: {} };
 
   constructor() {
     this.typeMap = {
-      string: "text",
-      number: "number",
-      category: "select",
-      date: "date",
-      boolean: "checkbox"
+      string: 'text',
+      number: 'number',
+      category: 'select',
+      date: 'date',
+      boolean: 'checkbox'
     };
     this.operatorMap = {
-      string: ["=", "!=", "contains", "like"],
-      number: ["=", "!=", ">", ">=", "<", "<="],
-      category: ["=", "!="],
-      date: ["=", "!=", ">", ">=", "<", "<="],
-      boolean: ["="]
+      string: ['=', '!=', 'contains', 'like'],
+      number: ['=', '!=', '>', '>=', '<', '<='],
+      category: ['=', '!='],
+      date: ['=', '!=', '>', '>=', '<', '<='],
+      boolean: ['=']
     };
   }
 
@@ -43,7 +43,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges {
       this.fieldNames = Object.keys(config.fields);
       this.operatorsCache = {};
     } else {
-      throw new Error("config must be a valid object");
+      throw new Error('config must be a valid object');
     }
   }
 
@@ -77,11 +77,11 @@ export class QueryBuilderComponent implements OnInit, OnChanges {
     }
     const type = this.config.fields[field].type;
     switch (operator) {
-      case "is null":
-      case "is not null":
+      case 'is null':
+      case 'is not null':
         return null;  // No displayed component
-      case "in":
-      case "not in":
+      case 'in':
+      case 'not in':
         return 'multiselect';
       default:
         return this.typeMap[type];
@@ -122,7 +122,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges {
     if (this.config.addRuleSet) {
       this.config.addRuleSet(parent);
     } else {
-      parent.rules = parent.rules.concat([{condition: "and", rules: []}]);
+      parent.rules = parent.rules.concat([{condition: 'and', rules: []}]);
     }
   }
 
@@ -140,4 +140,3 @@ export class QueryBuilderComponent implements OnInit, OnChanges {
     rule.operator = this.operatorMap[fieldObject.type][0];
   }
 }
-
