@@ -1,12 +1,12 @@
 export interface RuleSet {
-  condition: string
-  rules: (RuleSet | Rule)[]
+  condition: string;
+  rules: Array<RuleSet | Rule>;
 }
 
 export interface Rule {
-  field: string
-  value?: any
-  operator?: string
+  field: string;
+  value?: any;
+  operator?: string;
 }
 
 export interface Option {
@@ -15,20 +15,20 @@ export interface Option {
 }
 
 export interface Field {
-  name: string
-  type: string
-  nullable?: boolean
-  options?: Option[]
+  name: string;
+  type: string;
+  nullable?: boolean;
+  options?: Option[];
 }
 
 export interface QueryBuilderConfig {
-  fields: {[key: string]: Field}
-  allowEmptyRulesets?: boolean
-  getOperators?: (field: string) => string[]
-  getInputType?: (field: string, operator: string) => string
-  getOptions?: (field: string) => Option[]
-  addRuleSet?: (parent: RuleSet) => void
-  addRule?: (parent: RuleSet) => void
-  removeRuleSet?: (ruleset: RuleSet, parent: RuleSet) => void
-  removeRule?: (rule: Rule, parent: RuleSet) => void
+  fields: {[key: string]: Field};
+  allowEmptyRulesets?: boolean;
+  getOperators?: (field: string) => string[];
+  getInputType?: (field: string, operator: string) => string;
+  getOptions?: (field: string) => Option[];
+  addRuleSet?: (parent: RuleSet) => void;
+  addRule?: (parent: RuleSet) => void;
+  removeRuleSet?: (ruleset: RuleSet, parent: RuleSet) => void;
+  removeRule?: (rule: Rule, parent: RuleSet) => void;
 }

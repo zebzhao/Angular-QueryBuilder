@@ -8,14 +8,15 @@ import { Field, Option, QueryBuilderConfig, Rule, RuleSet } from './query-builde
 })
 export class QueryBuilderComponent implements OnInit, OnChanges {
   public fieldNames: string[];
-  private defaultEmptyList: any[] = [];
-  private operatorsCache: {[key: string]: string[]};
 
   @Input() operatorMap: {[key: string]: string[]};
   @Input() typeMap: {[key: string]: string};
   @Input() parentData: RuleSet;
   @Input() data: RuleSet = { condition: 'and', rules: [] };
   @Input() config: QueryBuilderConfig = { fields: {} };
+
+  private defaultEmptyList: any[] = [];
+  private operatorsCache: {[key: string]: string[]};
 
   constructor() {
     this.typeMap = {
@@ -55,7 +56,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges {
     if (this.config.getOperators) {
         operators = this.config.getOperators(field);
     }
-    const fieldObject = this.config.fields[field]
+    const fieldObject = this.config.fields[field];
     const type = fieldObject.type;
     if (field && this.operatorMap[type]) {
       operators = this.operatorMap[type];
