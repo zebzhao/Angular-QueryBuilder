@@ -20,13 +20,5 @@ Plunkr coming soon...
 
 That's it.
 
-# Roadmap
-
-## DataToSQLService
-Convert data format to valid SQL statement.
-
-## DataToGraphQL
-Convert data format to valid GraphQL syntax.
-
 # Workflow
 See the [angular-library-seed](https://github.com/trekhleb/angular-library-seed) project for details on how to build and run tests.
