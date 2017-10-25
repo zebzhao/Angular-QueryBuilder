@@ -21,33 +21,14 @@ document.addEventListener('DOMContentLoaded', function() {
         faAngleUpClass = 'fa-angle-up',
         faAngleDownClass = 'fa-angle-down',
         toggleItemMenu = function(e) {
-            var element = $(e.target),
-                parent = element[0].parentNode,
-                parentLink,
-                elementIconChild;
-            if (parent) {
-                if (!$(parent).hasClass('linked')) {
-                    e.preventDefault();
-                } else {
-                    parentLink = parent.parentNode;
-                    if (parentLink && element.hasClass('link-name')) {
-                        $(parentLink).trigger('click');
-                    }
-                }
-                elementIconChild = parent.getElementsByClassName(faAngleUpClass)[0];
-                if (!elementIconChild) {
-                    elementIconChild = parent.getElementsByClassName(faAngleDownClass)[0];
-                }
-                if (elementIconChild) {
-                    elementIconChild = $(elementIconChild)
-                    if (elementIconChild.hasClass(faAngleUpClass)) {
-                        elementIconChild.addClass(faAngleDownClass);
-                        elementIconChild.removeClass(faAngleUpClass);
-                    } else {
-                        elementIconChild.addClass(faAngleUpClass);
-                        elementIconChild.removeClass(faAngleDownClass);
-                    }
-                }
+            e.preventDefault();
+            var element = $(e.target);
+            if (element.hasClass(faAngleUpClass)) {
+                element.addClass(faAngleDownClass);
+                element.removeClass(faAngleUpClass);
+            } else {
+                element.addClass(faAngleUpClass);
+                element.removeClass(faAngleDownClass);
             }
         };
 
@@ -86,9 +67,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (parentUl) {
                     parentChapterMenu = parentUl.parentNode;
                     if (parentChapterMenu) {
-                        var toggler = parentChapterMenu.querySelector('.menu-toggler'),
-                            elementIconChild = toggler.getElementsByClassName(faAngleUpClass)[0];
-                        if (toggler && !elementIconChild) {
+                        var toggler = parentChapterMenu.querySelector('.menu-toggler');
+                        if (toggler && hasClass(toggler, 'fa-angle-down')) {
                             toggler.click();
                         }
                     }
@@ -97,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         } else if (linkType === 'chapter-link') {
             var toggler = activeLink.querySelector('.menu-toggler');
-            if (toggler) {
+            if (toggler && hasClass(toggler, 'fa-angle-down')) {
                 toggler.click();
             }
         }
