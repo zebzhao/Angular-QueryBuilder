@@ -30,7 +30,7 @@
   "exclude": [
     "src/**/*.spec.ts",
     "node_modules",
-    "demo/**/*.ts",
+    "demo",
     "dist"
   ]
 }
