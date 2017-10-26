@@ -9,7 +9,7 @@ A modernized Angular 4+ query builder based on jquery QueryBuilder.
 ## Demo
 Play with the [demo here](https://zebzhao.github.io/Angular-QueryBuilder/demo/).
 
-Plunkr coming soon...
+[See the Plunker](https://plnkr.co/edit/vdqjG9G4cxzKqOzNCVnY?p=preview)
 
 ## Documentation
 
