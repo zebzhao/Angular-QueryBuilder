@@ -19,6 +19,7 @@ export interface Field {
   type: string;
   nullable?: boolean;
   options?: Option[];
+  operators?: string[];
 }
 
 export interface QueryBuilderConfig {

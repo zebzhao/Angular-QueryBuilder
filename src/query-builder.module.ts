@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, } from '@angular/forms';
-import { QueryBuilderComponent } from './components';
+import { QueryBuilderComponent, QueryInputDirective } from './components';
 
 @NgModule({
   imports: [
@@ -9,10 +9,12 @@ import { QueryBuilderComponent } from './components';
     FormsModule
   ],
   declarations: [
-    QueryBuilderComponent
+    QueryBuilderComponent,
+    QueryInputDirective
   ],
   exports: [
-    QueryBuilderComponent
+    QueryBuilderComponent,
+    QueryInputDirective
   ]
 })
 export class QueryBuilderModule { }

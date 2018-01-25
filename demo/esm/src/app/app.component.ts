@@ -1,13 +1,30 @@
 import { Component } from '@angular/core';
-import { QueryBuilderConfig } from '../../lib/components/query-builder'
+import { QueryBuilderConfig } from '../../lib/components/query-builder';
 
 @Component({
   selector: 'my-app',
-  template: `<query-builder class='margin30' [data]='query' [config]='config'></query-builder>
+  template: `
+  <query-builder class='margin30' [data]='query' [config]='config'>
+    <ng-container *queryInput="let rule; type: 'textarea'">
+      <textarea class="text-input" [(ngModel)]="rule.value"></textarea>
+    </ng-container>
+  </query-builder>
   <div class='margin30'>
-      <textarea >{{query | json}}</textarea>
+    <textarea class="output">{{query | json}}</textarea>
   </div>`,
-  styles: ['.margin30 { margin: 30px; }', 'textarea { width: 100%; height: 250px; }']
+  styles: ['.margin30 { margin: 30px; }',
+    `.text-input {
+      margin-top: 10px;
+      width: 200px;
+      height: 100px;
+      display: block;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }`,
+    `.output {
+      width: 100%;
+      height: 300px;
+    }`]
 })
 export class AppComponent {
   public query = {
@@ -20,15 +37,16 @@ export class AppComponent {
         rules: [
           {field: 'gender', operator: '='},
           {field: 'occupation', operator: 'in'},
-          {field: 'school', operator: 'is null'}
+          {field: 'school', operator: 'is null'},
+          {field: 'notes', operator: '='}
         ]
       }
     ]
   };
   public config: QueryBuilderConfig = {
     fields: {
-      'age': {name: 'Age', type: 'number'},
-      'gender': {
+      age: {name: 'Age', type: 'number'},
+      gender: {
         name: 'Gender',
         type: 'category',
         options: [
@@ -36,11 +54,12 @@ export class AppComponent {
           {name: 'Female', value: 'f'}
         ]
       },
-      'name': {name: 'Name', type: 'string'},
-      'educated': {name: 'College Degree?', type: 'boolean'},
-      'birthday': {name: 'Birthday', type: 'date'},
-      'school': {name: 'School', type: 'string', nullable: true},
-      'occupation': {
+      name: {name: 'Name', type: 'string'},
+      notes: {name: 'Notes', type: 'textarea', operators: ['=', '!=']},
+      educated: {name: 'College Degree?', type: 'boolean'},
+      birthday: {name: 'Birthday', type: 'date'},
+      school: {name: 'School', type: 'string', nullable: true},
+      occupation: {
         name: 'Occupation',
         type: 'string',
         options: [

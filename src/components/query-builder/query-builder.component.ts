@@ -1,5 +1,17 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { QueryInputDirective } from './query-input.directive';
 import { Field, Option, QueryBuilderConfig, Rule, RuleSet } from './query-builder.interfaces';
+import {
+    Component,
+    ContentChildren,
+    Input,
+    OnChanges,
+    OnInit,
+    QueryList,
+    SimpleChanges,
+    TemplateRef,
+    ViewChild,
+    ViewContainerRef,
+} from '@angular/core';
 
 @Component({
   selector: 'query-builder',
@@ -10,22 +22,17 @@ export class QueryBuilderComponent implements OnInit, OnChanges {
   public fieldNames: string[];
 
   @Input() operatorMap: {[key: string]: string[]};
-  @Input() typeMap: {[key: string]: string};
   @Input() parentData: RuleSet;
   @Input() data: RuleSet = { condition: 'and', rules: [] };
   @Input() config: QueryBuilderConfig = { fields: {} };
+  @Input() inputTypeTemplates: QueryList<QueryInputDirective>;
+
+  @ContentChildren(QueryInputDirective) inputTypes: QueryList<QueryInputDirective>;
 
   private defaultEmptyList: any[] = [];
   private operatorsCache: {[key: string]: string[]};
 
   constructor() {
-    this.typeMap = {
-      string: 'text',
-      number: 'number',
-      category: 'select',
-      date: 'date',
-      boolean: 'checkbox'
-    };
     this.operatorMap = {
       string: ['=', '!=', 'contains', 'like'],
       number: ['=', '!=', '>', '>=', '<', '<='],
@@ -35,17 +42,40 @@ export class QueryBuilderComponent implements OnInit, OnChanges {
     };
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ngOnChanges(changes: SimpleChanges) {
     const config = this.config;
+    const data = this.data;
+
     if (typeof config === 'object') {
       this.fieldNames = Object.keys(config.fields);
       this.operatorsCache = {};
     } else {
       throw new Error('config must be a valid object');
     }
+
+    if (typeof data !== 'object') {
+      throw new Error('data must be a valid object');
+    }
+  }
+
+  findTemplateForRule(rule: Rule): TemplateRef<any> {
+    const type = this.getInputType(rule.field, rule.operator);
+    if (type) {
+      const queryInput = this.findQueryInput(type);
+      if (queryInput) {
+        return queryInput.template;
+      } else {
+        console.warn(`Could not find template for field with type: ${type}`);
+        return null;
+      }
+    }
+  }
+
+  findQueryInput(type: string): QueryInputDirective {
+    const templates = this.inputTypeTemplates || this.inputTypes;
+    return templates.find((item) => item.queryInputType === type);
   }
 
   getOperators(field: string): string[] {
@@ -54,13 +84,17 @@ export class QueryBuilderComponent implements OnInit, OnChanges {
     }
     let operators = this.defaultEmptyList;
     if (this.config.getOperators) {
-        operators = this.config.getOperators(field);
+      operators = this.config.getOperators(field);
     }
     const fieldObject = this.config.fields[field];
     const type = fieldObject.type;
-    if (field && this.operatorMap[type]) {
+
+    if (fieldObject && fieldObject.operators) {
+      operators = fieldObject.operators;
+    } else if (type && this.operatorMap[type]) {
       operators = this.operatorMap[type];
     }
+
     if (fieldObject.options) {
       operators = operators.concat(['in', 'not in']);
     }
@@ -74,7 +108,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges {
 
   getInputType(field: string, operator: string): string {
     if (this.config.getInputType) {
-        return this.config.getInputType(field, operator);
+      return this.config.getInputType(field, operator);
     }
     const type = this.config.fields[field].type;
     switch (operator) {
@@ -85,7 +119,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges {
       case 'not in':
         return 'multiselect';
       default:
-        return this.typeMap[type];
+        return type;
     }
   }
 
