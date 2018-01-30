@@ -62,7 +62,7 @@
                                 id="xs-modules-links"
                             >
                                 <li class="link">
-                                    <a href="../modules/QueryBuilderModule.html"  class="active" >QueryBuilderModule</a>
+                                    <a href="../modules/QueryBuilderModule.html" >QueryBuilderModule</a>
                                 </li>
                         </ul>
                     </li>
@@ -96,7 +96,7 @@
                                 id="xs-directives-links"
                             >
                                 <li class="link">
-                                    <a href="../directives/QueryInputDirective.html" >QueryInputDirective</a>
+                                    <a href="../directives/QueryInputDirective.html"  class="active" >QueryInputDirective</a>
                                 </li>
                         </ul>
                     </li>
@@ -201,7 +201,7 @@
                                        id="modules-links"
                    >
                                        <li class="link">
-                                           <a href="../modules/QueryBuilderModule.html"  class="active" >QueryBuilderModule</a>
+                                           <a href="../modules/QueryBuilderModule.html" >QueryBuilderModule</a>
                                        </li>
                                </ul>
                            </li>
@@ -235,7 +235,7 @@
                                        id="directives-links"
                    >
                                        <li class="link">
-                                           <a href="../directives/QueryInputDirective.html" >QueryInputDirective</a>
+                                           <a href="../directives/QueryInputDirective.html"  class="active" >QueryInputDirective</a>
                                        </li>
                                </ul>
                            </li>
@@ -292,26 +292,15 @@
                    
                    </nav>
                </div>
-               <div class="content module">
+               <div class="content directive">
                    <div class="content-data">
 
-<ol class="breadcrumb">
-  <li>Modules</li>
-  <li>QueryBuilderModule</li>
-</ol>
 
-<div class="text-center">
-    <object id="demo-svg" type="image/svg+xml" data="../modules/QueryBuilderModule/dependencies.svg" style="width: 100%; height: 250px;">
-            Your browser does not support SVG
-    </object>
-    <div class="btn-group">
-        <button id="zoom-in" class="btn btn-default btn-sm">Zoom in</button>
-        <button id="reset" class="btn btn-default btn-sm">Reset</button>
-        <button id="zoom-out" class="btn btn-default btn-sm">Zoom out</button>
-    </div>
-</div>
-<script src="../js/libs/svg-pan-zoom.min.js"></script>
-<script src="../js/svg-pan-zoom.controls.js"></script>
+
+<ol class="breadcrumb">
+  <li>Directives</li>
+  <li>QueryInputDirective</li>
+</ol>
 
 <ul class="nav nav-tabs" role="tablist">
     <li class="active">
@@ -328,63 +317,103 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/query-builder.module.ts</code>
+            <code>src/components/query-builder/query-input.directive.ts</code>
         </p>
 
 
-        <div class="container-fluid module">
-            <div class="row">
-                <div class="col-sm-3">
-                    <h3>Declarations<a href="https://angular.io/docs/ts/latest/api/core/index/NgModule-interface.html#!#declarations-anchor" target="_blank"><span class="fa fa-info-circle"></span></a></h3>
-                    <ul class="list-group">
-                            <li class="list-group-item">
-                                <a href="../components/QueryBuilderComponent.html">QueryBuilderComponent</a>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="../directives/QueryInputDirective.html">QueryInputDirective</a>
-                            </li>
-                    </ul>
-                </div>
-                <div class="col-sm-3">
-                    <h3>Exports<a href="https://angular.io/docs/ts/latest/api/core/index/NgModule-interface.html#!#exports-anchor" target="_blank"><span class="fa fa-info-circle"></a></h3>
-                    <ul class="list-group">
-                            <li class="list-group-item">
-                                    <a href="../components/QueryBuilderComponent.html" >QueryBuilderComponent</a>
-                            </li>
-                            <li class="list-group-item">
-                                    <a href="../directives/QueryInputDirective.html" >QueryInputDirective</a>
-                            </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+
+        <section>
+            <h3>Metadata</h3>
+            <table class="table table-sm table-hover">
+                <tbody>
+
+                    <tr>
+                        <td class="col-md-3">selector</td>
+                        <td class="col-md-9"><code>[queryInput]</code></td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </section>
+
+            <section>
+                <h3 id="inputs">Inputs</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-2">
+                                    <code>queryInputType</code>
+                                </td>
+                                <td class="col-md-10">
+                                    <div><p>Unique name for query input type. </p>
+</div>
+                                      <p>
+                                        <em>Type:</em>    <code>string</code>
+
+                                      </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </section>
+
+
+            <section>
+                <h3 id="constructor">Constructor</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
+                                    <code>constructor(template: TemplateRef<any>)</code>
+                                </td>
+                            </tr>
+            
+                        </tbody>
+                    </table>
+            </section>
+
+
+            <section>
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
+                                    <b> template</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <code>template:     <code>TemplateRef&lt;any&gt;</code>
+            </bcode>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </section>
+
     </div>
     <div class="tab-pane fade tab-source-code" id="source">
-        <pre><code class="hljs javascript">import { NgModule } from &#x27;@angular/core&#x27;;
-import { CommonModule } from &#x27;@angular/common&#x27;;
-import { FormsModule, } from &#x27;@angular/forms&#x27;;
-import { QueryBuilderComponent, QueryInputDirective } from &#x27;./components&#x27;;
+        <pre><code class="hljs javascript">import { Directive, ElementRef, Input, TemplateRef } from &#x27;@angular/core&#x27;;
 
-@NgModule({
-  imports: [
-    CommonModule,
-    FormsModule
-  ],
-  declarations: [
-    QueryBuilderComponent,
-    QueryInputDirective
-  ],
-  exports: [
-    QueryBuilderComponent,
-    QueryInputDirective
-  ]
-})
-export class QueryBuilderModule { }
+@Directive({selector: &#x27;[queryInput]&#x27;})
+export class QueryInputDirective {
+  /** Unique name for query input type. */
+  @Input()
+  get queryInputType(): string { return this._type; }
+  set queryInputType(value: string) {
+    // If the directive is set without a type (updated programatically), then this setter will
+    // trigger with an empty string and should not overwrite the programatically set value.
+    if (!value) { return; }
+    this._type &#x3D; value;
+  }
+  private _type: string;
+
+  constructor(public template: TemplateRef&lt;any&gt;) {}
+}
 </code></pre>
     </div>
 </div>
-
-
 
 
 
