@@ -29,6 +29,7 @@
   ],
   "exclude": [
     "src/**/*.spec.ts",
+    "tmp/**/*.ts",
     "node_modules",
     "demo",
     "dist"

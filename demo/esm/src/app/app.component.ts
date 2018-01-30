@@ -6,27 +6,39 @@ import { QueryBuilderConfig } from '../../lib/components/query-builder';
   template: `
   <query-builder class='margin30' [data]='query' [config]='config'>
     <ng-container *queryInput="let rule; type: 'textarea'">
-      <textarea class="text-input" [(ngModel)]="rule.value"></textarea>
+      <textarea class="text-input" [(ngModel)]="rule.value" placeholder="Custom Textarea">
+      </textarea>
+    </ng-container>
+    <ng-container *queryInput="let rule; type: 'date'">
+      <input [(ngModel)]="rule.value"
+        [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1"
+        placeholder="Custom Date Time">
+      <owl-date-time #dt1></owl-date-time>
     </ng-container>
   </query-builder>
   <div class='margin30'>
     <textarea class="output">{{query | json}}</textarea>
-  </div>`,
-  styles: [
-    `.margin30 { margin: 30px; }`,
-    `:host { font: 15px sans-serif }`,
-    `.text-input {
-      margin-top: 10px;
-      width: 200px;
-      height: 100px;
-      display: block;
-      border-radius: 4px;
-      border: 1px solid #ccc;
-    }`,
-    `.output {
-      width: 100%;
-      height: 300px;
-    }`]
+  </div>
+  `,
+  styles: [`
+  /deep/ html { font: 15px sans-serif }
+
+  .margin30 { margin: 30px; }
+
+  .text-input {
+    margin-top: 10px;
+    width: 200px;
+    height: 100px;
+    display: block;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+
+  .output {
+    width: 100%;
+    height: 300px;
+  }
+  `]
 })
 export class AppComponent {
   public query = {
