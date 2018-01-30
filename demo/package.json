@@ -26,7 +26,8 @@
     "@angular/core": "^4.0.0",
     "@angular/forms": "^4.0.0",
     "@angular/platform-browser": "^4.0.0",
-    "@angular/platform-browser-dynamic": "^4.0.0"
+    "@angular/platform-browser-dynamic": "^4.0.0",
+    "ng-pick-datetime": "^5.1.2"
   },
   "devDependencies": {
     "@angular/compiler": "^4.0.0",

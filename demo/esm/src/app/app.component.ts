@@ -12,7 +12,9 @@ import { QueryBuilderConfig } from '../../lib/components/query-builder';
   <div class='margin30'>
     <textarea class="output">{{query | json}}</textarea>
   </div>`,
-  styles: ['.margin30 { margin: 30px; }',
+  styles: [
+    `.margin30 { margin: 30px; }`,
+    `:host { font: 15px sans-serif }`,
     `.text-input {
       margin-top: 10px;
       width: 200px;

@@ -1,25 +1,34 @@
 :host {
   display: block;
 
-  .close-icon {
+  .q-icon {
     font-style: normal;
     font-size: 12px;
   }
 
-  .switch-field {
+  .q-remove-icon::before {
+    content: '❌'
+  }
+
+  .q-add-icon::before {
+    content: '➕'
+  }
+
+  .q-switch-group, .q-button-group {
     font-family: "Lucida Grande", Tahoma, Verdana, sans-serif;
     overflow: hidden;
   }
 
-  .float-right {
+  .q-button-group {
     float: right;
   }
 
-  .switch-title {
-    margin-bottom: 6px;
+  .q-button {
+    margin-left: 8px;
+    background-color: white;
   }
 
-  .form-control {
+  .q-input-control, .q-operator-control, .q-field-control {
     display: inline-block;
     padding: 4px 8px;
     color: #555;
@@ -30,7 +39,37 @@
     width: auto;
   }
 
-  .switch-field {
+  .q-switch-group label, .q-button {
+    float: left;
+    min-width: 30px;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 14px;
+    font-weight: normal;
+    text-align: center;
+    text-shadow: none;
+    padding: 4px 8px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    -webkit-transition: all 0.1s ease-in-out;
+    -moz-transition:    all 0.1s ease-in-out;
+    -ms-transition:     all 0.1s ease-in-out;
+    -o-transition:      all 0.1s ease-in-out;
+    transition:         all 0.1s ease-in-out;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #F0F0F0;
+    }
+
+    &.success {
+      color: #75BE47;
+    }
+
+    &.danger {
+      color: #B3415D;
+    }
+  }
+
+  .q-switch-group {
     input {
       position: absolute;
       clip: rect(0, 0, 0, 0);
@@ -40,43 +79,8 @@
       overflow: hidden;
     }
 
-    button {
-      margin-left: 8px;
-      background-color: white;
-    }
-
     label {
       background-color: #e4e4e4;
-    }
-
-    label, button {
-      float: left;
-      min-width: 30px;
-      color: rgba(0, 0, 0, 0.6);
-      font-size: 14px;
-      font-weight: normal;
-      text-align: center;
-      text-shadow: none;
-      padding: 4px 8px;
-      border: 1px solid rgba(0, 0, 0, 0.2);
-      -webkit-transition: all 0.1s ease-in-out;
-      -moz-transition:    all 0.1s ease-in-out;
-      -ms-transition:     all 0.1s ease-in-out;
-      -o-transition:      all 0.1s ease-in-out;
-      transition:         all 0.1s ease-in-out;
-
-      &:hover {
-        cursor: pointer;
-        background-color: #F0F0F0;
-      }
-
-      &.success {
-        color: #75BE47;
-      }
-
-      &.danger {
-        color: #B3415D;
-      }
     }
 
     input:checked + label {
@@ -86,21 +90,21 @@
     }
   }
 
-  .invalid-ruleset {
+  .q-invalid-ruleset {
     border: 1px solid rgba(179, 65, 93, 0.5) !important;
     background: rgba(179, 65, 93, 0.1) !important;
   }
 
-  .empty-warning {
+  .q-empty-warning {
     color: rgb(141, 37, 46);
     text-align: center;
   }
 
-  .query-tree {
+  .q-tree {
     list-style: none;
     margin: 4px 0 2px;
 
-    .query-item {
+    .q-item {
       position: relative;
       padding: 4px 6px;
       margin-top: 4px;
@@ -112,7 +116,7 @@
       -o-transition:      all 0.1s ease-in-out;
       transition:         all 0.1s ease-in-out;
 
-      &.ruleset {
+      &.q-ruleset {
         background: rgba(204, 204, 204, 0.2);
 
         &:hover {
@@ -121,7 +125,7 @@
         }
       }
 
-      &.rule {
+      &.q-rule {
         background: white;
       }
 

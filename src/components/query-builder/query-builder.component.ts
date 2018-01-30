@@ -1,16 +1,21 @@
 import { QueryInputDirective } from './query-input.directive';
-import { Field, Option, QueryBuilderConfig, Rule, RuleSet } from './query-builder.interfaces';
 import {
-    Component,
-    ContentChildren,
-    Input,
-    OnChanges,
-    OnInit,
-    QueryList,
-    SimpleChanges,
-    TemplateRef,
-    ViewChild,
-    ViewContainerRef,
+  Field,
+  Option,
+  QueryBuilderConfig,
+  Rule,
+  RuleSet,
+  LocalRuleMeta
+} from './query-builder.interfaces';
+import {
+  Component,
+  ContentChildren,
+  Input,
+  OnChanges,
+  OnInit,
+  QueryList,
+  SimpleChanges,
+  TemplateRef
 } from '@angular/core';
 
 @Component({
@@ -20,8 +25,31 @@ import {
 })
 export class QueryBuilderComponent implements OnInit, OnChanges {
   public fieldNames: string[];
+  public defaultClassNames: {[key: string]: string} = {
+    removeIcon: 'q-icon q-remove-icon',
+    addIcon: 'q-icon q-add-icon',
+    button: 'q-button',
+    buttonGroup: 'q-button-group',
+    switchGroup: 'q-switch-group',
+    queryTree: 'q-tree',
+    queryItem: 'q-item',
+    queryRule: 'q-rule',
+    queryRuleSet: 'q-ruleset',
+    invalidRuleset: 'q-invalid-ruleset',
+    emptyWarning: 'q-empty-warning',
+    fieldControl: 'q-field-control',
+    operatorControl: 'q-operator-control',
+    inputControl: 'q-input-control'
+  };
 
-  @Input() operatorMap: {[key: string]: string[]};
+  @Input() allowRuleset: boolean = true;
+  @Input() classNames: {[key: string]: string};
+  @Input() operatorMap: {[key: string]: string[]} = {
+    string: ['=', '!=', 'contains', 'like'],
+    number: ['=', '!=', '>', '>=', '<', '<='],
+    category: ['=', '!='],
+    boolean: ['=']
+  };
   @Input() parentData: RuleSet;
   @Input() data: RuleSet = { condition: 'and', rules: [] };
   @Input() config: QueryBuilderConfig = { fields: {} };
@@ -32,15 +60,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges {
   private defaultEmptyList: any[] = [];
   private operatorsCache: {[key: string]: string[]};
 
-  constructor() {
-    this.operatorMap = {
-      string: ['=', '!=', 'contains', 'like'],
-      number: ['=', '!=', '>', '>=', '<', '<='],
-      category: ['=', '!='],
-      date: ['=', '!=', '>', '>=', '<', '<='],
-      boolean: ['=']
-    };
-  }
+  constructor() {}
 
   ngOnInit() {}
 
@@ -130,6 +150,11 @@ export class QueryBuilderComponent implements OnInit, OnChanges {
     return this.config.fields[field].options || this.defaultEmptyList;
   }
 
+  getClassName(id: string) {
+    const cls = this.classNames ? this.classNames[id] : null;
+    return cls != null ? cls : this.defaultClassNames[id];
+  }
+
   addRule(parent: RuleSet): void {
     if (this.config.addRule) {
       return this.config.addRule(parent);
@@ -171,7 +196,15 @@ export class QueryBuilderComponent implements OnInit, OnChanges {
 
   onFieldChange(rule: Rule): void {
     delete rule.value;
-    const fieldObject = this.config.fields[rule.field];
-    rule.operator = this.operatorMap[fieldObject.type][0];
+    rule.operator = this.getOperators(rule.field)[0];
+  }
+
+  getQueryItemClassName(local: LocalRuleMeta): string {
+    let cls = this.getClassName('queryItem');
+    cls += ' ' + this.getClassName(local.ruleset ? 'queryRuleSet' : 'queryRule');
+    if (local.invalid) {
+      cls += ' ' + this.getClassName('invalidRuleset');
+    }
+    return cls;
   }
 }

@@ -22,6 +22,11 @@ export interface Field {
   operators?: string[];
 }
 
+export interface LocalRuleMeta {
+  ruleset: boolean;
+  invalid: boolean;
+}
+
 export interface QueryBuilderConfig {
   fields: {[key: string]: Field};
   allowEmptyRulesets?: boolean;

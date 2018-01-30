@@ -1,54 +1,62 @@
-<div class="switch-field float-right">
-    <button (click)="addRule(data)"><i class="close-icon">➕</i> Rule</button>
-    <button (click)="addRuleSet(data)"><i class="close-icon">➕</i> Ruleset</button>
-    <ng-container *ngIf="!!parentData">
-        <button (click)="removeRuleSet(data, parentData)" class="danger"><i class="close-icon">❌</i></button>
-    </ng-container>
+<div [ngClass]="getClassName('buttonGroup')">
+  <button (click)="addRule(data)" [ngClass]="getClassName('button')">
+    <i [ngClass]="getClassName('addIcon')"></i> Rule
+  </button>
+  <button (click)="addRuleSet(data)" [ngClass]="getClassName('button')" *ngIf="allowRuleset">
+    <i [ngClass]="getClassName('addIcon')"></i> Ruleset
+  </button>
+  <ng-container *ngIf="!!parentData">
+    <button (click)="removeRuleSet(data, parentData)" [ngClass]="getClassName('button')" class="danger">
+      <i [ngClass]="getClassName('removeIcon')"></i>
+    </button>
+  </ng-container>
 </div>
 
-<div class="switch-field">
-    <input type="radio" [(ngModel)]="data.condition" value="and" #andOption/>
-    <label (click)="data.condition=andOption.value">AND</label>
-    <input type="radio" [(ngModel)]="data.condition" value="or" #orOption/>
-    <label (click)="data.condition=orOption.value">OR</label>
+<div [ngClass]="getClassName('switchGroup')">
+  <input type="radio" [(ngModel)]="data.condition" value="and" #andOption/>
+  <label (click)="data.condition=andOption.value">AND</label>
+  <input type="radio" [(ngModel)]="data.condition" value="or" #orOption/>
+  <label (click)="data.condition=orOption.value">OR</label>
 </div>
 
-<ul class="query-tree">
+<ul [ngClass]="getClassName('queryTree')">
   <ng-container *ngFor="let rule of data.rules">
     <ng-container *ngIf="{ruleset: !!rule.rules, invalid: !config.allowEmptyRuleset && rule.rules && rule.rules.length === 0} as local">
-      <li [ngClass]="{'query-item': true, 'rule': !local.ruleset, 'ruleset': local.ruleset, 'invalid-ruleset': local.invalid}">
+      <li [ngClass]="getQueryItemClassName(local)">
         <ng-container *ngIf="!local.ruleset">
-          <div class="switch-field float-right">
-            <button class="danger" (click)="removeRule(rule, data)"><i class="close-icon">❌</i></button>
+          <div [ngClass]="getClassName('buttonGroup')">
+            <button class="danger" [ngClass]="getClassName('button')" (click)="removeRule(rule, data)">
+              <i [ngClass]="getClassName('removeIcon')"></i>
+            </button>
           </div>
 
-          <select class="form-control" [(ngModel)]="rule.field" (change)="onFieldChange(rule)">
+          <select [ngClass]="getClassName('fieldControl')" [(ngModel)]="rule.field" (change)="onFieldChange(rule)">
             <option *ngFor="let field of fieldNames" [ngValue]="field">
               {{config.fields[field].name}}
             </option>
           </select>
-          <select class="form-control" [(ngModel)]="rule.operator">
+          <select [ngClass]="getClassName('operatorControl')" [(ngModel)]="rule.operator">
             <option *ngFor="let operator of getOperators(rule.field)" [ngValue]="operator">
               {{operator}}
             </option>
           </select>
           <ng-container [ngSwitch]="getInputType(rule.field, rule.operator)">
-            <input class="form-control" [(ngModel)]="rule.value" *ngSwitchCase="'string'" type="text">
-            <input class="form-control" [(ngModel)]="rule.value" *ngSwitchCase="'number'" type="number">
-            <select class="form-control" [(ngModel)]="rule.value" *ngSwitchCase="'category'">
+            <input [ngClass]="getClassName('inputControl')" [(ngModel)]="rule.value" *ngSwitchCase="'string'" type="text">
+            <input [ngClass]="getClassName('inputControl')" [(ngModel)]="rule.value" *ngSwitchCase="'number'" type="number">
+            <select [ngClass]="getClassName('inputControl')" [(ngModel)]="rule.value" *ngSwitchCase="'category'">
               <option *ngFor="let opt of getOptions(rule.field)" [ngValue]="opt.value">
                 {{opt.name}}
               </option>
             </select>
             <ng-container *ngSwitchCase="'multiselect'">
               <div style="margin-bottom: 8px"></div>
-              <select class="form-control" [(ngModel)]="rule.value" style="min-width: 200px" multiple>
+              <select [ngClass]="getClassName('inputControl')" [(ngModel)]="rule.value" multiple>
                 <option *ngFor="let opt of getOptions(rule.field)" [ngValue]="opt.value">
                   {{opt.name}}
                 </option>
               </select>
             </ng-container>
-            <input class="form-control" [(ngModel)]="rule.value" *ngSwitchCase="'boolean'" type="checkbox">
+            <input [ngClass]="getClassName('inputControl')" [(ngModel)]="rule.value" *ngSwitchCase="'boolean'" type="checkbox">
             <ng-container *ngSwitchDefault>
               <ng-container *ngTemplateOutlet="findTemplateForRule(rule); context: {$implicit: rule}"></ng-container>
             </ng-container>
@@ -59,9 +67,10 @@
           [inputTypeTemplates]="inputTypes"
           [parentData]="data"
           [config]="config"
+          [allowRuleset]="allowRuleset"
           [operatorMap]="operatorMap">
         </query-builder>
-        <p class="empty-warning" *ngIf="local.invalid">A ruleset cannot be empty. Please add a rule or remove it all together.</p>
+        <p [ngClass]="getClassName('emptyWarning')" *ngIf="local.invalid">A ruleset cannot be empty. Please add a rule or remove it all together.</p>
       </li>
     </ng-container>
   </ng-container>
