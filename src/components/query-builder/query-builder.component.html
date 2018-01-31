@@ -30,7 +30,7 @@
             </button>
           </div>
 
-          <select [ngClass]="getClassName('fieldControl')" [(ngModel)]="rule.field" (change)="onFieldChange(rule)">
+          <select [ngClass]="getClassName('fieldControl')" [(ngModel)]="rule.field" (ngModelChange)="onFieldChange($event, rule)">
             <option *ngFor="let field of fieldNames" [ngValue]="field">
               {{config.fields[field].name}}
             </option>

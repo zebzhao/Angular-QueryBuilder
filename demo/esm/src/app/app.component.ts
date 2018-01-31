@@ -6,14 +6,11 @@ import { QueryBuilderConfig } from '../../lib/components/query-builder';
   template: `
   <query-builder class='margin30' [data]='query' [config]='config'>
     <ng-container *queryInput="let rule; type: 'textarea'">
-      <textarea class="text-input" [(ngModel)]="rule.value" placeholder="Custom Textarea">
+      <textarea class="text-input text-area" [(ngModel)]="rule.value" placeholder="Custom Textarea">
       </textarea>
     </ng-container>
     <ng-container *queryInput="let rule; type: 'date'">
-      <input [(ngModel)]="rule.value"
-        [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1"
-        placeholder="Custom Date Time">
-      <owl-date-time #dt1></owl-date-time>
+      <ng-datepicker [(ngModel)]="rule.value"></ng-datepicker>
     </ng-container>
   </query-builder>
   <div class='margin30'>
@@ -21,17 +18,38 @@ import { QueryBuilderConfig } from '../../lib/components/query-builder';
   </div>
   `,
   styles: [`
-  /deep/ html { font: 15px sans-serif }
+  /deep/ html {
+    font: 15px sans-serif;
+    box-sizing: border-box;
+  }
+
+  /deep/ .ngx-datepicker-container {
+    display: inline-block;
+  }
+
+  /deep/ .ngx-datepicker-calendar-container {
+    z-index: 100;
+  }
+
+  /deep/ *,
+  /deep/ *:before,
+  /deep/ *:after {
+    box-sizing: inherit;
+  }
 
   .margin30 { margin: 30px; }
 
   .text-input {
-    margin-top: 10px;
-    width: 200px;
-    height: 100px;
-    display: block;
+    padding: 4px 8px;
     border-radius: 4px;
     border: 1px solid #ccc;
+  }
+
+  .text-area {
+    margin-top: 8px;
+    width: 300px;
+    height: 100px;
+    display: block;
   }
 
   .output {
@@ -45,7 +63,7 @@ export class AppComponent {
     condition: 'and',
     rules: [
       {field: 'age', operator: '<='},
-      {field: 'birthday', operator: '>='},
+      {field: 'birthday', operator: '>=', value: new Date()},
       {
         condition: 'or',
         rules: [
@@ -71,7 +89,9 @@ export class AppComponent {
       name: {name: 'Name', type: 'string'},
       notes: {name: 'Notes', type: 'textarea', operators: ['=', '!=']},
       educated: {name: 'College Degree?', type: 'boolean'},
-      birthday: {name: 'Birthday', type: 'date'},
+      birthday: {name: 'Birthday', type: 'date', defaultValue: function () {
+        return new Date();
+      }},
       school: {name: 'School', type: 'string', nullable: true},
       occupation: {
         name: 'Occupation',
@@ -84,5 +104,5 @@ export class AppComponent {
         ]
       }
     }
-  }
+  };
 }

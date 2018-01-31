@@ -20,6 +20,8 @@ export interface Field {
   nullable?: boolean;
   options?: Option[];
   operators?: string[];
+  defaultValue?: any;
+  defaultOperator?: any;
 }
 
 export interface LocalRuleMeta {

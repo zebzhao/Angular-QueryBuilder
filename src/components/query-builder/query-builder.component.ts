@@ -194,9 +194,28 @@ export class QueryBuilderComponent implements OnInit, OnChanges {
     }
   }
 
-  onFieldChange(rule: Rule): void {
-    delete rule.value;
-    rule.operator = this.getOperators(rule.field)[0];
+  onFieldChange(fieldName: string, rule: Rule): void {
+    const field: Field = this.config.fields[fieldName];
+
+    if (field && field.defaultValue !== undefined) {
+      rule.value = this.getDefaultValue(field.defaultValue);
+    } else {
+      delete rule.value;
+    }
+    if (field && field.defaultOperator !== undefined) {
+      rule.operator = this.getDefaultValue(field.defaultOperator);
+    } else {
+      rule.operator = this.getOperators(rule.field)[0];
+    }
+  }
+
+  getDefaultValue(defaultValue: any): any {
+    switch (typeof defaultValue) {
+      case 'function':
+        return defaultValue();
+      default:
+        return defaultValue;
+    }
   }
 
   getQueryItemClassName(local: LocalRuleMeta): string {

@@ -4,16 +4,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 
 import { QueryBuilderModule } from '../../lib';
-import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgDatepickerModule } from 'ng2-datepicker';
 
 @NgModule({
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
     FormsModule,
-    OwlDateTimeModule,
-    OwlNativeDateTimeModule,
+    NgDatepickerModule,
     QueryBuilderModule
   ],
   declarations: [ AppComponent ],
