@@ -86,20 +86,20 @@ config: QueryBuilderConfig = {
 ##### `app.component.ts`
 ```javascript
 classNames: {[key: string]: string} = {
-  removeIcon: 'fa fa-minus',  			// Font-Awesome
-  addIcon: 'fa fa-plus',  				// Font-Awesome
-  button: 'btn',						// Bootstrap
-  buttonGroup: 'btn-group',				// Bootstrap
-  switchGroup: 'btn-group',				// Bootstrap
-  queryTree: 'q-tree',  				// DEFAULT
-  queryItem: 'q-item',  				// DEFAULT
-  queryRule: 'q-rule',  				// DEFAULT
-  queryRuleSet: 'q-ruleset',  			// DEFAULT
-  invalidRuleset: 'alert alert-danger',	// Bootstrap
-  emptyWarning: '',						// Bootstrap
-  fieldControl: 'form-control',			// Bootstrap
-  operatorControl: 'form-control',		// Bootstrap
-  inputControl: 'form-control'			// Bootstrap
+  removeIcon: 'fa fa-minus',               // Font-Awesome
+  addIcon: 'fa fa-plus',                   // Font-Awesome
+  button: 'btn',                           // Bootstrap
+  buttonGroup: 'btn-group',                // Bootstrap
+  switchGroup: 'btn-group',                // Bootstrap
+  queryTree: 'q-tree',                     // DEFAULT
+  queryItem: 'q-item',                     // DEFAULT
+  queryRule: 'q-rule',                     // DEFAULT
+  queryRuleSet: 'q-ruleset',               // DEFAULT
+  invalidRuleset: 'alert alert-danger',    // Bootstrap
+  emptyWarning: '',                        // Bootstrap
+  fieldControl: 'form-control',            // Bootstrap
+  operatorControl: 'form-control',         // Bootstrap
+  inputControl: 'form-control'             // Bootstrap
 };
 ```
 
