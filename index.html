@@ -304,6 +304,82 @@
 <p><a href="https://plnkr.co/edit/vdqjG9G4cxzKqOzNCVnY?p=preview">See the Plunker</a></p>
 <h2 id="documentation">Documentation</h2>
 <p><a href="https://zebzhao.github.io/Angular-QueryBuilder/">Documentation link</a></p>
+<h1 id="examples">Examples</h1>
+<h2 id="basic-usage">Basic Usage</h2>
+<h5 id="-app-component-html-"><code>app.component.html</code></h5>
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">query-builder</span> [<span class="hljs-attr">data</span>]=<span class="hljs-string">'query'</span> [<span class="hljs-attr">config</span>]=<span class="hljs-string">'config'</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">query-builder</span>&gt;</span></code></pre><h5 id="-app-component-ts-"><code>app.component.ts</code></h5>
+<pre><code class="hljs javascript">query = {<br>  <span class="hljs-attr">condition</span>: <span class="hljs-string">'and'</span>,<br>  <span class="hljs-attr">rules</span>: [<br>    {<span class="hljs-attr">field</span>: <span class="hljs-string">'age'</span>, <span class="hljs-attr">operator</span>: <span class="hljs-string">'&lt;='</span>, <span class="hljs-attr">value</span>: <span class="hljs-string">'Bob'</span>},<br>    {<span class="hljs-attr">field</span>: <span class="hljs-string">'gender'</span>, <span class="hljs-attr">operator</span>: <span class="hljs-string">'&gt;='</span>, <span class="hljs-attr">value</span>: <span class="hljs-string">'m'</span>}<br>  ]<br>};<br><br>config: QueryBuilderConfig = {<br>  <span class="hljs-attr">fields</span>: {<br>    <span class="hljs-attr">age</span>: {<span class="hljs-attr">name</span>: <span class="hljs-string">'Age'</span>, <span class="hljs-attr">type</span>: <span class="hljs-string">'number'</span>},<br>    <span class="hljs-attr">gender</span>: {<br>      <span class="hljs-attr">name</span>: <span class="hljs-string">'Gender'</span>,<br>      <span class="hljs-attr">type</span>: <span class="hljs-string">'category'</span>,<br>      <span class="hljs-attr">options</span>: [<br>        {<span class="hljs-attr">name</span>: <span class="hljs-string">'Male'</span>, <span class="hljs-attr">value</span>: <span class="hljs-string">'m'</span>},<br>        {<span class="hljs-attr">name</span>: <span class="hljs-string">'Female'</span>, <span class="hljs-attr">value</span>: <span class="hljs-string">'f'</span>}<br>      ]<br>    }<br>  }<br>}</code></pre><h2 id="custom-input-components">Custom Input Components</h2>
+<h5 id="-app-component-html-"><code>app.component.html</code></h5>
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">query-builder</span> [<span class="hljs-attr">data</span>]=<span class="hljs-string">'query'</span> [<span class="hljs-attr">config</span>]=<span class="hljs-string">'config'</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">ng-container</span> *<span class="hljs-attr">queryInput</span>=<span class="hljs-string">"let rule; type: 'date'"</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">custom-datepicker</span> [(<span class="hljs-attr">ngModel</span>)]=<span class="hljs-string">"rule.value"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">custom-datepicker</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">ng-container</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">query-builder</span>&gt;</span></code></pre><h5 id="-app-component-ts-"><code>app.component.ts</code></h5>
+<pre><code class="hljs javascript">query = {<br>  <span class="hljs-attr">condition</span>: <span class="hljs-string">'and'</span>,<br>  <span class="hljs-attr">rules</span>: [<br>    {<span class="hljs-attr">field</span>: <span class="hljs-string">'birthday'</span>, <span class="hljs-attr">operator</span>: <span class="hljs-string">'&gt;='</span>, <span class="hljs-attr">value</span>: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>()}<br>  ]<br>};<br><br>config: QueryBuilderConfig = {<br>  <span class="hljs-attr">fields</span>: {<br>    <span class="hljs-attr">birthday</span>: {<span class="hljs-attr">name</span>: <span class="hljs-string">'Birthday'</span>, <span class="hljs-attr">type</span>: <span class="hljs-string">'date'</span>, <span class="hljs-attr">defaultValue</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{<br>      <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>();<br>    }},<br>  }<br>}</code></pre><h2 id="custom-styling-with-bootstrap-">Custom Styling (with Bootstrap)</h2>
+<h5 id="-app-component-html-"><code>app.component.html</code></h5>
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">query-builder</span> [<span class="hljs-attr">data</span>]=<span class="hljs-string">'query'</span> [<span class="hljs-attr">config</span>]=<span class="hljs-string">'config'</span> [<span class="hljs-attr">classNames</span>]=<span class="hljs-string">'classNames'</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">query-builder</span>&gt;</span></code></pre><h5 id="-app-component-ts-"><code>app.component.ts</code></h5>
+<pre><code class="hljs javascript">classNames: {[key: string]: string} = {<br>  <span class="hljs-attr">removeIcon</span>: <span class="hljs-string">'fa fa-minus'</span>,              <span class="hljs-comment">// Font-Awesome</span><br>  addIcon: <span class="hljs-string">'fa fa-plus'</span>,                  <span class="hljs-comment">// Font-Awesome</span><br>  button: <span class="hljs-string">'btn'</span>,                        <span class="hljs-comment">// Bootstrap</span><br>  buttonGroup: <span class="hljs-string">'btn-group'</span>,                <span class="hljs-comment">// Bootstrap</span><br>  switchGroup: <span class="hljs-string">'btn-group'</span>,                <span class="hljs-comment">// Bootstrap</span><br>  queryTree: <span class="hljs-string">'q-tree'</span>,                  <span class="hljs-comment">// DEFAULT</span><br>  queryItem: <span class="hljs-string">'q-item'</span>,                  <span class="hljs-comment">// DEFAULT</span><br>  queryRule: <span class="hljs-string">'q-rule'</span>,                  <span class="hljs-comment">// DEFAULT</span><br>  queryRuleSet: <span class="hljs-string">'q-ruleset'</span>,              <span class="hljs-comment">// DEFAULT</span><br>  invalidRuleset: <span class="hljs-string">'alert alert-danger'</span>,    <span class="hljs-comment">// Bootstrap</span><br>  emptyWarning: <span class="hljs-string">''</span>,                        <span class="hljs-comment">// Bootstrap</span><br>  fieldControl: <span class="hljs-string">'form-control'</span>,            <span class="hljs-comment">// Bootstrap</span><br>  operatorControl: <span class="hljs-string">'form-control'</span>,        <span class="hljs-comment">// Bootstrap</span><br>  inputControl: <span class="hljs-string">'form-control'</span>            <span class="hljs-comment">// Bootstrap</span><br>};</code></pre><h2 id="property-bindings-quick-reference">Property Bindings Quick Reference</h2>
+<p>See <a href="https://zebzhao.github.io/Angular-QueryBuilder/">documentation</a> for more details on interfaces and properties.</p>
+<h4 id="-query-builder-"><code>query-builder</code></h4>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th style="text-align:left">Name</th>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Required</th>
+<th style="text-align:left">Default</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>allowRuleset</code></td>
+<td style="text-align:left"><code>boolean</code></td>
+<td style="text-align:left">Optional</td>
+<td style="text-align:left"><code>true</code></td>
+<td style="text-align:left">Displays the <code>+ Ruleset</code> button if <code>true</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>classNames</code></td>
+<td style="text-align:left"><code>object</code></td>
+<td style="text-align:left">Optional</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">CSS class names for different child elements in <code>query-builder</code> component</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>config</code></td>
+<td style="text-align:left"><code>QueryBuilderConfig</code></td>
+<td style="text-align:left">Required</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">Configuration object for the main component</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>data</code></td>
+<td style="text-align:left"><code>Ruleset</code></td>
+<td style="text-align:left">Required</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">Object that stores the state of the component</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>inputTypeTemplates</code></td>
+<td style="text-align:left"><code>QueryList&lt;QueryInputDirective&gt;</code></td>
+<td style="text-align:left">Optional</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">Internal property used to map field types to <code>TemplateRef</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>operatorMap</code></td>
+<td style="text-align:left"><code>{ [key: string]: string[] }</code></td>
+<td style="text-align:left">Optional</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">Used to map field types to list of operators</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>parentData</code></td>
+<td style="text-align:left"><code>Ruleset</code></td>
+<td style="text-align:left">Optional</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">Internal property used to determine the parent <code>query-builder</code> data</td>
+</tr>
+</tbody>
+</table>
+<p>Use the structural directive <code>queryInput</code> to use custom components with <code>query-builder</code>.</p>
 <h2 id="dependencies">Dependencies</h2>
 <ul>
 <li>Angular 4+</li>
