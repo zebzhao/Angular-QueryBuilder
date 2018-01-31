@@ -738,7 +738,7 @@
     
                     <tr>
                         <td class="col-md-4">
-    <code>onFieldChange(rule: Rule)</code>
+    <code>onFieldChange(fieldName: string, rule: Rule)</code>
                         </td>
                     </tr>
     
@@ -746,6 +746,30 @@
                         <td class="col-md-4">
                                 <div class="io-description">
                                     <b>Returns: </b>    <code>void</code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <b> getDefaultValue</b>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    <code>getDefaultValue(defaultValue: any)</code>
+                        </td>
+                    </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description">
+                                    <b>Returns: </b>    <code>any</code>
     
                                 </div>
                         </td>
@@ -1024,9 +1048,28 @@ export class QueryBuilderComponent implements OnInit, OnChanges {
     }
   }
 
-  onFieldChange(rule: Rule): void {
-    delete rule.value;
-    rule.operator &#x3D; this.getOperators(rule.field)[0];
+  onFieldChange(fieldName: string, rule: Rule): void {
+    const field: Field &#x3D; this.config.fields[fieldName];
+
+    if (field &amp;&amp; field.defaultValue !&#x3D;&#x3D; undefined) {
+      rule.value &#x3D; this.getDefaultValue(field.defaultValue);
+    } else {
+      delete rule.value;
+    }
+    if (field &amp;&amp; field.defaultOperator !&#x3D;&#x3D; undefined) {
+      rule.operator &#x3D; this.getDefaultValue(field.defaultOperator);
+    } else {
+      rule.operator &#x3D; this.getOperators(rule.field)[0];
+    }
+  }
+
+  getDefaultValue(defaultValue: any): any {
+    switch (typeof defaultValue) {
+      case &#x27;function&#x27;:
+        return defaultValue();
+      default:
+        return defaultValue;
+    }
   }
 
   getQueryItemClassName(local: LocalRuleMeta): string {
