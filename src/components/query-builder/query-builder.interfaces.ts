@@ -40,3 +40,21 @@ export interface QueryBuilderConfig {
   removeRuleSet?: (ruleset: RuleSet, parent: RuleSet) => void;
   removeRule?: (rule: Rule, parent: RuleSet) => void;
 }
+
+export interface OperatorContext {
+  operators: string[];
+  rule: Rule;
+}
+
+export interface FieldContext {
+  changeField: (fieldName: string, rule: Rule) => void;
+  fieldNames: string[];
+  rule: Rule;
+}
+
+export interface ButtonGroupContext {
+  addRule: () => void;
+  addRuleset: () => void;
+  removeRuleset: () => void;
+  data: RuleSet;
+}

@@ -11,7 +11,7 @@
     "member-access": false,
     "no-attribute-parameter-decorator": true,
     "no-console": [true, "time", "timeEnd", "trace"],
-    "no-forward-ref": true,
+    "no-forward-ref": false,
     "no-input-rename": true,
     "no-output-rename": true,
     "no-string-literal": false,

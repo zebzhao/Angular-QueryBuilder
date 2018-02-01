@@ -1,7 +1,7 @@
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { QueryOperatorDirective } from './query-operator.directive';
 import { QueryFieldDirective } from './query-field.directive';
-import { QuerySwitchDirective } from '../../../tmp/src-inlined/components/query-builder/query-switch.directive';
-import { QuerySwitchGroupDirective } from '../../../tmp/src-inlined/components/query-builder/query-switch-group.directive';
+import { QuerySwitchGroupDirective } from './query-switch-group.directive';
 import { QueryButtonGroupDirective } from './query-button-group.directive';
 import { QueryInputDirective } from './query-input.directive';
 import {
@@ -10,26 +10,38 @@ import {
   QueryBuilderConfig,
   Rule,
   RuleSet,
-  LocalRuleMeta
+  LocalRuleMeta,
+  OperatorContext,
+  FieldContext,
+  ButtonGroupContext
 } from './query-builder.interfaces';
 import {
-    Component,
-    ContentChild,
-    ContentChildren,
-    Input,
-    OnChanges,
-    OnInit,
-    QueryList,
-    SimpleChanges,
-    TemplateRef,
+  Component,
+  ContentChild,
+  ContentChildren,
+  forwardRef,
+  Input,
+  OnChanges,
+  OnInit,
+  QueryList,
+  SimpleChanges,
+  TemplateRef,
 } from '@angular/core';
+
+export const CONTROL_VALUE_ACCESSOR: any = {
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => QueryBuilderComponent),
+  multi: true
+};
 
 @Component({
   selector: 'query-builder',
   templateUrl: './query-builder.component.html',
-  styleUrls: ['./query-builder.component.scss']
+  styleUrls: ['./query-builder.component.scss'],
+  providers: [CONTROL_VALUE_ACCESSOR]
 })
-export class QueryBuilderComponent implements OnInit, OnChanges {
+export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAccessor {
+  public disabled: boolean;
   public fieldNames: string[];
   public defaultClassNames: {[key: string]: string} = {
     removeIcon: 'q-icon q-remove-icon',
@@ -62,13 +74,17 @@ export class QueryBuilderComponent implements OnInit, OnChanges {
   @Input() inputTypeTemplates: QueryList<QueryInputDirective>;
 
   @ContentChild(QueryButtonGroupDirective) buttonGroupTemplate: QueryButtonGroupDirective;
-  @ContentChild(QuerySwitchGroupDirective) switchGroupTemplate: QuerySwitchDirective;
+  @ContentChild(QuerySwitchGroupDirective) switchGroupTemplate: QuerySwitchGroupDirective;
   @ContentChild(QueryFieldDirective) fieldTemplate: QueryFieldDirective;
   @ContentChild(QueryOperatorDirective) operatorTemplate: QueryOperatorDirective;
   @ContentChildren(QueryInputDirective) inputTypes: QueryList<QueryInputDirective>;
 
   private defaultEmptyList: any[] = [];
   private operatorsCache: {[key: string]: string[]};
+
+  // For ControlValueAccessor interface
+  private onChangeCallback: (value: any) => void;
+  private onTouchedCallback: () => any;
 
   constructor() {}
 
@@ -88,6 +104,30 @@ export class QueryBuilderComponent implements OnInit, OnChanges {
     if (typeof data !== 'object') {
       throw new Error('data must be a valid object');
     }
+  }
+
+  get value(): RuleSet {
+    return this.data;
+  }
+
+  set value(value: RuleSet) {
+    this.data = value;
+    if (this.onChangeCallback) {
+      this.onChangeCallback(value);
+    }
+  }
+
+  writeValue(obj: any): void {
+    this.value = obj;
+  }
+  registerOnChange(fn: any): void {
+    this.onChangeCallback = fn;
+  }
+  registerOnTouched(fn: any): void {
+    this.onTouchedCallback = fn;
+  }
+  setDisabledState?(isDisabled: boolean): void {
+    this.disabled = isDisabled;
   }
 
   findTemplateForRule(rule: Rule): TemplateRef<any> {
@@ -165,7 +205,8 @@ export class QueryBuilderComponent implements OnInit, OnChanges {
     return cls != null ? cls : this.defaultClassNames[id];
   }
 
-  addRule(parent: RuleSet): void {
+  addRule(parent?: RuleSet): void {
+    parent = parent || this.data;
     if (this.config.addRule) {
       return this.config.addRule(parent);
     } else {
@@ -180,7 +221,8 @@ export class QueryBuilderComponent implements OnInit, OnChanges {
     }
   }
 
-  removeRule(rule: Rule, parent: RuleSet): void {
+  removeRule(rule: Rule, parent?: RuleSet): void {
+    parent = parent || this.data;
     if (this.config.removeRule) {
       this.config.removeRule(rule, parent);
     } else {
@@ -188,7 +230,8 @@ export class QueryBuilderComponent implements OnInit, OnChanges {
     }
   }
 
-  addRuleSet(parent: RuleSet): void {
+  addRuleSet(parent?: RuleSet): void {
+    parent = parent || this.data;
     if (this.config.addRuleSet) {
       this.config.addRuleSet(parent);
     } else {
@@ -196,7 +239,9 @@ export class QueryBuilderComponent implements OnInit, OnChanges {
     }
   }
 
-  removeRuleSet(ruleset: RuleSet, parent: RuleSet): void {
+  removeRuleSet(ruleset?: RuleSet, parent?: RuleSet): void {
+    ruleset = ruleset || this.data;
+    parent = parent || this.parentData;
     if (this.config.removeRuleSet) {
       this.config.removeRuleSet(ruleset, parent);
     } else {
@@ -204,7 +249,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges {
     }
   }
 
-  onFieldChange(fieldName: string, rule: Rule): void {
+  changeField(fieldName: string, rule: Rule): void {
     const field: Field = this.config.fields[fieldName];
 
     if (field && field.defaultValue !== undefined) {
@@ -235,5 +280,29 @@ export class QueryBuilderComponent implements OnInit, OnChanges {
       cls += ' ' + this.getClassName('invalidRuleset');
     }
     return cls;
+  }
+
+  getButtonGroupContext(): ButtonGroupContext {
+    return {
+      addRule: this.addRule.bind(this),
+      addRuleset: this.addRuleSet.bind(this),
+      removeRuleset: this.removeRuleSet.bind(this),
+      data: this.data
+    };
+  }
+
+  getFieldContext(rule: Rule): FieldContext {
+    return {
+      changeField: this.changeField.bind(this),
+      fieldNames: this.fieldNames,
+      rule: rule
+    };
+  }
+
+  getOperatorContext(rule: Rule): OperatorContext {
+    return {
+      operators: this.getOperators(rule.field),
+      rule: rule
+    };
   }
 }
