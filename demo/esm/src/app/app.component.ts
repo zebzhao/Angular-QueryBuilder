@@ -63,7 +63,7 @@ export class AppComponent {
     condition: 'and',
     rules: [
       {field: 'age', operator: '<='},
-      {field: 'birthday', operator: '>=', value: new Date()},
+      {field: 'birthday', operator: '=', value: new Date()},
       {
         condition: 'or',
         rules: [
@@ -89,9 +89,9 @@ export class AppComponent {
       name: {name: 'Name', type: 'string'},
       notes: {name: 'Notes', type: 'textarea', operators: ['=', '!=']},
       educated: {name: 'College Degree?', type: 'boolean'},
-      birthday: {name: 'Birthday', type: 'date', defaultValue: function () {
-        return new Date();
-      }},
+      birthday: {name: 'Birthday', type: 'date', operators: ['=', '<=', '>'],
+        defaultValue: (() => new Date())
+      },
       school: {name: 'School', type: 'string', nullable: true},
       occupation: {
         name: 'Occupation',

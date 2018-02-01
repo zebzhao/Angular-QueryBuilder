@@ -30,7 +30,8 @@
 
   .q-input-control, .q-operator-control, .q-field-control {
     display: inline-block;
-    padding: 4px 8px;
+    min-height: 30px;
+    padding: 5px 8px;
     color: #555;
     background-color: #fff;
     background-image: none;
@@ -41,13 +42,13 @@
 
   .q-switch-group label, .q-button {
     float: left;
-    min-width: 30px;
+    min-height: 30px;
     color: rgba(0, 0, 0, 0.6);
     font-size: 14px;
     font-weight: normal;
     text-align: center;
     text-shadow: none;
-    padding: 4px 8px;
+    padding: 2px 8px;
     border: 1px solid rgba(0, 0, 0, 0.2);
     -webkit-transition: all 0.1s ease-in-out;
     -moz-transition:    all 0.1s ease-in-out;
@@ -81,6 +82,7 @@
 
     label {
       background-color: #e4e4e4;
+      line-height: 24px;
     }
 
     input:checked + label {

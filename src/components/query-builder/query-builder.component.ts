@@ -1,3 +1,8 @@
+import { QueryOperatorDirective } from './query-operator.directive';
+import { QueryFieldDirective } from './query-field.directive';
+import { QuerySwitchDirective } from '../../../tmp/src-inlined/components/query-builder/query-switch.directive';
+import { QuerySwitchGroupDirective } from '../../../tmp/src-inlined/components/query-builder/query-switch-group.directive';
+import { QueryButtonGroupDirective } from './query-button-group.directive';
 import { QueryInputDirective } from './query-input.directive';
 import {
   Field,
@@ -8,14 +13,15 @@ import {
   LocalRuleMeta
 } from './query-builder.interfaces';
 import {
-  Component,
-  ContentChildren,
-  Input,
-  OnChanges,
-  OnInit,
-  QueryList,
-  SimpleChanges,
-  TemplateRef
+    Component,
+    ContentChild,
+    ContentChildren,
+    Input,
+    OnChanges,
+    OnInit,
+    QueryList,
+    SimpleChanges,
+    TemplateRef,
 } from '@angular/core';
 
 @Component({
@@ -55,6 +61,10 @@ export class QueryBuilderComponent implements OnInit, OnChanges {
   @Input() config: QueryBuilderConfig = { fields: {} };
   @Input() inputTypeTemplates: QueryList<QueryInputDirective>;
 
+  @ContentChild(QueryButtonGroupDirective) buttonGroupTemplate: QueryButtonGroupDirective;
+  @ContentChild(QuerySwitchGroupDirective) switchGroupTemplate: QuerySwitchDirective;
+  @ContentChild(QueryFieldDirective) fieldTemplate: QueryFieldDirective;
+  @ContentChild(QueryOperatorDirective) operatorTemplate: QueryOperatorDirective;
   @ContentChildren(QueryInputDirective) inputTypes: QueryList<QueryInputDirective>;
 
   private defaultEmptyList: any[] = [];

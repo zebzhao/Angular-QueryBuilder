@@ -54,7 +54,7 @@ config: QueryBuilderConfig = {
 ```html
 <query-builder [data]='query' [config]='config'>
   <ng-container *queryInput="let rule; type: 'date'">
-  	<custom-datepicker [(ngModel)]="rule.value"></custom-datepicker>
+    <custom-datepicker [(ngModel)]="rule.value"></custom-datepicker>
   </ng-container>
 </query-builder>
 ```
@@ -64,15 +64,15 @@ config: QueryBuilderConfig = {
 query = {
   condition: 'and',
   rules: [
-    {field: 'birthday', operator: '>=', value: new Date()}
+    {field: 'birthday', operator: '=', value: new Date()}
   ]
 };
 
 config: QueryBuilderConfig = {
   fields: {
-    birthday: {name: 'Birthday', type: 'date', defaultValue: function () {
-      return new Date();
-    }},
+    birthday: {name: 'Birthday', type: 'date', operators: ['=', '<=', '>']
+      defaultValue: (() => return new Date())
+    },
   }
 }
 ```
@@ -86,20 +86,20 @@ config: QueryBuilderConfig = {
 ##### `app.component.ts`
 ```javascript
 classNames: {[key: string]: string} = {
-  removeIcon: 'fa fa-minus',  			// Font-Awesome
-  addIcon: 'fa fa-plus',  				// Font-Awesome
-  button: 'btn',						// Bootstrap
-  buttonGroup: 'btn-group',				// Bootstrap
-  switchGroup: 'btn-group',				// Bootstrap
-  queryTree: 'q-tree',  				// DEFAULT
-  queryItem: 'q-item',  				// DEFAULT
-  queryRule: 'q-rule',  				// DEFAULT
-  queryRuleSet: 'q-ruleset',  			// DEFAULT
-  invalidRuleset: 'alert alert-danger',	// Bootstrap
-  emptyWarning: '',						// Bootstrap
-  fieldControl: 'form-control',			// Bootstrap
-  operatorControl: 'form-control',		// Bootstrap
-  inputControl: 'form-control'			// Bootstrap
+  removeIcon: 'fa fa-minus',               // Font-Awesome
+  addIcon: 'fa fa-plus',                   // Font-Awesome
+  button: 'btn',                           // Bootstrap
+  buttonGroup: 'btn-group',                // Bootstrap
+  switchGroup: 'btn-group',                // Bootstrap
+  queryTree: 'q-tree',                     // DEFAULT
+  queryItem: 'q-item',                     // DEFAULT
+  queryRule: 'q-rule',                     // DEFAULT
+  queryRuleSet: 'q-ruleset',               // DEFAULT
+  invalidRuleset: 'alert alert-danger',    // Bootstrap
+  emptyWarning: '',                        // Bootstrap
+  fieldControl: 'form-control',            // Bootstrap
+  operatorControl: 'form-control',         // Bootstrap
+  inputControl: 'form-control'             // Bootstrap
 };
 ```
 
