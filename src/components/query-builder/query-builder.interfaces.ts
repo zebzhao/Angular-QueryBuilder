@@ -14,8 +14,13 @@ export interface Option {
   value: any;
 }
 
+export interface FieldMap {
+  [key: string]: Field;
+}
+
 export interface Field {
   name: string;
+  value?: string;
   type: string;
   nullable?: boolean;
   options?: Option[];
@@ -30,7 +35,7 @@ export interface LocalRuleMeta {
 }
 
 export interface QueryBuilderConfig {
-  fields: {[key: string]: Field};
+  fields: FieldMap;
   allowEmptyRulesets?: boolean;
   getOperators?: (field: string) => string[];
   getInputType?: (field: string, operator: string) => string;
@@ -43,18 +48,24 @@ export interface QueryBuilderConfig {
 
 export interface OperatorContext {
   operators: string[];
-  rule: Rule;
+  $implicit: Rule;
 }
 
 export interface FieldContext {
   changeField: (fieldName: string, rule: Rule) => void;
-  fieldNames: string[];
-  rule: Rule;
+  fields: Field[];
+  $implicit: Rule;
+}
+
+export interface InputContext {
+  options: Option[];
+  field: Field;
+  $implicit: Rule;
 }
 
 export interface ButtonGroupContext {
   addRule: () => void;
   addRuleset: () => void;
   removeRuleset: () => void;
-  data: RuleSet;
+  $implicit: RuleSet;
 }

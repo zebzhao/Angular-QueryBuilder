@@ -4,14 +4,25 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 
 import { QueryBuilderModule } from '../../lib';
-import { NgDatepickerModule } from 'ng2-datepicker';
+
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  MatButtonModule,
+  MatCheckboxModule,
+  MatSelectModule,
+  MatInputModule
+} from '@angular/material';
 
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
-    NgDatepickerModule,
-    QueryBuilderModule
+    QueryBuilderModule,
+    NoopAnimationsModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatSelectModule,
+    MatInputModule
   ],
   declarations: [ AppComponent ],
   bootstrap: [ AppComponent ]

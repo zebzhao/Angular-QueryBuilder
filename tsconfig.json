@@ -10,7 +10,8 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "lib": [
-      "es2015",
+      "es5",
+      "es6",
       "dom"
     ],
     "typeRoots" : [

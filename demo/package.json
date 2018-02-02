@@ -22,15 +22,15 @@
     "start": "concurrently --raw \"gulp copy-lib:watch\" \"webpack-dev-server --open --watch --config esm/webpack.config.js\""
   },
   "dependencies": {
-    "@angular/animations": "^4.4.6",
-    "@angular/common": "^4.4.4",
-    "@angular/core": "^4.4.4",
-    "@angular/forms": "^4.4.4",
-    "@angular/platform-browser": "^4.4.4",
-    "@angular/platform-browser-dynamic": "^4.4.4",
-    "angular4-datepicker": "^1.0.1",
-    "ng2-datepicker": "^2.2.4",
-    "rxjs": "^5.5.6"
+    "@angular/animations": "4.4.4",
+    "@angular/cdk": "2.0.0-beta.12",
+    "@angular/common": "4.4.4",
+    "@angular/core": "4.4.4",
+    "@angular/forms": "4.4.4",
+    "@angular/http": "4.4.4",
+    "@angular/material": "2.0.0-beta.12",
+    "@angular/platform-browser": "4.4.4",
+    "@angular/platform-browser-dynamic": "4.4.4"
   },
   "devDependencies": {
     "@angular/compiler": "^4.0.0",

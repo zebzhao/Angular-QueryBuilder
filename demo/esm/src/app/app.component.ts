@@ -1,40 +1,41 @@
 import { Component } from '@angular/core';
 import { QueryBuilderConfig } from '../../lib/components/query-builder';
-
+/*
+  <query-builder class='margin30' [(ngModel)]='query' [config]='config'>
+    <ng-container *queryInput="let input; type: 'boolean'">
+      <mat-checkbox [(ngModel)]="input.rule.value"></mat-checkbox>
+    </ng-container>
+    <ng-container *queryInput="let input; type: 'string'">
+      <mat-form-field>
+        <input matInput [(ngModel)]="input.rule.value" [placeholder]="input.field.name">
+      </mat-form-field>
+    </ng-container>
+    <ng-container *queryInput="let input; type: 'textarea'">
+      <mat-form-field>
+        <textarea matInput [(ngModel)]="input.rule.value" [placeholder]="input.field.name">
+        </textarea>
+      </mat-form-field>
+    </ng-container>
+  </query-builder>
+ */
 @Component({
   selector: 'my-app',
   template: `
-  <query-builder class='margin30' [data]='query' [config]='config'>
+  <h2>Vanilla Query Builder</h2>
+  <query-builder class='margin30' [(ngModel)]='query' [config]='config'>
     <ng-container *queryInput="let rule; type: 'textarea'">
-      <textarea class="text-input text-area" [(ngModel)]="rule.value" placeholder="Custom Textarea">
-      </textarea>
-    </ng-container>
-    <ng-container *queryInput="let rule; type: 'date'">
-      <ng-datepicker [(ngModel)]="rule.value"></ng-datepicker>
+      <textarea class="text-input text-area" [(ngModel)]="rule.value"
+        placeholder="Custom Textarea"></textarea>
     </ng-container>
   </query-builder>
   <div class='margin30'>
     <textarea class="output">{{query | json}}</textarea>
   </div>
+  <h2>Material (Custom) Query Builder</h2>
   `,
   styles: [`
   /deep/ html {
-    font: 15px sans-serif;
-    box-sizing: border-box;
-  }
-
-  /deep/ .ngx-datepicker-container {
-    display: inline-block;
-  }
-
-  /deep/ .ngx-datepicker-calendar-container {
-    z-index: 100;
-  }
-
-  /deep/ *,
-  /deep/ *:before,
-  /deep/ *:after {
-    box-sizing: inherit;
+    font: 14px sans-serif;
   }
 
   .margin30 { margin: 30px; }

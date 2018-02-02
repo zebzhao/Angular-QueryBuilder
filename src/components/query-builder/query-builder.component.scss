@@ -30,13 +30,14 @@
 
   .q-input-control, .q-operator-control, .q-field-control {
     display: inline-block;
-    min-height: 30px;
+    min-height: 32px;
     padding: 5px 8px;
     color: #555;
     background-color: #fff;
     background-image: none;
     border: 1px solid #ccc;
     border-radius: 4px;
+    box-sizing: border-box;
     width: auto;
   }
 
@@ -50,6 +51,7 @@
     text-shadow: none;
     padding: 2px 8px;
     border: 1px solid rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
     -webkit-transition: all 0.1s ease-in-out;
     -moz-transition:    all 0.1s ease-in-out;
     -ms-transition:     all 0.1s ease-in-out;

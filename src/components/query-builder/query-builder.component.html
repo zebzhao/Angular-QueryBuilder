@@ -1,5 +1,5 @@
 <ng-container *ngIf="buttonGroupTemplate; else defaultButtonGroup">
-  <ng-container *ngTemplateOutlet="buttonGroupTemplate; context: {$implicit: getButtonGroupContext()}"></ng-container>
+  <ng-container *ngTemplateOutlet="buttonGroupTemplate; context: getButtonGroupContext()"></ng-container>
 </ng-container>
 
 <ng-template #defaultButtonGroup>
@@ -23,7 +23,7 @@
 </ng-container>
 
 <ng-template #defaultSwitchGroup>
-  <div [ngClass]="getClassName('switchGroup')">
+  <div [ngClass]="getClassName('switchGroup')" *ngIf="data">
     <input type="radio" [(ngModel)]="data.condition" value="and" #andOption/>
     <label (click)="data.condition=andOption.value">AND</label>
     <input type="radio" [(ngModel)]="data.condition" value="or" #orOption/>
@@ -31,7 +31,7 @@
   </div>
 </ng-template>
 
-<ul [ngClass]="getClassName('queryTree')">
+<ul [ngClass]="getClassName('queryTree')" *ngIf="data && data.rules">
   <ng-container *ngFor="let rule of data.rules">
     <ng-container *ngIf="{ruleset: !!rule.rules, invalid: !config.allowEmptyRuleset && rule.rules && rule.rules.length === 0} as local">
       <li [ngClass]="getQueryItemClassName(local)">
@@ -43,19 +43,19 @@
           </div>
 
           <ng-container *ngIf="fieldTemplate; else defaultField">
-            <ng-container *ngTemplateOutlet="fieldTemplate; context: {$implicit: getFieldContext(rule)}"></ng-container>
+            <ng-container *ngTemplateOutlet="fieldTemplate; context: getFieldContext(rule)"></ng-container>
           </ng-container>
 
           <ng-template #defaultField>
             <select [ngClass]="getClassName('fieldControl')" [(ngModel)]="rule.field" (ngModelChange)="changeField($event, rule)">
-              <option *ngFor="let field of fieldNames" [ngValue]="field">
-                {{config.fields[field].name}}
+              <option *ngFor="let value of fieldValues" [ngValue]="value">
+                {{config.fields[value].name}}
               </option>
             </select>
           </ng-template>
 
           <ng-container *ngIf="operatorTemplate; else defaultOperator">
-            <ng-container *ngTemplateOutlet="operatorTemplate; context: {$implicit: getOperatorContext(rule)}"></ng-container>
+            <ng-container *ngTemplateOutlet="operatorTemplate; context: getOperatorContext(rule)"></ng-container>
           </ng-container>
 
           <ng-template #defaultOperator>
@@ -66,27 +66,31 @@
             </select>
           </ng-template>
 
-          <ng-container [ngSwitch]="getInputType(rule.field, rule.operator)">
-            <input [ngClass]="getClassName('inputControl')" [(ngModel)]="rule.value" *ngSwitchCase="'string'" type="text">
-            <input [ngClass]="getClassName('inputControl')" [(ngModel)]="rule.value" *ngSwitchCase="'number'" type="number">
-            <select [ngClass]="getClassName('inputControl')" [(ngModel)]="rule.value" *ngSwitchCase="'category'">
-              <option *ngFor="let opt of getOptions(rule.field)" [ngValue]="opt.value">
-                {{opt.name}}
-              </option>
-            </select>
-            <ng-container *ngSwitchCase="'multiselect'">
-              <div style="margin-bottom: 8px"></div>
-              <select [ngClass]="getClassName('inputControl')" [(ngModel)]="rule.value" multiple>
+          <ng-container *ngIf="findTemplateForRule(rule) as template; else defaultInput">
+            <ng-container *ngTemplateOutlet="template; context: getInputContext(rule)"></ng-container>
+          </ng-container>
+
+          <ng-template #defaultInput>
+            <ng-container [ngSwitch]="getInputType(rule.field, rule.operator)">
+              <input [ngClass]="getClassName('inputControl')" [(ngModel)]="rule.value" *ngSwitchCase="'string'" type="text">
+              <input [ngClass]="getClassName('inputControl')" [(ngModel)]="rule.value" *ngSwitchCase="'number'" type="number">
+              <select [ngClass]="getClassName('inputControl')" [(ngModel)]="rule.value" *ngSwitchCase="'category'">
                 <option *ngFor="let opt of getOptions(rule.field)" [ngValue]="opt.value">
                   {{opt.name}}
                 </option>
               </select>
+              <ng-container *ngSwitchCase="'multiselect'">
+                <div style="margin-bottom: 8px"></div>
+                <select [ngClass]="getClassName('inputControl')" [(ngModel)]="rule.value" multiple>
+                  <option *ngFor="let opt of getOptions(rule.field)" [ngValue]="opt.value">
+                    {{opt.name}}
+                  </option>
+                </select>
+              </ng-container>
+              <input [ngClass]="getClassName('inputControl')" [(ngModel)]="rule.value" *ngSwitchCase="'boolean'" type="checkbox">
             </ng-container>
-            <input [ngClass]="getClassName('inputControl')" [(ngModel)]="rule.value" *ngSwitchCase="'boolean'" type="checkbox">
-            <ng-container *ngSwitchDefault>
-              <ng-container *ngTemplateOutlet="findTemplateForRule(rule); context: {$implicit: rule}"></ng-container>
-            </ng-container>
-          </ng-container>
+          </ng-template>
+
         </ng-container>
         <query-builder *ngIf="local.ruleset"
           [data]="rule"
