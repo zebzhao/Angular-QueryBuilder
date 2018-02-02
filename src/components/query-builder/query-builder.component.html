@@ -1,5 +1,5 @@
-<ng-container *ngIf="buttonGroupTemplate; else defaultButtonGroup">
-  <ng-container *ngTemplateOutlet="buttonGroupTemplate; context: getButtonGroupContext()"></ng-container>
+<ng-container *ngIf="getButtonGroupTemplate() as template; else defaultButtonGroup">
+  <ng-container *ngTemplateOutlet="template; context: getButtonGroupContext()"></ng-container>
 </ng-container>
 
 <ng-template #defaultButtonGroup>
@@ -18,8 +18,8 @@
   </div>
 </ng-template>
 
-<ng-container *ngIf="switchGroupTemplate; else defaultSwitchGroup">
-  <ng-container *ngTemplateOutlet="switchGroupTemplate; context: {$implicit: data}"></ng-container>
+<ng-container *ngIf="getSwitchGroupTemplate() as template; else defaultSwitchGroup">
+  <ng-container *ngTemplateOutlet="template; context: {$implicit: data}"></ng-container>
 </ng-container>
 
 <ng-template #defaultSwitchGroup>
@@ -42,20 +42,20 @@
             </button>
           </div>
 
-          <ng-container *ngIf="fieldTemplate; else defaultField">
-            <ng-container *ngTemplateOutlet="fieldTemplate; context: getFieldContext(rule)"></ng-container>
+          <ng-container *ngIf="getFieldTemplate() as template; else defaultField">
+            <ng-container *ngTemplateOutlet="template; context: getFieldContext(rule)"></ng-container>
           </ng-container>
 
           <ng-template #defaultField>
             <select [ngClass]="getClassName('fieldControl')" [(ngModel)]="rule.field" (ngModelChange)="changeField($event, rule)">
-              <option *ngFor="let value of fieldValues" [ngValue]="value">
-                {{config.fields[value].name}}
+              <option *ngFor="let field of fields" [ngValue]="field.value">
+                {{field.name}}
               </option>
             </select>
           </ng-template>
 
-          <ng-container *ngIf="operatorTemplate; else defaultOperator">
-            <ng-container *ngTemplateOutlet="operatorTemplate; context: getOperatorContext(rule)"></ng-container>
+          <ng-container *ngIf="getOperatorTemplate() as template; else defaultOperator">
+            <ng-container *ngTemplateOutlet="template; context: getOperatorContext(rule)"></ng-container>
           </ng-container>
 
           <ng-template #defaultOperator>
@@ -74,6 +74,8 @@
             <ng-container [ngSwitch]="getInputType(rule.field, rule.operator)">
               <input [ngClass]="getClassName('inputControl')" [(ngModel)]="rule.value" *ngSwitchCase="'string'" type="text">
               <input [ngClass]="getClassName('inputControl')" [(ngModel)]="rule.value" *ngSwitchCase="'number'" type="number">
+              <input [ngClass]="getClassName('inputControl')" [(ngModel)]="rule.value" *ngSwitchCase="'date'" type="date">
+              <input [ngClass]="getClassName('inputControl')" [(ngModel)]="rule.value" *ngSwitchCase="'time'" type="time">
               <select [ngClass]="getClassName('inputControl')" [(ngModel)]="rule.value" *ngSwitchCase="'category'">
                 <option *ngFor="let opt of getOptions(rule.field)" [ngValue]="opt.value">
                   {{opt.name}}
@@ -94,7 +96,11 @@
         </ng-container>
         <query-builder *ngIf="local.ruleset"
           [data]="rule"
-          [inputTypeTemplates]="inputTypes"
+          [parentInputTemplates]="inputTemplates"
+          [parentOperatorTemplate]="operatorTemplate"
+          [parentFieldTemplate]="fieldTemplate"
+          [parentSwitchGroupTemplate]="switchGroupTemplate"
+          [parentButtonGroupTemplate]="buttonGroupTemplate"
           [parentData]="data"
           [config]="config"
           [allowRuleset]="allowRuleset"

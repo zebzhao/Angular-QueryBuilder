@@ -46,7 +46,7 @@ export const CONTROL_VALUE_ACCESSOR: any = {
 })
 export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAccessor {
   public disabled: boolean;
-  public fieldValues: string[];
+  public fields: Field[];
   public defaultClassNames: {[key: string]: string} = {
     removeIcon: 'q-icon q-remove-icon',
     addIcon: 'q-icon q-add-icon',
@@ -77,13 +77,17 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   @Input() parentData: RuleSet;
   @Input() data: RuleSet = { condition: 'and', rules: [] };
   @Input() config: QueryBuilderConfig = { fields: {} };
-  @Input() inputTypeTemplates: QueryList<QueryInputDirective>;
+  @Input() parentInputTemplates: QueryList<QueryInputDirective>;
+  @Input() parentOperatorTemplate: QueryOperatorDirective;
+  @Input() parentFieldTemplate: QueryFieldDirective;
+  @Input() parentSwitchGroupTemplate: QuerySwitchGroupDirective;
+  @Input() parentButtonGroupTemplate: QueryButtonGroupDirective;
 
   @ContentChild(QueryButtonGroupDirective) buttonGroupTemplate: QueryButtonGroupDirective;
   @ContentChild(QuerySwitchGroupDirective) switchGroupTemplate: QuerySwitchGroupDirective;
   @ContentChild(QueryFieldDirective) fieldTemplate: QueryFieldDirective;
   @ContentChild(QueryOperatorDirective) operatorTemplate: QueryOperatorDirective;
-  @ContentChildren(QueryInputDirective) inputTypes: QueryList<QueryInputDirective>;
+  @ContentChildren(QueryInputDirective) inputTemplates: QueryList<QueryInputDirective>;
 
   private defaultTemplateTypes: string[] = [
     'string', 'number', 'time', 'date', 'category', 'boolean', 'multiselect'];
@@ -107,7 +111,11 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     const data = this.data;
 
     if (typeof config === 'object') {
-      this.fieldValues = Object.keys(config.fields);
+      this.fields = Object.keys(config.fields).map((value) => {
+        const field = config.fields[value];
+        field.value = field.value || value;
+        return field;
+      });
       this.operatorsCache = {};
     } else {
       throw new Error('config must be a valid object');
@@ -160,7 +168,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   }
 
   findQueryInput(type: string): QueryInputDirective {
-    const templates = this.inputTypeTemplates || this.inputTypes;
+    const templates = this.parentInputTemplates || this.inputTemplates;
     return templates.find((item) => item.queryInputType === type);
   }
 
@@ -226,12 +234,11 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     if (this.config.addRule) {
       return this.config.addRule(parent);
     } else {
-      const fieldValue = this.fieldValues[0];
-      const fieldObject = this.config.fields[fieldValue];
+      const field = this.fields[0];
       parent.rules = parent.rules.concat([
         {
-          field: fieldObject.value,
-          operator: this.operatorMap[fieldObject.type][0]
+          field: field.value,
+          operator: this.operatorMap[field.type][0]
         }
       ]);
     }
@@ -281,6 +288,14 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     } else {
       rule.operator = this.getOperators(rule.field)[0];
     }
+
+    // Create new context objects so templates will automatically update
+    this.inputContextCache.delete(rule);
+    this.operatorContextCache.delete(rule);
+    this.fieldContextCache.delete(rule);
+    this.getInputContext(rule);
+    this.getFieldContext(rule);
+    this.getOperatorContext(rule);
   }
 
   getDefaultValue(defaultValue: any): any {
@@ -290,6 +305,26 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
       default:
         return defaultValue;
     }
+  }
+
+  getOperatorTemplate(): TemplateRef<any> {
+    const t = this.parentOperatorTemplate || this.operatorTemplate;
+    return t ? t.template : null;
+  }
+
+  getFieldTemplate(): TemplateRef<any> {
+    const t = this.parentFieldTemplate || this.fieldTemplate;
+    return t ? t.template : null;
+  }
+
+  getButtonGroupTemplate(): TemplateRef<any> {
+    const t = this.parentButtonGroupTemplate || this.buttonGroupTemplate;
+    return t ? t.template : null;
+  }
+
+  getSwitchGroupTemplate(): TemplateRef<any> {
+    const t = this.parentSwitchGroupTemplate || this.switchGroupTemplate;
+    return t ? t.template : null;
   }
 
   getQueryItemClassName(local: LocalRuleMeta): string {
@@ -317,7 +352,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     if (!this.fieldContextCache.has(rule)) {
       this.fieldContextCache.set(rule, {
         changeField: this.changeField.bind(this),
-        fields: this.fieldValues.map((value) => this.config.fields[value]),
+        fields: this.fields,
         $implicit: rule
       });
     }

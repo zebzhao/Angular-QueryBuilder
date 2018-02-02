@@ -1,23 +1,6 @@
 import { Component } from '@angular/core';
 import { QueryBuilderConfig } from '../../lib/components/query-builder';
-/*
-  <query-builder class='margin30' [(ngModel)]='query' [config]='config'>
-    <ng-container *queryInput="let input; type: 'boolean'">
-      <mat-checkbox [(ngModel)]="input.rule.value"></mat-checkbox>
-    </ng-container>
-    <ng-container *queryInput="let input; type: 'string'">
-      <mat-form-field>
-        <input matInput [(ngModel)]="input.rule.value" [placeholder]="input.field.name">
-      </mat-form-field>
-    </ng-container>
-    <ng-container *queryInput="let input; type: 'textarea'">
-      <mat-form-field>
-        <textarea matInput [(ngModel)]="input.rule.value" [placeholder]="input.field.name">
-        </textarea>
-      </mat-form-field>
-    </ng-container>
-  </query-builder>
- */
+
 @Component({
   selector: 'my-app',
   template: `
@@ -31,7 +14,72 @@ import { QueryBuilderConfig } from '../../lib/components/query-builder';
   <div class='margin30'>
     <textarea class="output">{{query | json}}</textarea>
   </div>
-  <h2>Material (Custom) Query Builder</h2>
+  <h2>Custom Material Query Builder</h2>
+  <query-builder class='margin30' [(ngModel)]='query' [config]='config'>
+    <ng-container *queryField="let rule; let fields=fields; let changeField=changeField">
+      <mat-form-field>
+        <mat-select [(ngModel)]="rule.field" (ngModelChange)="changeField($event, rule)">
+          <mat-option *ngFor="let field of fields" [value]="field.value">
+            {{ field.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </ng-container>
+    <ng-container *queryOperator="let rule; let operators=operators">
+      <mat-form-field [style.width.px]="90">
+        <mat-select [(ngModel)]="rule.operator">
+          <mat-option *ngFor="let value of operators" [value]="value">
+            {{ value }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </ng-container>
+    <ng-container *queryInput="let rule; type: 'boolean'">
+      <mat-checkbox [(ngModel)]="rule.value"></mat-checkbox>
+    </ng-container>
+    <ng-container *queryInput="let rule; let field=field; let options=options; type: 'category'">
+      <mat-form-field>
+        <mat-select [placeholder]="field.name">
+          <mat-option *ngFor="let opt of options" [value]="opt.value">
+            {{ opt.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </ng-container>
+    <ng-container *queryInput="let rule; type: 'date'">
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="rule.value"
+          placeholder="Choose a date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </ng-container>
+    <ng-container *queryInput="let rule; let options=options; type: 'multiselect'">
+      <mat-form-field [style.width.px]="300">
+        <mat-select multiple>
+          <mat-option *ngFor="let opt of options" [value]="opt.value">
+            {{ opt.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </ng-container>
+    <ng-container *queryInput="let rule; let field=field; type: 'number'">
+      <mat-form-field [style.width.px]="50">
+        <input matInput [(ngModel)]="rule.value" [placeholder]="field.name" type="number">
+      </mat-form-field>
+    </ng-container>
+    <ng-container *queryInput="let rule; let field=field; type: 'string'">
+      <mat-form-field>
+        <input matInput [(ngModel)]="rule.value" [placeholder]="field.name">
+      </mat-form-field>
+    </ng-container>
+    <ng-container *queryInput="let rule; let field=field; type: 'textarea'">
+      <mat-form-field>
+        <textarea matInput [(ngModel)]="rule.value" [placeholder]="field.name">
+        </textarea>
+      </mat-form-field>
+    </ng-container>
+  </query-builder>
   `,
   styles: [`
   /deep/ html {
