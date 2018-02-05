@@ -118,7 +118,49 @@ See [documentation](https://zebzhao.github.io/Angular-QueryBuilder/) for more de
 |`operatorMap`|`{ [key: string]: string[] }`|Optional|| Used to map field types to list of operators |
 |`parentData`|`Ruleset`|Optional|| Internal property used to determine the parent `query-builder` data |
 
-Use the structural directive `queryInput` to use custom components with `query-builder`.
+### Structural Directives
+
+Use these directives to replace different parts of query builder with custom components.
+
+#### `queryInput`
+
+|Context Name|Type|Description|
+|:--- |:--- |:--- |
+|`$implicit`|`Rule`|Current rule object which contains the field, value, and operator|
+|`field`|`Field`|Current field object which contains the field's value and name|
+|`options`|`Option[]`|List of options for the field, returned by `getOptions`|
+
+#### `queryOperator`
+|Context Name|Type|Description|
+|:--- |:--- |:--- |
+|`$implicit`|`Rule`|Current rule object which contains the field, value, and operator|
+|`operators`|`string[]`|List of operators for the field, returned by `getOperators`|
+
+#### `queryField`
+|Context Name|Type|Description|
+|:--- |:--- |:--- |
+|`$implicit`|`Rule`|Current rule object which contains the field, value, and operator|
+|`fields`|`Field[]`|List of fields for the component, specified by `config`|
+|`changeField`|`(fieldName: string, rule: Rule) => void`|Function to handle changes to the field component|
+
+#### `querySwitchGroup`
+|Context Name|Type|Description|
+|:--- |:--- |:--- |
+|`$implicit`|`RuleSet`|Current rule set object which contain a list of child rules|
+
+#### `queryButtonGroup`
+|Context Name|Type|Description|
+|:--- |:--- |:--- |
+|`$implicit`|`RuleSet`|Current rule set object which contain a list of child rules|
+|`addRule`|`() => void`|Function to handle adding a new rule|
+|`addRuleSet`|`() => void`|Function to handle adding a new rule set|
+|`removeRuleSet`|`() => void`|Function to handle removing the current rule set|
+
+#### `queryRemoveButton`
+|Context Name|Type|Description|
+|:--- |:--- |:--- |
+|`$implicit`|`Rule`|Current rule object which contains the field, value, and operator|
+|`removeRule`|`(rule: Rule) => void`|Function to handle removing a rule|
 
 ## Dependencies
 - Angular 4+
