@@ -12,7 +12,10 @@ import {
   MatSelectModule,
   MatInputModule,
   MatDatepickerModule,
-  MatNativeDateModule
+  MatNativeDateModule,
+  MatRadioModule,
+  MatIconModule,
+  MatCardModule
 } from '@angular/material';
 
 @NgModule({
@@ -26,7 +29,10 @@ import {
     MatSelectModule,
     MatInputModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatRadioModule,
+    MatIconModule,
+    MatCardModule
   ],
   declarations: [ AppComponent ],
   bootstrap: [ AppComponent ]

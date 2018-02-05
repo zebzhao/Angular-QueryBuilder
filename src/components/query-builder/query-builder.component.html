@@ -1,5 +1,7 @@
 <ng-container *ngIf="getButtonGroupTemplate() as template; else defaultButtonGroup">
-  <ng-container *ngTemplateOutlet="template; context: getButtonGroupContext()"></ng-container>
+  <div [ngClass]="getClassName('buttonGroup')">
+    <ng-container *ngTemplateOutlet="template; context: getButtonGroupContext()"></ng-container>
+  </div>
 </ng-container>
 
 <ng-template #defaultButtonGroup>
@@ -36,11 +38,20 @@
     <ng-container *ngIf="{ruleset: !!rule.rules, invalid: !config.allowEmptyRuleset && rule.rules && rule.rules.length === 0} as local">
       <li [ngClass]="getQueryItemClassName(local)">
         <ng-container *ngIf="!local.ruleset">
-          <div [ngClass]="getClassName('buttonGroup')">
-            <button class="danger" [ngClass]="getClassName('button')" (click)="removeRule(rule, data)">
-              <i [ngClass]="getClassName('removeIcon')"></i>
-            </button>
-          </div>
+
+          <ng-container *ngIf="getRemoveButtonTemplate() as template; else defaultRemoveButton">
+            <div [ngClass]="getClassName('buttonGroup')">
+              <ng-container *ngTemplateOutlet="template; context: getRemoveButtonContext(rule)"></ng-container>
+            </div>
+          </ng-container>
+
+          <ng-template #defaultRemoveButton>
+            <div [ngClass]="getClassName('buttonGroup')">
+              <button class="danger" [ngClass]="getClassName('button')" (click)="removeRule(rule, data)">
+                <i [ngClass]="getClassName('removeIcon')"></i>
+              </button>
+            </div>
+          </ng-template>
 
           <ng-container *ngIf="getFieldTemplate() as template; else defaultField">
             <ng-container *ngTemplateOutlet="template; context: getFieldContext(rule)"></ng-container>
@@ -101,6 +112,7 @@
           [parentFieldTemplate]="fieldTemplate"
           [parentSwitchGroupTemplate]="switchGroupTemplate"
           [parentButtonGroupTemplate]="buttonGroupTemplate"
+          [parentRemoveButtonTemplate]="removeButtonTemplate"
           [parentData]="data"
           [config]="config"
           [allowRuleset]="allowRuleset"

@@ -4,6 +4,7 @@ import { QueryFieldDirective } from './query-field.directive';
 import { QuerySwitchGroupDirective } from './query-switch-group.directive';
 import { QueryButtonGroupDirective } from './query-button-group.directive';
 import { QueryInputDirective } from './query-input.directive';
+import { QueryRemoveButtonDirective } from './query-remove-button.directive';
 import {
     ButtonGroupContext,
     Field,
@@ -11,6 +12,7 @@ import {
     InputContext,
     LocalRuleMeta,
     OperatorContext,
+    RemoveButtonContext,
     Option,
     QueryBuilderConfig,
     Rule,
@@ -82,11 +84,13 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   @Input() parentFieldTemplate: QueryFieldDirective;
   @Input() parentSwitchGroupTemplate: QuerySwitchGroupDirective;
   @Input() parentButtonGroupTemplate: QueryButtonGroupDirective;
+  @Input() parentRemoveButtonTemplate: QueryRemoveButtonDirective;
 
   @ContentChild(QueryButtonGroupDirective) buttonGroupTemplate: QueryButtonGroupDirective;
   @ContentChild(QuerySwitchGroupDirective) switchGroupTemplate: QuerySwitchGroupDirective;
   @ContentChild(QueryFieldDirective) fieldTemplate: QueryFieldDirective;
   @ContentChild(QueryOperatorDirective) operatorTemplate: QueryOperatorDirective;
+  @ContentChild(QueryRemoveButtonDirective) removeButtonTemplate: QueryRemoveButtonDirective;
   @ContentChildren(QueryInputDirective) inputTemplates: QueryList<QueryInputDirective>;
 
   private defaultTemplateTypes: string[] = [
@@ -96,6 +100,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   private inputContextCache = new Map<Rule, InputContext>();
   private operatorContextCache = new Map<Rule, OperatorContext>();
   private fieldContextCache = new Map<Rule, FieldContext>();
+  private removeButtonContextCache = new Map<Rule, RemoveButtonContext>();
   private buttonGroupContext: ButtonGroupContext;
 
   // For ControlValueAccessor interface
@@ -254,6 +259,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     this.inputContextCache.delete(rule);
     this.operatorContextCache.delete(rule);
     this.fieldContextCache.delete(rule);
+    this.removeButtonContextCache.delete(rule);
   }
 
   addRuleSet(parent?: RuleSet): void {
@@ -327,6 +333,11 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     return t ? t.template : null;
   }
 
+  getRemoveButtonTemplate(): TemplateRef<any> {
+    const t = this.parentRemoveButtonTemplate || this.removeButtonTemplate;
+    return t ? t.template : null;
+  }
+
   getQueryItemClassName(local: LocalRuleMeta): string {
     let cls = this.getClassName('queryItem');
     cls += ' ' + this.getClassName(local.ruleset ? 'queryRuleSet' : 'queryRule');
@@ -340,12 +351,22 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     if (!this.buttonGroupContext) {
       this.buttonGroupContext = {
         addRule: this.addRule.bind(this),
-        addRuleset: this.addRuleSet.bind(this),
-        removeRuleset: this.removeRuleSet.bind(this),
+        addRuleSet: this.addRuleSet.bind(this),
+        removeRuleSet: this.removeRuleSet.bind(this),
         $implicit: this.data
       };
     }
     return this.buttonGroupContext;
+  }
+
+  getRemoveButtonContext(rule: Rule): RemoveButtonContext {
+    if (!this.removeButtonContextCache.has(rule)) {
+      this.removeButtonContextCache.set(rule, {
+        removeRule: this.removeRule.bind(this),
+        $implicit: rule
+      });
+    }
+    return this.removeButtonContextCache.get(rule);
   }
 
   getFieldContext(rule: Rule): FieldContext {

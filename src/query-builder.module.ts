@@ -7,7 +7,8 @@ import {
     QueryFieldDirective,
     QueryOperatorDirective,
     QueryButtonGroupDirective,
-    QuerySwitchGroupDirective
+    QuerySwitchGroupDirective,
+    QueryRemoveButtonDirective
 } from './components';
 
 @NgModule({
@@ -21,7 +22,8 @@ import {
     QueryOperatorDirective,
     QueryFieldDirective,
     QueryButtonGroupDirective,
-    QuerySwitchGroupDirective
+    QuerySwitchGroupDirective,
+    QueryRemoveButtonDirective
   ],
   exports: [
     QueryBuilderComponent,
@@ -29,7 +31,8 @@ import {
     QueryOperatorDirective,
     QueryFieldDirective,
     QueryButtonGroupDirective,
-    QuerySwitchGroupDirective
+    QuerySwitchGroupDirective,
+    QueryRemoveButtonDirective
   ]
 })
 export class QueryBuilderModule { }

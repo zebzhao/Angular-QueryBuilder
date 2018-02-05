@@ -65,7 +65,12 @@ export interface InputContext {
 
 export interface ButtonGroupContext {
   addRule: () => void;
-  addRuleset: () => void;
-  removeRuleset: () => void;
+  addRuleSet: () => void;
+  removeRuleSet: () => void;
   $implicit: RuleSet;
+}
+
+export interface RemoveButtonContext {
+  removeRule: (rule: Rule) => void;
+  $implicit: Rule;
 }

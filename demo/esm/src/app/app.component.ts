@@ -15,7 +15,27 @@ import { QueryBuilderConfig } from '../../lib/components/query-builder';
     <textarea class="output">{{query | json}}</textarea>
   </div>
   <h2>Custom Material Query Builder</h2>
-  <query-builder class='margin30' [(ngModel)]='query' [config]='config'>
+  <mat-card>
+  <query-builder [(ngModel)]='query' [config]='config'>
+    <ng-container *queryButtonGroup="let ruleset; let addRule=addRule; let addRuleSet=addRuleSet; let removeRuleSet=removeRuleSet">
+      <button mat-icon-button color="primary" (click)="addRule()">
+        <mat-icon>add</mat-icon></button>
+      <button mat-icon-button color="primary" (click)="addRuleSet()">
+        <mat-icon>add_circle_outline</mat-icon></button>
+      <button mat-icon-button color="accent" (click)="removeRuleSet()">
+        <mat-icon>remove_circle_outline</mat-icon></button>
+    </ng-container>
+    <ng-container *queryRemoveButton="let rule; let removeRule=removeRule">
+      <button mat-icon-button color="accent" (click)="removeRule(rule)">
+        <mat-icon>remove</mat-icon>
+      </button>
+    </ng-container>
+    <ng-container *querySwitchGroup="let ruleset">
+      <mat-radio-group *ngIf="ruleset" [(ngModel)]="ruleset.condition">
+        <mat-radio-button [style.padding.px]="10" value="and">And</mat-radio-button>
+        <mat-radio-button [style.padding.px]="10" value="or">Or</mat-radio-button>
+      </mat-radio-group>
+    </ng-container>
     <ng-container *queryField="let rule; let fields=fields; let changeField=changeField">
       <mat-form-field>
         <mat-select [(ngModel)]="rule.field" (ngModelChange)="changeField($event, rule)">
@@ -80,6 +100,7 @@ import { QueryBuilderConfig } from '../../lib/components/query-builder';
       </mat-form-field>
     </ng-container>
   </query-builder>
+  </mat-card>
   `,
   styles: [`
   /deep/ html {
