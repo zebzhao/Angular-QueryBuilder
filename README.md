@@ -1,5 +1,5 @@
 # Angular-QueryBuilder
-A modernized Angular 4+ query builder based on jquery QueryBuilder.
+A modernized Angular 4+ query builder based on jQuery QueryBuilder. Support for heavy customization with Angular components and provides a flexible way to handle custom data types.
 
 # Getting Started
 
@@ -21,7 +21,7 @@ Play with the [demo here](https://zebzhao.github.io/Angular-QueryBuilder/demo/).
 
 ##### `app.component.html`
 ```html
-<query-builder [data]='query' [config]='config'></query-builder>
+<query-builder [(ngModel)]='query' [config]='config'></query-builder>
 ```
 ##### `app.component.ts`
 ```javascript
@@ -52,7 +52,7 @@ config: QueryBuilderConfig = {
 
 ##### `app.component.html`
 ```html
-<query-builder [data]='query' [config]='config'>
+<query-builder [(ngModel)]='query' [config]='config'>
   <ng-container *queryInput="let rule; type: 'date'">
     <custom-datepicker [(ngModel)]="rule.value"></custom-datepicker>
   </ng-container>
@@ -81,7 +81,7 @@ config: QueryBuilderConfig = {
 
 ##### `app.component.html`
 ```html
-<query-builder [data]='query' [config]='config' [classNames]='classNames'></query-builder>
+<query-builder [(ngModel)]='query' [config]='config' [classNames]='classNames'></query-builder>
 ```
 ##### `app.component.ts`
 ```javascript
@@ -103,6 +103,62 @@ classNames: {[key: string]: string} = {
 };
 ```
 
+## Customizing with Angular Material
+
+Example of how you can completely customize the query component with another library like Angular Material. For the full example, please look at the [source code](https://github.com/zebzhao/Angular-QueryBuilder/blob/master/demo/esm/src/app/app.component.ts) provided in the demo.
+
+#### `app.component.html`
+
+```html
+<query-builder [(ngModel)]='query' [config]='config'>
+  <ng-container *queryButtonGroup="let ruleset; let addRule=addRule; let addRuleSet=addRuleSet; let removeRuleSet=removeRuleSet">
+    <button mat-button (click)="addRule()">+ Rule</button>
+    <button mat-button (click)="addRuleSet()">+ Ruleset</button>
+    <button mat-button (click)="removeRuleSet()">- Ruleset</button>
+  </ng-container>
+  <ng-container *queryRemoveButton="let rule; let removeRule=removeRule">
+    <button mat-icon-button color="accent" (click)="removeRule(rule)">
+      <mat-icon>remove</mat-icon>
+    </button>
+  </ng-container>
+  <ng-container *querySwitchGroup="let ruleset">
+    <mat-radio-group *ngIf="ruleset" [(ngModel)]="ruleset.condition">
+      <mat-radio-buttonvalue="and">And</mat-radio-button>
+      <mat-radio-button value="or">Or</mat-radio-button>
+    </mat-radio-group>
+  </ng-container>
+  <ng-container *queryField="let rule; let fields=fields; let changeField=changeField">
+    <mat-form-field>
+      <mat-select [(ngModel)]="rule.field" (ngModelChange)="changeField($event, rule)">
+        <mat-option *ngFor="let field of fields" [value]="field.value">{{field.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </ng-container>
+  <ng-container *queryOperator="let rule; let operators=operators">
+    <mat-form-field>
+      <mat-select [(ngModel)]="rule.operator">
+        <mat-option *ngFor="let value of operators" [value]="value">{{value}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </ng-container>
+  <!-- Override input component for 'boolean' type -->
+  <ng-container *queryInput="let rule; type: 'boolean'">
+    <mat-checkbox [(ngModel)]="rule.value"></mat-checkbox>
+  </ng-container>
+  <!-- Override input component for 'category' type -->
+  <ng-container *queryInput="let rule; let field=field; let options=options; type: 'category'">
+    <mat-form-field>
+      <mat-select [placeholder]="field.name">
+        <mat-option *ngFor="let opt of options" [value]="opt.value">
+          {{ opt.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </ng-container>
+  ...
+</query-builder>
+```
+
 ## Property Bindings Quick Reference
 
 See [documentation](https://zebzhao.github.io/Angular-QueryBuilder/) for more details on interfaces and properties.
@@ -110,15 +166,15 @@ See [documentation](https://zebzhao.github.io/Angular-QueryBuilder/) for more de
 #### `query-builder`
 |Name|Type|Required|Default|Description|
 |:--- |:--- |:--- |:--- |:--- |
-|`allowRuleset`|`boolean`|Optional|`true`| Displays the `+ Ruleset` button if `true` |
-|`classNames`|`object`|Optional|| CSS class names for different child elements in `query-builder` component |
-|`config`|`QueryBuilderConfig`|Required|| Configuration object for the main component |
-|`data`| `Ruleset` |Required|| Object that stores the state of the component |
-|`inputTypeTemplates`|`QueryList<QueryInputDirective>`|Optional|| Internal property used to map field types to `TemplateRef`|
-|`operatorMap`|`{ [key: string]: string[] }`|Optional|| Used to map field types to list of operators |
-|`parentData`|`Ruleset`|Optional|| Internal property used to determine the parent `query-builder` data |
+|`allowRuleset`|`boolean`|Optional|`true`| Displays the `+ Ruleset` button if `true`. |
+|`classNames`|`object`|Optional|| CSS class names for different child elements in `query-builder` component. |
+|`config`|`QueryBuilderConfig`|Required|| Configuration object for the main component. |
+|`data`| `Ruleset` |Optional|| *DEPRECATED* (Use `ngModel` or `value` instead.) |
+|`ngModel`| `Ruleset` |Optional|| Object that stores the state of the component. Supports 2-way binding. |
+|`operatorMap`|`{ [key: string]: string[] }`|Optional|| Used to map field types to list of operators. |
+|`value`| `Ruleset` |Optional|| Object that stores the state of the component. |
 
-### Structural Directives
+## Structural Directives
 
 Use these directives to replace different parts of query builder with custom components.
 
