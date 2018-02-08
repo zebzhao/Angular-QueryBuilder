@@ -15,7 +15,7 @@ export default {
     path: path.join(__dirname, 'dist'),
     filename: '[name].js',
     libraryTarget: 'umd',
-    library: 'ticktock'
+    library: 'angular2-query-builder'
   },
   resolve: {
     extensions: [ '.ts', '.js', '.json' ]
@@ -31,10 +31,7 @@ export default {
         test: /\.ts$/,
         use: [
           {
-            loader: 'awesome-typescript-loader',
-            options: {
-              configFileName: 'tsconfig.json'
-            }
+            loader: 'ts-loader',
           },
           {
             loader: 'angular2-template-loader'

@@ -65,10 +65,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     operatorControl: 'q-operator-control',
     inputControl: 'q-input-control'
   };
-
-  @Input() allowRuleset: boolean = true;
-  @Input() classNames: {[key: string]: string};
-  @Input() operatorMap: {[key: string]: string[]} = {
+  public defaultOperatorMap: {[key: string]: string[]} = {
     string: ['=', '!=', 'contains', 'like'],
     number: ['=', '!=', '>', '>=', '<', '<='],
     time: ['=', '!=', '>', '>=', '<', '<='],
@@ -76,8 +73,15 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     category: ['=', '!='],
     boolean: ['=']
   };
-  @Input() parentData: RuleSet;
+
+  @Input() allowRuleset: boolean = true;
+  @Input() classNames: {[key: string]: string};
+  @Input() operatorMap: {[key: string]: string[]};
+  /**
+   * @deprecated since version 0.2.0
+   */
   @Input() data: RuleSet = { condition: 'and', rules: [] };
+  @Input() parentData: RuleSet;
   @Input() config: QueryBuilderConfig = { fields: {} };
   @Input() parentInputTemplates: QueryList<QueryInputDirective>;
   @Input() parentOperatorTemplate: QueryOperatorDirective;
@@ -113,9 +117,8 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
 
   ngOnChanges(changes: SimpleChanges) {
     const config = this.config;
-    const data = this.data;
-
-    if (typeof config === 'object') {
+    const type = typeof config;
+    if (type === 'object') {
       this.fields = Object.keys(config.fields).map((value) => {
         const field = config.fields[value];
         field.value = field.value || value;
@@ -123,11 +126,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
       });
       this.operatorsCache = {};
     } else {
-      throw new Error('config must be a valid object');
-    }
-
-    if (typeof data !== 'object') {
-      throw new Error('data must be a valid object');
+      throw new Error(`Expected 'config' must be a valid object, got ${type} instead.`);
     }
   }
 
@@ -190,8 +189,15 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
 
     if (fieldObject && fieldObject.operators) {
       operators = fieldObject.operators;
-    } else if (type && this.operatorMap[type]) {
-      operators = this.operatorMap[type];
+    } else if (type) {
+      operators = (this.operatorMap && this.operatorMap[type]) || this.defaultOperatorMap[type] || this.defaultEmptyList;
+      if (operators.length === 0) {
+        console.warn(
+          `No operators found for field '${field}' with type ${fieldObject.type}. ` +
+          `Please define an 'operators' property on the field or use the 'operatorMap' binding to fix this.`);
+      }
+    } else {
+      console.warn(`No 'type' property found on field: '${field}'`);
     }
 
     if (fieldObject.options) {
@@ -234,6 +240,21 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     return cls != null ? cls : this.defaultClassNames[id];
   }
 
+  getDefaultOperator(field: Field) {
+    if (field && field.defaultOperator !== undefined) {
+      return this.getDefaultValue(field.defaultOperator);
+    } else {
+      const operators = this.getOperators(field.value)[0];
+      if (operators && operators.length) {
+        return operators[0];
+      } else {
+        console.warn(`No operators found for field '${field.value}'. ` +
+        `A 'defaultOperator' is also not specified on the field config. Operator value will default to null.`);
+        return null;
+      }
+    }
+  }
+
   addRule(parent?: RuleSet): void {
     parent = parent || this.data;
     if (this.config.addRule) {
@@ -243,7 +264,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
       parent.rules = parent.rules.concat([
         {
           field: field.value,
-          operator: this.operatorMap[field.type][0]
+          operator: this.getDefaultOperator(field)
         }
       ]);
     }
@@ -289,11 +310,8 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     } else {
       delete rule.value;
     }
-    if (field && field.defaultOperator !== undefined) {
-      rule.operator = this.getDefaultValue(field.defaultOperator);
-    } else {
-      rule.operator = this.getOperators(rule.field)[0];
-    }
+
+    rule.operator = this.getDefaultOperator(field);
 
     // Create new context objects so templates will automatically update
     this.inputContextCache.delete(rule);

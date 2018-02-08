@@ -59,7 +59,7 @@ import { QueryBuilderConfig } from '../../lib/components/query-builder';
     </ng-container>
     <ng-container *queryInput="let rule; let field=field; let options=options; type: 'category'">
       <mat-form-field>
-        <mat-select [placeholder]="field.name">
+        <mat-select [(ngModel)]="rule.value" [placeholder]="field.name">
           <mat-option *ngFor="let opt of options" [value]="opt.value">
             {{ opt.name }}
           </mat-option>
@@ -76,7 +76,7 @@ import { QueryBuilderConfig } from '../../lib/components/query-builder';
     </ng-container>
     <ng-container *queryInput="let rule; let options=options; type: 'multiselect'">
       <mat-form-field [style.width.px]="300">
-        <mat-select multiple>
+        <mat-select [(ngModel)]="rule.value" multiple>
           <mat-option *ngFor="let opt of options" [value]="opt.value">
             {{ opt.name }}
           </mat-option>
