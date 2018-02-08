@@ -408,7 +408,7 @@
                    <div class="content-data">
 
 <h1 id="angular-querybuilder">Angular-QueryBuilder</h1>
-<p>A modernized Angular 4+ query builder based on jquery QueryBuilder.</p>
+<p>A modernized Angular 4+ query builder based on jQuery QueryBuilder. Support for heavy customization with Angular components and provides a flexible way to handle custom data types.</p>
 <h1 id="getting-started">Getting Started</h1>
 <h2 id="install">Install</h2>
 <p><code>npm install angular2-query-builder</code></p>
@@ -420,7 +420,7 @@
 <h1 id="examples">Examples</h1>
 <h2 id="basic-usage">Basic Usage</h2>
 <h5 id="-app-component-html-"><code>app.component.html</code></h5>
-<pre class="line-numbers"><code class="language-html">&lt;query-builder [data]=&#39;query&#39; [config]=&#39;config&#39;&gt;&lt;/query-builder&gt;</code></pre><h5 id="-app-component-ts-"><code>app.component.ts</code></h5>
+<pre class="line-numbers"><code class="language-html">&lt;query-builder [(ngModel)]=&#39;query&#39; [config]=&#39;config&#39;&gt;&lt;/query-builder&gt;</code></pre><h5 id="-app-component-ts-"><code>app.component.ts</code></h5>
 <pre class="line-numbers"><code class="language-javascript">query = {
   condition: &#39;and&#39;,
   rules: [
@@ -443,7 +443,7 @@ config: QueryBuilderConfig = {
   }
 }</code></pre><h2 id="custom-input-components">Custom Input Components</h2>
 <h5 id="-app-component-html-"><code>app.component.html</code></h5>
-<pre class="line-numbers"><code class="language-html">&lt;query-builder [data]=&#39;query&#39; [config]=&#39;config&#39;&gt;
+<pre class="line-numbers"><code class="language-html">&lt;query-builder [(ngModel)]=&#39;query&#39; [config]=&#39;config&#39;&gt;
   &lt;ng-container *queryInput=&quot;let rule; type: &#39;date&#39;&quot;&gt;
     &lt;custom-datepicker [(ngModel)]=&quot;rule.value&quot;&gt;&lt;/custom-datepicker&gt;
   &lt;/ng-container&gt;
@@ -463,7 +463,7 @@ config: QueryBuilderConfig = {
   }
 }</code></pre><h2 id="custom-styling-with-bootstrap-">Custom Styling (with Bootstrap)</h2>
 <h5 id="-app-component-html-"><code>app.component.html</code></h5>
-<pre class="line-numbers"><code class="language-html">&lt;query-builder [data]=&#39;query&#39; [config]=&#39;config&#39; [classNames]=&#39;classNames&#39;&gt;&lt;/query-builder&gt;</code></pre><h5 id="-app-component-ts-"><code>app.component.ts</code></h5>
+<pre class="line-numbers"><code class="language-html">&lt;query-builder [(ngModel)]=&#39;query&#39; [config]=&#39;config&#39; [classNames]=&#39;classNames&#39;&gt;&lt;/query-builder&gt;</code></pre><h5 id="-app-component-ts-"><code>app.component.ts</code></h5>
 <pre class="line-numbers"><code class="language-javascript">classNames: {[key: string]: string} = {
   removeIcon: &#39;fa fa-minus&#39;,               // Font-Awesome
   addIcon: &#39;fa fa-plus&#39;,                   // Font-Awesome
@@ -479,7 +479,56 @@ config: QueryBuilderConfig = {
   fieldControl: &#39;form-control&#39;,            // Bootstrap
   operatorControl: &#39;form-control&#39;,         // Bootstrap
   inputControl: &#39;form-control&#39;             // Bootstrap
-};</code></pre><h2 id="property-bindings-quick-reference">Property Bindings Quick Reference</h2>
+};</code></pre><h2 id="customizing-with-angular-material">Customizing with Angular Material</h2>
+<p>Example of how you can completely customize the query component with another library like Angular Material. For the full example, please look at the <a href="https://github.com/zebzhao/Angular-QueryBuilder/blob/master/demo/esm/src/app/app.component.ts">source code</a> provided in the demo.</p>
+<h4 id="-app-component-html-"><code>app.component.html</code></h4>
+<pre class="line-numbers"><code class="language-html">&lt;query-builder [(ngModel)]=&#39;query&#39; [config]=&#39;config&#39;&gt;
+  &lt;ng-container *queryButtonGroup=&quot;let ruleset; let addRule=addRule; let addRuleSet=addRuleSet; let removeRuleSet=removeRuleSet&quot;&gt;
+    &lt;button mat-button (click)=&quot;addRule()&quot;&gt;+ Rule&lt;/button&gt;
+    &lt;button mat-button (click)=&quot;addRuleSet()&quot;&gt;+ Ruleset&lt;/button&gt;
+    &lt;button mat-button (click)=&quot;removeRuleSet()&quot;&gt;- Ruleset&lt;/button&gt;
+  &lt;/ng-container&gt;
+  &lt;ng-container *queryRemoveButton=&quot;let rule; let removeRule=removeRule&quot;&gt;
+    &lt;button mat-icon-button color=&quot;accent&quot; (click)=&quot;removeRule(rule)&quot;&gt;
+      &lt;mat-icon&gt;remove&lt;/mat-icon&gt;
+    &lt;/button&gt;
+  &lt;/ng-container&gt;
+  &lt;ng-container *querySwitchGroup=&quot;let ruleset&quot;&gt;
+    &lt;mat-radio-group *ngIf=&quot;ruleset&quot; [(ngModel)]=&quot;ruleset.condition&quot;&gt;
+      &lt;mat-radio-buttonvalue=&quot;and&quot;&gt;And&lt;/mat-radio-button&gt;
+      &lt;mat-radio-button value=&quot;or&quot;&gt;Or&lt;/mat-radio-button&gt;
+    &lt;/mat-radio-group&gt;
+  &lt;/ng-container&gt;
+  &lt;ng-container *queryField=&quot;let rule; let fields=fields; let changeField=changeField&quot;&gt;
+    &lt;mat-form-field&gt;
+      &lt;mat-select [(ngModel)]=&quot;rule.field&quot; (ngModelChange)=&quot;changeField($event, rule)&quot;&gt;
+        &lt;mat-option *ngFor=&quot;let field of fields&quot; [value]=&quot;field.value&quot;&gt;{{field.name}}&lt;/mat-option&gt;
+      &lt;/mat-select&gt;
+    &lt;/mat-form-field&gt;
+  &lt;/ng-container&gt;
+  &lt;ng-container *queryOperator=&quot;let rule; let operators=operators&quot;&gt;
+    &lt;mat-form-field&gt;
+      &lt;mat-select [(ngModel)]=&quot;rule.operator&quot;&gt;
+        &lt;mat-option *ngFor=&quot;let value of operators&quot; [value]=&quot;value&quot;&gt;{{value}}&lt;/mat-option&gt;
+      &lt;/mat-select&gt;
+    &lt;/mat-form-field&gt;
+  &lt;/ng-container&gt;
+  &lt;!-- Override input component for &#39;boolean&#39; type --&gt;
+  &lt;ng-container *queryInput=&quot;let rule; type: &#39;boolean&#39;&quot;&gt;
+    &lt;mat-checkbox [(ngModel)]=&quot;rule.value&quot;&gt;&lt;/mat-checkbox&gt;
+  &lt;/ng-container&gt;
+  &lt;!-- Override input component for &#39;category&#39; type --&gt;
+  &lt;ng-container *queryInput=&quot;let rule; let field=field; let options=options; type: &#39;category&#39;&quot;&gt;
+    &lt;mat-form-field&gt;
+      &lt;mat-select [placeholder]=&quot;field.name&quot;&gt;
+        &lt;mat-option *ngFor=&quot;let opt of options&quot; [value]=&quot;opt.value&quot;&gt;
+          {{ opt.name }}
+        &lt;/mat-option&gt;
+      &lt;/mat-select&gt;
+    &lt;/mat-form-field&gt;
+  &lt;/ng-container&gt;
+  ...
+&lt;/query-builder&gt;</code></pre><h2 id="property-bindings-quick-reference">Property Bindings Quick Reference</h2>
 <p>See <a href="https://zebzhao.github.io/Angular-QueryBuilder/">documentation</a> for more details on interfaces and properties.</p>
 <h4 id="-query-builder-"><code>query-builder</code></h4>
 <table class="table table-bordered compodoc-table">
@@ -498,53 +547,53 @@ config: QueryBuilderConfig = {
 <td style="text-align:left"><code>boolean</code></td>
 <td style="text-align:left">Optional</td>
 <td style="text-align:left"><code>true</code></td>
-<td style="text-align:left">Displays the <code>+ Ruleset</code> button if <code>true</code></td>
+<td style="text-align:left">Displays the <code>+ Ruleset</code> button if <code>true</code>.</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>classNames</code></td>
 <td style="text-align:left"><code>object</code></td>
 <td style="text-align:left">Optional</td>
 <td style="text-align:left"></td>
-<td style="text-align:left">CSS class names for different child elements in <code>query-builder</code> component</td>
+<td style="text-align:left">CSS class names for different child elements in <code>query-builder</code> component.</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>config</code></td>
 <td style="text-align:left"><code>QueryBuilderConfig</code></td>
 <td style="text-align:left">Required</td>
 <td style="text-align:left"></td>
-<td style="text-align:left">Configuration object for the main component</td>
+<td style="text-align:left">Configuration object for the main component.</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>data</code></td>
 <td style="text-align:left"><code>Ruleset</code></td>
-<td style="text-align:left">Required</td>
-<td style="text-align:left"></td>
-<td style="text-align:left">Object that stores the state of the component</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>inputTypeTemplates</code></td>
-<td style="text-align:left"><code>QueryList&lt;QueryInputDirective&gt;</code></td>
 <td style="text-align:left">Optional</td>
 <td style="text-align:left"></td>
-<td style="text-align:left">Internal property used to map field types to <code>TemplateRef</code></td>
+<td style="text-align:left"><em>DEPRECATED</em> (Use <code>ngModel</code> or <code>value</code> instead.)</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>ngModel</code></td>
+<td style="text-align:left"><code>Ruleset</code></td>
+<td style="text-align:left">Optional</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">Object that stores the state of the component. Supports 2-way binding.</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>operatorMap</code></td>
 <td style="text-align:left"><code>{ [key: string]: string[] }</code></td>
 <td style="text-align:left">Optional</td>
 <td style="text-align:left"></td>
-<td style="text-align:left">Used to map field types to list of operators</td>
+<td style="text-align:left">Used to map field types to list of operators.</td>
 </tr>
 <tr>
-<td style="text-align:left"><code>parentData</code></td>
+<td style="text-align:left"><code>value</code></td>
 <td style="text-align:left"><code>Ruleset</code></td>
 <td style="text-align:left">Optional</td>
 <td style="text-align:left"></td>
-<td style="text-align:left">Internal property used to determine the parent <code>query-builder</code> data</td>
+<td style="text-align:left">Object that stores the state of the component.</td>
 </tr>
 </tbody>
 </table>
-<h3 id="structural-directives">Structural Directives</h3>
+<h2 id="structural-directives">Structural Directives</h2>
 <p>Use these directives to replace different parts of query builder with custom components.</p>
 <h4 id="-queryinput-"><code>queryInput</code></h4>
 <table class="table table-bordered compodoc-table">
