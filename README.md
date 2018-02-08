@@ -148,7 +148,7 @@ Example of how you can completely customize the query component with another lib
   <!-- Override input component for 'category' type -->
   <ng-container *queryInput="let rule; let field=field; let options=options; type: 'category'">
     <mat-form-field>
-      <mat-select [placeholder]="field.name">
+      <mat-select [(ngModel)]="rule.value" [placeholder]="field.name">
         <mat-option *ngFor="let opt of options" [value]="opt.value">
           {{ opt.name }}
         </mat-option>
