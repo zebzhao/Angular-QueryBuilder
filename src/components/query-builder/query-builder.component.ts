@@ -19,7 +19,6 @@ import {
     RuleSet,
 } from './query-builder.interfaces';
 import {
-    ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     ContentChild,
@@ -43,8 +42,7 @@ export const CONTROL_VALUE_ACCESSOR: any = {
   selector: 'query-builder',
   templateUrl: './query-builder.component.html',
   styleUrls: ['./query-builder.component.scss'],
-  providers: [CONTROL_VALUE_ACCESSOR],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  providers: [CONTROL_VALUE_ACCESSOR]
 })
 export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAccessor {
   public disabled: boolean;
