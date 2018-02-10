@@ -65,7 +65,7 @@ var AppComponent = /** @class */ (function () {
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            template: "\n  <h2>Vanilla Query Builder</h2>\n  <query-builder class='margin30' [(ngModel)]='query' [config]='config'>\n    <ng-container *queryInput=\"let rule; type: 'textarea'\">\n      <textarea class=\"text-input text-area\" [(ngModel)]=\"rule.value\"\n        placeholder=\"Custom Textarea\"></textarea>\n    </ng-container>\n  </query-builder>\n  <div class='margin30'>\n    <textarea class=\"output\">{{query | json}}</textarea>\n  </div>\n  <h2>Custom Material Query Builder</h2>\n  <mat-card>\n  <query-builder [(ngModel)]='query' [config]='config'>\n    <ng-container *queryButtonGroup=\"let ruleset; let addRule=addRule; let addRuleSet=addRuleSet; let removeRuleSet=removeRuleSet\">\n      <button mat-icon-button color=\"primary\" (click)=\"addRule()\">\n        <mat-icon>add</mat-icon></button>\n      <button mat-icon-button color=\"primary\" (click)=\"addRuleSet()\">\n        <mat-icon>add_circle_outline</mat-icon></button>\n      <button mat-icon-button color=\"accent\" (click)=\"removeRuleSet()\">\n        <mat-icon>remove_circle_outline</mat-icon></button>\n    </ng-container>\n    <ng-container *queryRemoveButton=\"let rule; let removeRule=removeRule\">\n      <button mat-icon-button color=\"accent\" (click)=\"removeRule(rule)\">\n        <mat-icon>remove</mat-icon>\n      </button>\n    </ng-container>\n    <ng-container *querySwitchGroup=\"let ruleset\">\n      <mat-radio-group *ngIf=\"ruleset\" [(ngModel)]=\"ruleset.condition\">\n        <mat-radio-button [style.padding.px]=\"10\" value=\"and\">And</mat-radio-button>\n        <mat-radio-button [style.padding.px]=\"10\" value=\"or\">Or</mat-radio-button>\n      </mat-radio-group>\n    </ng-container>\n    <ng-container *queryField=\"let rule; let fields=fields; let changeField=changeField\">\n      <mat-form-field>\n        <mat-select [(ngModel)]=\"rule.field\" (ngModelChange)=\"changeField($event, rule)\">\n          <mat-option *ngFor=\"let field of fields\" [value]=\"field.value\">\n            {{ field.name }}\n          </mat-option>\n        </mat-select>\n      </mat-form-field>\n    </ng-container>\n    <ng-container *queryOperator=\"let rule; let operators=operators\">\n      <mat-form-field [style.width.px]=\"90\">\n        <mat-select [(ngModel)]=\"rule.operator\">\n          <mat-option *ngFor=\"let value of operators\" [value]=\"value\">\n            {{ value }}\n          </mat-option>\n        </mat-select>\n      </mat-form-field>\n    </ng-container>\n    <ng-container *queryInput=\"let rule; type: 'boolean'\">\n      <mat-checkbox [(ngModel)]=\"rule.value\"></mat-checkbox>\n    </ng-container>\n    <ng-container *queryInput=\"let rule; let field=field; let options=options; type: 'category'\">\n      <mat-form-field>\n        <mat-select [placeholder]=\"field.name\">\n          <mat-option *ngFor=\"let opt of options\" [value]=\"opt.value\">\n            {{ opt.name }}\n          </mat-option>\n        </mat-select>\n      </mat-form-field>\n    </ng-container>\n    <ng-container *queryInput=\"let rule; type: 'date'\">\n      <mat-form-field>\n        <input matInput [matDatepicker]=\"picker\" [(ngModel)]=\"rule.value\"\n          placeholder=\"Choose a date\">\n        <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\n        <mat-datepicker #picker></mat-datepicker>\n      </mat-form-field>\n    </ng-container>\n    <ng-container *queryInput=\"let rule; let options=options; type: 'multiselect'\">\n      <mat-form-field [style.width.px]=\"300\">\n        <mat-select multiple>\n          <mat-option *ngFor=\"let opt of options\" [value]=\"opt.value\">\n            {{ opt.name }}\n          </mat-option>\n        </mat-select>\n      </mat-form-field>\n    </ng-container>\n    <ng-container *queryInput=\"let rule; let field=field; type: 'number'\">\n      <mat-form-field [style.width.px]=\"50\">\n        <input matInput [(ngModel)]=\"rule.value\" [placeholder]=\"field.name\" type=\"number\">\n      </mat-form-field>\n    </ng-container>\n    <ng-container *queryInput=\"let rule; let field=field; type: 'string'\">\n      <mat-form-field>\n        <input matInput [(ngModel)]=\"rule.value\" [placeholder]=\"field.name\">\n      </mat-form-field>\n    </ng-container>\n    <ng-container *queryInput=\"let rule; let field=field; type: 'textarea'\">\n      <mat-form-field>\n        <textarea matInput [(ngModel)]=\"rule.value\" [placeholder]=\"field.name\">\n        </textarea>\n      </mat-form-field>\n    </ng-container>\n  </query-builder>\n  </mat-card>\n  ",
+            template: "\n  <h2>Vanilla Query Builder</h2>\n  <query-builder class='margin30' [(ngModel)]='query' [config]='config'>\n    <ng-container *queryInput=\"let rule; type: 'textarea'\">\n      <textarea class=\"text-input text-area\" [(ngModel)]=\"rule.value\"\n        placeholder=\"Custom Textarea\"></textarea>\n    </ng-container>\n  </query-builder>\n  <div class='margin30'>\n    <textarea class=\"output\">{{query | json}}</textarea>\n  </div>\n  <h2>Custom Material Query Builder</h2>\n  <mat-card>\n  <query-builder [(ngModel)]='query' [config]='config'>\n    <ng-container *queryButtonGroup=\"let ruleset; let addRule=addRule; let addRuleSet=addRuleSet; let removeRuleSet=removeRuleSet\">\n      <button mat-icon-button color=\"primary\" (click)=\"addRule()\">\n        <mat-icon>add</mat-icon></button>\n      <button mat-icon-button color=\"primary\" (click)=\"addRuleSet()\">\n        <mat-icon>add_circle_outline</mat-icon></button>\n      <button mat-icon-button color=\"accent\" (click)=\"removeRuleSet()\">\n        <mat-icon>remove_circle_outline</mat-icon></button>\n    </ng-container>\n    <ng-container *queryRemoveButton=\"let rule; let removeRule=removeRule\">\n      <button mat-icon-button color=\"accent\" (click)=\"removeRule(rule)\">\n        <mat-icon>remove</mat-icon>\n      </button>\n    </ng-container>\n    <ng-container *querySwitchGroup=\"let ruleset\">\n      <mat-radio-group *ngIf=\"ruleset\" [(ngModel)]=\"ruleset.condition\">\n        <mat-radio-button [style.padding.px]=\"10\" value=\"and\">And</mat-radio-button>\n        <mat-radio-button [style.padding.px]=\"10\" value=\"or\">Or</mat-radio-button>\n      </mat-radio-group>\n    </ng-container>\n    <ng-container *queryField=\"let rule; let fields=fields; let changeField=changeField\">\n      <mat-form-field>\n        <mat-select [(ngModel)]=\"rule.field\" (ngModelChange)=\"changeField($event, rule)\">\n          <mat-option *ngFor=\"let field of fields\" [value]=\"field.value\">\n            {{ field.name }}\n          </mat-option>\n        </mat-select>\n      </mat-form-field>\n    </ng-container>\n    <ng-container *queryOperator=\"let rule; let operators=operators\">\n      <mat-form-field [style.width.px]=\"90\">\n        <mat-select [(ngModel)]=\"rule.operator\">\n          <mat-option *ngFor=\"let value of operators\" [value]=\"value\">\n            {{ value }}\n          </mat-option>\n        </mat-select>\n      </mat-form-field>\n    </ng-container>\n    <ng-container *queryInput=\"let rule; type: 'boolean'\">\n      <mat-checkbox [(ngModel)]=\"rule.value\"></mat-checkbox>\n    </ng-container>\n    <ng-container *queryInput=\"let rule; let field=field; let options=options; type: 'category'\">\n      <mat-form-field>\n        <mat-select [(ngModel)]=\"rule.value\" [placeholder]=\"field.name\">\n          <mat-option *ngFor=\"let opt of options\" [value]=\"opt.value\">\n            {{ opt.name }}\n          </mat-option>\n        </mat-select>\n      </mat-form-field>\n    </ng-container>\n    <ng-container *queryInput=\"let rule; type: 'date'\">\n      <mat-form-field>\n        <input matInput [matDatepicker]=\"picker\" [(ngModel)]=\"rule.value\"\n          placeholder=\"Choose a date\">\n        <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\n        <mat-datepicker #picker></mat-datepicker>\n      </mat-form-field>\n    </ng-container>\n    <ng-container *queryInput=\"let rule; let options=options; type: 'multiselect'\">\n      <mat-form-field [style.width.px]=\"300\">\n        <mat-select [(ngModel)]=\"rule.value\" multiple>\n          <mat-option *ngFor=\"let opt of options\" [value]=\"opt.value\">\n            {{ opt.name }}\n          </mat-option>\n        </mat-select>\n      </mat-form-field>\n    </ng-container>\n    <ng-container *queryInput=\"let rule; let field=field; type: 'number'\">\n      <mat-form-field [style.width.px]=\"50\">\n        <input matInput [(ngModel)]=\"rule.value\" [placeholder]=\"field.name\" type=\"number\">\n      </mat-form-field>\n    </ng-container>\n    <ng-container *queryInput=\"let rule; let field=field; type: 'string'\">\n      <mat-form-field>\n        <input matInput [(ngModel)]=\"rule.value\" [placeholder]=\"field.name\">\n      </mat-form-field>\n    </ng-container>\n    <ng-container *queryInput=\"let rule; let field=field; type: 'textarea'\">\n      <mat-form-field>\n        <textarea matInput [(ngModel)]=\"rule.value\" [placeholder]=\"field.name\">\n        </textarea>\n      </mat-form-field>\n    </ng-container>\n  </query-builder>\n  </mat-card>\n  ",
             styles: ["\n  /deep/ html {\n    font: 14px sans-serif;\n  }\n\n  .margin30 { margin: 30px; }\n\n  .text-input {\n    padding: 4px 8px;\n    border-radius: 4px;\n    border: 1px solid #ccc;\n  }\n\n  .text-area {\n    margin-top: 8px;\n    width: 300px;\n    height: 100px;\n    display: block;\n  }\n\n  .output {\n    width: 100%;\n    height: 300px;\n  }\n  "]
         })
     ], AppComponent);
@@ -123,8 +123,7 @@ class QueryBuilderComponent {
             operatorControl: 'q-operator-control',
             inputControl: 'q-input-control'
         };
-        this.allowRuleset = true;
-        this.operatorMap = {
+        this.defaultOperatorMap = {
             string: ['=', '!=', 'contains', 'like'],
             number: ['=', '!=', '>', '>=', '<', '<='],
             time: ['=', '!=', '>', '>=', '<', '<='],
@@ -132,6 +131,7 @@ class QueryBuilderComponent {
             category: ['=', '!='],
             boolean: ['=']
         };
+        this.allowRuleset = true;
         this.data = { condition: 'and', rules: [] };
         this.config = { fields: {} };
         this.defaultTemplateTypes = [
@@ -146,8 +146,8 @@ class QueryBuilderComponent {
     ngOnInit() { }
     ngOnChanges(changes) {
         const config = this.config;
-        const data = this.data;
-        if (typeof config === 'object') {
+        const type = typeof config;
+        if (type === 'object') {
             this.fields = Object.keys(config.fields).map((value) => {
                 const field = config.fields[value];
                 field.value = field.value || value;
@@ -156,10 +156,7 @@ class QueryBuilderComponent {
             this.operatorsCache = {};
         }
         else {
-            throw new Error('config must be a valid object');
-        }
-        if (typeof data !== 'object') {
-            throw new Error('data must be a valid object');
+            throw new Error(`Expected 'config' must be a valid object, got ${type} instead.`);
         }
     }
     get value() {
@@ -217,8 +214,15 @@ class QueryBuilderComponent {
         if (fieldObject && fieldObject.operators) {
             operators = fieldObject.operators;
         }
-        else if (type && this.operatorMap[type]) {
-            operators = this.operatorMap[type];
+        else if (type) {
+            operators = (this.operatorMap && this.operatorMap[type]) || this.defaultOperatorMap[type] || this.defaultEmptyList;
+            if (operators.length === 0) {
+                console.warn(`No operators found for field '${field}' with type ${fieldObject.type}. ` +
+                    `Please define an 'operators' property on the field or use the 'operatorMap' binding to fix this.`);
+            }
+        }
+        else {
+            console.warn(`No 'type' property found on field: '${field}'`);
         }
         if (fieldObject.options) {
             operators = operators.concat(['in', 'not in']);
@@ -256,6 +260,22 @@ class QueryBuilderComponent {
         const cls = this.classNames ? this.classNames[id] : null;
         return cls != null ? cls : this.defaultClassNames[id];
     }
+    getDefaultOperator(field) {
+        if (field && field.defaultOperator !== undefined) {
+            return this.getDefaultValue(field.defaultOperator);
+        }
+        else {
+            const operators = this.getOperators(field.value)[0];
+            if (operators && operators.length) {
+                return operators[0];
+            }
+            else {
+                console.warn(`No operators found for field '${field.value}'. ` +
+                    `A 'defaultOperator' is also not specified on the field config. Operator value will default to null.`);
+                return null;
+            }
+        }
+    }
     addRule(parent) {
         parent = parent || this.data;
         if (this.config.addRule) {
@@ -266,7 +286,7 @@ class QueryBuilderComponent {
             parent.rules = parent.rules.concat([
                 {
                     field: field.value,
-                    operator: this.operatorMap[field.type][0]
+                    operator: this.getDefaultOperator(field)
                 }
             ]);
         }
@@ -311,12 +331,7 @@ class QueryBuilderComponent {
         else {
             delete rule.value;
         }
-        if (field && field.defaultOperator !== undefined) {
-            rule.operator = this.getDefaultValue(field.defaultOperator);
-        }
-        else {
-            rule.operator = this.getOperators(rule.field)[0];
-        }
+        rule.operator = this.getDefaultOperator(field);
         // Create new context objects so templates will automatically update
         this.inputContextCache.delete(rule);
         this.operatorContextCache.delete(rule);
@@ -526,12 +541,12 @@ QueryBuilderComponent.decorators = [
             </ng-container>
             <query-builder *ngIf="local.ruleset"
               [data]="rule"
-              [parentInputTemplates]="inputTemplates"
-              [parentOperatorTemplate]="operatorTemplate"
-              [parentFieldTemplate]="fieldTemplate"
-              [parentSwitchGroupTemplate]="switchGroupTemplate"
-              [parentButtonGroupTemplate]="buttonGroupTemplate"
-              [parentRemoveButtonTemplate]="removeButtonTemplate"
+              [parentInputTemplates]="parentInputTemplates || inputTemplates"
+              [parentOperatorTemplate]="parentOperatorTemplate || operatorTemplate"
+              [parentFieldTemplate]="parentFieldTemplate || fieldTemplate"
+              [parentSwitchGroupTemplate]="parentSwitchGroupTemplate || switchGroupTemplate"
+              [parentButtonGroupTemplate]="parentButtonGroupTemplate || buttonGroupTemplate"
+              [parentRemoveButtonTemplate]="parentRemoveButtonTemplate || removeButtonTemplate"
               [parentData]="data"
               [config]="config"
               [allowRuleset]="allowRuleset"
@@ -544,10 +559,9 @@ QueryBuilderComponent.decorators = [
     </ul>
   `,
                 styles: [`
-    ﻿:host{display:block}:host .q-icon{font-style:normal;font-size:12px}:host .q-remove-icon::before{content:'❌'}:host .q-add-icon::before{content:'➕'}:host .q-switch-group,:host .q-button-group{font-family:"Lucida Grande", Tahoma, Verdana, sans-serif;overflow:hidden}:host .q-button-group{float:right}:host .q-button{margin-left:8px;background-color:white}:host .q-input-control,:host .q-operator-control,:host .q-field-control{display:inline-block;min-height:32px;padding:5px 8px;color:#555;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:4px;box-sizing:border-box;width:auto}:host .q-switch-group label,:host .q-button{float:left;min-height:30px;color:rgba(0,0,0,0.6);font-size:14px;font-weight:normal;text-align:center;text-shadow:none;padding:2px 8px;border:1px solid rgba(0,0,0,0.2);box-sizing:border-box;-webkit-transition:all 0.1s ease-in-out;-moz-transition:all 0.1s ease-in-out;-ms-transition:all 0.1s ease-in-out;-o-transition:all 0.1s ease-in-out;transition:all 0.1s ease-in-out}:host .q-switch-group label:hover,:host .q-button:hover{cursor:pointer;background-color:#F0F0F0}:host .q-switch-group label.success,:host .q-button.success{color:#75BE47}:host .q-switch-group label.danger,:host .q-button.danger{color:#B3415D}:host .q-switch-group input{position:absolute;clip:rect(0, 0, 0, 0);height:1px;width:1px;border:0;overflow:hidden}:host .q-switch-group label{background-color:#e4e4e4;line-height:24px}:host .q-switch-group input:checked+label{border:1px solid #619ed7;background:white;color:#3176b3}:host .q-invalid-ruleset{border:1px solid rgba(179,65,93,0.5) !important;background:rgba(179,65,93,0.1) !important}:host .q-empty-warning{color:#8d252e;text-align:center}:host .q-tree{list-style:none;margin:4px 0 2px}:host .q-tree .q-item{position:relative;padding:4px 6px;margin-top:4px;border:1px solid #CCCCCC;-webkit-transition:all 0.1s ease-in-out;-moz-transition:all 0.1s ease-in-out;-ms-transition:all 0.1s ease-in-out;-o-transition:all 0.1s ease-in-out;transition:all 0.1s ease-in-out}:host .q-tree .q-item.q-ruleset{background:rgba(204,204,204,0.2)}:host .q-tree .q-item.q-ruleset:hover{border:1px solid rgba(97,158,215,0.5);background:rgba(97,158,215,0.1)}:host .q-tree .q-item.q-rule{background:white}:host .q-tree .q-item::before{top:-5px;border-width:0 0 2px 2px}:host .q-tree .q-item::after{border-width:0 0 0 2px;top:50%}:host .q-tree .q-item::before,:host .q-tree .q-item::after{content:'';left:-12px;border-color:#CCC;border-style:solid;width:9px;height:calc(50% + 6px);position:absolute}:host .q-tree .q-item:last-child::after{content:none}
+    ﻿:host{display:block}:host .q-icon{font-style:normal;font-size:12px}:host .q-remove-icon::before{content:'❌'}:host .q-add-icon::before{content:'➕'}:host .q-switch-group,:host .q-button-group{font-family:"Lucida Grande", Tahoma, Verdana, sans-serif;overflow:hidden}:host .q-button-group{float:right}:host .q-button{margin-left:8px;background-color:white}:host .q-input-control,:host .q-operator-control,:host .q-field-control{display:inline-block;padding:5px 8px;color:#555;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:4px;box-sizing:border-box;width:auto}:host .q-operator-control,:host .q-field-control,:host .q-input-control:not([type='checkbox']){min-height:32px}:host .q-switch-group label,:host .q-button{float:left;min-height:30px;color:rgba(0,0,0,0.6);font-size:14px;font-weight:normal;text-align:center;text-shadow:none;padding:2px 8px;border:1px solid rgba(0,0,0,0.2);box-sizing:border-box;-webkit-transition:all 0.1s ease-in-out;-moz-transition:all 0.1s ease-in-out;-ms-transition:all 0.1s ease-in-out;-o-transition:all 0.1s ease-in-out;transition:all 0.1s ease-in-out}:host .q-switch-group label:hover,:host .q-button:hover{cursor:pointer;background-color:#F0F0F0}:host .q-switch-group label.success,:host .q-button.success{color:#75BE47}:host .q-switch-group label.danger,:host .q-button.danger{color:#B3415D}:host .q-switch-group input{position:absolute;clip:rect(0, 0, 0, 0);height:1px;width:1px;border:0;overflow:hidden}:host .q-switch-group label{background-color:#e4e4e4;line-height:24px}:host .q-switch-group input:checked+label{border:1px solid #619ed7;background:white;color:#3176b3}:host .q-invalid-ruleset{border:1px solid rgba(179,65,93,0.5) !important;background:rgba(179,65,93,0.1) !important}:host .q-empty-warning{color:#8d252e;text-align:center}:host .q-tree{list-style:none;margin:4px 0 2px}:host .q-tree .q-item{position:relative;padding:4px 6px;margin-top:4px;border:1px solid #CCCCCC;-webkit-transition:all 0.1s ease-in-out;-moz-transition:all 0.1s ease-in-out;-ms-transition:all 0.1s ease-in-out;-o-transition:all 0.1s ease-in-out;transition:all 0.1s ease-in-out}:host .q-tree .q-item.q-ruleset{background:rgba(204,204,204,0.2)}:host .q-tree .q-item.q-ruleset:hover{border:1px solid rgba(97,158,215,0.5);background:rgba(97,158,215,0.1)}:host .q-tree .q-item.q-rule{background:white}:host .q-tree .q-item::before{top:-5px;border-width:0 0 2px 2px}:host .q-tree .q-item::after{border-width:0 0 0 2px;top:50%}:host .q-tree .q-item::before,:host .q-tree .q-item::after{content:'';left:-12px;border-color:#CCC;border-style:solid;width:9px;height:calc(50% + 6px);position:absolute}:host .q-tree .q-item:last-child::after{content:none}
   `],
-                providers: [CONTROL_VALUE_ACCESSOR],
-                changeDetection: __WEBPACK_IMPORTED_MODULE_7__angular_core__["ChangeDetectionStrategy"].OnPush
+                providers: [CONTROL_VALUE_ACCESSOR]
             },] },
 ];
 /** @nocollapse */
@@ -558,8 +572,8 @@ QueryBuilderComponent.propDecorators = {
     'allowRuleset': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["Input"] },],
     'classNames': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["Input"] },],
     'operatorMap': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["Input"] },],
-    'parentData': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["Input"] },],
     'data': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["Input"] },],
+    'parentData': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["Input"] },],
     'config': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["Input"] },],
     'parentInputTemplates': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["Input"] },],
     'parentOperatorTemplate': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["Input"] },],
@@ -1627,8 +1641,8 @@ function View_AppComponent_12(_l) {
     });
 }
 function View_AppComponent_11(_l) {
-    return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, null, null, 24, null, null, null, null, null, null, null)),
-        (_l()(), i0.ɵted(null, ['\n      '])), (_l()(), i0.ɵeld(0, null, null, 21, 'mat-form-field', [['class', 'mat-input-container mat-form-field']], [[2, 'mat-input-invalid', null], [2, 'mat-form-field-invalid', null],
+    return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, null, null, 27, null, null, null, null, null, null, null)),
+        (_l()(), i0.ɵted(null, ['\n      '])), (_l()(), i0.ɵeld(0, null, null, 24, 'mat-form-field', [['class', 'mat-input-container mat-form-field']], [[2, 'mat-input-invalid', null], [2, 'mat-form-field-invalid', null],
             [2, 'mat-form-field-can-float', null], [2, 'mat-form-field-should-float',
                 null], [2, 'mat-focused', null], [2, 'mat-primary',
                 null], [2, 'mat-accent', null], [2, 'mat-warn', null],
@@ -1639,39 +1653,48 @@ function View_AppComponent_11(_l) {
             i0.ChangeDetectorRef, [2, i3.MAT_PLACEHOLDER_GLOBAL_OPTIONS]], null, null), i0.ɵqud(335544320, 32, { _control: 0 }), i0.ɵqud(335544320, 33, { _placeholderChild: 0 }),
         i0.ɵqud(603979776, 34, { _errorChildren: 1 }), i0.ɵqud(603979776, 35, { _hintChildren: 1 }),
         i0.ɵqud(603979776, 36, { _prefixChildren: 1 }), i0.ɵqud(603979776, 37, { _suffixChildren: 1 }),
-        (_l()(), i0.ɵted(1, ['\n        '])), (_l()(), i0.ɵeld(0, null, 1, 10, 'mat-select', [['class', 'mat-select'], ['role', 'listbox']], [[1, 'id', 0], [1, 'tabindex', 0],
-            [1, 'aria-label', 0], [1, 'aria-labelledby', 0], [1, 'aria-required', 0], [1,
-                'aria-disabled', 0], [1, 'aria-invalid', 0], [1, 'aria-owns', 0], [1, 'aria-multiselectable',
+        (_l()(), i0.ɵted(1, ['\n        '])), (_l()(), i0.ɵeld(0, null, 1, 13, 'mat-select', [['class', 'mat-select'], ['role', 'listbox']], [[2, 'ng-untouched', null],
+            [2, 'ng-touched', null], [2, 'ng-pristine', null], [2, 'ng-dirty',
+                null], [2, 'ng-valid', null], [2, 'ng-invalid', null],
+            [2, 'ng-pending', null], [1, 'id', 0], [1, 'tabindex', 0], [1, 'aria-label',
+                0], [1, 'aria-labelledby', 0], [1, 'aria-required', 0], [1, 'aria-disabled',
+                0], [1, 'aria-invalid', 0], [1, 'aria-owns', 0], [1, 'aria-multiselectable',
                 0], [1, 'aria-describedby', 0], [1, 'aria-activedescendant', 0], [2, 'mat-select-disabled',
                 null], [2, 'mat-select-invalid', null], [2, 'mat-select-required',
-                null]], [[null, 'keydown'], [null, 'focus'],
-            [null, 'blur']], function (_v, en, $event) {
+                null]], [[null, 'ngModelChange'], [null,
+                'keydown'], [null, 'focus'], [null, 'blur']], function (_v, en, $event) {
             var ad = true;
             if (('keydown' === en)) {
-                var pd_0 = (i0.ɵnov(_v, 14)._handleKeydown($event) !== false);
+                var pd_0 = (i0.ɵnov(_v, 17)._handleKeydown($event) !== false);
                 ad = (pd_0 && ad);
             }
             if (('focus' === en)) {
-                var pd_1 = (i0.ɵnov(_v, 14)._onFocus() !== false);
+                var pd_1 = (i0.ɵnov(_v, 17)._onFocus() !== false);
                 ad = (pd_1 && ad);
             }
             if (('blur' === en)) {
-                var pd_2 = (i0.ɵnov(_v, 14)._onBlur() !== false);
+                var pd_2 = (i0.ɵnov(_v, 17)._onBlur() !== false);
                 ad = (pd_2 && ad);
             }
+            if (('ngModelChange' === en)) {
+                var pd_3 = ((_v.context.$implicit.value = $event) !== false);
+                ad = (pd_3 && ad);
+            }
             return ad;
-        }, i16.View_MatSelect_0, i16.RenderType_MatSelect)), i0.ɵdid(16384, null, 0, i3.MatPrefixRejector, [], null, null), i0.ɵdid(1294336, null, 3, i17.MatSelect, [i18.ViewportRuler, i0.ChangeDetectorRef, i0.NgZone,
+        }, i16.View_MatSelect_0, i16.RenderType_MatSelect)), i0.ɵdid(671744, null, 0, i1.NgModel, [[8, null], [8, null], [8, null], [8, null]], { model: [0, 'model'] }, { update: 'ngModelChange' }), i0.ɵprd(2048, null, i1.NgControl, null, [i1.NgModel]), i0.ɵdid(16384, null, 0, i1.NgControlStatus, [i1.NgControl], null, null), i0.ɵdid(16384, null, 0, i3.MatPrefixRejector, [], null, null), i0.ɵdid(1294336, null, 3, i17.MatSelect, [i18.ViewportRuler, i0.ChangeDetectorRef, i0.NgZone,
             i3.ErrorStateMatcher, i0.Renderer2, i0.ElementRef, [2, i19.Directionality],
-            [2, i1.NgForm], [2, i1.FormGroupDirective], [2, i15.MatFormField], [8, null],
+            [2, i1.NgForm], [2, i1.FormGroupDirective], [2, i15.MatFormField], [2, i1.NgControl],
             [8, null], i17.MAT_SELECT_SCROLL_STRATEGY], { placeholder: [0, 'placeholder'] }, null), i0.ɵqud(603979776, 38, { options: 1 }), i0.ɵqud(603979776, 39, { optionGroups: 1 }),
         i0.ɵqud(335544320, 40, { customTrigger: 0 }), i0.ɵprd(2048, [[32, 4]], i15.MatFormFieldControl, null, [i17.MatSelect]), (_l()(), i0.ɵted(1, ['\n          '])), (_l()(),
             i0.ɵand(16777216, null, 1, 1, null, View_AppComponent_12)),
         i0.ɵdid(802816, null, 0, i12.NgForOf, [i0.ViewContainerRef, i0.TemplateRef,
             i0.IterableDiffers], { ngForOf: [0, 'ngForOf'] }, null), (_l()(), i0.ɵted(1, ['\n        '])), (_l()(), i0.ɵted(1, ['\n      '])), (_l()(), i0.ɵted(null, ['\n    ']))], function (_ck, _v) {
-        var currVal_29 = _v.context.field.name;
-        _ck(_v, 14, 0, currVal_29);
-        var currVal_30 = _v.context.options;
-        _ck(_v, 21, 0, currVal_30);
+        var currVal_36 = _v.context.$implicit.value;
+        _ck(_v, 13, 0, currVal_36);
+        var currVal_37 = _v.context.field.name;
+        _ck(_v, 17, 0, currVal_37);
+        var currVal_38 = _v.context.options;
+        _ck(_v, 24, 0, currVal_38);
     }, function (_ck, _v) {
         var currVal_0 = i0.ɵnov(_v, 4)._control.errorState;
         var currVal_1 = i0.ɵnov(_v, 4)._control.errorState;
@@ -1691,23 +1714,31 @@ function View_AppComponent_11(_l) {
         _ck(_v, 2, 1, [currVal_0, currVal_1, currVal_2, currVal_3, currVal_4, currVal_5, currVal_6,
             currVal_7, currVal_8, currVal_9, currVal_10, currVal_11, currVal_12, currVal_13,
             currVal_14]);
-        var currVal_15 = i0.ɵnov(_v, 14).id;
-        var currVal_16 = i0.ɵnov(_v, 14).tabIndex;
-        var currVal_17 = i0.ɵnov(_v, 14)._ariaLabel;
-        var currVal_18 = i0.ɵnov(_v, 14).ariaLabelledby;
-        var currVal_19 = i0.ɵnov(_v, 14).required.toString();
-        var currVal_20 = i0.ɵnov(_v, 14).disabled.toString();
-        var currVal_21 = i0.ɵnov(_v, 14).errorState;
-        var currVal_22 = i0.ɵnov(_v, 14)._optionIds;
-        var currVal_23 = i0.ɵnov(_v, 14).multiple;
-        var currVal_24 = (i0.ɵnov(_v, 14)._ariaDescribedby || null);
-        var currVal_25 = i0.ɵnov(_v, 14)._getAriaActiveDescendant();
-        var currVal_26 = i0.ɵnov(_v, 14).disabled;
-        var currVal_27 = i0.ɵnov(_v, 14).errorState;
-        var currVal_28 = i0.ɵnov(_v, 14).required;
+        var currVal_15 = i0.ɵnov(_v, 15).ngClassUntouched;
+        var currVal_16 = i0.ɵnov(_v, 15).ngClassTouched;
+        var currVal_17 = i0.ɵnov(_v, 15).ngClassPristine;
+        var currVal_18 = i0.ɵnov(_v, 15).ngClassDirty;
+        var currVal_19 = i0.ɵnov(_v, 15).ngClassValid;
+        var currVal_20 = i0.ɵnov(_v, 15).ngClassInvalid;
+        var currVal_21 = i0.ɵnov(_v, 15).ngClassPending;
+        var currVal_22 = i0.ɵnov(_v, 17).id;
+        var currVal_23 = i0.ɵnov(_v, 17).tabIndex;
+        var currVal_24 = i0.ɵnov(_v, 17)._ariaLabel;
+        var currVal_25 = i0.ɵnov(_v, 17).ariaLabelledby;
+        var currVal_26 = i0.ɵnov(_v, 17).required.toString();
+        var currVal_27 = i0.ɵnov(_v, 17).disabled.toString();
+        var currVal_28 = i0.ɵnov(_v, 17).errorState;
+        var currVal_29 = i0.ɵnov(_v, 17)._optionIds;
+        var currVal_30 = i0.ɵnov(_v, 17).multiple;
+        var currVal_31 = (i0.ɵnov(_v, 17)._ariaDescribedby || null);
+        var currVal_32 = i0.ɵnov(_v, 17)._getAriaActiveDescendant();
+        var currVal_33 = i0.ɵnov(_v, 17).disabled;
+        var currVal_34 = i0.ɵnov(_v, 17).errorState;
+        var currVal_35 = i0.ɵnov(_v, 17).required;
         _ck(_v, 12, 1, [currVal_15, currVal_16, currVal_17, currVal_18, currVal_19, currVal_20,
             currVal_21, currVal_22, currVal_23, currVal_24, currVal_25, currVal_26, currVal_27,
-            currVal_28]);
+            currVal_28, currVal_29, currVal_30, currVal_31, currVal_32, currVal_33, currVal_34,
+            currVal_35]);
     });
 }
 function View_AppComponent_13(_l) {
@@ -1884,8 +1915,8 @@ function View_AppComponent_15(_l) {
     });
 }
 function View_AppComponent_14(_l) {
-    return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, null, null, 24, null, null, null, null, null, null, null)),
-        (_l()(), i0.ɵted(null, ['\n      '])), (_l()(), i0.ɵeld(0, null, null, 21, 'mat-form-field', [['class', 'mat-input-container mat-form-field']], [[4, 'width', 'px'], [2, 'mat-input-invalid', null], [2, 'mat-form-field-invalid',
+    return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, null, null, 27, null, null, null, null, null, null, null)),
+        (_l()(), i0.ɵted(null, ['\n      '])), (_l()(), i0.ɵeld(0, null, null, 24, 'mat-form-field', [['class', 'mat-input-container mat-form-field']], [[4, 'width', 'px'], [2, 'mat-input-invalid', null], [2, 'mat-form-field-invalid',
                 null], [2, 'mat-form-field-can-float', null], [2, 'mat-form-field-should-float',
                 null], [2, 'mat-focused', null], [2, 'mat-primary', null],
             [2, 'mat-accent', null], [2, 'mat-warn', null], [2, 'ng-untouched',
@@ -1896,39 +1927,49 @@ function View_AppComponent_14(_l) {
         i0.ɵqud(335544320, 47, { _control: 0 }), i0.ɵqud(335544320, 48, { _placeholderChild: 0 }),
         i0.ɵqud(603979776, 49, { _errorChildren: 1 }), i0.ɵqud(603979776, 50, { _hintChildren: 1 }),
         i0.ɵqud(603979776, 51, { _prefixChildren: 1 }), i0.ɵqud(603979776, 52, { _suffixChildren: 1 }),
-        (_l()(), i0.ɵted(1, ['\n        '])), (_l()(), i0.ɵeld(0, null, 1, 10, 'mat-select', [['class', 'mat-select'], ['multiple', ''], ['role', 'listbox']], [[1, 'id', 0],
-            [1, 'tabindex', 0], [1, 'aria-label', 0], [1, 'aria-labelledby', 0], [1, 'aria-required',
+        (_l()(), i0.ɵted(1, ['\n        '])), (_l()(), i0.ɵeld(0, null, 1, 13, 'mat-select', [['class', 'mat-select'], ['multiple', ''], ['role', 'listbox']], [[2, 'ng-untouched',
+                null], [2, 'ng-touched', null], [2, 'ng-pristine', null],
+            [2, 'ng-dirty', null], [2, 'ng-valid', null], [2, 'ng-invalid',
+                null], [2, 'ng-pending', null], [1, 'id', 0], [1, 'tabindex',
+                0], [1, 'aria-label', 0], [1, 'aria-labelledby', 0], [1, 'aria-required',
                 0], [1, 'aria-disabled', 0], [1, 'aria-invalid', 0], [1, 'aria-owns', 0],
             [1, 'aria-multiselectable', 0], [1, 'aria-describedby', 0], [1, 'aria-activedescendant',
                 0], [2, 'mat-select-disabled', null], [2, 'mat-select-invalid',
                 null], [2, 'mat-select-required', null]], [[null,
-                'keydown'], [null, 'focus'], [null, 'blur']], function (_v, en, $event) {
+                'ngModelChange'], [null, 'keydown'], [null, 'focus'], [null,
+                'blur']], function (_v, en, $event) {
             var ad = true;
             if (('keydown' === en)) {
-                var pd_0 = (i0.ɵnov(_v, 14)._handleKeydown($event) !== false);
+                var pd_0 = (i0.ɵnov(_v, 17)._handleKeydown($event) !== false);
                 ad = (pd_0 && ad);
             }
             if (('focus' === en)) {
-                var pd_1 = (i0.ɵnov(_v, 14)._onFocus() !== false);
+                var pd_1 = (i0.ɵnov(_v, 17)._onFocus() !== false);
                 ad = (pd_1 && ad);
             }
             if (('blur' === en)) {
-                var pd_2 = (i0.ɵnov(_v, 14)._onBlur() !== false);
+                var pd_2 = (i0.ɵnov(_v, 17)._onBlur() !== false);
                 ad = (pd_2 && ad);
             }
+            if (('ngModelChange' === en)) {
+                var pd_3 = ((_v.context.$implicit.value = $event) !== false);
+                ad = (pd_3 && ad);
+            }
             return ad;
-        }, i16.View_MatSelect_0, i16.RenderType_MatSelect)), i0.ɵdid(16384, null, 0, i3.MatPrefixRejector, [], null, null), i0.ɵdid(1294336, null, 3, i17.MatSelect, [i18.ViewportRuler, i0.ChangeDetectorRef, i0.NgZone,
+        }, i16.View_MatSelect_0, i16.RenderType_MatSelect)), i0.ɵdid(671744, null, 0, i1.NgModel, [[8, null], [8, null], [8, null], [8, null]], { model: [0, 'model'] }, { update: 'ngModelChange' }), i0.ɵprd(2048, null, i1.NgControl, null, [i1.NgModel]), i0.ɵdid(16384, null, 0, i1.NgControlStatus, [i1.NgControl], null, null), i0.ɵdid(16384, null, 0, i3.MatPrefixRejector, [], null, null), i0.ɵdid(1294336, null, 3, i17.MatSelect, [i18.ViewportRuler, i0.ChangeDetectorRef, i0.NgZone,
             i3.ErrorStateMatcher, i0.Renderer2, i0.ElementRef, [2, i19.Directionality],
-            [2, i1.NgForm], [2, i1.FormGroupDirective], [2, i15.MatFormField], [8, null],
+            [2, i1.NgForm], [2, i1.FormGroupDirective], [2, i15.MatFormField], [2, i1.NgControl],
             [8, null], i17.MAT_SELECT_SCROLL_STRATEGY], { multiple: [0, 'multiple'] }, null), i0.ɵqud(603979776, 53, { options: 1 }), i0.ɵqud(603979776, 54, { optionGroups: 1 }),
         i0.ɵqud(335544320, 55, { customTrigger: 0 }), i0.ɵprd(2048, [[47, 4]], i15.MatFormFieldControl, null, [i17.MatSelect]), (_l()(), i0.ɵted(1, ['\n          '])), (_l()(),
             i0.ɵand(16777216, null, 1, 1, null, View_AppComponent_15)),
         i0.ɵdid(802816, null, 0, i12.NgForOf, [i0.ViewContainerRef, i0.TemplateRef,
             i0.IterableDiffers], { ngForOf: [0, 'ngForOf'] }, null), (_l()(), i0.ɵted(1, ['\n        '])), (_l()(), i0.ɵted(1, ['\n      '])), (_l()(), i0.ɵted(null, ['\n    ']))], function (_ck, _v) {
-        var currVal_30 = '';
-        _ck(_v, 14, 0, currVal_30);
-        var currVal_31 = _v.context.options;
-        _ck(_v, 21, 0, currVal_31);
+        var currVal_37 = _v.context.$implicit.value;
+        _ck(_v, 13, 0, currVal_37);
+        var currVal_38 = '';
+        _ck(_v, 17, 0, currVal_38);
+        var currVal_39 = _v.context.options;
+        _ck(_v, 24, 0, currVal_39);
     }, function (_ck, _v) {
         var currVal_0 = 300;
         var currVal_1 = i0.ɵnov(_v, 4)._control.errorState;
@@ -1949,23 +1990,31 @@ function View_AppComponent_14(_l) {
         _ck(_v, 2, 1, [currVal_0, currVal_1, currVal_2, currVal_3, currVal_4, currVal_5, currVal_6,
             currVal_7, currVal_8, currVal_9, currVal_10, currVal_11, currVal_12, currVal_13,
             currVal_14, currVal_15]);
-        var currVal_16 = i0.ɵnov(_v, 14).id;
-        var currVal_17 = i0.ɵnov(_v, 14).tabIndex;
-        var currVal_18 = i0.ɵnov(_v, 14)._ariaLabel;
-        var currVal_19 = i0.ɵnov(_v, 14).ariaLabelledby;
-        var currVal_20 = i0.ɵnov(_v, 14).required.toString();
-        var currVal_21 = i0.ɵnov(_v, 14).disabled.toString();
-        var currVal_22 = i0.ɵnov(_v, 14).errorState;
-        var currVal_23 = i0.ɵnov(_v, 14)._optionIds;
-        var currVal_24 = i0.ɵnov(_v, 14).multiple;
-        var currVal_25 = (i0.ɵnov(_v, 14)._ariaDescribedby || null);
-        var currVal_26 = i0.ɵnov(_v, 14)._getAriaActiveDescendant();
-        var currVal_27 = i0.ɵnov(_v, 14).disabled;
-        var currVal_28 = i0.ɵnov(_v, 14).errorState;
-        var currVal_29 = i0.ɵnov(_v, 14).required;
+        var currVal_16 = i0.ɵnov(_v, 15).ngClassUntouched;
+        var currVal_17 = i0.ɵnov(_v, 15).ngClassTouched;
+        var currVal_18 = i0.ɵnov(_v, 15).ngClassPristine;
+        var currVal_19 = i0.ɵnov(_v, 15).ngClassDirty;
+        var currVal_20 = i0.ɵnov(_v, 15).ngClassValid;
+        var currVal_21 = i0.ɵnov(_v, 15).ngClassInvalid;
+        var currVal_22 = i0.ɵnov(_v, 15).ngClassPending;
+        var currVal_23 = i0.ɵnov(_v, 17).id;
+        var currVal_24 = i0.ɵnov(_v, 17).tabIndex;
+        var currVal_25 = i0.ɵnov(_v, 17)._ariaLabel;
+        var currVal_26 = i0.ɵnov(_v, 17).ariaLabelledby;
+        var currVal_27 = i0.ɵnov(_v, 17).required.toString();
+        var currVal_28 = i0.ɵnov(_v, 17).disabled.toString();
+        var currVal_29 = i0.ɵnov(_v, 17).errorState;
+        var currVal_30 = i0.ɵnov(_v, 17)._optionIds;
+        var currVal_31 = i0.ɵnov(_v, 17).multiple;
+        var currVal_32 = (i0.ɵnov(_v, 17)._ariaDescribedby || null);
+        var currVal_33 = i0.ɵnov(_v, 17)._getAriaActiveDescendant();
+        var currVal_34 = i0.ɵnov(_v, 17).disabled;
+        var currVal_35 = i0.ɵnov(_v, 17).errorState;
+        var currVal_36 = i0.ɵnov(_v, 17).required;
         _ck(_v, 12, 1, [currVal_16, currVal_17, currVal_18, currVal_19, currVal_20, currVal_21,
             currVal_22, currVal_23, currVal_24, currVal_25, currVal_26, currVal_27, currVal_28,
-            currVal_29]);
+            currVal_29, currVal_30, currVal_31, currVal_32, currVal_33, currVal_34, currVal_35,
+            currVal_36]);
     });
 }
 function View_AppComponent_16(_l) {
@@ -2409,7 +2458,7 @@ var i0 = __webpack_require__(1);
 var i1 = __webpack_require__(4);
 var i2 = __webpack_require__(19);
 var i3 = __webpack_require__(128);
-var styles_QueryBuilderComponent = ['[_nghost-%COMP%]{display:block}[_nghost-%COMP%]   .q-icon[_ngcontent-%COMP%]{font-style:normal;font-size:12px}[_nghost-%COMP%]   .q-remove-icon[_ngcontent-%COMP%]::before{content:\'❌\'}[_nghost-%COMP%]   .q-add-icon[_ngcontent-%COMP%]::before{content:\'➕\'}[_nghost-%COMP%]   .q-switch-group[_ngcontent-%COMP%], [_nghost-%COMP%]   .q-button-group[_ngcontent-%COMP%]{font-family:"Lucida Grande", Tahoma, Verdana, sans-serif;overflow:hidden}[_nghost-%COMP%]   .q-button-group[_ngcontent-%COMP%]{float:right}[_nghost-%COMP%]   .q-button[_ngcontent-%COMP%]{margin-left:8px;background-color:white}[_nghost-%COMP%]   .q-input-control[_ngcontent-%COMP%], [_nghost-%COMP%]   .q-operator-control[_ngcontent-%COMP%], [_nghost-%COMP%]   .q-field-control[_ngcontent-%COMP%]{display:inline-block;min-height:32px;padding:5px 8px;color:#555;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:4px;box-sizing:border-box;width:auto}[_nghost-%COMP%]   .q-switch-group[_ngcontent-%COMP%]   label[_ngcontent-%COMP%], [_nghost-%COMP%]   .q-button[_ngcontent-%COMP%]{float:left;min-height:30px;color:rgba(0,0,0,0.6);font-size:14px;font-weight:normal;text-align:center;text-shadow:none;padding:2px 8px;border:1px solid rgba(0,0,0,0.2);box-sizing:border-box;-webkit-transition:all 0.1s ease-in-out;-moz-transition:all 0.1s ease-in-out;-ms-transition:all 0.1s ease-in-out;-o-transition:all 0.1s ease-in-out;transition:all 0.1s ease-in-out}[_nghost-%COMP%]   .q-switch-group[_ngcontent-%COMP%]   label[_ngcontent-%COMP%]:hover, [_nghost-%COMP%]   .q-button[_ngcontent-%COMP%]:hover{cursor:pointer;background-color:#F0F0F0}[_nghost-%COMP%]   .q-switch-group[_ngcontent-%COMP%]   label.success[_ngcontent-%COMP%], [_nghost-%COMP%]   .q-button.success[_ngcontent-%COMP%]{color:#75BE47}[_nghost-%COMP%]   .q-switch-group[_ngcontent-%COMP%]   label.danger[_ngcontent-%COMP%], [_nghost-%COMP%]   .q-button.danger[_ngcontent-%COMP%]{color:#B3415D}[_nghost-%COMP%]   .q-switch-group[_ngcontent-%COMP%]   input[_ngcontent-%COMP%]{position:absolute;clip:rect(0, 0, 0, 0);height:1px;width:1px;border:0;overflow:hidden}[_nghost-%COMP%]   .q-switch-group[_ngcontent-%COMP%]   label[_ngcontent-%COMP%]{background-color:#e4e4e4;line-height:24px}[_nghost-%COMP%]   .q-switch-group[_ngcontent-%COMP%]   input[_ngcontent-%COMP%]:checked + label[_ngcontent-%COMP%]{border:1px solid #619ed7;background:white;color:#3176b3}[_nghost-%COMP%]   .q-invalid-ruleset[_ngcontent-%COMP%]{border:1px solid rgba(179,65,93,0.5) !important;background:rgba(179,65,93,0.1) !important}[_nghost-%COMP%]   .q-empty-warning[_ngcontent-%COMP%]{color:#8d252e;text-align:center}[_nghost-%COMP%]   .q-tree[_ngcontent-%COMP%]{list-style:none;margin:4px 0 2px}[_nghost-%COMP%]   .q-tree[_ngcontent-%COMP%]   .q-item[_ngcontent-%COMP%]{position:relative;padding:4px 6px;margin-top:4px;border:1px solid #CCCCCC;-webkit-transition:all 0.1s ease-in-out;-moz-transition:all 0.1s ease-in-out;-ms-transition:all 0.1s ease-in-out;-o-transition:all 0.1s ease-in-out;transition:all 0.1s ease-in-out}[_nghost-%COMP%]   .q-tree[_ngcontent-%COMP%]   .q-item.q-ruleset[_ngcontent-%COMP%]{background:rgba(204,204,204,0.2)}[_nghost-%COMP%]   .q-tree[_ngcontent-%COMP%]   .q-item.q-ruleset[_ngcontent-%COMP%]:hover{border:1px solid rgba(97,158,215,0.5);background:rgba(97,158,215,0.1)}[_nghost-%COMP%]   .q-tree[_ngcontent-%COMP%]   .q-item.q-rule[_ngcontent-%COMP%]{background:white}[_nghost-%COMP%]   .q-tree[_ngcontent-%COMP%]   .q-item[_ngcontent-%COMP%]::before{top:-5px;border-width:0 0 2px 2px}[_nghost-%COMP%]   .q-tree[_ngcontent-%COMP%]   .q-item[_ngcontent-%COMP%]::after{border-width:0 0 0 2px;top:50%}[_nghost-%COMP%]   .q-tree[_ngcontent-%COMP%]   .q-item[_ngcontent-%COMP%]::before, [_nghost-%COMP%]   .q-tree[_ngcontent-%COMP%]   .q-item[_ngcontent-%COMP%]::after{content:\'\';left:-12px;border-color:#CCC;border-style:solid;width:9px;height:calc(50% + 6px);position:absolute}[_nghost-%COMP%]   .q-tree[_ngcontent-%COMP%]   .q-item[_ngcontent-%COMP%]:last-child::after{content:none}'];
+var styles_QueryBuilderComponent = ['[_nghost-%COMP%]{display:block}[_nghost-%COMP%]   .q-icon[_ngcontent-%COMP%]{font-style:normal;font-size:12px}[_nghost-%COMP%]   .q-remove-icon[_ngcontent-%COMP%]::before{content:\'❌\'}[_nghost-%COMP%]   .q-add-icon[_ngcontent-%COMP%]::before{content:\'➕\'}[_nghost-%COMP%]   .q-switch-group[_ngcontent-%COMP%], [_nghost-%COMP%]   .q-button-group[_ngcontent-%COMP%]{font-family:"Lucida Grande", Tahoma, Verdana, sans-serif;overflow:hidden}[_nghost-%COMP%]   .q-button-group[_ngcontent-%COMP%]{float:right}[_nghost-%COMP%]   .q-button[_ngcontent-%COMP%]{margin-left:8px;background-color:white}[_nghost-%COMP%]   .q-input-control[_ngcontent-%COMP%], [_nghost-%COMP%]   .q-operator-control[_ngcontent-%COMP%], [_nghost-%COMP%]   .q-field-control[_ngcontent-%COMP%]{display:inline-block;padding:5px 8px;color:#555;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:4px;box-sizing:border-box;width:auto}[_nghost-%COMP%]   .q-operator-control[_ngcontent-%COMP%], [_nghost-%COMP%]   .q-field-control[_ngcontent-%COMP%], [_nghost-%COMP%]   .q-input-control[_ngcontent-%COMP%]:not([type=\'checkbox\']){min-height:32px}[_nghost-%COMP%]   .q-switch-group[_ngcontent-%COMP%]   label[_ngcontent-%COMP%], [_nghost-%COMP%]   .q-button[_ngcontent-%COMP%]{float:left;min-height:30px;color:rgba(0,0,0,0.6);font-size:14px;font-weight:normal;text-align:center;text-shadow:none;padding:2px 8px;border:1px solid rgba(0,0,0,0.2);box-sizing:border-box;-webkit-transition:all 0.1s ease-in-out;-moz-transition:all 0.1s ease-in-out;-ms-transition:all 0.1s ease-in-out;-o-transition:all 0.1s ease-in-out;transition:all 0.1s ease-in-out}[_nghost-%COMP%]   .q-switch-group[_ngcontent-%COMP%]   label[_ngcontent-%COMP%]:hover, [_nghost-%COMP%]   .q-button[_ngcontent-%COMP%]:hover{cursor:pointer;background-color:#F0F0F0}[_nghost-%COMP%]   .q-switch-group[_ngcontent-%COMP%]   label.success[_ngcontent-%COMP%], [_nghost-%COMP%]   .q-button.success[_ngcontent-%COMP%]{color:#75BE47}[_nghost-%COMP%]   .q-switch-group[_ngcontent-%COMP%]   label.danger[_ngcontent-%COMP%], [_nghost-%COMP%]   .q-button.danger[_ngcontent-%COMP%]{color:#B3415D}[_nghost-%COMP%]   .q-switch-group[_ngcontent-%COMP%]   input[_ngcontent-%COMP%]{position:absolute;clip:rect(0, 0, 0, 0);height:1px;width:1px;border:0;overflow:hidden}[_nghost-%COMP%]   .q-switch-group[_ngcontent-%COMP%]   label[_ngcontent-%COMP%]{background-color:#e4e4e4;line-height:24px}[_nghost-%COMP%]   .q-switch-group[_ngcontent-%COMP%]   input[_ngcontent-%COMP%]:checked + label[_ngcontent-%COMP%]{border:1px solid #619ed7;background:white;color:#3176b3}[_nghost-%COMP%]   .q-invalid-ruleset[_ngcontent-%COMP%]{border:1px solid rgba(179,65,93,0.5) !important;background:rgba(179,65,93,0.1) !important}[_nghost-%COMP%]   .q-empty-warning[_ngcontent-%COMP%]{color:#8d252e;text-align:center}[_nghost-%COMP%]   .q-tree[_ngcontent-%COMP%]{list-style:none;margin:4px 0 2px}[_nghost-%COMP%]   .q-tree[_ngcontent-%COMP%]   .q-item[_ngcontent-%COMP%]{position:relative;padding:4px 6px;margin-top:4px;border:1px solid #CCCCCC;-webkit-transition:all 0.1s ease-in-out;-moz-transition:all 0.1s ease-in-out;-ms-transition:all 0.1s ease-in-out;-o-transition:all 0.1s ease-in-out;transition:all 0.1s ease-in-out}[_nghost-%COMP%]   .q-tree[_ngcontent-%COMP%]   .q-item.q-ruleset[_ngcontent-%COMP%]{background:rgba(204,204,204,0.2)}[_nghost-%COMP%]   .q-tree[_ngcontent-%COMP%]   .q-item.q-ruleset[_ngcontent-%COMP%]:hover{border:1px solid rgba(97,158,215,0.5);background:rgba(97,158,215,0.1)}[_nghost-%COMP%]   .q-tree[_ngcontent-%COMP%]   .q-item.q-rule[_ngcontent-%COMP%]{background:white}[_nghost-%COMP%]   .q-tree[_ngcontent-%COMP%]   .q-item[_ngcontent-%COMP%]::before{top:-5px;border-width:0 0 2px 2px}[_nghost-%COMP%]   .q-tree[_ngcontent-%COMP%]   .q-item[_ngcontent-%COMP%]::after{border-width:0 0 0 2px;top:50%}[_nghost-%COMP%]   .q-tree[_ngcontent-%COMP%]   .q-item[_ngcontent-%COMP%]::before, [_nghost-%COMP%]   .q-tree[_ngcontent-%COMP%]   .q-item[_ngcontent-%COMP%]::after{content:\'\';left:-12px;border-color:#CCC;border-style:solid;width:9px;height:calc(50% + 6px);position:absolute}[_nghost-%COMP%]   .q-tree[_ngcontent-%COMP%]   .q-item[_ngcontent-%COMP%]:last-child::after{content:none}'];
 exports.RenderType_QueryBuilderComponent = i0.ɵcrt({ encapsulation: 0,
     styles: styles_QueryBuilderComponent, data: {} });
 function View_QueryBuilderComponent_2(_l) {
@@ -3320,7 +3369,7 @@ function View_QueryBuilderComponent_37(_l) {
     return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, null, null, 9, 'query-builder', [], null, null, null, View_QueryBuilderComponent_0, exports.RenderType_QueryBuilderComponent)), i0.ɵprd(5120, null, i2.NG_VALUE_ACCESSOR, function (p0_0) {
             return [p0_0];
         }, [i3.QueryBuilderComponent]), i0.ɵdid(638976, null, 6, i3.QueryBuilderComponent, [i0.ChangeDetectorRef], { allowRuleset: [0, 'allowRuleset'], operatorMap: [1, 'operatorMap'],
-            parentData: [2, 'parentData'], data: [3, 'data'], config: [4, 'config'], parentInputTemplates: [5,
+            data: [2, 'data'], parentData: [3, 'parentData'], config: [4, 'config'], parentInputTemplates: [5,
                 'parentInputTemplates'], parentOperatorTemplate: [6, 'parentOperatorTemplate'],
             parentFieldTemplate: [7, 'parentFieldTemplate'], parentSwitchGroupTemplate: [8,
                 'parentSwitchGroupTemplate'], parentButtonGroupTemplate: [9, 'parentButtonGroupTemplate'],
@@ -3332,15 +3381,15 @@ function View_QueryBuilderComponent_37(_l) {
         var _co = _v.component;
         var currVal_0 = _co.allowRuleset;
         var currVal_1 = _co.operatorMap;
-        var currVal_2 = _co.data;
-        var currVal_3 = _v.parent.parent.context.$implicit;
+        var currVal_2 = _v.parent.parent.context.$implicit;
+        var currVal_3 = _co.data;
         var currVal_4 = _co.config;
-        var currVal_5 = _co.inputTemplates;
-        var currVal_6 = _co.operatorTemplate;
-        var currVal_7 = _co.fieldTemplate;
-        var currVal_8 = _co.switchGroupTemplate;
-        var currVal_9 = _co.buttonGroupTemplate;
-        var currVal_10 = _co.removeButtonTemplate;
+        var currVal_5 = (_co.parentInputTemplates || _co.inputTemplates);
+        var currVal_6 = (_co.parentOperatorTemplate || _co.operatorTemplate);
+        var currVal_7 = (_co.parentFieldTemplate || _co.fieldTemplate);
+        var currVal_8 = (_co.parentSwitchGroupTemplate || _co.switchGroupTemplate);
+        var currVal_9 = (_co.parentButtonGroupTemplate || _co.buttonGroupTemplate);
+        var currVal_10 = (_co.parentRemoveButtonTemplate || _co.removeButtonTemplate);
         _ck(_v, 2, 1, [currVal_0, currVal_1, currVal_2, currVal_3, currVal_4, currVal_5, currVal_6,
             currVal_7, currVal_8, currVal_9, currVal_10]);
     }, null);
@@ -3399,7 +3448,7 @@ function View_QueryBuilderComponent_10(_l) {
     }, null);
 }
 function View_QueryBuilderComponent_0(_l) {
-    return i0.ɵvid(2, [(_l()(), i0.ɵted(null, ['\n    '])), (_l()(), i0.ɵand(16777216, null, null, 1, null, View_QueryBuilderComponent_1)), i0.ɵdid(16384, null, 0, i1.NgIf, [i0.ViewContainerRef, i0.TemplateRef], { ngIf: [0, 'ngIf'],
+    return i0.ɵvid(0, [(_l()(), i0.ɵted(null, ['\n    '])), (_l()(), i0.ɵand(16777216, null, null, 1, null, View_QueryBuilderComponent_1)), i0.ɵdid(16384, null, 0, i1.NgIf, [i0.ViewContainerRef, i0.TemplateRef], { ngIf: [0, 'ngIf'],
             ngIfElse: [1, 'ngIfElse'] }, null), (_l()(), i0.ɵted(null, ['\n\n    '])),
         (_l()(), i0.ɵand(0, [['defaultButtonGroup', 2]], null, 0, null, View_QueryBuilderComponent_3)),
         (_l()(), i0.ɵted(null, ['\n\n    '])), (_l()(), i0.ɵand(16777216, null, null, 1, null, View_QueryBuilderComponent_6)), i0.ɵdid(16384, null, 0, i1.NgIf, [i0.ViewContainerRef, i0.TemplateRef], { ngIf: [0, 'ngIf'],
@@ -3429,8 +3478,8 @@ function View_QueryBuilderComponent_Host_0(_l) {
 }
 exports.View_QueryBuilderComponent_Host_0 = View_QueryBuilderComponent_Host_0;
 exports.QueryBuilderComponentNgFactory = i0.ɵccf('query-builder', i3.QueryBuilderComponent, View_QueryBuilderComponent_Host_0, { allowRuleset: 'allowRuleset',
-    classNames: 'classNames', operatorMap: 'operatorMap', parentData: 'parentData',
-    data: 'data', config: 'config', parentInputTemplates: 'parentInputTemplates', parentOperatorTemplate: 'parentOperatorTemplate',
+    classNames: 'classNames', operatorMap: 'operatorMap', data: 'data', parentData: 'parentData',
+    config: 'config', parentInputTemplates: 'parentInputTemplates', parentOperatorTemplate: 'parentOperatorTemplate',
     parentFieldTemplate: 'parentFieldTemplate', parentSwitchGroupTemplate: 'parentSwitchGroupTemplate',
     parentButtonGroupTemplate: 'parentButtonGroupTemplate', parentRemoveButtonTemplate: 'parentRemoveButtonTemplate' }, {}, []);
 

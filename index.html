@@ -520,7 +520,7 @@ config: QueryBuilderConfig = {
   &lt;!-- Override input component for &#39;category&#39; type --&gt;
   &lt;ng-container *queryInput=&quot;let rule; let field=field; let options=options; type: &#39;category&#39;&quot;&gt;
     &lt;mat-form-field&gt;
-      &lt;mat-select [placeholder]=&quot;field.name&quot;&gt;
+      &lt;mat-select [(ngModel)]=&quot;rule.value&quot; [placeholder]=&quot;field.name&quot;&gt;
         &lt;mat-option *ngFor=&quot;let opt of options&quot; [value]=&quot;opt.value&quot;&gt;
           {{ opt.name }}
         &lt;/mat-option&gt;
