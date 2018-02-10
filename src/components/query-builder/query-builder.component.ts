@@ -75,9 +75,6 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   @Input() allowRuleset: boolean = true;
   @Input() classNames: {[key: string]: string};
   @Input() operatorMap: {[key: string]: string[]};
-  /**
-   * @deprecated since version 0.2.0
-   */
   @Input() data: RuleSet = { condition: 'and', rules: [] };
   @Input() parentData: RuleSet;
   @Input() config: QueryBuilderConfig = { fields: {} };
@@ -150,7 +147,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   registerOnTouched(fn: any): void {
     this.onTouchedCallback = fn;
   }
-  setDisabledState?(isDisabled: boolean): void {
+  setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
   }
 

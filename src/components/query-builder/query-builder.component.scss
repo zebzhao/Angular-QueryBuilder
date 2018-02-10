@@ -30,7 +30,6 @@
 
   .q-input-control, .q-operator-control, .q-field-control {
     display: inline-block;
-    min-height: 32px;
     padding: 5px 8px;
     color: #555;
     background-color: #fff;
@@ -39,6 +38,10 @@
     border-radius: 4px;
     box-sizing: border-box;
     width: auto;
+  }
+
+  .q-operator-control, .q-field-control, .q-input-control:not([type='checkbox']) {
+    min-height: 32px;
   }
 
   .q-switch-group label, .q-button {
