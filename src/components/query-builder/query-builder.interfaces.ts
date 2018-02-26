@@ -7,6 +7,7 @@ export interface Rule {
   field: string;
   value?: any;
   operator?: string;
+  entity?: string;
 }
 
 export interface Option {
@@ -27,6 +28,7 @@ export interface Field {
   operators?: string[];
   defaultValue?: any;
   defaultOperator?: any;
+  entityName?: string;
 }
 
 export interface LocalRuleMeta {
@@ -34,8 +36,18 @@ export interface LocalRuleMeta {
   invalid: boolean;
 }
 
+export interface EntityMap {
+  entities: Entity[];
+}
+
+export interface Entity {
+  name: string;
+  description: string;
+}
+
 export interface QueryBuilderConfig {
   fields: FieldMap;
+  entities?: Entity[];
   allowEmptyRulesets?: boolean;
   getOperators?: (field: string) => string[];
   getInputType?: (field: string, operator: string) => string;
@@ -50,9 +62,15 @@ export interface OperatorContext {
   operators: string[];
   $implicit: Rule;
 }
+export interface EntityContext {
+  changeEntity: (entityName: string, rule: Rule) => void;
+  entities: Entity[];
+  $implicit: Rule;
+}
 
 export interface FieldContext {
   changeField: (fieldName: string, rule: Rule) => void;
+  getFields: (entityName: string) => void;
   fields: Field[];
   $implicit: Rule;
 }

@@ -52,14 +52,25 @@
               </button>
             </div>
           </ng-template>
-
+          <div *ngIf="entities?.length > 0" class="q-inline-block-display" >
+              <ng-container *ngIf="getEntityTemplate() as template; else defaultEntity">
+                <ng-container *ngTemplateOutlet="template; context: getEntityContext(rule)"></ng-container>
+              </ng-container>
+          </div>
+          <ng-template #defaultEntity>
+            <select [ngClass]="getClassName('entityControl')" [(ngModel)]="rule.entity" (ngModelChange)="changeEntity($event, rule)">
+              <option *ngFor="let entity of entities" [ngValue]="entity.name">
+                {{entity.description}}
+              </option>
+            </select>
+          </ng-template>
           <ng-container *ngIf="getFieldTemplate() as template; else defaultField">
             <ng-container *ngTemplateOutlet="template; context: getFieldContext(rule)"></ng-container>
           </ng-container>
 
           <ng-template #defaultField>
             <select [ngClass]="getClassName('fieldControl')" [(ngModel)]="rule.field" (ngModelChange)="changeField($event, rule)">
-              <option *ngFor="let field of fields" [ngValue]="field.value">
+              <option *ngFor="let field of getFields(rule.entity)" [ngValue]="field.value">
                 {{field.name}}
               </option>
             </select>
@@ -110,6 +121,7 @@
           [parentInputTemplates]="parentInputTemplates || inputTemplates"
           [parentOperatorTemplate]="parentOperatorTemplate || operatorTemplate"
           [parentFieldTemplate]="parentFieldTemplate || fieldTemplate"
+          [parentEntityTemplate]="parentEntityTemplate || entityTemplate"
           [parentSwitchGroupTemplate]="parentSwitchGroupTemplate || switchGroupTemplate"
           [parentButtonGroupTemplate]="parentButtonGroupTemplate || buttonGroupTemplate"
           [parentRemoveButtonTemplate]="parentRemoveButtonTemplate || removeButtonTemplate"

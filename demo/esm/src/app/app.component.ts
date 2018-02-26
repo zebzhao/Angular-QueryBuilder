@@ -36,10 +36,19 @@ import { QueryBuilderConfig } from '../../lib/components/query-builder';
         <mat-radio-button [style.padding.px]="10" value="or">Or</mat-radio-button>
       </mat-radio-group>
     </ng-container>
-    <ng-container *queryField="let rule; let fields=fields; let changeField=changeField">
+    <ng-container *queryEntity="let rule; let entities=entities; let changeEntity=changeEntity">
+      <mat-form-field>
+        <mat-select [(ngModel)]="rule.entity" (ngModelChange)="changeEntity($event, rule)">
+          <mat-option *ngFor="let entity of entities" [value]="entity.name">
+          {{entity.description}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </ng-container>
+    <ng-container *queryField="let rule; let fields=fields; let changeField=changeField; let getFields = getFields">
       <mat-form-field>
         <mat-select [(ngModel)]="rule.field" (ngModelChange)="changeField($event, rule)">
-          <mat-option *ngFor="let field of fields" [value]="field.value">
+          <mat-option *ngFor="let field of getFields(rule.entity)" [value]="field.value">
             {{ field.name }}
           </mat-option>
         </mat-select>
@@ -132,37 +141,39 @@ export class AppComponent {
   public query = {
     condition: 'and',
     rules: [
-      {field: 'age', operator: '<='},
-      {field: 'birthday', operator: '=', value: new Date()},
+      {field: 'age', operator: '<=', entity: 'Entity01'},
+      {field: 'birthday', operator: '=', value: new Date(), entity: 'Entity02'},
       {
         condition: 'or',
         rules: [
-          {field: 'gender', operator: '='},
-          {field: 'occupation', operator: 'in'},
-          {field: 'school', operator: 'is null'},
-          {field: 'notes', operator: '='}
+          {field: 'gender', operator: '=', entity: 'Entity01'},
+          {field: 'occupation', operator: 'in', entity: 'Entity02'},
+          {field: 'school', operator: 'is null', entity: 'Entity02'},
+          {field: 'notes', operator: '=', entity: 'Entity02'}
         ]
       }
     ]
   };
   public config: QueryBuilderConfig = {
+    entities: [{ name: 'Entity01', description: 'Entity 001' }, {name: 'Entity02', description: 'Entity 002'}],
     fields: {
-      age: {name: 'Age', type: 'number'},
+      age: {name: 'Age', type: 'number', entityName: 'Entity01'},
       gender: {
         name: 'Gender',
         type: 'category',
         options: [
           {name: 'Male', value: 'm'},
           {name: 'Female', value: 'f'}
-        ]
+        ],
+        entityName: 'Entity01'
       },
-      name: {name: 'Name', type: 'string'},
-      notes: {name: 'Notes', type: 'textarea', operators: ['=', '!=']},
+      name: {name: 'Name', type: 'string', entityName: 'Entity01'},
+      notes: {name: 'Notes', type: 'textarea', operators: ['=', '!='], entityName: 'Entity02'},
       educated: {name: 'College Degree?', type: 'boolean'},
       birthday: {name: 'Birthday', type: 'date', operators: ['=', '<=', '>'],
-        defaultValue: (() => new Date())
+        defaultValue: (() => new Date()), entityName: 'Entity02'
       },
-      school: {name: 'School', type: 'string', nullable: true},
+      school: {name: 'School', type: 'string', nullable: true, entityName: 'Entity02'},
       occupation: {
         name: 'Occupation',
         type: 'string',
@@ -171,7 +182,8 @@ export class AppComponent {
           {name: 'Teacher', value: 'teacher'},
           {name: 'Unemployed', value: 'unemployed'},
           {name: 'Scientist', value: 'scientist'}
-        ]
+        ],
+        entityName: 'Entity02'
       }
     }
   };
