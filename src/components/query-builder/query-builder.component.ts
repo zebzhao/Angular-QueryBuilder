@@ -1,4 +1,4 @@
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { AbstractControl, ControlValueAccessor, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 import { QueryOperatorDirective } from './query-operator.directive';
 import { QueryFieldDirective } from './query-field.directive';
 import { QuerySwitchGroupDirective } from './query-switch-group.directive';
@@ -44,7 +44,7 @@ export const CONTROL_VALUE_ACCESSOR: any = {
   styleUrls: ['./query-builder.component.scss'],
   providers: [CONTROL_VALUE_ACCESSOR]
 })
-export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAccessor {
+export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAccessor, Validator {
   public disabled: boolean;
   public fields: Field[];
   public defaultClassNames: {[key: string]: string} = {
@@ -108,7 +108,11 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
 
   constructor(private changeDetectorRef: ChangeDetectorRef) {}
 
+  // ----------OnInit Implementation----------
+
   ngOnInit() {}
+
+  // ----------OnChanges Implementation----------
 
   ngOnChanges(changes: SimpleChanges) {
     const config = this.config;
@@ -124,6 +128,30 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
       throw new Error(`Expected 'config' must be a valid object, got ${type} instead.`);
     }
   }
+
+  // ----------Validator Implementation----------
+
+  validate(control: AbstractControl): ValidationErrors | null {
+    const query: RuleSet = control.value;
+    const errors: {[key: string]: any} = {};
+    const ruleErrorStore = [];
+    let hasErrors = false;
+
+    if (!this.config.allowEmptyRulesets && this.checkEmptyRuleInRuleset(query)) {
+      errors.empty = 'Empty rulesets are not allowed.';
+      hasErrors = true;
+    }
+
+    this.validateRulesInRuleset(query, ruleErrorStore);
+
+    if (ruleErrorStore.length) {
+      errors.rules = ruleErrorStore;
+      hasErrors = true;
+    }
+    return hasErrors ? errors : null;
+  }
+
+  // ----------ControlValueAccessor Implementation----------
 
   get value(): RuleSet {
     return this.data;
@@ -150,6 +178,8 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
   }
+
+  // ----------END----------
 
   findTemplateForRule(rule: Rule): TemplateRef<any> {
     const type = this.getInputType(rule.field, rule.operator);
@@ -412,5 +442,37 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
       });
     }
     return this.inputContextCache.get(rule);
+  }
+
+  private checkEmptyRuleInRuleset(ruleset: RuleSet): boolean {
+    if (ruleset.rules.length === 0) {
+      return false;
+    } else {
+      return ruleset.rules.every((item: RuleSet) => {
+        if (item.rules) {
+          return this.checkEmptyRuleInRuleset(item);
+        } else {
+          return true;
+        }
+      });
+    }
+  }
+
+  private validateRulesInRuleset(ruleset: RuleSet, errorStore: any[]) {
+    if (ruleset.rules.length > 0) {
+      ruleset.rules.forEach((item) => {
+        if ((item as RuleSet).rules) {
+          return this.validateRulesInRuleset(item as RuleSet, errorStore);
+        } else if ((item as Rule).field) {
+          const field = this.config.fields[(item as Rule).field];
+          if (field && field.validator && field.validator.apply) {
+            const error = field.validator(item as Rule, ruleset);
+            if (error != null) {
+              errorStore.push(error);
+            }
+          }
+        }
+      });
+    }
   }
 }

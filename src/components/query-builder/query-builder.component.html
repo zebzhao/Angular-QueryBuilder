@@ -35,7 +35,7 @@
 
 <ul [ngClass]="getClassName('queryTree')" *ngIf="data && data.rules">
   <ng-container *ngFor="let rule of data.rules">
-    <ng-container *ngIf="{ruleset: !!rule.rules, invalid: !config.allowEmptyRuleset && rule.rules && rule.rules.length === 0} as local">
+    <ng-container *ngIf="{ruleset: !!rule.rules, invalid: !config.allowEmptyRulesets && rule.rules && rule.rules.length === 0} as local">
       <li [ngClass]="getQueryItemClassName(local)">
         <ng-container *ngIf="!local.ruleset">
 

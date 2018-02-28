@@ -1,3 +1,5 @@
+import { ValidationErrors } from '@angular/forms';
+
 export interface RuleSet {
   condition: string;
   rules: Array<RuleSet | Rule>;
@@ -27,6 +29,7 @@ export interface Field {
   operators?: string[];
   defaultValue?: any;
   defaultOperator?: any;
+  validator?: (rule: Rule, parent: RuleSet) => any | null;
 }
 
 export interface LocalRuleMeta {
