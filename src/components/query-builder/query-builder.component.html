@@ -107,6 +107,7 @@
         </ng-container>
         <query-builder *ngIf="local.ruleset"
           [data]="rule"
+          [parentChangeCallback]="parentChangeCallback || onChangeCallback"
           [parentInputTemplates]="parentInputTemplates || inputTemplates"
           [parentOperatorTemplate]="parentOperatorTemplate || operatorTemplate"
           [parentFieldTemplate]="parentFieldTemplate || fieldTemplate"

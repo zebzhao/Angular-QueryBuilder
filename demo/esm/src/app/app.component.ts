@@ -1,3 +1,4 @@
+import { FormBuilder, FormControl } from '@angular/forms';
 import { Component } from '@angular/core';
 import { QueryBuilderConfig } from '../../lib/components/query-builder';
 
@@ -5,13 +6,14 @@ import { QueryBuilderConfig } from '../../lib/components/query-builder';
   selector: 'my-app',
   template: `
   <h2>Vanilla Query Builder</h2>
-  <query-builder class='margin30' [(ngModel)]='query' [config]='config'>
+  <query-builder class='margin30' [formControl]='queryCtrl' [config]='config'>
     <ng-container *queryInput="let rule; type: 'textarea'">
       <textarea class="text-input text-area" [(ngModel)]="rule.value"
         placeholder="Custom Textarea"></textarea>
     </ng-container>
   </query-builder>
   <div class='margin30'>
+    <p>Control Valid?: {{ queryCtrl.valid }}</p>
     <textarea class="output">{{query | json}}</textarea>
   </div>
   <h2>Custom Material Query Builder</h2>
@@ -129,6 +131,8 @@ import { QueryBuilderConfig } from '../../lib/components/query-builder';
   `]
 })
 export class AppComponent {
+  public queryCtrl: FormControl;
+
   public query = {
     condition: 'and',
     rules: [
@@ -175,4 +179,10 @@ export class AppComponent {
       }
     }
   };
+
+  constructor(
+    private formBuilder: FormBuilder
+  ) {
+    this.queryCtrl = this.formBuilder.control(this.query);
+  }
 }

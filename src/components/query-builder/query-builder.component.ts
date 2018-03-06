@@ -1,4 +1,11 @@
-import { AbstractControl, ControlValueAccessor, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
+import {
+    AbstractControl,
+    ControlValueAccessor,
+    NG_VALUE_ACCESSOR,
+    NG_VALIDATORS,
+    ValidationErrors,
+    Validator
+} from '@angular/forms';
 import { QueryOperatorDirective } from './query-operator.directive';
 import { QueryFieldDirective } from './query-field.directive';
 import { QuerySwitchGroupDirective } from './query-switch-group.directive';
@@ -38,11 +45,17 @@ export const CONTROL_VALUE_ACCESSOR: any = {
   multi: true
 };
 
+export const VALIDATOR: any = {
+  provide: NG_VALIDATORS,
+  useExisting: forwardRef(() => QueryBuilderComponent),
+  multi: true
+};
+
 @Component({
   selector: 'query-builder',
   templateUrl: './query-builder.component.html',
   styleUrls: ['./query-builder.component.scss'],
-  providers: [CONTROL_VALUE_ACCESSOR]
+  providers: [CONTROL_VALUE_ACCESSOR, VALIDATOR]
 })
 export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAccessor, Validator {
   public disabled: boolean;
@@ -72,6 +85,10 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     boolean: ['=']
   };
 
+  // For ControlValueAccessor interface
+  public onChangeCallback: (value: any) => void;
+  public onTouchedCallback: () => any;
+
   @Input() allowRuleset: boolean = true;
   @Input() classNames: {[key: string]: string};
   @Input() operatorMap: {[key: string]: string[]};
@@ -84,6 +101,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   @Input() parentSwitchGroupTemplate: QuerySwitchGroupDirective;
   @Input() parentButtonGroupTemplate: QueryButtonGroupDirective;
   @Input() parentRemoveButtonTemplate: QueryRemoveButtonDirective;
+  @Input() parentChangeCallback: (value: any) => void;
 
   @ContentChild(QueryButtonGroupDirective) buttonGroupTemplate: QueryButtonGroupDirective;
   @ContentChild(QuerySwitchGroupDirective) switchGroupTemplate: QuerySwitchGroupDirective;
@@ -101,10 +119,6 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   private fieldContextCache = new Map<Rule, FieldContext>();
   private removeButtonContextCache = new Map<Rule, RemoveButtonContext>();
   private buttonGroupContext: ButtonGroupContext;
-
-  // For ControlValueAccessor interface
-  private onChangeCallback: (value: any) => void;
-  private onTouchedCallback: () => any;
 
   constructor(private changeDetectorRef: ChangeDetectorRef) {}
 
@@ -132,17 +146,16 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   // ----------Validator Implementation----------
 
   validate(control: AbstractControl): ValidationErrors | null {
-    const query: RuleSet = control.value;
     const errors: {[key: string]: any} = {};
     const ruleErrorStore = [];
     let hasErrors = false;
 
-    if (!this.config.allowEmptyRulesets && this.checkEmptyRuleInRuleset(query)) {
+    if (!this.config.allowEmptyRulesets && this.checkEmptyRuleInRuleset(this.data)) {
       errors.empty = 'Empty rulesets are not allowed.';
       hasErrors = true;
     }
 
-    this.validateRulesInRuleset(query, ruleErrorStore);
+    this.validateRulesInRuleset(this.data, ruleErrorStore);
 
     if (ruleErrorStore.length) {
       errors.rules = ruleErrorStore;
@@ -160,10 +173,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   set value(value: RuleSet) {
     // When component is initialized without a formControl, null is passed to value
     this.data = value;
-    this.changeDetectorRef.markForCheck();
-    if (this.onChangeCallback) {
-      this.onChangeCallback(value);
-    }
+    this.handleDataChange();
   }
 
   writeValue(obj: any): void {
@@ -283,16 +293,16 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   addRule(parent?: RuleSet): void {
     parent = parent || this.data;
     if (this.config.addRule) {
-      return this.config.addRule(parent);
+      this.config.addRule(parent);
     } else {
       const field = this.fields[0];
-      parent.rules = parent.rules.concat([
-        {
-          field: field.value,
-          operator: this.getDefaultOperator(field)
-        }
-      ]);
+      parent.rules = parent.rules.concat([{
+        field: field.value,
+        operator: this.getDefaultOperator(field)
+      }]);
     }
+
+    this.handleDataChange();
   }
 
   removeRule(rule: Rule, parent?: RuleSet): void {
@@ -306,6 +316,8 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     this.operatorContextCache.delete(rule);
     this.fieldContextCache.delete(rule);
     this.removeButtonContextCache.delete(rule);
+
+    this.handleDataChange();
   }
 
   addRuleSet(parent?: RuleSet): void {
@@ -315,6 +327,8 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     } else {
       parent.rules = parent.rules.concat([{condition: 'and', rules: []}]);
     }
+
+    this.handleDataChange();
   }
 
   removeRuleSet(ruleset?: RuleSet, parent?: RuleSet): void {
@@ -325,6 +339,8 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     } else {
       parent.rules = parent.rules.filter((r) => r !== ruleset);
     }
+
+    this.handleDataChange();
   }
 
   changeField(fieldValue: string, rule: Rule): void {
@@ -345,6 +361,8 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     this.getInputContext(rule);
     this.getFieldContext(rule);
     this.getOperatorContext(rule);
+
+    this.handleDataChange();
   }
 
   getDefaultValue(defaultValue: any): any {
@@ -445,21 +463,21 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   }
 
   private checkEmptyRuleInRuleset(ruleset: RuleSet): boolean {
-    if (ruleset.rules.length === 0) {
-      return false;
+    if (!ruleset || !ruleset.rules || ruleset.rules.length === 0) {
+      return true;
     } else {
-      return ruleset.rules.every((item: RuleSet) => {
+      return ruleset.rules.some((item: RuleSet) => {
         if (item.rules) {
           return this.checkEmptyRuleInRuleset(item);
         } else {
-          return true;
+          return false;
         }
       });
     }
   }
 
   private validateRulesInRuleset(ruleset: RuleSet, errorStore: any[]) {
-    if (ruleset.rules.length > 0) {
+    if (ruleset && ruleset.rules && ruleset.rules.length > 0) {
       ruleset.rules.forEach((item) => {
         if ((item as RuleSet).rules) {
           return this.validateRulesInRuleset(item as RuleSet, errorStore);
@@ -473,6 +491,16 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
           }
         }
       });
+    }
+  }
+
+  private handleDataChange() {
+    this.changeDetectorRef.markForCheck();
+    if (this.onChangeCallback) {
+      this.onChangeCallback(this.data);
+    }
+    if (this.parentChangeCallback) {
+      this.parentChangeCallback(this.data);
     }
   }
 }
