@@ -48,6 +48,12 @@
                                   <a href="../index.html" ><span class="fa fa-file-text-o"></span>README</a>
                                 </li>
                                 <li class="link">
+                                        <a href="../changelog.html"
+                                    >
+                                        <span class="fa fa-file-text-o"></span>CHANGELOG
+                                    </a>
+                                </li>
+                                <li class="link">
                                         <a href="../license.html"
                                     >
                                         <span class="fa fa-file-text-o"></span>LICENSE
@@ -241,6 +247,12 @@
                                        </li>
                                        <li class="link">
                                          <a href="../index.html" ><span class="fa fa-file-text-o"></span>README</a>
+                                       </li>
+                                       <li class="link">
+                                               <a href="../changelog.html"
+                                           >
+                                               <span class="fa fa-file-text-o"></span>CHANGELOG
+                                           </a>
                                        </li>
                                        <li class="link">
                                                <a href="../license.html"
@@ -520,7 +532,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/components/query-builder/query-builder.interfaces.ts:44</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/components/query-builder/query-builder.interfaces.ts:47</a></div>
                                         </td>
                                     </tr>
 
@@ -553,7 +565,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/components/query-builder/query-builder.interfaces.ts:43</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/components/query-builder/query-builder.interfaces.ts:46</a></div>
                                         </td>
                                     </tr>
 
@@ -586,7 +598,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/components/query-builder/query-builder.interfaces.ts:39</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/components/query-builder/query-builder.interfaces.ts:42</a></div>
                                         </td>
                                     </tr>
 
@@ -619,7 +631,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/components/query-builder/query-builder.interfaces.ts:38</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/components/query-builder/query-builder.interfaces.ts:41</a></div>
                                         </td>
                                     </tr>
 
@@ -652,7 +664,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/components/query-builder/query-builder.interfaces.ts:41</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/components/query-builder/query-builder.interfaces.ts:44</a></div>
                                         </td>
                                     </tr>
 
@@ -685,7 +697,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/components/query-builder/query-builder.interfaces.ts:40</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/components/query-builder/query-builder.interfaces.ts:43</a></div>
                                         </td>
                                     </tr>
 
@@ -718,7 +730,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/components/query-builder/query-builder.interfaces.ts:42</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/components/query-builder/query-builder.interfaces.ts:45</a></div>
                                         </td>
                                     </tr>
 
@@ -751,7 +763,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/components/query-builder/query-builder.interfaces.ts:46</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/components/query-builder/query-builder.interfaces.ts:49</a></div>
                                         </td>
                                     </tr>
 
@@ -784,7 +796,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/components/query-builder/query-builder.interfaces.ts:45</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/components/query-builder/query-builder.interfaces.ts:48</a></div>
                                         </td>
                                     </tr>
 
@@ -795,7 +807,9 @@
 
 
     <div class="tab-pane fade tab-source-code" id="c-source">
-        <pre class="line-numbers"><code class="language-typescript">export interface RuleSet {
+        <pre class="line-numbers"><code class="language-typescript">import { ValidationErrors } from &#x27;@angular/forms&#x27;;
+
+export interface RuleSet {
   condition: string;
   rules: Array&lt;RuleSet | Rule&gt;;
 }
@@ -824,6 +838,7 @@ export interface Field {
   operators?: string[];
   defaultValue?: any;
   defaultOperator?: any;
+  validator?: (rule: Rule, parent: RuleSet) &#x3D;&gt; any | null;
 }
 
 export interface LocalRuleMeta {

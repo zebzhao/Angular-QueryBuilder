@@ -48,6 +48,12 @@
                                   <a href="../index.html" ><span class="fa fa-file-text-o"></span>README</a>
                                 </li>
                                 <li class="link">
+                                        <a href="../changelog.html"
+                                    >
+                                        <span class="fa fa-file-text-o"></span>CHANGELOG
+                                    </a>
+                                </li>
+                                <li class="link">
                                         <a href="../license.html"
                                     >
                                         <span class="fa fa-file-text-o"></span>LICENSE
@@ -243,6 +249,12 @@
                                          <a href="../index.html" ><span class="fa fa-file-text-o"></span>README</a>
                                        </li>
                                        <li class="link">
+                                               <a href="../changelog.html"
+                                           >
+                                               <span class="fa fa-file-text-o"></span>CHANGELOG
+                                           </a>
+                                       </li>
+                                       <li class="link">
                                                <a href="../license.html"
                                            >
                                                <span class="fa fa-file-text-o"></span>LICENSE
@@ -432,6 +444,9 @@
                         <li>
                             <a href="#CONTROL_VALUE_ACCESSOR">CONTROL_VALUE_ACCESSOR</a>
                         </li>
+                        <li>
+                            <a href="#VALIDATOR">VALIDATOR</a>
+                        </li>
                     </ul>
                 </td>
             </tr>
@@ -470,6 +485,44 @@
                             <td class="col-md-4">
                                 <i>Default value : </i><code>{
       provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() &#x3D;&gt; QueryBuilderComponent),
+      multi: true
+    }</code>
+                            </td>
+                        </tr>
+    
+    
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <a name="VALIDATOR"></a>
+                            <span class="name">
+                                <b>
+                                VALIDATOR
+                                </b>
+                                <a href="#VALIDATOR"><span class="fa fa-link"></span></a>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>VALIDATOR:     <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+    </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Type : </i>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+    
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <i>Default value : </i><code>{
+      provide: NG_VALIDATORS,
       useExisting: forwardRef(() &#x3D;&gt; QueryBuilderComponent),
       multi: true
     }</code>

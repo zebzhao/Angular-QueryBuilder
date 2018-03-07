@@ -48,6 +48,12 @@
                                   <a href="../index.html" ><span class="fa fa-file-text-o"></span>README</a>
                                 </li>
                                 <li class="link">
+                                        <a href="../changelog.html"
+                                    >
+                                        <span class="fa fa-file-text-o"></span>CHANGELOG
+                                    </a>
+                                </li>
+                                <li class="link">
                                         <a href="../license.html"
                                     >
                                         <span class="fa fa-file-text-o"></span>LICENSE
@@ -241,6 +247,12 @@
                                        </li>
                                        <li class="link">
                                          <a href="../index.html" ><span class="fa fa-file-text-o"></span>README</a>
+                                       </li>
+                                       <li class="link">
+                                               <a href="../changelog.html"
+                                           >
+                                               <span class="fa fa-file-text-o"></span>CHANGELOG
+                                           </a>
                                        </li>
                                        <li class="link">
                                                <a href="../license.html"
@@ -502,7 +514,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/components/query-builder/query-builder.interfaces.ts:57</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/components/query-builder/query-builder.interfaces.ts:60</a></div>
                                         </td>
                                     </tr>
 
@@ -535,7 +547,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/components/query-builder/query-builder.interfaces.ts:55</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/components/query-builder/query-builder.interfaces.ts:58</a></div>
                                         </td>
                                     </tr>
 
@@ -568,7 +580,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/components/query-builder/query-builder.interfaces.ts:56</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/components/query-builder/query-builder.interfaces.ts:59</a></div>
                                         </td>
                                     </tr>
 
@@ -579,7 +591,9 @@
 
 
     <div class="tab-pane fade tab-source-code" id="c-source">
-        <pre class="line-numbers"><code class="language-typescript">export interface RuleSet {
+        <pre class="line-numbers"><code class="language-typescript">import { ValidationErrors } from &#x27;@angular/forms&#x27;;
+
+export interface RuleSet {
   condition: string;
   rules: Array&lt;RuleSet | Rule&gt;;
 }
@@ -608,6 +622,7 @@ export interface Field {
   operators?: string[];
   defaultValue?: any;
   defaultOperator?: any;
+  validator?: (rule: Rule, parent: RuleSet) &#x3D;&gt; any | null;
 }
 
 export interface LocalRuleMeta {

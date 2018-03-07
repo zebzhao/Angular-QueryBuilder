@@ -11,10 +11,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+var forms_1 = __webpack_require__(19);
 var core_1 = __webpack_require__(1);
 var AppComponent = /** @class */ (function () {
-    function AppComponent() {
+    function AppComponent(formBuilder) {
+        this.formBuilder = formBuilder;
         this.query = {
             condition: 'and',
             rules: [
@@ -61,13 +66,15 @@ var AppComponent = /** @class */ (function () {
                 }
             }
         };
+        this.queryCtrl = this.formBuilder.control(this.query);
     }
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            template: "\n  <h2>Vanilla Query Builder</h2>\n  <query-builder class='margin30' [(ngModel)]='query' [config]='config'>\n    <ng-container *queryInput=\"let rule; type: 'textarea'\">\n      <textarea class=\"text-input text-area\" [(ngModel)]=\"rule.value\"\n        placeholder=\"Custom Textarea\"></textarea>\n    </ng-container>\n  </query-builder>\n  <div class='margin30'>\n    <textarea class=\"output\">{{query | json}}</textarea>\n  </div>\n  <h2>Custom Material Query Builder</h2>\n  <mat-card>\n  <query-builder [(ngModel)]='query' [config]='config'>\n    <ng-container *queryButtonGroup=\"let ruleset; let addRule=addRule; let addRuleSet=addRuleSet; let removeRuleSet=removeRuleSet\">\n      <button mat-icon-button color=\"primary\" (click)=\"addRule()\">\n        <mat-icon>add</mat-icon></button>\n      <button mat-icon-button color=\"primary\" (click)=\"addRuleSet()\">\n        <mat-icon>add_circle_outline</mat-icon></button>\n      <button mat-icon-button color=\"accent\" (click)=\"removeRuleSet()\">\n        <mat-icon>remove_circle_outline</mat-icon></button>\n    </ng-container>\n    <ng-container *queryRemoveButton=\"let rule; let removeRule=removeRule\">\n      <button mat-icon-button color=\"accent\" (click)=\"removeRule(rule)\">\n        <mat-icon>remove</mat-icon>\n      </button>\n    </ng-container>\n    <ng-container *querySwitchGroup=\"let ruleset\">\n      <mat-radio-group *ngIf=\"ruleset\" [(ngModel)]=\"ruleset.condition\">\n        <mat-radio-button [style.padding.px]=\"10\" value=\"and\">And</mat-radio-button>\n        <mat-radio-button [style.padding.px]=\"10\" value=\"or\">Or</mat-radio-button>\n      </mat-radio-group>\n    </ng-container>\n    <ng-container *queryField=\"let rule; let fields=fields; let changeField=changeField\">\n      <mat-form-field>\n        <mat-select [(ngModel)]=\"rule.field\" (ngModelChange)=\"changeField($event, rule)\">\n          <mat-option *ngFor=\"let field of fields\" [value]=\"field.value\">\n            {{ field.name }}\n          </mat-option>\n        </mat-select>\n      </mat-form-field>\n    </ng-container>\n    <ng-container *queryOperator=\"let rule; let operators=operators\">\n      <mat-form-field [style.width.px]=\"90\">\n        <mat-select [(ngModel)]=\"rule.operator\">\n          <mat-option *ngFor=\"let value of operators\" [value]=\"value\">\n            {{ value }}\n          </mat-option>\n        </mat-select>\n      </mat-form-field>\n    </ng-container>\n    <ng-container *queryInput=\"let rule; type: 'boolean'\">\n      <mat-checkbox [(ngModel)]=\"rule.value\"></mat-checkbox>\n    </ng-container>\n    <ng-container *queryInput=\"let rule; let field=field; let options=options; type: 'category'\">\n      <mat-form-field>\n        <mat-select [(ngModel)]=\"rule.value\" [placeholder]=\"field.name\">\n          <mat-option *ngFor=\"let opt of options\" [value]=\"opt.value\">\n            {{ opt.name }}\n          </mat-option>\n        </mat-select>\n      </mat-form-field>\n    </ng-container>\n    <ng-container *queryInput=\"let rule; type: 'date'\">\n      <mat-form-field>\n        <input matInput [matDatepicker]=\"picker\" [(ngModel)]=\"rule.value\"\n          placeholder=\"Choose a date\">\n        <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\n        <mat-datepicker #picker></mat-datepicker>\n      </mat-form-field>\n    </ng-container>\n    <ng-container *queryInput=\"let rule; let options=options; type: 'multiselect'\">\n      <mat-form-field [style.width.px]=\"300\">\n        <mat-select [(ngModel)]=\"rule.value\" multiple>\n          <mat-option *ngFor=\"let opt of options\" [value]=\"opt.value\">\n            {{ opt.name }}\n          </mat-option>\n        </mat-select>\n      </mat-form-field>\n    </ng-container>\n    <ng-container *queryInput=\"let rule; let field=field; type: 'number'\">\n      <mat-form-field [style.width.px]=\"50\">\n        <input matInput [(ngModel)]=\"rule.value\" [placeholder]=\"field.name\" type=\"number\">\n      </mat-form-field>\n    </ng-container>\n    <ng-container *queryInput=\"let rule; let field=field; type: 'string'\">\n      <mat-form-field>\n        <input matInput [(ngModel)]=\"rule.value\" [placeholder]=\"field.name\">\n      </mat-form-field>\n    </ng-container>\n    <ng-container *queryInput=\"let rule; let field=field; type: 'textarea'\">\n      <mat-form-field>\n        <textarea matInput [(ngModel)]=\"rule.value\" [placeholder]=\"field.name\">\n        </textarea>\n      </mat-form-field>\n    </ng-container>\n  </query-builder>\n  </mat-card>\n  ",
+            template: "\n  <h2>Vanilla Query Builder</h2>\n  <query-builder class='margin30' [formControl]='queryCtrl' [config]='config'>\n    <ng-container *queryInput=\"let rule; type: 'textarea'\">\n      <textarea class=\"text-input text-area\" [(ngModel)]=\"rule.value\"\n        placeholder=\"Custom Textarea\"></textarea>\n    </ng-container>\n  </query-builder>\n  <div class='margin30'>\n    <p>Control Valid?: {{ queryCtrl.valid }}</p>\n    <textarea class=\"output\">{{query | json}}</textarea>\n  </div>\n  <h2>Custom Material Query Builder</h2>\n  <mat-card>\n  <query-builder [(ngModel)]='query' [config]='config'>\n    <ng-container *queryButtonGroup=\"let ruleset; let addRule=addRule; let addRuleSet=addRuleSet; let removeRuleSet=removeRuleSet\">\n      <button mat-icon-button color=\"primary\" (click)=\"addRule()\">\n        <mat-icon>add</mat-icon></button>\n      <button mat-icon-button color=\"primary\" (click)=\"addRuleSet()\">\n        <mat-icon>add_circle_outline</mat-icon></button>\n      <button mat-icon-button color=\"accent\" (click)=\"removeRuleSet()\">\n        <mat-icon>remove_circle_outline</mat-icon></button>\n    </ng-container>\n    <ng-container *queryRemoveButton=\"let rule; let removeRule=removeRule\">\n      <button mat-icon-button color=\"accent\" (click)=\"removeRule(rule)\">\n        <mat-icon>remove</mat-icon>\n      </button>\n    </ng-container>\n    <ng-container *querySwitchGroup=\"let ruleset\">\n      <mat-radio-group *ngIf=\"ruleset\" [(ngModel)]=\"ruleset.condition\">\n        <mat-radio-button [style.padding.px]=\"10\" value=\"and\">And</mat-radio-button>\n        <mat-radio-button [style.padding.px]=\"10\" value=\"or\">Or</mat-radio-button>\n      </mat-radio-group>\n    </ng-container>\n    <ng-container *queryField=\"let rule; let fields=fields; let changeField=changeField\">\n      <mat-form-field>\n        <mat-select [(ngModel)]=\"rule.field\" (ngModelChange)=\"changeField($event, rule)\">\n          <mat-option *ngFor=\"let field of fields\" [value]=\"field.value\">\n            {{ field.name }}\n          </mat-option>\n        </mat-select>\n      </mat-form-field>\n    </ng-container>\n    <ng-container *queryOperator=\"let rule; let operators=operators\">\n      <mat-form-field [style.width.px]=\"90\">\n        <mat-select [(ngModel)]=\"rule.operator\">\n          <mat-option *ngFor=\"let value of operators\" [value]=\"value\">\n            {{ value }}\n          </mat-option>\n        </mat-select>\n      </mat-form-field>\n    </ng-container>\n    <ng-container *queryInput=\"let rule; type: 'boolean'\">\n      <mat-checkbox [(ngModel)]=\"rule.value\"></mat-checkbox>\n    </ng-container>\n    <ng-container *queryInput=\"let rule; let field=field; let options=options; type: 'category'\">\n      <mat-form-field>\n        <mat-select [(ngModel)]=\"rule.value\" [placeholder]=\"field.name\">\n          <mat-option *ngFor=\"let opt of options\" [value]=\"opt.value\">\n            {{ opt.name }}\n          </mat-option>\n        </mat-select>\n      </mat-form-field>\n    </ng-container>\n    <ng-container *queryInput=\"let rule; type: 'date'\">\n      <mat-form-field>\n        <input matInput [matDatepicker]=\"picker\" [(ngModel)]=\"rule.value\"\n          placeholder=\"Choose a date\">\n        <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\n        <mat-datepicker #picker></mat-datepicker>\n      </mat-form-field>\n    </ng-container>\n    <ng-container *queryInput=\"let rule; let options=options; type: 'multiselect'\">\n      <mat-form-field [style.width.px]=\"300\">\n        <mat-select [(ngModel)]=\"rule.value\" multiple>\n          <mat-option *ngFor=\"let opt of options\" [value]=\"opt.value\">\n            {{ opt.name }}\n          </mat-option>\n        </mat-select>\n      </mat-form-field>\n    </ng-container>\n    <ng-container *queryInput=\"let rule; let field=field; type: 'number'\">\n      <mat-form-field [style.width.px]=\"50\">\n        <input matInput [(ngModel)]=\"rule.value\" [placeholder]=\"field.name\" type=\"number\">\n      </mat-form-field>\n    </ng-container>\n    <ng-container *queryInput=\"let rule; let field=field; type: 'string'\">\n      <mat-form-field>\n        <input matInput [(ngModel)]=\"rule.value\" [placeholder]=\"field.name\">\n      </mat-form-field>\n    </ng-container>\n    <ng-container *queryInput=\"let rule; let field=field; type: 'textarea'\">\n      <mat-form-field>\n        <textarea matInput [(ngModel)]=\"rule.value\" [placeholder]=\"field.name\">\n        </textarea>\n      </mat-form-field>\n    </ng-container>\n  </query-builder>\n  </mat-card>\n  ",
             styles: ["\n  /deep/ html {\n    font: 14px sans-serif;\n  }\n\n  .margin30 { margin: 30px; }\n\n  .text-input {\n    padding: 4px 8px;\n    border-radius: 4px;\n    border: 1px solid #ccc;\n  }\n\n  .text-area {\n    margin-top: 8px;\n    width: 300px;\n    height: 100px;\n    display: block;\n  }\n\n  .output {\n    width: 100%;\n    height: 300px;\n  }\n  "]
-        })
+        }),
+        __metadata("design:paramtypes", [forms_1.FormBuilder])
     ], AppComponent);
     return AppComponent;
 }());
@@ -81,6 +88,9 @@ exports.AppComponent = AppComponent;
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CONTROL_VALUE_ACCESSOR", function() { return CONTROL_VALUE_ACCESSOR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VALIDATOR", function() { return VALIDATOR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "QueryBuilderComponent", function() { return QueryBuilderComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_forms__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__query_operator_directive__ = __webpack_require__(129);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__query_field_directive__ = __webpack_require__(130);
@@ -97,15 +107,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-const CONTROL_VALUE_ACCESSOR = {
+var CONTROL_VALUE_ACCESSOR = {
     provide: __WEBPACK_IMPORTED_MODULE_0__angular_forms__["NG_VALUE_ACCESSOR"],
-    useExisting: Object(__WEBPACK_IMPORTED_MODULE_7__angular_core__["forwardRef"])(() => QueryBuilderComponent),
+    useExisting: Object(__WEBPACK_IMPORTED_MODULE_7__angular_core__["forwardRef"])(function () { return QueryBuilderComponent; }),
     multi: true
 };
-/* harmony export (immutable) */ __webpack_exports__["CONTROL_VALUE_ACCESSOR"] = CONTROL_VALUE_ACCESSOR;
-
-class QueryBuilderComponent {
-    constructor(changeDetectorRef) {
+var VALIDATOR = {
+    provide: __WEBPACK_IMPORTED_MODULE_0__angular_forms__["NG_VALIDATORS"],
+    useExisting: Object(__WEBPACK_IMPORTED_MODULE_7__angular_core__["forwardRef"])(function () { return QueryBuilderComponent; }),
+    multi: true
+};
+var QueryBuilderComponent = /** @class */ (function () {
+    function QueryBuilderComponent(changeDetectorRef) {
         this.changeDetectorRef = changeDetectorRef;
         this.defaultClassNames = {
             removeIcon: 'q-icon q-remove-icon',
@@ -143,86 +156,107 @@ class QueryBuilderComponent {
         this.fieldContextCache = new Map();
         this.removeButtonContextCache = new Map();
     }
-    ngOnInit() { }
-    ngOnChanges(changes) {
-        const config = this.config;
-        const type = typeof config;
+    // ----------OnInit Implementation----------
+    QueryBuilderComponent.prototype.ngOnInit = function () { };
+    // ----------OnChanges Implementation----------
+    QueryBuilderComponent.prototype.ngOnChanges = function (changes) {
+        var config = this.config;
+        var type = typeof config;
         if (type === 'object') {
-            this.fields = Object.keys(config.fields).map((value) => {
-                const field = config.fields[value];
+            this.fields = Object.keys(config.fields).map(function (value) {
+                var field = config.fields[value];
                 field.value = field.value || value;
                 return field;
             });
             this.operatorsCache = {};
         }
         else {
-            throw new Error(`Expected 'config' must be a valid object, got ${type} instead.`);
+            throw new Error("Expected 'config' must be a valid object, got " + type + " instead.");
         }
-    }
-    get value() {
-        return this.data;
-    }
-    set value(value) {
-        // When component is initialized without a formControl, null is passed to value
-        this.data = value;
-        this.changeDetectorRef.markForCheck();
-        if (this.onChangeCallback) {
-            this.onChangeCallback(value);
+    };
+    // ----------Validator Implementation----------
+    QueryBuilderComponent.prototype.validate = function (control) {
+        var errors = {};
+        var ruleErrorStore = [];
+        var hasErrors = false;
+        if (!this.config.allowEmptyRulesets && this.checkEmptyRuleInRuleset(this.data)) {
+            errors.empty = 'Empty rulesets are not allowed.';
+            hasErrors = true;
         }
-    }
-    writeValue(obj) {
+        this.validateRulesInRuleset(this.data, ruleErrorStore);
+        if (ruleErrorStore.length) {
+            errors.rules = ruleErrorStore;
+            hasErrors = true;
+        }
+        return hasErrors ? errors : null;
+    };
+    Object.defineProperty(QueryBuilderComponent.prototype, "value", {
+        // ----------ControlValueAccessor Implementation----------
+        get: function () {
+            return this.data;
+        },
+        set: function (value) {
+            // When component is initialized without a formControl, null is passed to value
+            this.data = value;
+            this.handleDataChange();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    QueryBuilderComponent.prototype.writeValue = function (obj) {
         this.value = obj;
-    }
-    registerOnChange(fn) {
+    };
+    QueryBuilderComponent.prototype.registerOnChange = function (fn) {
         this.onChangeCallback = fn;
-    }
-    registerOnTouched(fn) {
+    };
+    QueryBuilderComponent.prototype.registerOnTouched = function (fn) {
         this.onTouchedCallback = fn;
-    }
-    setDisabledState(isDisabled) {
+    };
+    QueryBuilderComponent.prototype.setDisabledState = function (isDisabled) {
         this.disabled = isDisabled;
-    }
-    findTemplateForRule(rule) {
-        const type = this.getInputType(rule.field, rule.operator);
+    };
+    // ----------END----------
+    QueryBuilderComponent.prototype.findTemplateForRule = function (rule) {
+        var type = this.getInputType(rule.field, rule.operator);
         if (type) {
-            const queryInput = this.findQueryInput(type);
+            var queryInput = this.findQueryInput(type);
             if (queryInput) {
                 return queryInput.template;
             }
             else {
                 if (this.defaultTemplateTypes.indexOf(type) === -1) {
-                    console.warn(`Could not find template for field with type: ${type}`);
+                    console.warn("Could not find template for field with type: " + type);
                 }
                 return null;
             }
         }
-    }
-    findQueryInput(type) {
-        const templates = this.parentInputTemplates || this.inputTemplates;
-        return templates.find((item) => item.queryInputType === type);
-    }
-    getOperators(field) {
+    };
+    QueryBuilderComponent.prototype.findQueryInput = function (type) {
+        var templates = this.parentInputTemplates || this.inputTemplates;
+        return templates.find(function (item) { return item.queryInputType === type; });
+    };
+    QueryBuilderComponent.prototype.getOperators = function (field) {
         if (this.operatorsCache[field]) {
             return this.operatorsCache[field];
         }
-        let operators = this.defaultEmptyList;
+        var operators = this.defaultEmptyList;
         if (this.config.getOperators) {
             operators = this.config.getOperators(field);
         }
-        const fieldObject = this.config.fields[field];
-        const type = fieldObject.type;
+        var fieldObject = this.config.fields[field];
+        var type = fieldObject.type;
         if (fieldObject && fieldObject.operators) {
             operators = fieldObject.operators;
         }
         else if (type) {
             operators = (this.operatorMap && this.operatorMap[type]) || this.defaultOperatorMap[type] || this.defaultEmptyList;
             if (operators.length === 0) {
-                console.warn(`No operators found for field '${field}' with type ${fieldObject.type}. ` +
-                    `Please define an 'operators' property on the field or use the 'operatorMap' binding to fix this.`);
+                console.warn("No operators found for field '" + field + "' with type " + fieldObject.type + ". " +
+                    "Please define an 'operators' property on the field or use the 'operatorMap' binding to fix this.");
             }
         }
         else {
-            console.warn(`No 'type' property found on field: '${field}'`);
+            console.warn("No 'type' property found on field: '" + field + "'");
         }
         if (fieldObject.options) {
             operators = operators.concat(['in', 'not in']);
@@ -233,12 +267,12 @@ class QueryBuilderComponent {
         // Cache reference to array object, so it won't be computed next time and trigger a rerender.
         this.operatorsCache[field] = operators;
         return operators;
-    }
-    getInputType(field, operator) {
+    };
+    QueryBuilderComponent.prototype.getInputType = function (field, operator) {
         if (this.config.getInputType) {
             return this.config.getInputType(field, operator);
         }
-        const type = this.config.fields[field].type;
+        var type = this.config.fields[field].type;
         switch (operator) {
             case 'is null':
             case 'is not null':
@@ -249,62 +283,62 @@ class QueryBuilderComponent {
             default:
                 return type;
         }
-    }
-    getOptions(field) {
+    };
+    QueryBuilderComponent.prototype.getOptions = function (field) {
         if (this.config.getOptions) {
             return this.config.getOptions(field);
         }
         return this.config.fields[field].options || this.defaultEmptyList;
-    }
-    getClassName(id) {
-        const cls = this.classNames ? this.classNames[id] : null;
+    };
+    QueryBuilderComponent.prototype.getClassName = function (id) {
+        var cls = this.classNames ? this.classNames[id] : null;
         return cls != null ? cls : this.defaultClassNames[id];
-    }
-    getDefaultOperator(field) {
+    };
+    QueryBuilderComponent.prototype.getDefaultOperator = function (field) {
         if (field && field.defaultOperator !== undefined) {
             return this.getDefaultValue(field.defaultOperator);
         }
         else {
-            const operators = this.getOperators(field.value)[0];
+            var operators = this.getOperators(field.value)[0];
             if (operators && operators.length) {
                 return operators[0];
             }
             else {
-                console.warn(`No operators found for field '${field.value}'. ` +
-                    `A 'defaultOperator' is also not specified on the field config. Operator value will default to null.`);
+                console.warn("No operators found for field '" + field.value + "'. " +
+                    "A 'defaultOperator' is also not specified on the field config. Operator value will default to null.");
                 return null;
             }
         }
-    }
-    addRule(parent) {
+    };
+    QueryBuilderComponent.prototype.addRule = function (parent) {
         parent = parent || this.data;
         if (this.config.addRule) {
-            return this.config.addRule(parent);
+            this.config.addRule(parent);
         }
         else {
-            const field = this.fields[0];
-            parent.rules = parent.rules.concat([
-                {
+            var field = this.fields[0];
+            parent.rules = parent.rules.concat([{
                     field: field.value,
                     operator: this.getDefaultOperator(field)
-                }
-            ]);
+                }]);
         }
-    }
-    removeRule(rule, parent) {
+        this.handleDataChange();
+    };
+    QueryBuilderComponent.prototype.removeRule = function (rule, parent) {
         parent = parent || this.data;
         if (this.config.removeRule) {
             this.config.removeRule(rule, parent);
         }
         else {
-            parent.rules = parent.rules.filter((r) => r !== rule);
+            parent.rules = parent.rules.filter(function (r) { return r !== rule; });
         }
         this.inputContextCache.delete(rule);
         this.operatorContextCache.delete(rule);
         this.fieldContextCache.delete(rule);
         this.removeButtonContextCache.delete(rule);
-    }
-    addRuleSet(parent) {
+        this.handleDataChange();
+    };
+    QueryBuilderComponent.prototype.addRuleSet = function (parent) {
         parent = parent || this.data;
         if (this.config.addRuleSet) {
             this.config.addRuleSet(parent);
@@ -312,19 +346,21 @@ class QueryBuilderComponent {
         else {
             parent.rules = parent.rules.concat([{ condition: 'and', rules: [] }]);
         }
-    }
-    removeRuleSet(ruleset, parent) {
+        this.handleDataChange();
+    };
+    QueryBuilderComponent.prototype.removeRuleSet = function (ruleset, parent) {
         ruleset = ruleset || this.data;
         parent = parent || this.parentData;
         if (this.config.removeRuleSet) {
             this.config.removeRuleSet(ruleset, parent);
         }
         else {
-            parent.rules = parent.rules.filter((r) => r !== ruleset);
+            parent.rules = parent.rules.filter(function (r) { return r !== ruleset; });
         }
-    }
-    changeField(fieldValue, rule) {
-        const field = this.config.fields[fieldValue];
+        this.handleDataChange();
+    };
+    QueryBuilderComponent.prototype.changeField = function (fieldValue, rule) {
+        var field = this.config.fields[fieldValue];
         if (field && field.defaultValue !== undefined) {
             rule.value = this.getDefaultValue(field.defaultValue);
         }
@@ -339,44 +375,45 @@ class QueryBuilderComponent {
         this.getInputContext(rule);
         this.getFieldContext(rule);
         this.getOperatorContext(rule);
-    }
-    getDefaultValue(defaultValue) {
+        this.handleDataChange();
+    };
+    QueryBuilderComponent.prototype.getDefaultValue = function (defaultValue) {
         switch (typeof defaultValue) {
             case 'function':
                 return defaultValue();
             default:
                 return defaultValue;
         }
-    }
-    getOperatorTemplate() {
-        const t = this.parentOperatorTemplate || this.operatorTemplate;
+    };
+    QueryBuilderComponent.prototype.getOperatorTemplate = function () {
+        var t = this.parentOperatorTemplate || this.operatorTemplate;
         return t ? t.template : null;
-    }
-    getFieldTemplate() {
-        const t = this.parentFieldTemplate || this.fieldTemplate;
+    };
+    QueryBuilderComponent.prototype.getFieldTemplate = function () {
+        var t = this.parentFieldTemplate || this.fieldTemplate;
         return t ? t.template : null;
-    }
-    getButtonGroupTemplate() {
-        const t = this.parentButtonGroupTemplate || this.buttonGroupTemplate;
+    };
+    QueryBuilderComponent.prototype.getButtonGroupTemplate = function () {
+        var t = this.parentButtonGroupTemplate || this.buttonGroupTemplate;
         return t ? t.template : null;
-    }
-    getSwitchGroupTemplate() {
-        const t = this.parentSwitchGroupTemplate || this.switchGroupTemplate;
+    };
+    QueryBuilderComponent.prototype.getSwitchGroupTemplate = function () {
+        var t = this.parentSwitchGroupTemplate || this.switchGroupTemplate;
         return t ? t.template : null;
-    }
-    getRemoveButtonTemplate() {
-        const t = this.parentRemoveButtonTemplate || this.removeButtonTemplate;
+    };
+    QueryBuilderComponent.prototype.getRemoveButtonTemplate = function () {
+        var t = this.parentRemoveButtonTemplate || this.removeButtonTemplate;
         return t ? t.template : null;
-    }
-    getQueryItemClassName(local) {
-        let cls = this.getClassName('queryItem');
+    };
+    QueryBuilderComponent.prototype.getQueryItemClassName = function (local) {
+        var cls = this.getClassName('queryItem');
         cls += ' ' + this.getClassName(local.ruleset ? 'queryRuleSet' : 'queryRule');
         if (local.invalid) {
             cls += ' ' + this.getClassName('invalidRuleset');
         }
         return cls;
-    }
-    getButtonGroupContext() {
+    };
+    QueryBuilderComponent.prototype.getButtonGroupContext = function () {
         if (!this.buttonGroupContext) {
             this.buttonGroupContext = {
                 addRule: this.addRule.bind(this),
@@ -386,8 +423,8 @@ class QueryBuilderComponent {
             };
         }
         return this.buttonGroupContext;
-    }
-    getRemoveButtonContext(rule) {
+    };
+    QueryBuilderComponent.prototype.getRemoveButtonContext = function (rule) {
         if (!this.removeButtonContextCache.has(rule)) {
             this.removeButtonContextCache.set(rule, {
                 removeRule: this.removeRule.bind(this),
@@ -395,8 +432,8 @@ class QueryBuilderComponent {
             });
         }
         return this.removeButtonContextCache.get(rule);
-    }
-    getFieldContext(rule) {
+    };
+    QueryBuilderComponent.prototype.getFieldContext = function (rule) {
         if (!this.fieldContextCache.has(rule)) {
             this.fieldContextCache.set(rule, {
                 changeField: this.changeField.bind(this),
@@ -405,8 +442,8 @@ class QueryBuilderComponent {
             });
         }
         return this.fieldContextCache.get(rule);
-    }
-    getOperatorContext(rule) {
+    };
+    QueryBuilderComponent.prototype.getOperatorContext = function (rule) {
         if (!this.operatorContextCache.has(rule)) {
             this.operatorContextCache.set(rule, {
                 operators: this.getOperators(rule.field),
@@ -414,8 +451,8 @@ class QueryBuilderComponent {
             });
         }
         return this.operatorContextCache.get(rule);
-    }
-    getInputContext(rule) {
+    };
+    QueryBuilderComponent.prototype.getInputContext = function (rule) {
         if (!this.inputContextCache.has(rule)) {
             this.inputContextCache.set(rule, {
                 options: this.getOptions(rule.field),
@@ -424,170 +461,87 @@ class QueryBuilderComponent {
             });
         }
         return this.inputContextCache.get(rule);
-    }
-}
-/* harmony export (immutable) */ __webpack_exports__["QueryBuilderComponent"] = QueryBuilderComponent;
+    };
+    QueryBuilderComponent.prototype.checkEmptyRuleInRuleset = function (ruleset) {
+        var _this = this;
+        if (!ruleset || !ruleset.rules || ruleset.rules.length === 0) {
+            return true;
+        }
+        else {
+            return ruleset.rules.some(function (item) {
+                if (item.rules) {
+                    return _this.checkEmptyRuleInRuleset(item);
+                }
+                else {
+                    return false;
+                }
+            });
+        }
+    };
+    QueryBuilderComponent.prototype.validateRulesInRuleset = function (ruleset, errorStore) {
+        var _this = this;
+        if (ruleset && ruleset.rules && ruleset.rules.length > 0) {
+            ruleset.rules.forEach(function (item) {
+                if (item.rules) {
+                    return _this.validateRulesInRuleset(item, errorStore);
+                }
+                else if (item.field) {
+                    var field = _this.config.fields[item.field];
+                    if (field && field.validator && field.validator.apply) {
+                        var error = field.validator(item, ruleset);
+                        if (error != null) {
+                            errorStore.push(error);
+                        }
+                    }
+                }
+            });
+        }
+    };
+    QueryBuilderComponent.prototype.handleDataChange = function () {
+        this.changeDetectorRef.markForCheck();
+        if (this.onChangeCallback) {
+            this.onChangeCallback(this.data);
+        }
+        if (this.parentChangeCallback) {
+            this.parentChangeCallback(this.data);
+        }
+    };
+    QueryBuilderComponent.decorators = [
+        { type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["Component"], args: [{
+                    selector: 'query-builder',
+                    template: "\n    <ng-container *ngIf=\"getButtonGroupTemplate() as template; else defaultButtonGroup\">\n      <div [ngClass]=\"getClassName('buttonGroup')\">\n        <ng-container *ngTemplateOutlet=\"template; context: getButtonGroupContext()\"></ng-container>\n      </div>\n    </ng-container>\n\n    <ng-template #defaultButtonGroup>\n      <div [ngClass]=\"getClassName('buttonGroup')\">\n        <button (click)=\"addRule()\" [ngClass]=\"getClassName('button')\">\n          <i [ngClass]=\"getClassName('addIcon')\"></i> Rule\n        </button>\n        <button (click)=\"addRuleSet()\" [ngClass]=\"getClassName('button')\" *ngIf=\"allowRuleset\">\n          <i [ngClass]=\"getClassName('addIcon')\"></i> Ruleset\n        </button>\n        <ng-container *ngIf=\"!!parentData\">\n          <button (click)=\"removeRuleSet()\" [ngClass]=\"getClassName('button')\" class=\"danger\">\n            <i [ngClass]=\"getClassName('removeIcon')\"></i>\n          </button>\n        </ng-container>\n      </div>\n    </ng-template>\n\n    <ng-container *ngIf=\"getSwitchGroupTemplate() as template; else defaultSwitchGroup\">\n      <ng-container *ngTemplateOutlet=\"template; context: {$implicit: data}\"></ng-container>\n    </ng-container>\n\n    <ng-template #defaultSwitchGroup>\n      <div [ngClass]=\"getClassName('switchGroup')\" *ngIf=\"data\">\n        <input type=\"radio\" [(ngModel)]=\"data.condition\" value=\"and\" #andOption/>\n        <label (click)=\"data.condition=andOption.value\">AND</label>\n        <input type=\"radio\" [(ngModel)]=\"data.condition\" value=\"or\" #orOption/>\n        <label (click)=\"data.condition=orOption.value\">OR</label>\n      </div>\n    </ng-template>\n\n    <ul [ngClass]=\"getClassName('queryTree')\" *ngIf=\"data && data.rules\">\n      <ng-container *ngFor=\"let rule of data.rules\">\n        <ng-container *ngIf=\"{ruleset: !!rule.rules, invalid: !config.allowEmptyRulesets && rule.rules && rule.rules.length === 0} as local\">\n          <li [ngClass]=\"getQueryItemClassName(local)\">\n            <ng-container *ngIf=\"!local.ruleset\">\n\n              <ng-container *ngIf=\"getRemoveButtonTemplate() as template; else defaultRemoveButton\">\n                <div [ngClass]=\"getClassName('buttonGroup')\">\n                  <ng-container *ngTemplateOutlet=\"template; context: getRemoveButtonContext(rule)\"></ng-container>\n                </div>\n              </ng-container>\n\n              <ng-template #defaultRemoveButton>\n                <div [ngClass]=\"getClassName('buttonGroup')\">\n                  <button class=\"danger\" [ngClass]=\"getClassName('button')\" (click)=\"removeRule(rule, data)\">\n                    <i [ngClass]=\"getClassName('removeIcon')\"></i>\n                  </button>\n                </div>\n              </ng-template>\n\n              <ng-container *ngIf=\"getFieldTemplate() as template; else defaultField\">\n                <ng-container *ngTemplateOutlet=\"template; context: getFieldContext(rule)\"></ng-container>\n              </ng-container>\n\n              <ng-template #defaultField>\n                <select [ngClass]=\"getClassName('fieldControl')\" [(ngModel)]=\"rule.field\" (ngModelChange)=\"changeField($event, rule)\">\n                  <option *ngFor=\"let field of fields\" [ngValue]=\"field.value\">\n                    {{field.name}}\n                  </option>\n                </select>\n              </ng-template>\n\n              <ng-container *ngIf=\"getOperatorTemplate() as template; else defaultOperator\">\n                <ng-container *ngTemplateOutlet=\"template; context: getOperatorContext(rule)\"></ng-container>\n              </ng-container>\n\n              <ng-template #defaultOperator>\n                <select [ngClass]=\"getClassName('operatorControl')\" [(ngModel)]=\"rule.operator\">\n                  <option *ngFor=\"let operator of getOperators(rule.field)\" [ngValue]=\"operator\">\n                    {{operator}}\n                  </option>\n                </select>\n              </ng-template>\n\n              <ng-container *ngIf=\"findTemplateForRule(rule) as template; else defaultInput\">\n                <ng-container *ngTemplateOutlet=\"template; context: getInputContext(rule)\"></ng-container>\n              </ng-container>\n\n              <ng-template #defaultInput>\n                <ng-container [ngSwitch]=\"getInputType(rule.field, rule.operator)\">\n                  <input [ngClass]=\"getClassName('inputControl')\" [(ngModel)]=\"rule.value\" *ngSwitchCase=\"'string'\" type=\"text\">\n                  <input [ngClass]=\"getClassName('inputControl')\" [(ngModel)]=\"rule.value\" *ngSwitchCase=\"'number'\" type=\"number\">\n                  <input [ngClass]=\"getClassName('inputControl')\" [(ngModel)]=\"rule.value\" *ngSwitchCase=\"'date'\" type=\"date\">\n                  <input [ngClass]=\"getClassName('inputControl')\" [(ngModel)]=\"rule.value\" *ngSwitchCase=\"'time'\" type=\"time\">\n                  <select [ngClass]=\"getClassName('inputControl')\" [(ngModel)]=\"rule.value\" *ngSwitchCase=\"'category'\">\n                    <option *ngFor=\"let opt of getOptions(rule.field)\" [ngValue]=\"opt.value\">\n                      {{opt.name}}\n                    </option>\n                  </select>\n                  <ng-container *ngSwitchCase=\"'multiselect'\">\n                    <div style=\"margin-bottom: 8px\"></div>\n                    <select [ngClass]=\"getClassName('inputControl')\" [(ngModel)]=\"rule.value\" multiple>\n                      <option *ngFor=\"let opt of getOptions(rule.field)\" [ngValue]=\"opt.value\">\n                        {{opt.name}}\n                      </option>\n                    </select>\n                  </ng-container>\n                  <input [ngClass]=\"getClassName('inputControl')\" [(ngModel)]=\"rule.value\" *ngSwitchCase=\"'boolean'\" type=\"checkbox\">\n                </ng-container>\n              </ng-template>\n\n            </ng-container>\n            <query-builder *ngIf=\"local.ruleset\"\n              [data]=\"rule\"\n              [parentChangeCallback]=\"parentChangeCallback || onChangeCallback\"\n              [parentInputTemplates]=\"parentInputTemplates || inputTemplates\"\n              [parentOperatorTemplate]=\"parentOperatorTemplate || operatorTemplate\"\n              [parentFieldTemplate]=\"parentFieldTemplate || fieldTemplate\"\n              [parentSwitchGroupTemplate]=\"parentSwitchGroupTemplate || switchGroupTemplate\"\n              [parentButtonGroupTemplate]=\"parentButtonGroupTemplate || buttonGroupTemplate\"\n              [parentRemoveButtonTemplate]=\"parentRemoveButtonTemplate || removeButtonTemplate\"\n              [parentData]=\"data\"\n              [config]=\"config\"\n              [allowRuleset]=\"allowRuleset\"\n              [operatorMap]=\"operatorMap\">\n            </query-builder>\n            <p [ngClass]=\"getClassName('emptyWarning')\" *ngIf=\"local.invalid\">A ruleset cannot be empty. Please add a rule or remove it all together.</p>\n          </li>\n        </ng-container>\n      </ng-container>\n    </ul>\n  ",
+                    styles: ["\n    \uFEFF:host{display:block}:host .q-icon{font-style:normal;font-size:12px}:host .q-remove-icon::before{content:'\u274C'}:host .q-add-icon::before{content:'\u2795'}:host .q-switch-group,:host .q-button-group{font-family:\"Lucida Grande\", Tahoma, Verdana, sans-serif;overflow:hidden}:host .q-button-group{float:right}:host .q-button{margin-left:8px;background-color:white}:host .q-input-control,:host .q-operator-control,:host .q-field-control{display:inline-block;padding:5px 8px;color:#555;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:4px;box-sizing:border-box;width:auto}:host .q-operator-control,:host .q-field-control,:host .q-input-control:not([type='checkbox']){min-height:32px}:host .q-switch-group label,:host .q-button{float:left;min-height:30px;color:rgba(0,0,0,0.6);font-size:14px;font-weight:normal;text-align:center;text-shadow:none;padding:2px 8px;border:1px solid rgba(0,0,0,0.2);box-sizing:border-box;-webkit-transition:all 0.1s ease-in-out;-moz-transition:all 0.1s ease-in-out;-ms-transition:all 0.1s ease-in-out;-o-transition:all 0.1s ease-in-out;transition:all 0.1s ease-in-out}:host .q-switch-group label:hover,:host .q-button:hover{cursor:pointer;background-color:#F0F0F0}:host .q-switch-group label.success,:host .q-button.success{color:#75BE47}:host .q-switch-group label.danger,:host .q-button.danger{color:#B3415D}:host .q-switch-group input{position:absolute;clip:rect(0, 0, 0, 0);height:1px;width:1px;border:0;overflow:hidden}:host .q-switch-group label{background-color:#e4e4e4;line-height:24px}:host .q-switch-group input:checked+label{border:1px solid #619ed7;background:white;color:#3176b3}:host .q-invalid-ruleset{border:1px solid rgba(179,65,93,0.5) !important;background:rgba(179,65,93,0.1) !important}:host .q-empty-warning{color:#8d252e;text-align:center}:host .q-tree{list-style:none;margin:4px 0 2px}:host .q-tree .q-item{position:relative;padding:4px 6px;margin-top:4px;border:1px solid #CCCCCC;-webkit-transition:all 0.1s ease-in-out;-moz-transition:all 0.1s ease-in-out;-ms-transition:all 0.1s ease-in-out;-o-transition:all 0.1s ease-in-out;transition:all 0.1s ease-in-out}:host .q-tree .q-item.q-ruleset{background:rgba(204,204,204,0.2)}:host .q-tree .q-item.q-ruleset:hover{border:1px solid rgba(97,158,215,0.5);background:rgba(97,158,215,0.1)}:host .q-tree .q-item.q-rule{background:white}:host .q-tree .q-item::before{top:-5px;border-width:0 0 2px 2px}:host .q-tree .q-item::after{border-width:0 0 0 2px;top:50%}:host .q-tree .q-item::before,:host .q-tree .q-item::after{content:'';left:-12px;border-color:#CCC;border-style:solid;width:9px;height:calc(50% + 6px);position:absolute}:host .q-tree .q-item:last-child::after{content:none}\n  "],
+                    providers: [CONTROL_VALUE_ACCESSOR, VALIDATOR]
+                },] },
+    ];
+    /** @nocollapse */
+    QueryBuilderComponent.ctorParameters = function () { return [
+        { type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["ChangeDetectorRef"], },
+    ]; };
+    QueryBuilderComponent.propDecorators = {
+        'allowRuleset': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["Input"] },],
+        'classNames': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["Input"] },],
+        'operatorMap': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["Input"] },],
+        'data': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["Input"] },],
+        'parentData': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["Input"] },],
+        'config': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["Input"] },],
+        'parentInputTemplates': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["Input"] },],
+        'parentOperatorTemplate': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["Input"] },],
+        'parentFieldTemplate': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["Input"] },],
+        'parentSwitchGroupTemplate': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["Input"] },],
+        'parentButtonGroupTemplate': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["Input"] },],
+        'parentRemoveButtonTemplate': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["Input"] },],
+        'parentChangeCallback': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["Input"] },],
+        'buttonGroupTemplate': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["ContentChild"], args: [__WEBPACK_IMPORTED_MODULE_4__query_button_group_directive__["QueryButtonGroupDirective"],] },],
+        'switchGroupTemplate': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["ContentChild"], args: [__WEBPACK_IMPORTED_MODULE_3__query_switch_group_directive__["QuerySwitchGroupDirective"],] },],
+        'fieldTemplate': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["ContentChild"], args: [__WEBPACK_IMPORTED_MODULE_2__query_field_directive__["QueryFieldDirective"],] },],
+        'operatorTemplate': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["ContentChild"], args: [__WEBPACK_IMPORTED_MODULE_1__query_operator_directive__["QueryOperatorDirective"],] },],
+        'removeButtonTemplate': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["ContentChild"], args: [__WEBPACK_IMPORTED_MODULE_6__query_remove_button_directive__["QueryRemoveButtonDirective"],] },],
+        'inputTemplates': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["ContentChildren"], args: [__WEBPACK_IMPORTED_MODULE_5__query_input_directive__["QueryInputDirective"],] },],
+    };
+    return QueryBuilderComponent;
+}());
 
-QueryBuilderComponent.decorators = [
-    { type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["Component"], args: [{
-                selector: 'query-builder',
-                template: `
-    <ng-container *ngIf="getButtonGroupTemplate() as template; else defaultButtonGroup">
-      <div [ngClass]="getClassName('buttonGroup')">
-        <ng-container *ngTemplateOutlet="template; context: getButtonGroupContext()"></ng-container>
-      </div>
-    </ng-container>
-
-    <ng-template #defaultButtonGroup>
-      <div [ngClass]="getClassName('buttonGroup')">
-        <button (click)="addRule()" [ngClass]="getClassName('button')">
-          <i [ngClass]="getClassName('addIcon')"></i> Rule
-        </button>
-        <button (click)="addRuleSet()" [ngClass]="getClassName('button')" *ngIf="allowRuleset">
-          <i [ngClass]="getClassName('addIcon')"></i> Ruleset
-        </button>
-        <ng-container *ngIf="!!parentData">
-          <button (click)="removeRuleSet()" [ngClass]="getClassName('button')" class="danger">
-            <i [ngClass]="getClassName('removeIcon')"></i>
-          </button>
-        </ng-container>
-      </div>
-    </ng-template>
-
-    <ng-container *ngIf="getSwitchGroupTemplate() as template; else defaultSwitchGroup">
-      <ng-container *ngTemplateOutlet="template; context: {$implicit: data}"></ng-container>
-    </ng-container>
-
-    <ng-template #defaultSwitchGroup>
-      <div [ngClass]="getClassName('switchGroup')" *ngIf="data">
-        <input type="radio" [(ngModel)]="data.condition" value="and" #andOption/>
-        <label (click)="data.condition=andOption.value">AND</label>
-        <input type="radio" [(ngModel)]="data.condition" value="or" #orOption/>
-        <label (click)="data.condition=orOption.value">OR</label>
-      </div>
-    </ng-template>
-
-    <ul [ngClass]="getClassName('queryTree')" *ngIf="data && data.rules">
-      <ng-container *ngFor="let rule of data.rules">
-        <ng-container *ngIf="{ruleset: !!rule.rules, invalid: !config.allowEmptyRuleset && rule.rules && rule.rules.length === 0} as local">
-          <li [ngClass]="getQueryItemClassName(local)">
-            <ng-container *ngIf="!local.ruleset">
-
-              <ng-container *ngIf="getRemoveButtonTemplate() as template; else defaultRemoveButton">
-                <div [ngClass]="getClassName('buttonGroup')">
-                  <ng-container *ngTemplateOutlet="template; context: getRemoveButtonContext(rule)"></ng-container>
-                </div>
-              </ng-container>
-
-              <ng-template #defaultRemoveButton>
-                <div [ngClass]="getClassName('buttonGroup')">
-                  <button class="danger" [ngClass]="getClassName('button')" (click)="removeRule(rule, data)">
-                    <i [ngClass]="getClassName('removeIcon')"></i>
-                  </button>
-                </div>
-              </ng-template>
-
-              <ng-container *ngIf="getFieldTemplate() as template; else defaultField">
-                <ng-container *ngTemplateOutlet="template; context: getFieldContext(rule)"></ng-container>
-              </ng-container>
-
-              <ng-template #defaultField>
-                <select [ngClass]="getClassName('fieldControl')" [(ngModel)]="rule.field" (ngModelChange)="changeField($event, rule)">
-                  <option *ngFor="let field of fields" [ngValue]="field.value">
-                    {{field.name}}
-                  </option>
-                </select>
-              </ng-template>
-
-              <ng-container *ngIf="getOperatorTemplate() as template; else defaultOperator">
-                <ng-container *ngTemplateOutlet="template; context: getOperatorContext(rule)"></ng-container>
-              </ng-container>
-
-              <ng-template #defaultOperator>
-                <select [ngClass]="getClassName('operatorControl')" [(ngModel)]="rule.operator">
-                  <option *ngFor="let operator of getOperators(rule.field)" [ngValue]="operator">
-                    {{operator}}
-                  </option>
-                </select>
-              </ng-template>
-
-              <ng-container *ngIf="findTemplateForRule(rule) as template; else defaultInput">
-                <ng-container *ngTemplateOutlet="template; context: getInputContext(rule)"></ng-container>
-              </ng-container>
-
-              <ng-template #defaultInput>
-                <ng-container [ngSwitch]="getInputType(rule.field, rule.operator)">
-                  <input [ngClass]="getClassName('inputControl')" [(ngModel)]="rule.value" *ngSwitchCase="'string'" type="text">
-                  <input [ngClass]="getClassName('inputControl')" [(ngModel)]="rule.value" *ngSwitchCase="'number'" type="number">
-                  <input [ngClass]="getClassName('inputControl')" [(ngModel)]="rule.value" *ngSwitchCase="'date'" type="date">
-                  <input [ngClass]="getClassName('inputControl')" [(ngModel)]="rule.value" *ngSwitchCase="'time'" type="time">
-                  <select [ngClass]="getClassName('inputControl')" [(ngModel)]="rule.value" *ngSwitchCase="'category'">
-                    <option *ngFor="let opt of getOptions(rule.field)" [ngValue]="opt.value">
-                      {{opt.name}}
-                    </option>
-                  </select>
-                  <ng-container *ngSwitchCase="'multiselect'">
-                    <div style="margin-bottom: 8px"></div>
-                    <select [ngClass]="getClassName('inputControl')" [(ngModel)]="rule.value" multiple>
-                      <option *ngFor="let opt of getOptions(rule.field)" [ngValue]="opt.value">
-                        {{opt.name}}
-                      </option>
-                    </select>
-                  </ng-container>
-                  <input [ngClass]="getClassName('inputControl')" [(ngModel)]="rule.value" *ngSwitchCase="'boolean'" type="checkbox">
-                </ng-container>
-              </ng-template>
-
-            </ng-container>
-            <query-builder *ngIf="local.ruleset"
-              [data]="rule"
-              [parentInputTemplates]="parentInputTemplates || inputTemplates"
-              [parentOperatorTemplate]="parentOperatorTemplate || operatorTemplate"
-              [parentFieldTemplate]="parentFieldTemplate || fieldTemplate"
-              [parentSwitchGroupTemplate]="parentSwitchGroupTemplate || switchGroupTemplate"
-              [parentButtonGroupTemplate]="parentButtonGroupTemplate || buttonGroupTemplate"
-              [parentRemoveButtonTemplate]="parentRemoveButtonTemplate || removeButtonTemplate"
-              [parentData]="data"
-              [config]="config"
-              [allowRuleset]="allowRuleset"
-              [operatorMap]="operatorMap">
-            </query-builder>
-            <p [ngClass]="getClassName('emptyWarning')" *ngIf="local.invalid">A ruleset cannot be empty. Please add a rule or remove it all together.</p>
-          </li>
-        </ng-container>
-      </ng-container>
-    </ul>
-  `,
-                styles: [`
-    ﻿:host{display:block}:host .q-icon{font-style:normal;font-size:12px}:host .q-remove-icon::before{content:'❌'}:host .q-add-icon::before{content:'➕'}:host .q-switch-group,:host .q-button-group{font-family:"Lucida Grande", Tahoma, Verdana, sans-serif;overflow:hidden}:host .q-button-group{float:right}:host .q-button{margin-left:8px;background-color:white}:host .q-input-control,:host .q-operator-control,:host .q-field-control{display:inline-block;padding:5px 8px;color:#555;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:4px;box-sizing:border-box;width:auto}:host .q-operator-control,:host .q-field-control,:host .q-input-control:not([type='checkbox']){min-height:32px}:host .q-switch-group label,:host .q-button{float:left;min-height:30px;color:rgba(0,0,0,0.6);font-size:14px;font-weight:normal;text-align:center;text-shadow:none;padding:2px 8px;border:1px solid rgba(0,0,0,0.2);box-sizing:border-box;-webkit-transition:all 0.1s ease-in-out;-moz-transition:all 0.1s ease-in-out;-ms-transition:all 0.1s ease-in-out;-o-transition:all 0.1s ease-in-out;transition:all 0.1s ease-in-out}:host .q-switch-group label:hover,:host .q-button:hover{cursor:pointer;background-color:#F0F0F0}:host .q-switch-group label.success,:host .q-button.success{color:#75BE47}:host .q-switch-group label.danger,:host .q-button.danger{color:#B3415D}:host .q-switch-group input{position:absolute;clip:rect(0, 0, 0, 0);height:1px;width:1px;border:0;overflow:hidden}:host .q-switch-group label{background-color:#e4e4e4;line-height:24px}:host .q-switch-group input:checked+label{border:1px solid #619ed7;background:white;color:#3176b3}:host .q-invalid-ruleset{border:1px solid rgba(179,65,93,0.5) !important;background:rgba(179,65,93,0.1) !important}:host .q-empty-warning{color:#8d252e;text-align:center}:host .q-tree{list-style:none;margin:4px 0 2px}:host .q-tree .q-item{position:relative;padding:4px 6px;margin-top:4px;border:1px solid #CCCCCC;-webkit-transition:all 0.1s ease-in-out;-moz-transition:all 0.1s ease-in-out;-ms-transition:all 0.1s ease-in-out;-o-transition:all 0.1s ease-in-out;transition:all 0.1s ease-in-out}:host .q-tree .q-item.q-ruleset{background:rgba(204,204,204,0.2)}:host .q-tree .q-item.q-ruleset:hover{border:1px solid rgba(97,158,215,0.5);background:rgba(97,158,215,0.1)}:host .q-tree .q-item.q-rule{background:white}:host .q-tree .q-item::before{top:-5px;border-width:0 0 2px 2px}:host .q-tree .q-item::after{border-width:0 0 0 2px;top:50%}:host .q-tree .q-item::before,:host .q-tree .q-item::after{content:'';left:-12px;border-color:#CCC;border-style:solid;width:9px;height:calc(50% + 6px);position:absolute}:host .q-tree .q-item:last-child::after{content:none}
-  `],
-                providers: [CONTROL_VALUE_ACCESSOR]
-            },] },
-];
-/** @nocollapse */
-QueryBuilderComponent.ctorParameters = () => [
-    { type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["ChangeDetectorRef"], },
-];
-QueryBuilderComponent.propDecorators = {
-    'allowRuleset': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["Input"] },],
-    'classNames': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["Input"] },],
-    'operatorMap': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["Input"] },],
-    'data': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["Input"] },],
-    'parentData': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["Input"] },],
-    'config': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["Input"] },],
-    'parentInputTemplates': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["Input"] },],
-    'parentOperatorTemplate': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["Input"] },],
-    'parentFieldTemplate': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["Input"] },],
-    'parentSwitchGroupTemplate': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["Input"] },],
-    'parentButtonGroupTemplate': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["Input"] },],
-    'parentRemoveButtonTemplate': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["Input"] },],
-    'buttonGroupTemplate': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["ContentChild"], args: [__WEBPACK_IMPORTED_MODULE_4__query_button_group_directive__["QueryButtonGroupDirective"],] },],
-    'switchGroupTemplate': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["ContentChild"], args: [__WEBPACK_IMPORTED_MODULE_3__query_switch_group_directive__["QuerySwitchGroupDirective"],] },],
-    'fieldTemplate': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["ContentChild"], args: [__WEBPACK_IMPORTED_MODULE_2__query_field_directive__["QueryFieldDirective"],] },],
-    'operatorTemplate': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["ContentChild"], args: [__WEBPACK_IMPORTED_MODULE_1__query_operator_directive__["QueryOperatorDirective"],] },],
-    'removeButtonTemplate': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["ContentChild"], args: [__WEBPACK_IMPORTED_MODULE_6__query_remove_button_directive__["QueryRemoveButtonDirective"],] },],
-    'inputTemplates': [{ type: __WEBPACK_IMPORTED_MODULE_7__angular_core__["ContentChildren"], args: [__WEBPACK_IMPORTED_MODULE_5__query_input_directive__["QueryInputDirective"],] },],
-};
 //# sourceMappingURL=query-builder.component.js.map
 
 /***/ }),
@@ -597,22 +551,23 @@ QueryBuilderComponent.propDecorators = {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "QueryOperatorDirective", function() { return QueryOperatorDirective; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 
-class QueryOperatorDirective {
-    constructor(template) {
+var QueryOperatorDirective = /** @class */ (function () {
+    function QueryOperatorDirective(template) {
         this.template = template;
     }
-}
-/* harmony export (immutable) */ __webpack_exports__["QueryOperatorDirective"] = QueryOperatorDirective;
+    QueryOperatorDirective.decorators = [
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Directive"], args: [{ selector: '[queryOperator]' },] },
+    ];
+    /** @nocollapse */
+    QueryOperatorDirective.ctorParameters = function () { return [
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["TemplateRef"], },
+    ]; };
+    return QueryOperatorDirective;
+}());
 
-QueryOperatorDirective.decorators = [
-    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Directive"], args: [{ selector: '[queryOperator]' },] },
-];
-/** @nocollapse */
-QueryOperatorDirective.ctorParameters = () => [
-    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["TemplateRef"], },
-];
 //# sourceMappingURL=query-operator.directive.js.map
 
 /***/ }),
@@ -622,22 +577,23 @@ QueryOperatorDirective.ctorParameters = () => [
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "QueryFieldDirective", function() { return QueryFieldDirective; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 
-class QueryFieldDirective {
-    constructor(template) {
+var QueryFieldDirective = /** @class */ (function () {
+    function QueryFieldDirective(template) {
         this.template = template;
     }
-}
-/* harmony export (immutable) */ __webpack_exports__["QueryFieldDirective"] = QueryFieldDirective;
+    QueryFieldDirective.decorators = [
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Directive"], args: [{ selector: '[queryField]' },] },
+    ];
+    /** @nocollapse */
+    QueryFieldDirective.ctorParameters = function () { return [
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["TemplateRef"], },
+    ]; };
+    return QueryFieldDirective;
+}());
 
-QueryFieldDirective.decorators = [
-    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Directive"], args: [{ selector: '[queryField]' },] },
-];
-/** @nocollapse */
-QueryFieldDirective.ctorParameters = () => [
-    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["TemplateRef"], },
-];
 //# sourceMappingURL=query-field.directive.js.map
 
 /***/ }),
@@ -647,22 +603,23 @@ QueryFieldDirective.ctorParameters = () => [
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "QuerySwitchGroupDirective", function() { return QuerySwitchGroupDirective; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 
-class QuerySwitchGroupDirective {
-    constructor(template) {
+var QuerySwitchGroupDirective = /** @class */ (function () {
+    function QuerySwitchGroupDirective(template) {
         this.template = template;
     }
-}
-/* harmony export (immutable) */ __webpack_exports__["QuerySwitchGroupDirective"] = QuerySwitchGroupDirective;
+    QuerySwitchGroupDirective.decorators = [
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Directive"], args: [{ selector: '[querySwitchGroup]' },] },
+    ];
+    /** @nocollapse */
+    QuerySwitchGroupDirective.ctorParameters = function () { return [
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["TemplateRef"], },
+    ]; };
+    return QuerySwitchGroupDirective;
+}());
 
-QuerySwitchGroupDirective.decorators = [
-    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Directive"], args: [{ selector: '[querySwitchGroup]' },] },
-];
-/** @nocollapse */
-QuerySwitchGroupDirective.ctorParameters = () => [
-    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["TemplateRef"], },
-];
 //# sourceMappingURL=query-switch-group.directive.js.map
 
 /***/ }),
@@ -672,22 +629,23 @@ QuerySwitchGroupDirective.ctorParameters = () => [
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "QueryButtonGroupDirective", function() { return QueryButtonGroupDirective; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 
-class QueryButtonGroupDirective {
-    constructor(template) {
+var QueryButtonGroupDirective = /** @class */ (function () {
+    function QueryButtonGroupDirective(template) {
         this.template = template;
     }
-}
-/* harmony export (immutable) */ __webpack_exports__["QueryButtonGroupDirective"] = QueryButtonGroupDirective;
+    QueryButtonGroupDirective.decorators = [
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Directive"], args: [{ selector: '[queryButtonGroup]' },] },
+    ];
+    /** @nocollapse */
+    QueryButtonGroupDirective.ctorParameters = function () { return [
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["TemplateRef"], },
+    ]; };
+    return QueryButtonGroupDirective;
+}());
 
-QueryButtonGroupDirective.decorators = [
-    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Directive"], args: [{ selector: '[queryButtonGroup]' },] },
-];
-/** @nocollapse */
-QueryButtonGroupDirective.ctorParameters = () => [
-    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["TemplateRef"], },
-];
 //# sourceMappingURL=query-button-group.directive.js.map
 
 /***/ }),
@@ -697,35 +655,40 @@ QueryButtonGroupDirective.ctorParameters = () => [
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "QueryInputDirective", function() { return QueryInputDirective; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 
-class QueryInputDirective {
-    constructor(template) {
+var QueryInputDirective = /** @class */ (function () {
+    function QueryInputDirective(template) {
         this.template = template;
     }
-    /** Unique name for query input type. */
-    get queryInputType() { return this._type; }
-    set queryInputType(value) {
-        // If the directive is set without a type (updated programatically), then this setter will
-        // trigger with an empty string and should not overwrite the programatically set value.
-        if (!value) {
-            return;
-        }
-        this._type = value;
-    }
-}
-/* harmony export (immutable) */ __webpack_exports__["QueryInputDirective"] = QueryInputDirective;
+    Object.defineProperty(QueryInputDirective.prototype, "queryInputType", {
+        /** Unique name for query input type. */
+        get: function () { return this._type; },
+        set: function (value) {
+            // If the directive is set without a type (updated programatically), then this setter will
+            // trigger with an empty string and should not overwrite the programatically set value.
+            if (!value) {
+                return;
+            }
+            this._type = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    QueryInputDirective.decorators = [
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Directive"], args: [{ selector: '[queryInput]' },] },
+    ];
+    /** @nocollapse */
+    QueryInputDirective.ctorParameters = function () { return [
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["TemplateRef"], },
+    ]; };
+    QueryInputDirective.propDecorators = {
+        'queryInputType': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
+    };
+    return QueryInputDirective;
+}());
 
-QueryInputDirective.decorators = [
-    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Directive"], args: [{ selector: '[queryInput]' },] },
-];
-/** @nocollapse */
-QueryInputDirective.ctorParameters = () => [
-    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["TemplateRef"], },
-];
-QueryInputDirective.propDecorators = {
-    'queryInputType': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
-};
 //# sourceMappingURL=query-input.directive.js.map
 
 /***/ }),
@@ -735,22 +698,23 @@ QueryInputDirective.propDecorators = {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "QueryRemoveButtonDirective", function() { return QueryRemoveButtonDirective; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 
-class QueryRemoveButtonDirective {
-    constructor(template) {
+var QueryRemoveButtonDirective = /** @class */ (function () {
+    function QueryRemoveButtonDirective(template) {
         this.template = template;
     }
-}
-/* harmony export (immutable) */ __webpack_exports__["QueryRemoveButtonDirective"] = QueryRemoveButtonDirective;
+    QueryRemoveButtonDirective.decorators = [
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Directive"], args: [{ selector: '[queryRemoveButton]' },] },
+    ];
+    /** @nocollapse */
+    QueryRemoveButtonDirective.ctorParameters = function () { return [
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["TemplateRef"], },
+    ]; };
+    return QueryRemoveButtonDirective;
+}());
 
-QueryRemoveButtonDirective.decorators = [
-    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Directive"], args: [{ selector: '[queryRemoveButton]' },] },
-];
-/** @nocollapse */
-QueryRemoveButtonDirective.ctorParameters = () => [
-    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["TemplateRef"], },
-];
 //# sourceMappingURL=query-remove-button.directive.js.map
 
 /***/ }),
@@ -794,6 +758,7 @@ webpackEmptyAsyncContext.id = 180;
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "QueryBuilderModule", function() { return QueryBuilderModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(19);
@@ -802,38 +767,40 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-class QueryBuilderModule {
-}
-/* harmony export (immutable) */ __webpack_exports__["QueryBuilderModule"] = QueryBuilderModule;
+var QueryBuilderModule = /** @class */ (function () {
+    function QueryBuilderModule() {
+    }
+    QueryBuilderModule.decorators = [
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"], args: [{
+                    imports: [
+                        __WEBPACK_IMPORTED_MODULE_1__angular_common__["CommonModule"],
+                        __WEBPACK_IMPORTED_MODULE_2__angular_forms__["FormsModule"]
+                    ],
+                    declarations: [
+                        __WEBPACK_IMPORTED_MODULE_3__components__["a" /* QueryBuilderComponent */],
+                        __WEBPACK_IMPORTED_MODULE_3__components__["d" /* QueryInputDirective */],
+                        __WEBPACK_IMPORTED_MODULE_3__components__["e" /* QueryOperatorDirective */],
+                        __WEBPACK_IMPORTED_MODULE_3__components__["c" /* QueryFieldDirective */],
+                        __WEBPACK_IMPORTED_MODULE_3__components__["b" /* QueryButtonGroupDirective */],
+                        __WEBPACK_IMPORTED_MODULE_3__components__["g" /* QuerySwitchGroupDirective */],
+                        __WEBPACK_IMPORTED_MODULE_3__components__["f" /* QueryRemoveButtonDirective */]
+                    ],
+                    exports: [
+                        __WEBPACK_IMPORTED_MODULE_3__components__["a" /* QueryBuilderComponent */],
+                        __WEBPACK_IMPORTED_MODULE_3__components__["d" /* QueryInputDirective */],
+                        __WEBPACK_IMPORTED_MODULE_3__components__["e" /* QueryOperatorDirective */],
+                        __WEBPACK_IMPORTED_MODULE_3__components__["c" /* QueryFieldDirective */],
+                        __WEBPACK_IMPORTED_MODULE_3__components__["b" /* QueryButtonGroupDirective */],
+                        __WEBPACK_IMPORTED_MODULE_3__components__["g" /* QuerySwitchGroupDirective */],
+                        __WEBPACK_IMPORTED_MODULE_3__components__["f" /* QueryRemoveButtonDirective */]
+                    ]
+                },] },
+    ];
+    /** @nocollapse */
+    QueryBuilderModule.ctorParameters = function () { return []; };
+    return QueryBuilderModule;
+}());
 
-QueryBuilderModule.decorators = [
-    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"], args: [{
-                imports: [
-                    __WEBPACK_IMPORTED_MODULE_1__angular_common__["CommonModule"],
-                    __WEBPACK_IMPORTED_MODULE_2__angular_forms__["FormsModule"]
-                ],
-                declarations: [
-                    __WEBPACK_IMPORTED_MODULE_3__components__["a" /* QueryBuilderComponent */],
-                    __WEBPACK_IMPORTED_MODULE_3__components__["d" /* QueryInputDirective */],
-                    __WEBPACK_IMPORTED_MODULE_3__components__["e" /* QueryOperatorDirective */],
-                    __WEBPACK_IMPORTED_MODULE_3__components__["c" /* QueryFieldDirective */],
-                    __WEBPACK_IMPORTED_MODULE_3__components__["b" /* QueryButtonGroupDirective */],
-                    __WEBPACK_IMPORTED_MODULE_3__components__["g" /* QuerySwitchGroupDirective */],
-                    __WEBPACK_IMPORTED_MODULE_3__components__["f" /* QueryRemoveButtonDirective */]
-                ],
-                exports: [
-                    __WEBPACK_IMPORTED_MODULE_3__components__["a" /* QueryBuilderComponent */],
-                    __WEBPACK_IMPORTED_MODULE_3__components__["d" /* QueryInputDirective */],
-                    __WEBPACK_IMPORTED_MODULE_3__components__["e" /* QueryOperatorDirective */],
-                    __WEBPACK_IMPORTED_MODULE_3__components__["c" /* QueryFieldDirective */],
-                    __WEBPACK_IMPORTED_MODULE_3__components__["b" /* QueryButtonGroupDirective */],
-                    __WEBPACK_IMPORTED_MODULE_3__components__["g" /* QuerySwitchGroupDirective */],
-                    __WEBPACK_IMPORTED_MODULE_3__components__["f" /* QueryRemoveButtonDirective */]
-                ]
-            },] },
-];
-/** @nocollapse */
-QueryBuilderModule.ctorParameters = () => [];
 //# sourceMappingURL=query-builder.module.js.map
 
 /***/ }),
@@ -911,12 +878,16 @@ exports.AppModuleNgFactory = i0.ɵcmf(i1.AppModule, [i2.AppComponent], function 
         i0.ɵmpd(5120, i0.RendererFactory2, i9.ɵe, [i7.ɵDomRendererFactory2, i8.ɵAnimationEngine,
             i0.NgZone]), i0.ɵmpd(6144, i7.ɵSharedStylesHost, null, [i7.ɵDomSharedStylesHost]),
         i0.ɵmpd(4608, i0.Testability, i0.Testability, [i0.NgZone]), i0.ɵmpd(4608, i7.Meta, i7.Meta, [i6.DOCUMENT]), i0.ɵmpd(4608, i7.Title, i7.Title, [i6.DOCUMENT]),
-        i0.ɵmpd(4608, i10.ɵi, i10.ɵi, []), i0.ɵmpd(4608, i11.AnimationBuilder, i9.ɵBrowserAnimationBuilder, [i0.RendererFactory2, i7.DOCUMENT]), i0.ɵmpd(6144, i12.DIR_DOCUMENT, null, [i7.DOCUMENT]), i0.ɵmpd(4608, i12.Directionality, i12.Directionality, [[2, i12.DIR_DOCUMENT]]), i0.ɵmpd(4608, i13.Platform, i13.Platform, []), i0.ɵmpd(4608, i14.InteractivityChecker, i14.InteractivityChecker, [i13.Platform]), i0.ɵmpd(4608, i14.FocusTrapFactory, i14.FocusTrapFactory, [i14.InteractivityChecker, i13.Platform, i0.NgZone]), i0.ɵmpd(136192, i14.AriaDescriber, i14.ARIA_DESCRIBER_PROVIDER_FACTORY, [[3, i14.AriaDescriber], i13.Platform]),
-        i0.ɵmpd(5120, i14.LiveAnnouncer, i14.LIVE_ANNOUNCER_PROVIDER_FACTORY, [[3, i14.LiveAnnouncer],
-            [2, i14.LIVE_ANNOUNCER_ELEMENT_TOKEN], i13.Platform]), i0.ɵmpd(5120, i14.FocusMonitor, i14.FOCUS_MONITOR_PROVIDER_FACTORY, [[3, i14.FocusMonitor], i0.NgZone, i13.Platform]),
-        i0.ɵmpd(4608, i15.MatMutationObserverFactory, i15.MatMutationObserverFactory, []), i0.ɵmpd(5120, i16.ScrollDispatcher, i16.SCROLL_DISPATCHER_PROVIDER_FACTORY, [[3, i16.ScrollDispatcher], i0.NgZone, i13.Platform]), i0.ɵmpd(5120, i16.ViewportRuler, i16.VIEWPORT_RULER_PROVIDER_FACTORY, [[3, i16.ViewportRuler], i13.Platform,
-            i0.NgZone, i16.ScrollDispatcher]), i0.ɵmpd(4608, i17.ScrollStrategyOptions, i17.ScrollStrategyOptions, [i16.ScrollDispatcher, i16.ViewportRuler]),
-        i0.ɵmpd(5120, i17.OverlayContainer, i17.ɵa, [[3, i17.OverlayContainer]]), i0.ɵmpd(4608, i17.ɵf, i17.ɵf, [i16.ViewportRuler]), i0.ɵmpd(4608, i17.Overlay, i17.Overlay, [i17.ScrollStrategyOptions, i17.OverlayContainer, i0.ComponentFactoryResolver,
+        i0.ɵmpd(4608, i10.ɵi, i10.ɵi, []), i0.ɵmpd(4608, i10.FormBuilder, i10.FormBuilder, []), i0.ɵmpd(4608, i11.AnimationBuilder, i9.ɵBrowserAnimationBuilder, [i0.RendererFactory2, i7.DOCUMENT]), i0.ɵmpd(6144, i12.DIR_DOCUMENT, null, [i7.DOCUMENT]), i0.ɵmpd(4608, i12.Directionality, i12.Directionality, [[2,
+                i12.DIR_DOCUMENT]]), i0.ɵmpd(4608, i13.Platform, i13.Platform, []),
+        i0.ɵmpd(4608, i14.InteractivityChecker, i14.InteractivityChecker, [i13.Platform]),
+        i0.ɵmpd(4608, i14.FocusTrapFactory, i14.FocusTrapFactory, [i14.InteractivityChecker,
+            i13.Platform, i0.NgZone]), i0.ɵmpd(136192, i14.AriaDescriber, i14.ARIA_DESCRIBER_PROVIDER_FACTORY, [[3, i14.AriaDescriber], i13.Platform]), i0.ɵmpd(5120, i14.LiveAnnouncer, i14.LIVE_ANNOUNCER_PROVIDER_FACTORY, [[3, i14.LiveAnnouncer], [2, i14.LIVE_ANNOUNCER_ELEMENT_TOKEN],
+            i13.Platform]), i0.ɵmpd(5120, i14.FocusMonitor, i14.FOCUS_MONITOR_PROVIDER_FACTORY, [[3, i14.FocusMonitor], i0.NgZone, i13.Platform]), i0.ɵmpd(4608, i15.MatMutationObserverFactory, i15.MatMutationObserverFactory, []), i0.ɵmpd(5120, i16.ScrollDispatcher, i16.SCROLL_DISPATCHER_PROVIDER_FACTORY, [[3, i16.ScrollDispatcher], i0.NgZone,
+            i13.Platform]), i0.ɵmpd(5120, i16.ViewportRuler, i16.VIEWPORT_RULER_PROVIDER_FACTORY, [[3, i16.ViewportRuler], i13.Platform, i0.NgZone, i16.ScrollDispatcher]),
+        i0.ɵmpd(4608, i17.ScrollStrategyOptions, i17.ScrollStrategyOptions, [i16.ScrollDispatcher,
+            i16.ViewportRuler]), i0.ɵmpd(5120, i17.OverlayContainer, i17.ɵa, [[3, i17.OverlayContainer]]),
+        i0.ɵmpd(4608, i17.ɵf, i17.ɵf, [i16.ViewportRuler]), i0.ɵmpd(4608, i17.Overlay, i17.Overlay, [i17.ScrollStrategyOptions, i17.OverlayContainer, i0.ComponentFactoryResolver,
             i17.ɵf, i0.ApplicationRef, i0.Injector, i0.NgZone]), i0.ɵmpd(5120, i17.ɵc, i17.ɵd, [i17.Overlay]), i0.ɵmpd(5120, i18.MAT_SELECT_SCROLL_STRATEGY, i18.MAT_SELECT_SCROLL_STRATEGY_PROVIDER_FACTORY, [i17.Overlay]), i0.ɵmpd(4608, i19.ErrorStateMatcher, i19.ErrorStateMatcher, []), i0.ɵmpd(5120, i20.MAT_DIALOG_SCROLL_STRATEGY, i20.MAT_DIALOG_SCROLL_STRATEGY_PROVIDER_FACTORY, [i17.Overlay]), i0.ɵmpd(4608, i20.MatDialog, i20.MatDialog, [i17.Overlay,
             i0.Injector, [2, i6.Location], i20.MAT_DIALOG_SCROLL_STRATEGY, [3, i20.MatDialog]]),
         i0.ɵmpd(5120, i21.MatIconRegistry, i21.ICON_REGISTRY_PROVIDER_FACTORY, [[3,
@@ -925,7 +896,7 @@ exports.AppModuleNgFactory = i0.ɵcmf(i1.AppModule, [i2.AppComponent], function 
             return [i7.ɵc(p0_0, p0_1)];
         }, [[2, i7.NgProbeToken], [2, i0.NgProbeToken]]), i0.ɵmpd(512, i0.ApplicationInitStatus, i0.ApplicationInitStatus, [[2, i0.APP_INITIALIZER]]), i0.ɵmpd(131584, i0.ɵe, i0.ɵe, [i0.NgZone, i0.ɵConsole, i0.Injector, i0.ErrorHandler, i0.ComponentFactoryResolver,
             i0.ApplicationInitStatus]), i0.ɵmpd(2048, i0.ApplicationRef, null, [i0.ɵe]), i0.ɵmpd(512, i0.ApplicationModule, i0.ApplicationModule, [i0.ApplicationRef]),
-        i0.ɵmpd(512, i7.BrowserModule, i7.BrowserModule, [[3, i7.BrowserModule]]), i0.ɵmpd(512, i10.ɵba, i10.ɵba, []), i0.ɵmpd(512, i10.FormsModule, i10.FormsModule, []), i0.ɵmpd(512, i25.QueryBuilderModule, i25.QueryBuilderModule, []), i0.ɵmpd(512, i9.NoopAnimationsModule, i9.NoopAnimationsModule, []), i0.ɵmpd(512, i19.CompatibilityModule, i19.CompatibilityModule, []), i0.ɵmpd(512, i12.BidiModule, i12.BidiModule, []),
+        i0.ɵmpd(512, i7.BrowserModule, i7.BrowserModule, [[3, i7.BrowserModule]]), i0.ɵmpd(512, i10.ɵba, i10.ɵba, []), i0.ɵmpd(512, i10.FormsModule, i10.FormsModule, []), i0.ɵmpd(512, i10.ReactiveFormsModule, i10.ReactiveFormsModule, []), i0.ɵmpd(512, i25.QueryBuilderModule, i25.QueryBuilderModule, []), i0.ɵmpd(512, i9.NoopAnimationsModule, i9.NoopAnimationsModule, []), i0.ɵmpd(512, i19.CompatibilityModule, i19.CompatibilityModule, []), i0.ɵmpd(512, i12.BidiModule, i12.BidiModule, []),
         i0.ɵmpd(256, i19.MATERIAL_SANITY_CHECKS, true, []), i0.ɵmpd(512, i19.MatCommonModule, i19.MatCommonModule, [[2, i19.MATERIAL_SANITY_CHECKS]]), i0.ɵmpd(512, i13.PlatformModule, i13.PlatformModule, []), i0.ɵmpd(512, i19.MatRippleModule, i19.MatRippleModule, []), i0.ɵmpd(512, i14.A11yModule, i14.A11yModule, []),
         i0.ɵmpd(512, i26.MatButtonModule, i26.MatButtonModule, []), i0.ɵmpd(512, i15.ObserversModule, i15.ObserversModule, []), i0.ɵmpd(512, i27.MatCheckboxModule, i27.MatCheckboxModule, []), i0.ɵmpd(512, i28.PortalModule, i28.PortalModule, []), i0.ɵmpd(512, i16.ScrollDispatchModule, i16.ScrollDispatchModule, []), i0.ɵmpd(512, i17.OverlayModule, i17.OverlayModule, []),
         i0.ɵmpd(512, i19.MatPseudoCheckboxModule, i19.MatPseudoCheckboxModule, []),
@@ -965,6 +936,7 @@ var AppModule = /** @class */ (function () {
             imports: [
                 platform_browser_1.BrowserModule,
                 forms_1.FormsModule,
+                forms_1.ReactiveFormsModule,
                 lib_1.QueryBuilderModule,
                 animations_1.NoopAnimationsModule,
                 material_1.MatButtonModule,
@@ -1072,12 +1044,12 @@ var i24 = __webpack_require__(196);
 var i25 = __webpack_require__(69);
 var i26 = __webpack_require__(27);
 var i27 = __webpack_require__(9);
-var i28 = __webpack_require__(127);
-var i29 = __webpack_require__(450);
-var i30 = __webpack_require__(128);
-var i31 = __webpack_require__(133);
-var i32 = __webpack_require__(451);
-var i33 = __webpack_require__(94);
+var i28 = __webpack_require__(450);
+var i29 = __webpack_require__(128);
+var i30 = __webpack_require__(133);
+var i31 = __webpack_require__(451);
+var i32 = __webpack_require__(94);
+var i33 = __webpack_require__(127);
 var i34 = __webpack_require__(132);
 var i35 = __webpack_require__(134);
 var i36 = __webpack_require__(131);
@@ -2344,26 +2316,21 @@ function View_AppComponent_18(_l) {
 }
 function View_AppComponent_0(_l) {
     return i0.ɵvid(0, [(_l()(), i0.ɵted(null, ['\n  '])), (_l()(), i0.ɵeld(0, null, null, 1, 'h2', [], null, null, null, null, null)), (_l()(), i0.ɵted(null, ['Vanilla Query Builder'])),
-        (_l()(), i0.ɵted(null, ['\n  '])), (_l()(), i0.ɵeld(0, null, null, 15, 'query-builder', [['class', 'margin30']], [[2, 'ng-untouched', null],
+        (_l()(), i0.ɵted(null, ['\n  '])), (_l()(), i0.ɵeld(0, null, null, 16, 'query-builder', [['class', 'margin30']], [[2, 'ng-untouched', null],
             [2, 'ng-touched', null], [2, 'ng-pristine', null], [2, 'ng-dirty',
                 null], [2, 'ng-valid', null], [2, 'ng-invalid', null],
-            [2, 'ng-pending', null]], [[null, 'ngModelChange']], function (_v, en, $event) {
-            var ad = true;
-            var _co = _v.component;
-            if (('ngModelChange' === en)) {
-                var pd_0 = ((_co.query = $event) !== false);
-                ad = (pd_0 && ad);
-            }
-            return ad;
-        }, i29.View_QueryBuilderComponent_0, i29.RenderType_QueryBuilderComponent)),
-        i0.ɵdid(638976, null, 6, i30.QueryBuilderComponent, [i0.ChangeDetectorRef], { config: [0, 'config'] }, null), i0.ɵqud(335544320, 1, { buttonGroupTemplate: 0 }),
-        i0.ɵqud(335544320, 2, { switchGroupTemplate: 0 }), i0.ɵqud(335544320, 3, { fieldTemplate: 0 }),
-        i0.ɵqud(335544320, 4, { operatorTemplate: 0 }), i0.ɵqud(335544320, 5, { removeButtonTemplate: 0 }),
-        i0.ɵqud(603979776, 6, { inputTemplates: 1 }), i0.ɵprd(1024, null, i1.NG_VALUE_ACCESSOR, function (p0_0) {
+            [2, 'ng-pending', null]], null, null, i28.View_QueryBuilderComponent_0, i28.RenderType_QueryBuilderComponent)), i0.ɵdid(638976, null, 6, i29.QueryBuilderComponent, [i0.ChangeDetectorRef], { config: [0, 'config'] }, null), i0.ɵqud(335544320, 1, { buttonGroupTemplate: 0 }), i0.ɵqud(335544320, 2, { switchGroupTemplate: 0 }),
+        i0.ɵqud(335544320, 3, { fieldTemplate: 0 }), i0.ɵqud(335544320, 4, { operatorTemplate: 0 }),
+        i0.ɵqud(335544320, 5, { removeButtonTemplate: 0 }), i0.ɵqud(603979776, 6, { inputTemplates: 1 }),
+        i0.ɵprd(1024, null, i1.NG_VALIDATORS, function (p0_0) {
             return [p0_0];
-        }, [i30.QueryBuilderComponent]), i0.ɵdid(671744, null, 0, i1.NgModel, [[8, null], [8, null], [8, null], [2, i1.NG_VALUE_ACCESSOR]], { model: [0, 'model'] }, { update: 'ngModelChange' }), i0.ɵprd(2048, null, i1.NgControl, null, [i1.NgModel]), i0.ɵdid(16384, null, 0, i1.NgControlStatus, [i1.NgControl], null, null), (_l()(), i0.ɵted(null, ['\n    '])), (_l()(), i0.ɵand(0, null, null, 1, null, View_AppComponent_1)), i0.ɵdid(16384, [[6, 4]], 0, i31.QueryInputDirective, [i0.TemplateRef], { queryInputType: [0, 'queryInputType'] }, null), (_l()(), i0.ɵted(null, ['\n  '])), (_l()(), i0.ɵted(null, ['\n  '])), (_l()(), i0.ɵeld(0, null, null, 5, 'div', [['class', 'margin30']], null, null, null, null, null)), (_l()(), i0.ɵted(null, ['\n    '])), (_l()(), i0.ɵeld(0, null, null, 2, 'textarea', [['class', 'output']], null, null, null, null, null)), (_l()(), i0.ɵted(null, ['', ''])), i0.ɵpid(0, i12.JsonPipe, []), (_l()(), i0.ɵted(null, ['\n  '])), (_l()(), i0.ɵted(null, ['\n  '])), (_l()(), i0.ɵeld(0, null, null, 1, 'h2', [], null, null, null, null, null)),
-        (_l()(), i0.ɵted(null, ['Custom Material Query Builder'])), (_l()(), i0.ɵted(null, ['\n  '])), (_l()(), i0.ɵeld(0, null, null, 53, 'mat-card', [['class',
-                'mat-card']], null, null, null, i32.View_MatCard_0, i32.RenderType_MatCard)), i0.ɵdid(16384, null, 0, i3.MatPrefixRejector, [], null, null), i0.ɵdid(49152, null, 0, i33.MatCard, [], null, null), (_l()(), i0.ɵted(0, ['\n  '])), (_l()(), i0.ɵeld(0, null, 0, 48, 'query-builder', [], [[2, 'ng-untouched', null], [2, 'ng-touched', null], [2, 'ng-pristine',
+        }, [i29.QueryBuilderComponent]), i0.ɵprd(1024, null, i1.NG_VALUE_ACCESSOR, function (p0_0) {
+            return [p0_0];
+        }, [i29.QueryBuilderComponent]), i0.ɵdid(540672, null, 0, i1.FormControlDirective, [[2, i1.NG_VALIDATORS], [8, null], [2, i1.NG_VALUE_ACCESSOR]], { form: [0,
+                'form'] }, null), i0.ɵprd(2048, null, i1.NgControl, null, [i1.FormControlDirective]), i0.ɵdid(16384, null, 0, i1.NgControlStatus, [i1.NgControl], null, null), (_l()(), i0.ɵted(null, ['\n    '])), (_l()(), i0.ɵand(0, null, null, 1, null, View_AppComponent_1)), i0.ɵdid(16384, [[6, 4]], 0, i30.QueryInputDirective, [i0.TemplateRef], { queryInputType: [0, 'queryInputType'] }, null), (_l()(), i0.ɵted(null, ['\n  '])), (_l()(), i0.ɵted(null, ['\n  '])), (_l()(), i0.ɵeld(0, null, null, 8, 'div', [['class', 'margin30']], null, null, null, null, null)), (_l()(), i0.ɵted(null, ['\n    '])), (_l()(), i0.ɵeld(0, null, null, 1, 'p', [], null, null, null, null, null)),
+        (_l()(), i0.ɵted(null, ['Control Valid?: ', ''])), (_l()(), i0.ɵted(null, ['\n    '])), (_l()(), i0.ɵeld(0, null, null, 2, 'textarea', [['class', 'output']], null, null, null, null, null)), (_l()(), i0.ɵted(null, ['', ''])), i0.ɵpid(0, i12.JsonPipe, []), (_l()(), i0.ɵted(null, ['\n  '])), (_l()(), i0.ɵted(null, ['\n  '])), (_l()(), i0.ɵeld(0, null, null, 1, 'h2', [], null, null, null, null, null)),
+        (_l()(), i0.ɵted(null, ['Custom Material Query Builder'])), (_l()(), i0.ɵted(null, ['\n  '])), (_l()(), i0.ɵeld(0, null, null, 54, 'mat-card', [['class',
+                'mat-card']], null, null, null, i31.View_MatCard_0, i31.RenderType_MatCard)), i0.ɵdid(16384, null, 0, i3.MatPrefixRejector, [], null, null), i0.ɵdid(49152, null, 0, i32.MatCard, [], null, null), (_l()(), i0.ɵted(0, ['\n  '])), (_l()(), i0.ɵeld(0, null, 0, 49, 'query-builder', [], [[2, 'ng-untouched', null], [2, 'ng-touched', null], [2, 'ng-pristine',
                 null], [2, 'ng-dirty', null], [2, 'ng-valid', null],
             [2, 'ng-invalid', null], [2, 'ng-pending', null]], [[null,
                 'ngModelChange']], function (_v, en, $event) {
@@ -2374,69 +2341,73 @@ function View_AppComponent_0(_l) {
                 ad = (pd_0 && ad);
             }
             return ad;
-        }, i29.View_QueryBuilderComponent_0, i29.RenderType_QueryBuilderComponent)),
-        i0.ɵdid(638976, null, 6, i30.QueryBuilderComponent, [i0.ChangeDetectorRef], { config: [0, 'config'] }, null), i0.ɵqud(335544320, 7, { buttonGroupTemplate: 0 }),
+        }, i28.View_QueryBuilderComponent_0, i28.RenderType_QueryBuilderComponent)),
+        i0.ɵdid(638976, null, 6, i29.QueryBuilderComponent, [i0.ChangeDetectorRef], { config: [0, 'config'] }, null), i0.ɵqud(335544320, 7, { buttonGroupTemplate: 0 }),
         i0.ɵqud(335544320, 8, { switchGroupTemplate: 0 }), i0.ɵqud(335544320, 9, { fieldTemplate: 0 }),
         i0.ɵqud(335544320, 10, { operatorTemplate: 0 }), i0.ɵqud(335544320, 11, { removeButtonTemplate: 0 }),
-        i0.ɵqud(603979776, 12, { inputTemplates: 1 }), i0.ɵprd(1024, null, i1.NG_VALUE_ACCESSOR, function (p0_0) {
+        i0.ɵqud(603979776, 12, { inputTemplates: 1 }), i0.ɵprd(1024, null, i1.NG_VALIDATORS, function (p0_0) {
             return [p0_0];
-        }, [i30.QueryBuilderComponent]), i0.ɵdid(671744, null, 0, i1.NgModel, [[8, null], [8, null], [8, null], [2, i1.NG_VALUE_ACCESSOR]], { model: [0, 'model'] }, { update: 'ngModelChange' }), i0.ɵprd(2048, null, i1.NgControl, null, [i1.NgModel]), i0.ɵdid(16384, null, 0, i1.NgControlStatus, [i1.NgControl], null, null), (_l()(), i0.ɵted(null, ['\n    '])), (_l()(), i0.ɵand(0, null, null, 1, null, View_AppComponent_2)), i0.ɵdid(16384, [[7, 4]], 0, i34.QueryButtonGroupDirective, [i0.TemplateRef], null, null), (_l()(), i0.ɵted(null, ['\n    '])), (_l()(), i0.ɵand(0, null, null, 1, null, View_AppComponent_3)), i0.ɵdid(16384, [[11, 4]], 0, i35.QueryRemoveButtonDirective, [i0.TemplateRef], null, null), (_l()(), i0.ɵted(null, ['\n    '])), (_l()(), i0.ɵand(0, null, null, 1, null, View_AppComponent_4)), i0.ɵdid(16384, [[8, 4]], 0, i36.QuerySwitchGroupDirective, [i0.TemplateRef], null, null), (_l()(), i0.ɵted(null, ['\n    '])), (_l()(), i0.ɵand(0, null, null, 1, null, View_AppComponent_6)), i0.ɵdid(16384, [[9, 4]], 0, i37.QueryFieldDirective, [i0.TemplateRef], null, null), (_l()(), i0.ɵted(null, ['\n    '])),
+        }, [i29.QueryBuilderComponent]), i0.ɵprd(1024, null, i1.NG_VALUE_ACCESSOR, function (p0_0) {
+            return [p0_0];
+        }, [i29.QueryBuilderComponent]), i0.ɵdid(671744, null, 0, i1.NgModel, [[8, null], [2, i1.NG_VALIDATORS], [8, null], [2, i1.NG_VALUE_ACCESSOR]], { model: [0, 'model'] }, { update: 'ngModelChange' }), i0.ɵprd(2048, null, i1.NgControl, null, [i1.NgModel]), i0.ɵdid(16384, null, 0, i1.NgControlStatus, [i1.NgControl], null, null), (_l()(), i0.ɵted(null, ['\n    '])), (_l()(), i0.ɵand(0, null, null, 1, null, View_AppComponent_2)), i0.ɵdid(16384, [[7, 4]], 0, i34.QueryButtonGroupDirective, [i0.TemplateRef], null, null), (_l()(), i0.ɵted(null, ['\n    '])), (_l()(), i0.ɵand(0, null, null, 1, null, View_AppComponent_3)), i0.ɵdid(16384, [[11, 4]], 0, i35.QueryRemoveButtonDirective, [i0.TemplateRef], null, null), (_l()(), i0.ɵted(null, ['\n    '])), (_l()(), i0.ɵand(0, null, null, 1, null, View_AppComponent_4)), i0.ɵdid(16384, [[8, 4]], 0, i36.QuerySwitchGroupDirective, [i0.TemplateRef], null, null), (_l()(), i0.ɵted(null, ['\n    '])), (_l()(), i0.ɵand(0, null, null, 1, null, View_AppComponent_6)), i0.ɵdid(16384, [[9, 4]], 0, i37.QueryFieldDirective, [i0.TemplateRef], null, null), (_l()(), i0.ɵted(null, ['\n    '])),
         (_l()(), i0.ɵand(0, null, null, 1, null, View_AppComponent_8)),
-        i0.ɵdid(16384, [[10, 4]], 0, i38.QueryOperatorDirective, [i0.TemplateRef], null, null), (_l()(), i0.ɵted(null, ['\n    '])), (_l()(), i0.ɵand(0, null, null, 1, null, View_AppComponent_10)), i0.ɵdid(16384, [[12, 4]], 0, i31.QueryInputDirective, [i0.TemplateRef], { queryInputType: [0, 'queryInputType'] }, null), (_l()(), i0.ɵted(null, ['\n    '])), (_l()(), i0.ɵand(0, null, null, 1, null, View_AppComponent_11)), i0.ɵdid(16384, [[12, 4]], 0, i31.QueryInputDirective, [i0.TemplateRef], { queryInputType: [0, 'queryInputType'] }, null), (_l()(), i0.ɵted(null, ['\n    '])), (_l()(), i0.ɵand(0, null, null, 1, null, View_AppComponent_13)), i0.ɵdid(16384, [[12, 4]], 0, i31.QueryInputDirective, [i0.TemplateRef], { queryInputType: [0, 'queryInputType'] }, null), (_l()(), i0.ɵted(null, ['\n    '])), (_l()(), i0.ɵand(0, null, null, 1, null, View_AppComponent_14)), i0.ɵdid(16384, [[12, 4]], 0, i31.QueryInputDirective, [i0.TemplateRef], { queryInputType: [0, 'queryInputType'] }, null), (_l()(), i0.ɵted(null, ['\n    '])), (_l()(), i0.ɵand(0, null, null, 1, null, View_AppComponent_16)), i0.ɵdid(16384, [[12, 4]], 0, i31.QueryInputDirective, [i0.TemplateRef], { queryInputType: [0, 'queryInputType'] }, null), (_l()(), i0.ɵted(null, ['\n    '])), (_l()(), i0.ɵand(0, null, null, 1, null, View_AppComponent_17)), i0.ɵdid(16384, [[12, 4]], 0, i31.QueryInputDirective, [i0.TemplateRef], { queryInputType: [0, 'queryInputType'] }, null), (_l()(), i0.ɵted(null, ['\n    '])), (_l()(), i0.ɵand(0, null, null, 1, null, View_AppComponent_18)), i0.ɵdid(16384, [[12, 4]], 0, i31.QueryInputDirective, [i0.TemplateRef], { queryInputType: [0, 'queryInputType'] }, null), (_l()(), i0.ɵted(null, ['\n  '])), (_l()(), i0.ɵted(0, ['\n  '])), (_l()(), i0.ɵted(null, ['\n  ']))], function (_ck, _v) {
+        i0.ɵdid(16384, [[10, 4]], 0, i38.QueryOperatorDirective, [i0.TemplateRef], null, null), (_l()(), i0.ɵted(null, ['\n    '])), (_l()(), i0.ɵand(0, null, null, 1, null, View_AppComponent_10)), i0.ɵdid(16384, [[12, 4]], 0, i30.QueryInputDirective, [i0.TemplateRef], { queryInputType: [0, 'queryInputType'] }, null), (_l()(), i0.ɵted(null, ['\n    '])), (_l()(), i0.ɵand(0, null, null, 1, null, View_AppComponent_11)), i0.ɵdid(16384, [[12, 4]], 0, i30.QueryInputDirective, [i0.TemplateRef], { queryInputType: [0, 'queryInputType'] }, null), (_l()(), i0.ɵted(null, ['\n    '])), (_l()(), i0.ɵand(0, null, null, 1, null, View_AppComponent_13)), i0.ɵdid(16384, [[12, 4]], 0, i30.QueryInputDirective, [i0.TemplateRef], { queryInputType: [0, 'queryInputType'] }, null), (_l()(), i0.ɵted(null, ['\n    '])), (_l()(), i0.ɵand(0, null, null, 1, null, View_AppComponent_14)), i0.ɵdid(16384, [[12, 4]], 0, i30.QueryInputDirective, [i0.TemplateRef], { queryInputType: [0, 'queryInputType'] }, null), (_l()(), i0.ɵted(null, ['\n    '])), (_l()(), i0.ɵand(0, null, null, 1, null, View_AppComponent_16)), i0.ɵdid(16384, [[12, 4]], 0, i30.QueryInputDirective, [i0.TemplateRef], { queryInputType: [0, 'queryInputType'] }, null), (_l()(), i0.ɵted(null, ['\n    '])), (_l()(), i0.ɵand(0, null, null, 1, null, View_AppComponent_17)), i0.ɵdid(16384, [[12, 4]], 0, i30.QueryInputDirective, [i0.TemplateRef], { queryInputType: [0, 'queryInputType'] }, null), (_l()(), i0.ɵted(null, ['\n    '])), (_l()(), i0.ɵand(0, null, null, 1, null, View_AppComponent_18)), i0.ɵdid(16384, [[12, 4]], 0, i30.QueryInputDirective, [i0.TemplateRef], { queryInputType: [0, 'queryInputType'] }, null), (_l()(), i0.ɵted(null, ['\n  '])), (_l()(), i0.ɵted(0, ['\n  '])), (_l()(), i0.ɵted(null, ['\n  ']))], function (_ck, _v) {
         var _co = _v.component;
         var currVal_7 = _co.config;
         _ck(_v, 5, 0, currVal_7);
-        var currVal_8 = _co.query;
-        _ck(_v, 13, 0, currVal_8);
+        var currVal_8 = _co.queryCtrl;
+        _ck(_v, 14, 0, currVal_8);
         var currVal_9 = 'textarea';
-        _ck(_v, 18, 0, currVal_9);
-        var currVal_18 = _co.config;
-        _ck(_v, 36, 0, currVal_18);
-        var currVal_19 = _co.query;
-        _ck(_v, 44, 0, currVal_19);
-        var currVal_20 = 'boolean';
-        _ck(_v, 64, 0, currVal_20);
-        var currVal_21 = 'category';
-        _ck(_v, 67, 0, currVal_21);
-        var currVal_22 = 'date';
-        _ck(_v, 70, 0, currVal_22);
-        var currVal_23 = 'multiselect';
-        _ck(_v, 73, 0, currVal_23);
-        var currVal_24 = 'number';
-        _ck(_v, 76, 0, currVal_24);
-        var currVal_25 = 'string';
-        _ck(_v, 79, 0, currVal_25);
-        var currVal_26 = 'textarea';
-        _ck(_v, 82, 0, currVal_26);
+        _ck(_v, 19, 0, currVal_9);
+        var currVal_19 = _co.config;
+        _ck(_v, 40, 0, currVal_19);
+        var currVal_20 = _co.query;
+        _ck(_v, 49, 0, currVal_20);
+        var currVal_21 = 'boolean';
+        _ck(_v, 69, 0, currVal_21);
+        var currVal_22 = 'category';
+        _ck(_v, 72, 0, currVal_22);
+        var currVal_23 = 'date';
+        _ck(_v, 75, 0, currVal_23);
+        var currVal_24 = 'multiselect';
+        _ck(_v, 78, 0, currVal_24);
+        var currVal_25 = 'number';
+        _ck(_v, 81, 0, currVal_25);
+        var currVal_26 = 'string';
+        _ck(_v, 84, 0, currVal_26);
+        var currVal_27 = 'textarea';
+        _ck(_v, 87, 0, currVal_27);
     }, function (_ck, _v) {
         var _co = _v.component;
-        var currVal_0 = i0.ɵnov(_v, 15).ngClassUntouched;
-        var currVal_1 = i0.ɵnov(_v, 15).ngClassTouched;
-        var currVal_2 = i0.ɵnov(_v, 15).ngClassPristine;
-        var currVal_3 = i0.ɵnov(_v, 15).ngClassDirty;
-        var currVal_4 = i0.ɵnov(_v, 15).ngClassValid;
-        var currVal_5 = i0.ɵnov(_v, 15).ngClassInvalid;
-        var currVal_6 = i0.ɵnov(_v, 15).ngClassPending;
+        var currVal_0 = i0.ɵnov(_v, 16).ngClassUntouched;
+        var currVal_1 = i0.ɵnov(_v, 16).ngClassTouched;
+        var currVal_2 = i0.ɵnov(_v, 16).ngClassPristine;
+        var currVal_3 = i0.ɵnov(_v, 16).ngClassDirty;
+        var currVal_4 = i0.ɵnov(_v, 16).ngClassValid;
+        var currVal_5 = i0.ɵnov(_v, 16).ngClassInvalid;
+        var currVal_6 = i0.ɵnov(_v, 16).ngClassPending;
         _ck(_v, 4, 0, currVal_0, currVal_1, currVal_2, currVal_3, currVal_4, currVal_5, currVal_6);
-        var currVal_10 = i0.ɵunv(_v, 24, 0, i0.ɵnov(_v, 25).transform(_co.query));
-        _ck(_v, 24, 0, currVal_10);
-        var currVal_11 = i0.ɵnov(_v, 46).ngClassUntouched;
-        var currVal_12 = i0.ɵnov(_v, 46).ngClassTouched;
-        var currVal_13 = i0.ɵnov(_v, 46).ngClassPristine;
-        var currVal_14 = i0.ɵnov(_v, 46).ngClassDirty;
-        var currVal_15 = i0.ɵnov(_v, 46).ngClassValid;
-        var currVal_16 = i0.ɵnov(_v, 46).ngClassInvalid;
-        var currVal_17 = i0.ɵnov(_v, 46).ngClassPending;
-        _ck(_v, 35, 0, currVal_11, currVal_12, currVal_13, currVal_14, currVal_15, currVal_16, currVal_17);
+        var currVal_10 = _co.queryCtrl.valid;
+        _ck(_v, 25, 0, currVal_10);
+        var currVal_11 = i0.ɵunv(_v, 28, 0, i0.ɵnov(_v, 29).transform(_co.query));
+        _ck(_v, 28, 0, currVal_11);
+        var currVal_12 = i0.ɵnov(_v, 51).ngClassUntouched;
+        var currVal_13 = i0.ɵnov(_v, 51).ngClassTouched;
+        var currVal_14 = i0.ɵnov(_v, 51).ngClassPristine;
+        var currVal_15 = i0.ɵnov(_v, 51).ngClassDirty;
+        var currVal_16 = i0.ɵnov(_v, 51).ngClassValid;
+        var currVal_17 = i0.ɵnov(_v, 51).ngClassInvalid;
+        var currVal_18 = i0.ɵnov(_v, 51).ngClassPending;
+        _ck(_v, 39, 0, currVal_12, currVal_13, currVal_14, currVal_15, currVal_16, currVal_17, currVal_18);
     });
 }
 exports.View_AppComponent_0 = View_AppComponent_0;
 function View_AppComponent_Host_0(_l) {
     return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, null, null, 1, 'my-app', [], null, null, null, View_AppComponent_0, exports.RenderType_AppComponent)),
-        i0.ɵdid(49152, null, 0, i28.AppComponent, [], null, null)], null, null);
+        i0.ɵdid(49152, null, 0, i33.AppComponent, [i1.FormBuilder], null, null)], null, null);
 }
 exports.View_AppComponent_Host_0 = View_AppComponent_Host_0;
-exports.AppComponentNgFactory = i0.ɵccf('my-app', i28.AppComponent, View_AppComponent_Host_0, {}, {}, []);
+exports.AppComponentNgFactory = i0.ɵccf('my-app', i33.AppComponent, View_AppComponent_Host_0, {}, {}, []);
 
 
 
@@ -3366,18 +3337,20 @@ function View_QueryBuilderComponent_13(_l) {
     }, null);
 }
 function View_QueryBuilderComponent_37(_l) {
-    return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, null, null, 9, 'query-builder', [], null, null, null, View_QueryBuilderComponent_0, exports.RenderType_QueryBuilderComponent)), i0.ɵprd(5120, null, i2.NG_VALUE_ACCESSOR, function (p0_0) {
+    return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, null, null, 10, 'query-builder', [], null, null, null, View_QueryBuilderComponent_0, exports.RenderType_QueryBuilderComponent)), i0.ɵprd(5120, null, i2.NG_VALUE_ACCESSOR, function (p0_0) {
+            return [p0_0];
+        }, [i3.QueryBuilderComponent]), i0.ɵprd(5120, null, i2.NG_VALIDATORS, function (p0_0) {
             return [p0_0];
         }, [i3.QueryBuilderComponent]), i0.ɵdid(638976, null, 6, i3.QueryBuilderComponent, [i0.ChangeDetectorRef], { allowRuleset: [0, 'allowRuleset'], operatorMap: [1, 'operatorMap'],
             data: [2, 'data'], parentData: [3, 'parentData'], config: [4, 'config'], parentInputTemplates: [5,
                 'parentInputTemplates'], parentOperatorTemplate: [6, 'parentOperatorTemplate'],
             parentFieldTemplate: [7, 'parentFieldTemplate'], parentSwitchGroupTemplate: [8,
                 'parentSwitchGroupTemplate'], parentButtonGroupTemplate: [9, 'parentButtonGroupTemplate'],
-            parentRemoveButtonTemplate: [10, 'parentRemoveButtonTemplate'] }, null),
-        i0.ɵqud(335544320, 1, { buttonGroupTemplate: 0 }), i0.ɵqud(335544320, 2, { switchGroupTemplate: 0 }),
-        i0.ɵqud(335544320, 3, { fieldTemplate: 0 }), i0.ɵqud(335544320, 4, { operatorTemplate: 0 }),
-        i0.ɵqud(335544320, 5, { removeButtonTemplate: 0 }), i0.ɵqud(603979776, 6, { inputTemplates: 1 }),
-        (_l()(), i0.ɵted(null, ['\n            ']))], function (_ck, _v) {
+            parentRemoveButtonTemplate: [10, 'parentRemoveButtonTemplate'], parentChangeCallback: [11,
+                'parentChangeCallback'] }, null), i0.ɵqud(335544320, 1, { buttonGroupTemplate: 0 }),
+        i0.ɵqud(335544320, 2, { switchGroupTemplate: 0 }), i0.ɵqud(335544320, 3, { fieldTemplate: 0 }),
+        i0.ɵqud(335544320, 4, { operatorTemplate: 0 }), i0.ɵqud(335544320, 5, { removeButtonTemplate: 0 }),
+        i0.ɵqud(603979776, 6, { inputTemplates: 1 }), (_l()(), i0.ɵted(null, ['\n            ']))], function (_ck, _v) {
         var _co = _v.component;
         var currVal_0 = _co.allowRuleset;
         var currVal_1 = _co.operatorMap;
@@ -3390,8 +3363,9 @@ function View_QueryBuilderComponent_37(_l) {
         var currVal_8 = (_co.parentSwitchGroupTemplate || _co.switchGroupTemplate);
         var currVal_9 = (_co.parentButtonGroupTemplate || _co.buttonGroupTemplate);
         var currVal_10 = (_co.parentRemoveButtonTemplate || _co.removeButtonTemplate);
-        _ck(_v, 2, 1, [currVal_0, currVal_1, currVal_2, currVal_3, currVal_4, currVal_5, currVal_6,
-            currVal_7, currVal_8, currVal_9, currVal_10]);
+        var currVal_11 = (_co.parentChangeCallback || _co.onChangeCallback);
+        _ck(_v, 3, 1, [currVal_0, currVal_1, currVal_2, currVal_3, currVal_4, currVal_5, currVal_6,
+            currVal_7, currVal_8, currVal_9, currVal_10, currVal_11]);
     }, null);
 }
 function View_QueryBuilderComponent_38(_l) {
@@ -3431,7 +3405,7 @@ function View_QueryBuilderComponent_11(_l) {
     return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, null, null, 5, null, null, null, null, null, null, null)),
         (_l()(), i0.ɵted(null, ['\n        '])), (_l()(), i0.ɵand(16777216, null, null, 2, null, View_QueryBuilderComponent_12)), i0.ɵdid(16384, null, 0, i1.NgIf, [i0.ViewContainerRef, i0.TemplateRef], { ngIf: [0, 'ngIf'] }, null), i0.ɵpod({ ruleset: 0, invalid: 1 }), (_l()(), i0.ɵted(null, ['\n      ']))], function (_ck, _v) {
         var _co = _v.component;
-        var currVal_0 = _ck(_v, 4, 0, !!_v.context.$implicit.rules, ((!_co.config.allowEmptyRuleset && _v.context.$implicit.rules) && (_v.context.$implicit.rules.length === 0)));
+        var currVal_0 = _ck(_v, 4, 0, !!_v.context.$implicit.rules, ((!_co.config.allowEmptyRulesets && _v.context.$implicit.rules) && (_v.context.$implicit.rules.length === 0)));
         _ck(_v, 3, 0, currVal_0);
     }, null);
 }
@@ -3467,13 +3441,15 @@ function View_QueryBuilderComponent_0(_l) {
 }
 exports.View_QueryBuilderComponent_0 = View_QueryBuilderComponent_0;
 function View_QueryBuilderComponent_Host_0(_l) {
-    return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, null, null, 8, 'query-builder', [], null, null, null, View_QueryBuilderComponent_0, exports.RenderType_QueryBuilderComponent)), i0.ɵprd(5120, null, i2.NG_VALUE_ACCESSOR, function (p0_0) {
+    return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, null, null, 9, 'query-builder', [], null, null, null, View_QueryBuilderComponent_0, exports.RenderType_QueryBuilderComponent)), i0.ɵprd(5120, null, i2.NG_VALUE_ACCESSOR, function (p0_0) {
+            return [p0_0];
+        }, [i3.QueryBuilderComponent]), i0.ɵprd(5120, null, i2.NG_VALIDATORS, function (p0_0) {
             return [p0_0];
         }, [i3.QueryBuilderComponent]), i0.ɵdid(638976, null, 6, i3.QueryBuilderComponent, [i0.ChangeDetectorRef], null, null), i0.ɵqud(335544320, 1, { buttonGroupTemplate: 0 }),
         i0.ɵqud(335544320, 2, { switchGroupTemplate: 0 }), i0.ɵqud(335544320, 3, { fieldTemplate: 0 }),
         i0.ɵqud(335544320, 4, { operatorTemplate: 0 }), i0.ɵqud(335544320, 5, { removeButtonTemplate: 0 }),
         i0.ɵqud(603979776, 6, { inputTemplates: 1 })], function (_ck, _v) {
-        _ck(_v, 2, 0);
+        _ck(_v, 3, 0);
     }, null);
 }
 exports.View_QueryBuilderComponent_Host_0 = View_QueryBuilderComponent_Host_0;
@@ -3481,7 +3457,8 @@ exports.QueryBuilderComponentNgFactory = i0.ɵccf('query-builder', i3.QueryBuild
     classNames: 'classNames', operatorMap: 'operatorMap', data: 'data', parentData: 'parentData',
     config: 'config', parentInputTemplates: 'parentInputTemplates', parentOperatorTemplate: 'parentOperatorTemplate',
     parentFieldTemplate: 'parentFieldTemplate', parentSwitchGroupTemplate: 'parentSwitchGroupTemplate',
-    parentButtonGroupTemplate: 'parentButtonGroupTemplate', parentRemoveButtonTemplate: 'parentRemoveButtonTemplate' }, {}, []);
+    parentButtonGroupTemplate: 'parentButtonGroupTemplate', parentRemoveButtonTemplate: 'parentRemoveButtonTemplate',
+    parentChangeCallback: 'parentChangeCallback' }, {}, []);
 
 
 
