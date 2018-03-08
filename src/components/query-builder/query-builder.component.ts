@@ -19,9 +19,10 @@ import {
     InputContext,
     LocalRuleMeta,
     OperatorContext,
-    RemoveButtonContext,
     Option,
+    QueryBuilderClassNames,
     QueryBuilderConfig,
+    RemoveButtonContext,
     Rule,
     RuleSet,
 } from './query-builder.interfaces';
@@ -60,17 +61,23 @@ export const VALIDATOR: any = {
 export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAccessor, Validator {
   public disabled: boolean;
   public fields: Field[];
-  public defaultClassNames: {[key: string]: string} = {
+  public defaultClassNames: QueryBuilderClassNames = {
     removeIcon: 'q-icon q-remove-icon',
     addIcon: 'q-icon q-add-icon',
     button: 'q-button',
     buttonGroup: 'q-button-group',
+    removeButton: 'q-remove-button',
     switchGroup: 'q-switch-group',
-    queryTree: 'q-tree',
-    queryItem: 'q-item',
-    queryRule: 'q-rule',
-    queryRuleSet: 'q-ruleset',
-    invalidRuleset: 'q-invalid-ruleset',
+    switchLabel: 'q-switch-label',
+    switchRadio: 'q-switch-radio',
+    rightAlign: 'q-right-align',
+    transition: 'q-transition',
+    tree: 'q-tree',
+    row: 'q-row',
+    connector: 'q-connector',
+    rule: 'q-rule',
+    ruleSet: 'q-ruleset',
+    invalidRuleSet: 'q-invalid-ruleset',
     emptyWarning: 'q-empty-warning',
     fieldControl: 'q-field-control',
     operatorControl: 'q-operator-control',
@@ -86,11 +93,11 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   };
 
   // For ControlValueAccessor interface
-  public onChangeCallback: (value: any) => void;
+  public onChangeCallback: () => void;
   public onTouchedCallback: () => any;
 
   @Input() allowRuleset: boolean = true;
-  @Input() classNames: {[key: string]: string};
+  @Input() classNames: QueryBuilderClassNames;
   @Input() operatorMap: {[key: string]: string[]};
   @Input() data: RuleSet = { condition: 'and', rules: [] };
   @Input() parentData: RuleSet;
@@ -101,7 +108,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   @Input() parentSwitchGroupTemplate: QuerySwitchGroupDirective;
   @Input() parentButtonGroupTemplate: QueryButtonGroupDirective;
   @Input() parentRemoveButtonTemplate: QueryRemoveButtonDirective;
-  @Input() parentChangeCallback: (value: any) => void;
+  @Input() parentChangeCallback: () => void;
 
   @ContentChild(QueryButtonGroupDirective) buttonGroupTemplate: QueryButtonGroupDirective;
   @ContentChild(QuerySwitchGroupDirective) switchGroupTemplate: QuerySwitchGroupDirective;
@@ -180,10 +187,10 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     this.value = obj;
   }
   registerOnChange(fn: any): void {
-    this.onChangeCallback = fn;
+    this.onChangeCallback = () => fn(this.data);
   }
   registerOnTouched(fn: any): void {
-    this.onTouchedCallback = fn;
+    this.onTouchedCallback = () => fn(this.data);
   }
   setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
@@ -270,9 +277,10 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     return this.config.fields[field].options || this.defaultEmptyList;
   }
 
-  getClassName(id: string) {
-    const cls = this.classNames ? this.classNames[id] : null;
-    return cls != null ? cls : this.defaultClassNames[id];
+  getClassNames(...args) {
+    const clsLookup = this.classNames ? this.classNames : this.defaultClassNames;
+    const classNames = args.map((id) => clsLookup[id] || this.defaultClassNames[id]).filter((c) => !!c);
+    return classNames.length ? classNames.join(' ')  : null;
   }
 
   getDefaultOperator(field: Field) {
@@ -400,10 +408,10 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   }
 
   getQueryItemClassName(local: LocalRuleMeta): string {
-    let cls = this.getClassName('queryItem');
-    cls += ' ' + this.getClassName(local.ruleset ? 'queryRuleSet' : 'queryRule');
+    let cls = this.getClassNames('row', 'connector', 'transition');
+    cls += ' ' + this.getClassNames(local.ruleset ? 'ruleSet' : 'rule');
     if (local.invalid) {
-      cls += ' ' + this.getClassName('invalidRuleset');
+      cls += ' ' + this.getClassNames('invalidRuleSet');
     }
     return cls;
   }
@@ -497,10 +505,10 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   private handleDataChange() {
     this.changeDetectorRef.markForCheck();
     if (this.onChangeCallback) {
-      this.onChangeCallback(this.data);
+      this.onChangeCallback();
     }
     if (this.parentChangeCallback) {
-      this.parentChangeCallback(this.data);
+      this.parentChangeCallback();
     }
   }
 }

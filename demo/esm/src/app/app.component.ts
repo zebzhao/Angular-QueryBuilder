@@ -1,22 +1,26 @@
 import { FormBuilder, FormControl } from '@angular/forms';
 import { Component } from '@angular/core';
-import { QueryBuilderConfig } from '../../lib/components/query-builder';
+import { QueryBuilderClassNames, QueryBuilderConfig } from '../../lib/components/query-builder';
 
 @Component({
   selector: 'my-app',
   template: `
-  <h2>Vanilla Query Builder</h2>
-  <query-builder class='margin30' [formControl]='queryCtrl' [config]='config'>
+  <h2>Vanilla</h2>
+  <br>
+  <query-builder [formControl]='queryCtrl' [config]='config'>
     <ng-container *queryInput="let rule; type: 'textarea'">
       <textarea class="text-input text-area" [(ngModel)]="rule.value"
         placeholder="Custom Textarea"></textarea>
     </ng-container>
   </query-builder>
-  <div class='margin30'>
-    <p>Control Valid?: {{ queryCtrl.valid }}</p>
+  <br>
+  <div>
+    <p>Control Valid: {{ queryCtrl.valid }}</p>
     <textarea class="output">{{query | json}}</textarea>
   </div>
-  <h2>Custom Material Query Builder</h2>
+  <br>
+  <h2>Custom Material</h2>
+  <br>
   <mat-card>
   <query-builder [(ngModel)]='query' [config]='config'>
     <ng-container *queryButtonGroup="let ruleset; let addRule=addRule; let addRuleSet=addRuleSet; let removeRuleSet=removeRuleSet">
@@ -103,13 +107,21 @@ import { QueryBuilderConfig } from '../../lib/components/query-builder';
     </ng-container>
   </query-builder>
   </mat-card>
+  <br>
+  <h2>Bootstrap</h2>
+  <br>
+  <query-builder [(ngModel)]='query' [classNames]='bootstrapClassNames' [config]='config'>
+    <ng-container *queryInput="let rule; type: 'textarea'">
+      <textarea class="text-input text-area" [(ngModel)]="rule.value"
+        placeholder="Custom Textarea"></textarea>
+    </ng-container>
+  </query-builder>
   `,
   styles: [`
   /deep/ html {
     font: 14px sans-serif;
+    margin: 30px;
   }
-
-  .margin30 { margin: 30px; }
 
   .text-input {
     padding: 4px 8px;
@@ -132,6 +144,21 @@ import { QueryBuilderConfig } from '../../lib/components/query-builder';
 })
 export class AppComponent {
   public queryCtrl: FormControl;
+
+  public bootstrapClassNames: QueryBuilderClassNames = {
+    removeIcon: 'fa fa-minus',
+    addIcon: 'fa fa-plus',
+    button: 'btn',
+    buttonGroup: 'btn-group order-12',
+    removeButton: 'btn-danger',
+    switchGroup: '',
+    row: 'row justify-content-between',
+    invalidRuleSet: 'alert alert-danger',
+    emptyWarning: '',
+    fieldControl: 'form-control col-4',
+    operatorControl: 'form-control col-2',
+    inputControl: 'form-control col-5'
+  };
 
   public query = {
     condition: 'and',

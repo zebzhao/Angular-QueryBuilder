@@ -6,12 +6,20 @@
     font-size: 12px;
   }
 
-  .q-remove-icon::before {
-    content: '❌'
+  .q-remove-icon {
+    &::before {
+      content: '❌'
+    }
+  }
+  .q-add-icon {
+    color: #555;
+    &::before {
+      content: '➕'
+    }
   }
 
-  .q-add-icon::before {
-    content: '➕'
+  .q-remove-button {
+    color: #B3415D;
   }
 
   .q-switch-group, .q-button-group {
@@ -19,12 +27,13 @@
     overflow: hidden;
   }
 
-  .q-button-group {
+  .q-right-align {
     float: right;
   }
 
   .q-button {
     margin-left: 8px;
+    padding: 2px 8px;
     background-color: white;
   }
 
@@ -42,55 +51,40 @@
 
   .q-operator-control, .q-field-control, .q-input-control:not([type='checkbox']) {
     min-height: 32px;
+    -webkit-appearance: none;
   }
 
-  .q-switch-group label, .q-button {
+  .q-switch-label, .q-button {
     float: left;
-    min-height: 30px;
-    color: rgba(0, 0, 0, 0.6);
+    margin-bottom: 0;
     font-size: 14px;
     font-weight: normal;
     text-align: center;
     text-shadow: none;
-    padding: 2px 8px;
     border: 1px solid rgba(0, 0, 0, 0.2);
     box-sizing: border-box;
-    -webkit-transition: all 0.1s ease-in-out;
-    -moz-transition:    all 0.1s ease-in-out;
-    -ms-transition:     all 0.1s ease-in-out;
-    -o-transition:      all 0.1s ease-in-out;
-    transition:         all 0.1s ease-in-out;
 
     &:hover {
       cursor: pointer;
       background-color: #F0F0F0;
     }
-
-    &.success {
-      color: #75BE47;
-    }
-
-    &.danger {
-      color: #B3415D;
-    }
   }
 
-  .q-switch-group {
-    input {
-      position: absolute;
-      clip: rect(0, 0, 0, 0);
-      height: 1px;
-      width: 1px;
-      border: 0;
-      overflow: hidden;
-    }
+  .q-switch-label {
+    background-color: #e4e4e4;
+    line-height: 24px;
+    padding: 0 8px;
+  }
 
-    label {
-      background-color: #e4e4e4;
-      line-height: 24px;
-    }
+  .q-switch-radio {
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    width: 1px;
+    border: 0;
+    overflow: hidden;
 
-    input:checked + label {
+    &:checked + .q-switch-label {
       border: 1px solid rgb(97, 158, 215);
       background: white;
       color: rgb(49, 118, 179);
@@ -107,58 +101,64 @@
     text-align: center;
   }
 
+  .q-ruleset {
+    border: 1px solid #CCC;
+    background: rgba(204, 204, 204, 0.2);
+
+    &:hover {
+      border: 1px solid rgba(97, 158, 215, 0.5);
+      background: rgba(97, 158, 215, 0.1);
+    }
+  }
+
+  .q-rule {
+    background: white;
+  }
+
+  .q-transition {
+    -webkit-transition: all 0.1s ease-in-out;
+    -moz-transition:    all 0.1s ease-in-out;
+    -ms-transition:     all 0.1s ease-in-out;
+    -o-transition:      all 0.1s ease-in-out;
+    transition:         all 0.1s ease-in-out;
+  }
+
   .q-tree {
     list-style: none;
     margin: 4px 0 2px;
+  }
 
-    .q-item {
-      position: relative;
-      padding: 4px 6px;
-      margin-top: 4px;
-      border: 1px solid #CCCCCC;
+  .q-row {
+    padding: 4px 6px;
+    margin-top: 4px;
+    border: 1px solid #CCC;
+  }
 
-      -webkit-transition: all 0.1s ease-in-out;
-      -moz-transition:    all 0.1s ease-in-out;
-      -ms-transition:     all 0.1s ease-in-out;
-      -o-transition:      all 0.1s ease-in-out;
-      transition:         all 0.1s ease-in-out;
+  .q-connector {
+    position: relative;
 
-      &.q-ruleset {
-        background: rgba(204, 204, 204, 0.2);
+    &::before {
+      top: -5px;
+      border-width: 0 0 2px 2px;
+    }
 
-        &:hover {
-          border: 1px solid rgba(97, 158, 215, 0.5);
-          background: rgba(97, 158, 215, 0.1);
-        }
-      }
+    &::after {
+      border-width: 0 0 0 2px;
+      top: 50%;
+    }
 
-      &.q-rule {
-        background: white;
-      }
+    &::before, &::after {
+      content: '';
+      left: -12px;
+      border-color: #CCC;
+      border-style: solid;
+      width: 9px;
+      height: calc(50% + 6px);
+      position: absolute;
+    }
 
-      &::before {
-        top: -5px;
-        border-width: 0 0 2px 2px;
-      }
-
-      &::after {
-        border-width: 0 0 0 2px;
-        top: 50%;
-      }
-
-      &::before, &::after {
-        content: '';
-        left: -12px;
-        border-color: #CCC;
-        border-style: solid;
-        width: 9px;
-        height: calc(50% + 6px);
-        position: absolute;
-      }
-
-      &:last-child::after {
-        content: none;
-      }
+    &:last-child::after {
+      content: none;
     }
   }
 }

@@ -37,6 +37,29 @@ export interface LocalRuleMeta {
   invalid: boolean;
 }
 
+export interface QueryBuilderClassNames {
+  removeIcon?: string;
+  addIcon?: string;
+  button?: string;
+  buttonGroup?: string;
+  removeButton?: string;
+  switchGroup?: string;
+  switchLabel?: string;
+  switchRadio?: string;
+  rightAlign?: string;
+  transition?: string;
+  tree?: string;
+  row?: string;
+  connector?: string;
+  rule?: string;
+  ruleSet?: string;
+  invalidRuleSet?: string;
+  emptyWarning?: string;
+  fieldControl?: string;
+  operatorControl?: string;
+  inputControl?: string;
+}
+
 export interface QueryBuilderConfig {
   fields: FieldMap;
   allowEmptyRulesets?: boolean;
