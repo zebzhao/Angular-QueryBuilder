@@ -11,10 +11,7 @@ export default {
         test: /\.ts$/,
         use: [
           {
-            loader: 'awesome-typescript-loader',
-            options: {
-              configFileName: 'tsconfig.json'
-            }
+            loader: 'ts-loader',
           },
           {
             loader: 'angular2-template-loader'
