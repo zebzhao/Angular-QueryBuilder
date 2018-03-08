@@ -111,10 +111,10 @@ import { QueryBuilderClassNames, QueryBuilderConfig } from '../../lib/components
   <h2>Bootstrap</h2>
   <br>
   <query-builder [(ngModel)]='query' [classNames]='bootstrapClassNames' [config]='config'>
-    <ng-container *queryInput="let rule; type: 'textarea'">
-      <textarea class="text-input text-area" [(ngModel)]="rule.value"
+    <div class="col-auto" *queryInput="let rule; type: 'textarea'">
+      <textarea class="form-control" [(ngModel)]="rule.value"
         placeholder="Custom Textarea"></textarea>
-    </ng-container>
+    </div>
   </query-builder>
   `,
   styles: [`
@@ -130,10 +130,8 @@ import { QueryBuilderClassNames, QueryBuilderConfig } from '../../lib/components
   }
 
   .text-area {
-    margin-top: 8px;
     width: 300px;
     height: 100px;
-    display: block;
   }
 
   .output {
@@ -149,15 +147,23 @@ export class AppComponent {
     removeIcon: 'fa fa-minus',
     addIcon: 'fa fa-plus',
     button: 'btn',
-    buttonGroup: 'btn-group order-12',
+    buttonGroup: 'btn-group',
     removeButton: 'btn-danger',
-    switchGroup: '',
-    row: 'row justify-content-between',
+    rightAlign: 'order-12 ml-auto',
+    switchRow: 'd-flex px-2',
+    switchRadio: 'custom-control-input',
+    switchLabel: 'custom-control-label',
+    switchControl: 'custom-control custom-radio custom-control-inline',
+    row: 'row p-2 m-1',
+    rule: 'border',
+    ruleSet: 'border',
     invalidRuleSet: 'alert alert-danger',
-    emptyWarning: '',
-    fieldControl: 'form-control col-4',
-    operatorControl: 'form-control col-2',
-    inputControl: 'form-control col-5'
+    operatorControl: 'form-control',
+    operatorControlSize: 'col-auto',
+    fieldControl: 'form-control',
+    fieldControlSize: 'col-auto',
+    inputControl: 'form-control',
+    inputControlSize: 'col-auto'
   };
 
   public query = {

@@ -43,9 +43,11 @@ export interface QueryBuilderClassNames {
   button?: string;
   buttonGroup?: string;
   removeButton?: string;
+  switchRow?: string;
   switchGroup?: string;
   switchLabel?: string;
   switchRadio?: string;
+  switchControl?: string;
   rightAlign?: string;
   transition?: string;
   tree?: string;
@@ -56,8 +58,11 @@ export interface QueryBuilderClassNames {
   invalidRuleSet?: string;
   emptyWarning?: string;
   fieldControl?: string;
+  fieldControlSize?: string;
   operatorControl?: string;
+  operatorControlSize?: string;
   inputControl?: string;
+  inputControlSize?: string;
 }
 
 export interface QueryBuilderConfig {

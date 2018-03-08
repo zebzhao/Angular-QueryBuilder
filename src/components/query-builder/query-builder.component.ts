@@ -80,8 +80,11 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     invalidRuleSet: 'q-invalid-ruleset',
     emptyWarning: 'q-empty-warning',
     fieldControl: 'q-field-control',
+    fieldControlSize: 'q-control-size',
     operatorControl: 'q-operator-control',
-    inputControl: 'q-input-control'
+    operatorControlSize: 'q-control-size',
+    inputControl: 'q-input-control',
+    inputControlSize: 'q-control-size'
   };
   public defaultOperatorMap: {[key: string]: string[]} = {
     string: ['=', '!=', 'contains', 'like'],

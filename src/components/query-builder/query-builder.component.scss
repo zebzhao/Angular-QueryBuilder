@@ -1,5 +1,6 @@
 :host {
   display: block;
+  width: 100%;
 
   .q-icon {
     font-style: normal;
@@ -35,6 +36,11 @@
     margin-left: 8px;
     padding: 2px 8px;
     background-color: white;
+  }
+
+  .q-control-size {
+    display: inline-block;
+    vertical-align: top;
   }
 
   .q-input-control, .q-operator-control, .q-field-control {
@@ -112,6 +118,7 @@
   }
 
   .q-rule {
+    border: 1px solid #CCC;
     background: white;
   }
 
@@ -131,7 +138,6 @@
   .q-row {
     padding: 4px 6px;
     margin-top: 4px;
-    border: 1px solid #CCC;
   }
 
   .q-connector {
