@@ -44,7 +44,7 @@ const config = {
      */
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'src', 'index.ejs'),
-      title: 'Angular Library Starter',
+      title: 'Angular Query Builder',
       inject: 'body'
     }),
 

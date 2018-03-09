@@ -43,6 +43,7 @@ export interface QueryBuilderClassNames {
   button?: string;
   buttonGroup?: string;
   removeButton?: string;
+  removeButtonSize?: string;
   switchRow?: string;
   switchGroup?: string;
   switchLabel?: string;
