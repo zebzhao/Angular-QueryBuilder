@@ -9,7 +9,7 @@ A modernized Angular 4+ query builder based on jQuery QueryBuilder. Support for 
 ## Demo
 Play with the [demo here](https://zebzhao.github.io/Angular-QueryBuilder/demo/).
 
-[See the Plunker](https://plnkr.co/edit/vdqjG9G4cxzKqOzNCVnY?p=preview)
+[See the Plunker](https://plnkr.co/edit/fgw8tfnOJ1cI48nr3MUl?p=preview)
 
 ## Documentation
 
@@ -77,7 +77,9 @@ config: QueryBuilderConfig = {
 }
 ```
 
-## Custom Styling (with Bootstrap)
+## Custom Styling (with Bootstrap 4)
+
+[Bootstrap demo](https://zebzhao.github.io/Angular-QueryBuilder/demo/).
 
 ##### `app.component.html`
 ```html
@@ -85,22 +87,28 @@ config: QueryBuilderConfig = {
 ```
 ##### `app.component.ts`
 ```javascript
-classNames: {[key: string]: string} = {
-  removeIcon: 'fa fa-minus',               // Font-Awesome
-  addIcon: 'fa fa-plus',                   // Font-Awesome
-  button: 'btn',                           // Bootstrap
-  buttonGroup: 'btn-group',                // Bootstrap
-  switchGroup: 'btn-group',                // Bootstrap
-  queryTree: 'q-tree',                     // DEFAULT
-  queryItem: 'q-item',                     // DEFAULT
-  queryRule: 'q-rule',                     // DEFAULT
-  queryRuleSet: 'q-ruleset',               // DEFAULT
-  invalidRuleset: 'alert alert-danger',    // Bootstrap
-  emptyWarning: '',                        // Bootstrap
-  fieldControl: 'form-control',            // Bootstrap
-  operatorControl: 'form-control',         // Bootstrap
-  inputControl: 'form-control'             // Bootstrap
-};
+classNames: QueryBuilderClassNames = {
+  removeIcon: 'fa fa-minus',
+  addIcon: 'fa fa-plus',
+  button: 'btn',
+  buttonGroup: 'btn-group',
+  rightAlign: 'order-12 ml-auto',
+  switchRow: 'd-flex px-2',
+  switchGroup: 'd-flex align-items-center',
+  switchRadio: 'custom-control-input',
+  switchLabel: 'custom-control-label',
+  switchControl: 'custom-control custom-radio custom-control-inline',
+  row: 'row p-2 m-1',
+  rule: 'border',
+  ruleSet: 'border',
+  invalidRuleSet: 'alert alert-danger',
+  operatorControl: 'form-control',
+  operatorControlSize: 'col-auto px-0',
+  fieldControl: 'form-control',
+  fieldControlSize: 'col-auto',
+  inputControl: 'form-control',
+  inputControlSize: 'col-auto'
+}
 ```
 
 ## Customizing with Angular Material

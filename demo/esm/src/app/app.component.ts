@@ -1,20 +1,26 @@
+import { FormBuilder, FormControl } from '@angular/forms';
 import { Component } from '@angular/core';
-import { QueryBuilderConfig } from '../../lib/components/query-builder';
+import { QueryBuilderClassNames, QueryBuilderConfig } from '../../lib/components/query-builder';
 
 @Component({
   selector: 'my-app',
   template: `
-  <h2>Vanilla Query Builder</h2>
-  <query-builder class='margin30' [(ngModel)]='query' [config]='config'>
+  <h2>Vanilla</h2>
+  <br>
+  <query-builder [formControl]='queryCtrl' [config]='config'>
     <ng-container *queryInput="let rule; type: 'textarea'">
       <textarea class="text-input text-area" [(ngModel)]="rule.value"
         placeholder="Custom Textarea"></textarea>
     </ng-container>
   </query-builder>
-  <div class='margin30'>
+  <br>
+  <div>
+    <p>Control Valid: {{ queryCtrl.valid }}</p>
     <textarea class="output">{{query | json}}</textarea>
   </div>
-  <h2>Custom Material Query Builder</h2>
+  <br>
+  <h2>Custom Material</h2>
+  <br>
   <mat-card>
   <query-builder [(ngModel)]='query' [config]='config'>
     <ng-container *queryButtonGroup="let ruleset; let addRule=addRule; let addRuleSet=addRuleSet; let removeRuleSet=removeRuleSet">
@@ -110,13 +116,21 @@ import { QueryBuilderConfig } from '../../lib/components/query-builder';
     </ng-container>
   </query-builder>
   </mat-card>
+  <br>
+  <h2>Bootstrap</h2>
+  <br>
+  <query-builder [(ngModel)]='query' [classNames]='bootstrapClassNames' [config]='config'>
+    <div class="col-auto" *queryInput="let rule; type: 'textarea'">
+      <textarea class="form-control" [(ngModel)]="rule.value"
+        placeholder="Custom Textarea"></textarea>
+    </div>
+  </query-builder>
   `,
   styles: [`
   /deep/ html {
     font: 14px sans-serif;
+    margin: 30px;
   }
-
-  .margin30 { margin: 30px; }
 
   .text-input {
     padding: 4px 8px;
@@ -125,10 +139,8 @@ import { QueryBuilderConfig } from '../../lib/components/query-builder';
   }
 
   .text-area {
-    margin-top: 8px;
     width: 300px;
     height: 100px;
-    display: block;
   }
 
   .output {
@@ -138,6 +150,33 @@ import { QueryBuilderConfig } from '../../lib/components/query-builder';
   `]
 })
 export class AppComponent {
+  public queryCtrl: FormControl;
+
+  public bootstrapClassNames: QueryBuilderClassNames = {
+    removeIcon: 'fa fa-minus',
+    addIcon: 'fa fa-plus',
+    button: 'btn',
+    buttonGroup: 'btn-group',
+    rightAlign: 'order-12 ml-auto',
+    switchRow: 'd-flex px-2',
+    switchGroup: 'd-flex align-items-center',
+    switchRadio: 'custom-control-input',
+    switchLabel: 'custom-control-label',
+    switchControl: 'custom-control custom-radio custom-control-inline',
+    row: 'row p-2 m-1',
+    rule: 'border',
+    ruleSet: 'border',
+    invalidRuleSet: 'alert alert-danger',
+    operatorControl: 'form-control',
+    operatorControlSize: 'col-auto px-0',
+    fieldControl: 'form-control',
+    fieldControlSize: 'col-auto',
+    entityControl: 'form-control',
+    entityControlSize: 'col-auto',
+    inputControl: 'form-control',
+    inputControlSize: 'col-auto'
+  };
+
   public query = {
     condition: 'and',
     rules: [
@@ -187,4 +226,10 @@ export class AppComponent {
       }
     }
   };
+
+  constructor(
+    private formBuilder: FormBuilder
+  ) {
+    this.queryCtrl = this.formBuilder.control(this.query);
+  }
 }

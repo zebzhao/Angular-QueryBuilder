@@ -1,6 +1,6 @@
 {
   "name": "angular2-query-builder",
-  "version": "0.2.2",
+  "version": "0.2.4",
   "description": "A modernized Angular 2+ query builder based on jquery QueryBuilder",
   "main": "./dist/index.umd.js",
   "module": "./dist/index.js",

@@ -4,8 +4,8 @@ import { FormsModule, } from '@angular/forms';
 import {
     QueryBuilderComponent,
     QueryInputDirective,
-    QueryEntityDirective,
     QueryFieldDirective,
+    QueryEntityDirective,
     QueryOperatorDirective,
     QueryButtonGroupDirective,
     QuerySwitchGroupDirective,

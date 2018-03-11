@@ -1,3 +1,5 @@
+import { ValidationErrors } from '@angular/forms';
+
 export interface RuleSet {
   condition: string;
   rules: Array<RuleSet | Rule>;
@@ -29,6 +31,7 @@ export interface Field {
   defaultValue?: any;
   defaultOperator?: any;
   entityName?: string;
+  validator?: (rule: Rule, parent: RuleSet) => any | null;
 }
 
 export interface LocalRuleMeta {
@@ -43,6 +46,37 @@ export interface EntityMap {
 export interface Entity {
   name: string;
   description: string;
+}
+
+export interface QueryBuilderClassNames {
+  removeIcon?: string;
+  addIcon?: string;
+  button?: string;
+  buttonGroup?: string;
+  removeButton?: string;
+  removeButtonSize?: string;
+  switchRow?: string;
+  switchGroup?: string;
+  switchLabel?: string;
+  switchRadio?: string;
+  switchControl?: string;
+  rightAlign?: string;
+  transition?: string;
+  tree?: string;
+  row?: string;
+  connector?: string;
+  rule?: string;
+  ruleSet?: string;
+  invalidRuleSet?: string;
+  emptyWarning?: string;
+  fieldControl?: string;
+  fieldControlSize?: string;
+  entityControl?: string;
+  entityControlSize?: string;
+  operatorControl?: string;
+  operatorControlSize?: string;
+  inputControl?: string;
+  inputControlSize?: string;
 }
 
 export interface QueryBuilderConfig {
@@ -62,6 +96,7 @@ export interface OperatorContext {
   operators: string[];
   $implicit: Rule;
 }
+
 export interface EntityContext {
   changeEntity: (entityName: string, rule: Rule) => void;
   entities: Entity[];

@@ -48,5 +48,5 @@
     "webpack-dev-server": "^2.4.5",
     "zone.js": "^0.8.4"
   },
-  "version": "0.1.1"
+  "version": "0.2.3"
 }
