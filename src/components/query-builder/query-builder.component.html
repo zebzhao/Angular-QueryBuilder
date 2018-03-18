@@ -13,7 +13,7 @@
       <button (click)="addRuleSet()" [ngClass]="getClassNames('button')" *ngIf="allowRuleset">
         <i [ngClass]="getClassNames('addIcon')"></i> Ruleset
       </button>
-      <ng-container *ngIf="!!parentData">
+      <ng-container *ngIf="!!parentData && allowRuleset">
         <button (click)="removeRuleSet()" [ngClass]="getClassNames('button', 'removeButton')">
           <i [ngClass]="getClassNames('removeIcon')"></i>
         </button>

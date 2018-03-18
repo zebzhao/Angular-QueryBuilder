@@ -26,9 +26,9 @@ import { QueryBuilderClassNames, QueryBuilderConfig } from '../../lib/components
     <ng-container *queryButtonGroup="let ruleset; let addRule=addRule; let addRuleSet=addRuleSet; let removeRuleSet=removeRuleSet">
       <button mat-icon-button color="primary" (click)="addRule()">
         <mat-icon>add</mat-icon></button>
-      <button mat-icon-button color="primary" (click)="addRuleSet()">
+      <button mat-icon-button color="primary" *ngIf="addRuleSet" (click)="addRuleSet()">
         <mat-icon>add_circle_outline</mat-icon></button>
-      <button mat-icon-button color="accent" (click)="removeRuleSet()">
+      <button mat-icon-button color="accent" *ngIf="removeRuleSet" (click)="removeRuleSet()">
         <mat-icon>remove_circle_outline</mat-icon></button>
     </ng-container>
     <ng-container *queryRemoveButton="let rule; let removeRule=removeRule">
@@ -202,7 +202,7 @@ export class AppComponent {
       school: {name: 'School', type: 'string', nullable: true},
       occupation: {
         name: 'Occupation',
-        type: 'string',
+        type: 'category',
         options: [
           {name: 'Student', value: 'student'},
           {name: 'Teacher', value: 'teacher'},

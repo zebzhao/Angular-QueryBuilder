@@ -91,7 +91,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     number: ['=', '!=', '>', '>=', '<', '<='],
     time: ['=', '!=', '>', '>=', '<', '<='],
     date: ['=', '!=', '>', '>=', '<', '<='],
-    category: ['=', '!='],
+    category: ['=', '!=', 'in', 'not in'],
     boolean: ['=']
   };
 
@@ -226,10 +226,12 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
       return this.operatorsCache[field];
     }
     let operators = this.defaultEmptyList;
-    if (this.config.getOperators) {
-      operators = this.config.getOperators(field);
-    }
     const fieldObject = this.config.fields[field];
+
+    if (this.config.getOperators) {
+      return this.config.getOperators(field, fieldObject);
+    }
+
     const type = fieldObject.type;
 
     if (fieldObject && fieldObject.operators) {
@@ -241,16 +243,13 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
           `No operators found for field '${field}' with type ${fieldObject.type}. ` +
           `Please define an 'operators' property on the field or use the 'operatorMap' binding to fix this.`);
       }
+      if (fieldObject.nullable) {
+        operators = operators.concat(['is null', 'is not null']);
+      }
     } else {
       console.warn(`No 'type' property found on field: '${field}'`);
     }
 
-    if (fieldObject.options) {
-      operators = operators.concat(['in', 'not in']);
-    }
-    if (fieldObject.nullable) {
-      operators = operators.concat(['is null', 'is not null']);
-    }
     // Cache reference to array object, so it won't be computed next time and trigger a rerender.
     this.operatorsCache[field] = operators;
     return operators;
@@ -423,8 +422,8 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     if (!this.buttonGroupContext) {
       this.buttonGroupContext = {
         addRule: this.addRule.bind(this),
-        addRuleSet: this.addRuleSet.bind(this),
-        removeRuleSet: this.removeRuleSet.bind(this),
+        addRuleSet: this.allowRuleset && this.addRuleSet.bind(this),
+        removeRuleSet: this.allowRuleset && this.parentData && this.removeRuleSet.bind(this),
         $implicit: this.data
       };
     }

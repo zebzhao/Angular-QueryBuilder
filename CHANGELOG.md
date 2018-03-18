@@ -1,6 +1,10 @@
 Angular2-QueryBuilder Changelog
 ===============
 
+Version 0.2.5
+-----------
+- TODO: Fix root remove ruleset button showing 
+
 Version 0.2.4
 -----------
 - Fix serious issue with validation causing `ngModel` value to be wrong

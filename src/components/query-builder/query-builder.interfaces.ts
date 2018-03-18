@@ -69,7 +69,7 @@ export interface QueryBuilderClassNames {
 export interface QueryBuilderConfig {
   fields: FieldMap;
   allowEmptyRulesets?: boolean;
-  getOperators?: (field: string) => string[];
+  getOperators?: (fieldName: string, field: Field) => string[];
   getInputType?: (field: string, operator: string) => string;
   getOptions?: (field: string) => Option[];
   addRuleSet?: (parent: RuleSet) => void;
