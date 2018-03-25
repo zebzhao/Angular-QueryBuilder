@@ -289,7 +289,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     if (field && field.defaultOperator !== undefined) {
       return this.getDefaultValue(field.defaultOperator);
     } else {
-      const operators = this.getOperators(field.value)[0];
+      const operators = this.getOperators(field.value);
       if (operators && operators.length) {
         return operators[0];
       } else {
