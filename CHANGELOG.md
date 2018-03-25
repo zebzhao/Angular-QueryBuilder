@@ -3,7 +3,9 @@ Angular2-QueryBuilder Changelog
 
 Version 0.2.5
 -----------
-- TODO: Fix root remove ruleset button showing 
+- Fix root remove ruleset button showing
+- Fix default value bug where only the first character of the operator is shown
+- Fix inability to override multiselect operators (is in, is not in)
 
 Version 0.2.4
 -----------
