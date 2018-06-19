@@ -43,7 +43,7 @@
     vertical-align: top;
   }
 
-  .q-input-control, .q-operator-control, .q-field-control {
+  .q-input-control, .q-operator-control, .q-field-control, .q-entity-control {
     display: inline-block;
     padding: 5px 8px;
     color: #555;
@@ -55,7 +55,7 @@
     width: auto;
   }
 
-  .q-operator-control, .q-field-control, .q-input-control:not([type='checkbox']) {
+  .q-operator-control, .q-field-control,.q-entity-control, .q-input-control:not([type='checkbox']) {
     min-height: 32px;
     -webkit-appearance: none;
   }
@@ -166,5 +166,10 @@
     &:last-child::after {
       content: none;
     }
+  }
+
+  .q-inline-block-display{
+    display: inline-block;
+    vertical-align: top;
   }
 }
