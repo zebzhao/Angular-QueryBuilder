@@ -18,18 +18,6 @@ Play with the [demo here](https://zebzhao.github.io/Angular-QueryBuilder/demo/).
 # Examples
 
 ## Basic Usage
-##### IonicFramework 2+
-##### `app.module.ts`
-```javascript
-import { QueryBuilderModule } from "angular2-query-builder";
-imports: [
-    ...,
-    ...,
-    QueryBuilderModule,
-    IonicModule.forRoot(MyApp),
-
-  ],
-```
 
 ##### `app.component.html`
 ```html
@@ -37,9 +25,6 @@ imports: [
 ```
 ##### `app.component.ts`
 ```javascript
-import { QueryBuilderConfig } from 'angular2-query-builder';
-
-export class  ComponentClass {
 query = {
   condition: 'and',
   rules: [
@@ -60,8 +45,6 @@ config: QueryBuilderConfig = {
       ]
     }
   }
-}
-
 }
 ```
 
