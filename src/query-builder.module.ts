@@ -5,6 +5,7 @@ import {
     QueryBuilderComponent,
     QueryInputDirective,
     QueryFieldDirective,
+    QueryEntityDirective,
     QueryOperatorDirective,
     QueryButtonGroupDirective,
     QuerySwitchGroupDirective,
@@ -21,6 +22,7 @@ import {
     QueryInputDirective,
     QueryOperatorDirective,
     QueryFieldDirective,
+    QueryEntityDirective,
     QueryButtonGroupDirective,
     QuerySwitchGroupDirective,
     QueryRemoveButtonDirective
@@ -30,6 +32,7 @@ import {
     QueryInputDirective,
     QueryOperatorDirective,
     QueryFieldDirective,
+    QueryEntityDirective,
     QueryButtonGroupDirective,
     QuerySwitchGroupDirective,
     QueryRemoveButtonDirective
