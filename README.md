@@ -18,50 +18,52 @@ Play with the [demo here](https://zebzhao.github.io/Angular-QueryBuilder/demo/).
 # Examples
 
 ## Basic Usage
-##### IonicFramework 2+
+
 ##### `app.module.ts`
 ```javascript
 import { QueryBuilderModule } from "angular2-query-builder";
-imports: [
-    ...,
-    ...,
-    QueryBuilderModule,
-    IonicModule.forRoot(MyApp),
+import { AppComponent } from "./app.component"
 
-  ],
+@NgModule(imports: [
+  ...,
+  QueryBuilderModule,
+  IonicModule.forRoot(AppComponent) // (Optional) for IonicFramework 2+
+])
+export class AppModule { }
 ```
 
 ##### `app.component.html`
 ```html
+...
 <query-builder [(ngModel)]='query' [config]='config'></query-builder>
+...
 ```
 ##### `app.component.ts`
 ```javascript
 import { QueryBuilderConfig } from 'angular2-query-builder';
 
-export class  ComponentClass {
-query = {
-  condition: 'and',
-  rules: [
-    {field: 'age', operator: '<=', value: 'Bob'},
-    {field: 'gender', operator: '>=', value: 'm'}
-  ]
-};
-
-config: QueryBuilderConfig = {
-  fields: {
-    age: {name: 'Age', type: 'number'},
-    gender: {
-      name: 'Gender',
-      type: 'category',
-      options: [
-        {name: 'Male', value: 'm'},
-        {name: 'Female', value: 'f'}
-      ]
+export class AppComponent {
+  query = {
+    condition: 'and',
+    rules: [
+      {field: 'age', operator: '<=', value: 'Bob'},
+      {field: 'gender', operator: '>=', value: 'm'}
+    ]
+  };
+  
+  config: QueryBuilderConfig = {
+    fields: {
+      age: {name: 'Age', type: 'number'},
+      gender: {
+        name: 'Gender',
+        type: 'category',
+        options: [
+          {name: 'Male', value: 'm'},
+          {name: 'Female', value: 'f'}
+        ]
+      }
     }
   }
-}
-
 }
 ```
 
