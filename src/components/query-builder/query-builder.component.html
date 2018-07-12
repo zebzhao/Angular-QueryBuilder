@@ -95,7 +95,7 @@
 
           <ng-template #defaultOperator>
             <div [ngClass]="getClassNames('operatorControlSize')">
-              <select [ngClass]="getClassNames('operatorControl')" [(ngModel)]="rule.operator">
+              <select [ngClass]="getClassNames('operatorControl')" [(ngModel)]="rule.operator" (ngModelChange)="changeOperator($event, rule)">
                 <option *ngFor="let operator of getOperators(rule.field)" [ngValue]="operator">
                   {{operator}}
                 </option>
@@ -109,29 +109,30 @@
 
           <ng-template #defaultInput>
             <div [ngClass]="getClassNames('inputControlSize')" [ngSwitch]="getInputType(rule.field, rule.operator)">
-              <input [ngClass]="getClassNames('inputControl')" [(ngModel)]="rule.value" *ngSwitchCase="'string'" type="text">
-              <input [ngClass]="getClassNames('inputControl')" [(ngModel)]="rule.value" *ngSwitchCase="'number'" type="number">
-              <input [ngClass]="getClassNames('inputControl')" [(ngModel)]="rule.value" *ngSwitchCase="'date'" type="date">
-              <input [ngClass]="getClassNames('inputControl')" [(ngModel)]="rule.value" *ngSwitchCase="'time'" type="time">
-              <select [ngClass]="getClassNames('inputControl')" [(ngModel)]="rule.value" *ngSwitchCase="'category'">
+              <input [ngClass]="getClassNames('inputControl')" [(ngModel)]="rule.value" (ngModelChange)="changeInput($event, rule)" *ngSwitchCase="'string'" type="text">
+              <input [ngClass]="getClassNames('inputControl')" [(ngModel)]="rule.value" (ngModelChange)="changeInput($event, rule)" *ngSwitchCase="'number'" type="number">
+              <input [ngClass]="getClassNames('inputControl')" [(ngModel)]="rule.value" (ngModelChange)="changeInput($event, rule)" *ngSwitchCase="'date'" type="date">
+              <input [ngClass]="getClassNames('inputControl')" [(ngModel)]="rule.value" (ngModelChange)="changeInput($event, rule)" *ngSwitchCase="'time'" type="time">
+              <select [ngClass]="getClassNames('inputControl')" [(ngModel)]="rule.value" (ngModelChange)="changeInput($event, rule)" *ngSwitchCase="'category'">
                 <option *ngFor="let opt of getOptions(rule.field)" [ngValue]="opt.value">
                   {{opt.name}}
                 </option>
               </select>
               <ng-container *ngSwitchCase="'multiselect'">
-                <select [ngClass]="getClassNames('inputControl')" [(ngModel)]="rule.value" multiple>
+                <select [ngClass]="getClassNames('inputControl')" [(ngModel)]="rule.value" (ngModelChange)="changeInput($event, rule)" multiple>
                   <option *ngFor="let opt of getOptions(rule.field)" [ngValue]="opt.value">
                     {{opt.name}}
                   </option>
                 </select>
               </ng-container>
-              <input [ngClass]="getClassNames('inputControl')" [(ngModel)]="rule.value" *ngSwitchCase="'boolean'" type="checkbox">
+              <input [ngClass]="getClassNames('inputControl')" [(ngModel)]="rule.value" (ngModelChange)="changeInput($event, rule)" *ngSwitchCase="'boolean'" type="checkbox">
             </div>
           </ng-template>
 
         </ng-container>
         <query-builder *ngIf="local.ruleset"
           [value]="rule"
+          [parentTouchedCallback]="parentTouchedCallback || onTouchedCallback"
           [parentChangeCallback]="parentChangeCallback || onChangeCallback"
           [parentInputTemplates]="parentInputTemplates || inputTemplates"
           [parentOperatorTemplate]="parentOperatorTemplate || operatorTemplate"

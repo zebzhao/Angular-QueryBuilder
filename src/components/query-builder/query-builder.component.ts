@@ -120,6 +120,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   @Input() parentButtonGroupTemplate: QueryButtonGroupDirective;
   @Input() parentRemoveButtonTemplate: QueryRemoveButtonDirective;
   @Input() parentChangeCallback: () => void;
+  @Input() parentTouchedCallback: () => void;
 
   @ContentChild(QueryButtonGroupDirective) buttonGroupTemplate: QueryButtonGroupDirective;
   @ContentChild(QuerySwitchGroupDirective) switchGroupTemplate: QuerySwitchGroupDirective;
@@ -343,6 +344,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
       }]);
     }
 
+    this.handleTouched();
     this.handleDataChange();
   }
 
@@ -359,6 +361,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     this.entityContextCache.delete(rule);
     this.removeButtonContextCache.delete(rule);
 
+    this.handleTouched();
     this.handleDataChange();
   }
 
@@ -370,6 +373,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
       parent.rules = parent.rules.concat([{condition: 'and', rules: []}]);
     }
 
+    this.handleTouched();
     this.handleDataChange();
   }
 
@@ -382,6 +386,17 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
       parent.rules = parent.rules.filter((r) => r !== ruleset);
     }
 
+    this.handleTouched();
+    this.handleDataChange();
+  }
+
+  changeOperator(operatorValue: string, rule: Rule): void {
+    this.handleTouched();
+    this.handleDataChange();
+  }
+
+  changeInput(inputValue: any, rule: Rule): void {
+    this.handleTouched();
     this.handleDataChange();
   }
 
@@ -406,18 +421,19 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     this.getOperatorContext(rule);
     this.getEntityContext(rule);
 
+    this.handleTouched();
     this.handleDataChange();
   }
 
   changeEntity(entityName: string, rule: Rule): void {
     if (this.config.fields) {
-        const entityFields = Object.keys(this.config.fields).map((value) => {
+      const entityFields = Object.keys(this.config.fields).map((value) => {
         const field = this.config.fields[value];
         if (field && field.entityName && field.entityName === entityName) {
-         return field;
-       }
+          return field;
+        }
       });
-        if (entityFields && entityFields.length > 0) {
+      if (entityFields && entityFields.length > 0) {
         const entityField = entityFields.filter((d) => d != null)[0];
         if (entityField) {
           rule.field = entityField.value;
@@ -426,8 +442,10 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
           this.changeField(entityField.value, rule);
         }
       }
-    }
 
+      this.handleTouched();
+      this.handleDataChange();
+    }
   }
 
   getDefaultValue(defaultValue: any): any {
@@ -503,7 +521,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   getFieldContext(rule: Rule): FieldContext {
     if (!this.fieldContextCache.has(rule)) {
       this.fieldContextCache.set(rule, {
-        changeField: this.changeField.bind(this),
+        onChange: this.changeField.bind(this),
         getFields: this.getFields.bind(this),
         fields: this.fields,
         $implicit: rule
@@ -515,7 +533,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   getEntityContext(rule: Rule): EntityContext {
     if (!this.entityContextCache.has(rule)) {
       this.entityContextCache.set(rule, {
-        changeEntity: this.changeEntity.bind(this),
+        onChange: this.changeEntity.bind(this),
         entities: this.entities,
         $implicit: rule
       });
@@ -526,6 +544,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   getOperatorContext(rule: Rule): OperatorContext {
     if (!this.operatorContextCache.has(rule)) {
       this.operatorContextCache.set(rule, {
+        onChange: this.changeOperator.bind(this),
         operators: this.getOperators(rule.field),
         $implicit: rule
       });
@@ -536,6 +555,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   getInputContext(rule: Rule): InputContext {
     if (!this.inputContextCache.has(rule)) {
       this.inputContextCache.set(rule, {
+        onChange: this.changeInput.bind(this),
         options: this.getOptions(rule.field),
         field: this.config.fields[rule.field],
         $implicit: rule
@@ -583,6 +603,15 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     }
     if (this.parentChangeCallback) {
       this.parentChangeCallback();
+    }
+  }
+
+  private handleTouched() {
+    if (this.onTouchedCallback) {
+      this.onTouchedCallback();
+    }
+    if (this.parentTouchedCallback) {
+      this.parentTouchedCallback();
     }
   }
 }

@@ -93,24 +93,26 @@ export interface QueryBuilderConfig {
 }
 
 export interface OperatorContext {
+  onChange: (operatorValue: string, rule: Rule) => void;
   operators: string[];
   $implicit: Rule;
 }
 
 export interface EntityContext {
-  changeEntity: (entityName: string, rule: Rule) => void;
+  onChange: (entityValue: string, rule: Rule) => void;
   entities: Entity[];
   $implicit: Rule;
 }
 
 export interface FieldContext {
-  changeField: (fieldName: string, rule: Rule) => void;
+  onChange: (fieldValue: string, rule: Rule) => void;
   getFields: (entityName: string) => void;
   fields: Field[];
   $implicit: Rule;
 }
 
 export interface InputContext {
+  onChange: (inputValue: any, rule: Rule) => void;
   options: Option[];
   field: Field;
   $implicit: Rule;
