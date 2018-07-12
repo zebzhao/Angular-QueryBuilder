@@ -13,7 +13,7 @@
       <button (click)="addRuleSet()" [ngClass]="getClassNames('button')" *ngIf="allowRuleset">
         <i [ngClass]="getClassNames('addIcon')"></i> Ruleset
       </button>
-      <ng-container *ngIf="!!parentData && allowRuleset">
+      <ng-container *ngIf="!!parentValue && allowRuleset">
         <button (click)="removeRuleSet()" [ngClass]="getClassNames('button', 'removeButton')">
           <i [ngClass]="getClassNames('removeIcon')"></i>
         </button>
@@ -63,16 +63,17 @@
             <ng-container *ngIf="getEntityTemplate() as template; else defaultEntity">
               <ng-container *ngTemplateOutlet="template; context: getEntityContext(rule)"></ng-container>
             </ng-container>
-        </div>
-        <ng-template #defaultEntity>
-          <div [ngClass]="getClassNames('entityControlSize')">
-            <select [ngClass]="getClassNames('entityControl')" [(ngModel)]="rule.entity" (ngModelChange)="changeEntity($event, rule)">
-              <option *ngFor="let entity of entities" [ngValue]="entity.name">
-                {{entity.description}}
-              </option>
-            </select>
-         </div>
-        </ng-template>
+          </div>
+
+          <ng-template #defaultEntity>
+            <div [ngClass]="getClassNames('entityControlSize')">
+              <select [ngClass]="getClassNames('entityControl')" [(ngModel)]="rule.entity" (ngModelChange)="changeEntity($event, rule)">
+                <option *ngFor="let entity of entities" [ngValue]="entity.name">
+                  {{entity.description}}
+                </option>
+              </select>
+            </div>
+          </ng-template>
 
           <ng-container *ngIf="getFieldTemplate() as template; else defaultField">
             <ng-container *ngTemplateOutlet="template; context: getFieldContext(rule)"></ng-container>
@@ -130,7 +131,7 @@
 
         </ng-container>
         <query-builder *ngIf="local.ruleset"
-          [data]="rule"
+          [value]="rule"
           [parentChangeCallback]="parentChangeCallback || onChangeCallback"
           [parentInputTemplates]="parentInputTemplates || inputTemplates"
           [parentOperatorTemplate]="parentOperatorTemplate || operatorTemplate"
@@ -139,7 +140,7 @@
           [parentSwitchGroupTemplate]="parentSwitchGroupTemplate || switchGroupTemplate"
           [parentButtonGroupTemplate]="parentButtonGroupTemplate || buttonGroupTemplate"
           [parentRemoveButtonTemplate]="parentRemoveButtonTemplate || removeButtonTemplate"
-          [parentData]="data"
+          [parentValue]="data"
           [classNames]="classNames"
           [config]="config"
           [allowRuleset]="allowRuleset"

@@ -101,6 +101,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     category: ['=', '!=', 'in', 'not in'],
     boolean: ['=']
   };
+  public data: RuleSet = { condition: 'and', rules: [] };
 
   // For ControlValueAccessor interface
   public onChangeCallback: () => void;
@@ -109,8 +110,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   @Input() allowRuleset: boolean = true;
   @Input() classNames: QueryBuilderClassNames;
   @Input() operatorMap: {[key: string]: string[]};
-  @Input() data: RuleSet = { condition: 'and', rules: [] };
-  @Input() parentData: RuleSet;
+  @Input() parentValue: RuleSet;
   @Input() config: QueryBuilderConfig = { fields: {} };
   @Input() parentInputTemplates: QueryList<QueryInputDirective>;
   @Input() parentOperatorTemplate: QueryOperatorDirective;
@@ -193,7 +193,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
 
   set value(value: RuleSet) {
     // When component is initialized without a formControl, null is passed to value
-    this.data = value;
+    this.data = value || { condition: 'and', rules: [] };
     this.handleDataChange();
   }
 
@@ -268,15 +268,15 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
 
   getFields(entityName: string): Field[] {
     if (this.entities && this.entities.length > 0 && entityName) {
-        const entityFields = Object.keys(this.config.fields).map((value) => {
+      const entityFields = Object.keys(this.config.fields).map((value) => {
         const field = this.config.fields[value];
         if (field && field.entityName && field.entityName === entityName) {
           return field;
         }
       });
 
-        if (entityFields && entityFields.length > 0) {
-        return entityFields.filter((d) => d != null);
+      if (entityFields && entityFields.length > 0) {
+        return entityFields.filter(d => d != null);
       } else {
         return this.fields;
       }
@@ -296,7 +296,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
         return null;  // No displayed component
       case 'in':
       case 'not in':
-        return 'multiselect';
+        return type == 'category' || type == 'boolean' ? 'multiselect' : type;
       default:
         return type;
     }
@@ -375,7 +375,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
 
   removeRuleSet(ruleset?: RuleSet, parent?: RuleSet): void {
     ruleset = ruleset || this.data;
-    parent = parent || this.parentData;
+    parent = parent || this.parentValue;
     if (this.config.removeRuleSet) {
       this.config.removeRuleSet(ruleset, parent);
     } else {
@@ -483,7 +483,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
       this.buttonGroupContext = {
         addRule: this.addRule.bind(this),
         addRuleSet: this.allowRuleset && this.addRuleSet.bind(this),
-        removeRuleSet: this.allowRuleset && this.parentData && this.removeRuleSet.bind(this),
+        removeRuleSet: this.allowRuleset && this.parentValue && this.removeRuleSet.bind(this),
         $implicit: this.data
       };
     }

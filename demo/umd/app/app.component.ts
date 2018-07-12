@@ -4,7 +4,7 @@ import { QueryBuilderConfig } from 'angular2-query-builder';
 
 @Component({
   selector: 'my-app',
-  template: `<query-builder class='margin30' [data]='query' [config]='config'></query-builder>
+  template: `<query-builder class='margin30' [value]='query' [config]='config'></query-builder>
   <div class='margin30'>
       <textarea >{{query | json}}</textarea>
   </div>`,
