@@ -68,8 +68,8 @@
           <ng-template #defaultEntity>
             <div [ngClass]="getClassNames('entityControlSize')">
               <select [ngClass]="getClassNames('entityControl')" [(ngModel)]="rule.entity" (ngModelChange)="changeEntity($event, rule)">
-                <option *ngFor="let entity of entities" [ngValue]="entity.name">
-                  {{entity.description}}
+                <option *ngFor="let entity of entities" [ngValue]="entity.value">
+                  {{entity.name}}
                 </option>
               </select>
             </div>

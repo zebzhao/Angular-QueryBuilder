@@ -23,14 +23,14 @@ export interface FieldMap {
 
 export interface Field {
   name: string;
-  value?: string;
+  value: string;
   type: string;
   nullable?: boolean;
   options?: Option[];
   operators?: string[];
   defaultValue?: any;
   defaultOperator?: any;
-  entityName?: string;
+  entity?: string;
   validator?: (rule: Rule, parent: RuleSet) => any | null;
 }
 
@@ -45,7 +45,8 @@ export interface EntityMap {
 
 export interface Entity {
   name: string;
-  description: string;
+  value: string;
+  defaultField?: any;
 }
 
 export interface QueryBuilderClassNames {

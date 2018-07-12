@@ -267,20 +267,11 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     return operators;
   }
 
-  getFields(entityName: string): Field[] {
-    if (this.entities && this.entities.length > 0 && entityName) {
-      const entityFields = Object.keys(this.config.fields).map((value) => {
-        const field = this.config.fields[value];
-        if (field && field.entityName && field.entityName === entityName) {
-          return field;
-        }
+  getFields(entity: string): Field[] {
+    if (this.entities && entity) {
+      return this.fields.filter(field => {
+        return field && field.entity == entity;
       });
-
-      if (entityFields && entityFields.length > 0) {
-        return entityFields.filter(d => d != null);
-      } else {
-        return this.fields;
-      }
     } else {
       return this.fields;
     }
@@ -316,6 +307,25 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     return classNames.length ? classNames.join(' ')  : null;
   }
 
+  getDefaultField(entity: Entity): Field {
+    if (!entity) {
+      return null
+    } else if (entity.defaultField !== undefined) {
+      return this.getDefaultValue(entity.defaultField);
+    } else {
+      const entityFields = this.fields.filter(field => {
+        return field && field.entity == entity.value;
+      });
+      if (entityFields && entityFields.length) {
+        return entityFields[0];
+      } else {
+        console.warn(`No fields found for entity '${entity.name}'. ` +
+        `A 'defaultOperator' is also not specified on the field config. Operator value will default to null.`);
+        return null;
+      }
+    }
+  }
+
   getDefaultOperator(field: Field) {
     if (field && field.defaultOperator !== undefined) {
       return this.getDefaultValue(field.defaultOperator);
@@ -340,7 +350,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
       parent.rules = parent.rules.concat([{
         field: field.value,
         operator: this.getDefaultOperator(field),
-        entity: field.entityName
+        entity: field.entity
       }]);
     }
 
@@ -425,24 +435,13 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     this.handleDataChange();
   }
 
-  changeEntity(entityName: string, rule: Rule): void {
-    if (this.config.fields) {
-      const entityFields = Object.keys(this.config.fields).map((value) => {
-        const field = this.config.fields[value];
-        if (field && field.entityName && field.entityName === entityName) {
-          return field;
-        }
-      });
-      if (entityFields && entityFields.length > 0) {
-        const entityField = entityFields.filter((d) => d != null)[0];
-        if (entityField) {
-          rule.field = entityField.value;
-          rule.operator  = this.getDefaultOperator(entityField),
-          rule.entity = entityField.entityName;
-          this.changeField(entityField.value, rule);
-        }
-      }
+  changeEntity(entityValue: string, rule: Rule): void {
+    const entity: Entity = this.entities.find(e => e.value === entityValue);
+    const defaultField: Field = this.getDefaultField(entity)
 
+    if (defaultField) {
+      this.changeField(defaultField.value, rule);
+    } else {
       this.handleTouched();
       this.handleDataChange();
     }
