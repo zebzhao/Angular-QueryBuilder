@@ -22,10 +22,8 @@ const config = {
         test: /\.ts$/,
         use: [
           {
-            loader: 'awesome-typescript-loader',
-            options: {
-              configFileName: path.resolve(__dirname, 'tsconfig.json')
-            }
+            loader: 'ts-loader',
+            configFile: 'tsconfig-aot.json'
           }
         ]
       }

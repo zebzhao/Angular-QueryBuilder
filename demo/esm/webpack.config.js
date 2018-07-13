@@ -22,10 +22,7 @@ const config = {
         test: /\.ts$/,
         use: [
           {
-            loader: 'awesome-typescript-loader',
-            options: {
-              configFileName: path.resolve(__dirname, 'tsconfig.json')
-            }
+            loader: 'ts-loader'
           }
         ]
       }
@@ -87,7 +84,7 @@ const config = {
   ],
 
   devServer: {
-    port: 8000,
+    port: 8100,
     historyApiFallback: true,
     watchOptions: {
       aggregateTimeout: 300,

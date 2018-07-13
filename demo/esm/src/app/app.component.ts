@@ -1,6 +1,6 @@
 import { FormBuilder, FormControl } from '@angular/forms';
 import { Component } from '@angular/core';
-import { QueryBuilderClassNames, QueryBuilderConfig } from '../../lib/components/query-builder';
+import { QueryBuilderClassNames, QueryBuilderConfig } from '../../lib';
 
 @Component({
   selector: 'my-app',
@@ -15,7 +15,14 @@ import { QueryBuilderClassNames, QueryBuilderConfig } from '../../lib/components
   </query-builder>
   <br>
   <div>
-    <p>Control Valid: {{ queryCtrl.valid }}</p>
+    <div class="row">
+      <p class="col-6">Control Valid: {{ queryCtrl.valid }}</p>
+      <div class="col-6">
+        <input type="checkbox" (change)=switchModes($event)>
+        <label>Entity Mode</label>
+      </div>
+    </div>
+    <p>Control Touched: {{ queryCtrl.touched }}</p>
     <textarea class="output">{{query | json}}</textarea>
   </div>
   <br>
@@ -42,18 +49,18 @@ import { QueryBuilderClassNames, QueryBuilderConfig } from '../../lib/components
         <mat-radio-button [style.padding.px]="10" value="or">Or</mat-radio-button>
       </mat-radio-group>
     </ng-container>
-    <ng-container *queryEntity="let rule; let entities=entities; let changeEntity=changeEntity">
+    <ng-container *queryEntity="let rule; let entities=entities; let onChange=onChange">
       <mat-form-field>
-        <mat-select [(ngModel)]="rule.entity" (ngModelChange)="changeEntity($event, rule)">
+        <mat-select [(ngModel)]="rule.entity" (ngModelChange)="onChange($event, rule)">
           <mat-option *ngFor="let entity of entities" [value]="entity.name">
           {{entity.description}}
           </mat-option>
         </mat-select>
       </mat-form-field>
     </ng-container>
-    <ng-container *queryField="let rule; let fields=fields; let changeField=changeField; let getFields = getFields">
+    <ng-container *queryField="let rule; let fields=fields; let onChange=onChange; let getFields = getFields">
       <mat-form-field>
-        <mat-select [(ngModel)]="rule.field" (ngModelChange)="changeField($event, rule)">
+        <mat-select [(ngModel)]="rule.field" (ngModelChange)="onChange($event, rule)">
           <mat-option *ngFor="let field of getFields(rule.entity)" [value]="field.value">
             {{ field.name }}
           </mat-option>
@@ -193,26 +200,25 @@ export class AppComponent {
       }
     ]
   };
-  public config: QueryBuilderConfig = {
-    entities: [{ name: 'Entity01', description: 'Entity 001' }, {name: 'Entity02', description: 'Entity 002'}],
+
+  public entityConfig: QueryBuilderConfig = {
     fields: {
-      age: {name: 'Age', type: 'number', entityName: 'Entity01'},
+      age: {name: 'Age', type: 'number'},
       gender: {
         name: 'Gender',
         type: 'category',
         options: [
           {name: 'Male', value: 'm'},
           {name: 'Female', value: 'f'}
-        ],
-        entityName: 'Entity01'
+        ]
       },
-      name: {name: 'Name', type: 'string', entityName: 'Entity01'},
-      notes: {name: 'Notes', type: 'textarea', operators: ['=', '!='], entityName: 'Entity02'},
+      name: {name: 'Name', type: 'string'},
+      notes: {name: 'Notes', type: 'textarea', operators: ['=', '!=']},
       educated: {name: 'College Degree?', type: 'boolean'},
       birthday: {name: 'Birthday', type: 'date', operators: ['=', '<=', '>'],
-        defaultValue: (() => new Date()), entityName: 'Entity02'
+        defaultValue: (() => new Date())
       },
-      school: {name: 'School', type: 'string', nullable: true, entityName: 'Entity02'},
+      school: {name: 'School', type: 'string', nullable: true},
       occupation: {
         name: 'Occupation',
         type: 'category',
@@ -221,15 +227,52 @@ export class AppComponent {
           {name: 'Teacher', value: 'teacher'},
           {name: 'Unemployed', value: 'unemployed'},
           {name: 'Scientist', value: 'scientist'}
-        ],
-        entityName: 'Entity02'
+        ]
       }
     }
   };
+
+  public config: QueryBuilderConfig = {
+    fields: {
+      age: {name: 'Age', type: 'number'},
+      gender: {
+        name: 'Gender',
+        type: 'category',
+        options: [
+          {name: 'Male', value: 'm'},
+          {name: 'Female', value: 'f'}
+        ]
+      },
+      name: {name: 'Name', type: 'string'},
+      notes: {name: 'Notes', type: 'textarea', operators: ['=', '!=']},
+      educated: {name: 'College Degree?', type: 'boolean'},
+      birthday: {name: 'Birthday', type: 'date', operators: ['=', '<=', '>'],
+        defaultValue: (() => new Date())
+      },
+      school: {name: 'School', type: 'string', nullable: true},
+      occupation: {
+        name: 'Occupation',
+        type: 'category',
+        options: [
+          {name: 'Student', value: 'student'},
+          {name: 'Teacher', value: 'teacher'},
+          {name: 'Unemployed', value: 'unemployed'},
+          {name: 'Scientist', value: 'scientist'}
+        ]
+      }
+    }
+  };
+
+  public currentConfig: QueryBuilderConfig;
 
   constructor(
     private formBuilder: FormBuilder
   ) {
     this.queryCtrl = this.formBuilder.control(this.query);
+    this.currentConfig = this.config;
+  }
+
+  switchModes(event: Event) {
+    this.currentConfig = (<HTMLInputElement>event.target).checked ? this.entityConfig : this.config;
   }
 }
