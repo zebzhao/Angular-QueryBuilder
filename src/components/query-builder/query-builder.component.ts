@@ -164,6 +164,8 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
           entity.value = entity.value || value;
           return entity;
         });
+      } else {
+        this.entities = null;
       }
       this.operatorsCache = {};
     } else {

@@ -45,7 +45,7 @@ export interface EntityMap {
 
 export interface Entity {
   name: string;
-  value: string;
+  value?: string;
   defaultField?: any;
 }
 
