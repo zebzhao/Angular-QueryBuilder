@@ -1,6 +1,17 @@
 Angular2-QueryBuilder Changelog
 ===============
 
+Version 0.3.0
+-----------
+- Breaking: Renamed `changeField` callback to `onChange` for `queryField` directive.
+- Add `onChange` callback to `queryEntity`, `queryInput`, `queryOperator`, `queryInput` for proper reactive form validation and touched behavior on custom components
+- Add proper touched behavior to reactive form usage (See #49)
+- Add entity mode (See #22)
+- Fix `[value]` unrecognized property binding
+- Fix QueryBuilderClassNames not being exported as interface
+- Fix `in` operator causing multi-select to be displayed for all types (only limited to `category`, `boolean` now)
+- Minor tweaks to CSS styling of default component
+
 Version 0.2.5
 -----------
 - Fix root remove ruleset button showing
