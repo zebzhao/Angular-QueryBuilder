@@ -93,10 +93,9 @@ export interface QueryBuilderConfig {
   removeRule?: (rule: Rule, parent: RuleSet) => void;
 }
 
-export interface OperatorContext {
-  onChange: (operatorValue: string, rule: Rule) => void;
-  operators: string[];
-  $implicit: Rule;
+export interface SwitchGroupContext {
+  onChange: () => void;
+  $implicit: RuleSet;
 }
 
 export interface EntityContext {
@@ -112,8 +111,14 @@ export interface FieldContext {
   $implicit: Rule;
 }
 
+export interface OperatorContext {
+  onChange: () => void;
+  operators: string[];
+  $implicit: Rule;
+}
+
 export interface InputContext {
-  onChange: (inputValue: any, rule: Rule) => void;
+  onChange: () => void;
   options: Option[];
   field: Field;
   $implicit: Rule;

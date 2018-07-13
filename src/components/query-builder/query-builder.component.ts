@@ -16,6 +16,7 @@ import { QueryRemoveButtonDirective } from './query-remove-button.directive';
 import {
     ButtonGroupContext,
     Field,
+    SwitchGroupContext,
     EntityContext,
     FieldContext,
     InputContext,
@@ -309,7 +310,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     return this.config.fields[field].options || this.defaultEmptyList;
   }
 
-  getClassNames(...args) {
+  getClassNames(...args): string {
     const clsLookup = this.classNames ? this.classNames : this.defaultClassNames;
     const classNames = args.map((id) => clsLookup[id] || this.defaultClassNames[id]).filter((c) => !!c);
     return classNames.length ? classNames.join(' ')  : null;
@@ -334,7 +335,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     }
   }
 
-  getDefaultOperator(field: Field) {
+  getDefaultOperator(field: Field): string {
     if (field && field.defaultOperator !== undefined) {
       return this.getDefaultValue(field.defaultOperator);
     } else {
@@ -408,12 +409,17 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     this.handleDataChange();
   }
 
-  changeOperator(operatorValue: string, rule: Rule): void {
+  changeCondition(): void {
     this.handleTouched();
     this.handleDataChange();
   }
 
-  changeInput(inputValue: any, rule: Rule): void {
+  changeOperator(): void {
+    this.handleTouched();
+    this.handleDataChange();
+  }
+
+  changeInput(): void {
     this.handleTouched();
     this.handleDataChange();
   }
@@ -548,6 +554,13 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     return this.entityContextCache.get(rule);
  }
 
+ getSwitchGroupContext(): SwitchGroupContext {
+   return {
+     onChange: this.changeCondition.bind(this),
+     $implicit: this.data
+   }
+ }
+
   getOperatorContext(rule: Rule): OperatorContext {
     if (!this.operatorContextCache.has(rule)) {
       this.operatorContextCache.set(rule, {
@@ -603,7 +616,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     }
   }
 
-  private handleDataChange() {
+  private handleDataChange(): void {
     this.changeDetectorRef.markForCheck();
     if (this.onChangeCallback) {
       this.onChangeCallback();
@@ -613,7 +626,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     }
   }
 
-  private handleTouched() {
+  private handleTouched(): void {
     if (this.onTouchedCallback) {
       this.onTouchedCallback();
     }
