@@ -277,8 +277,8 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
 
   getFields(entity: string): Field[] {
     if (this.entities && entity) {
-      return this.fields.filter(field => {
-        return field && field.entity == entity;
+      return this.fields.filter((field) => {
+        return field && field.entity === entity;
       });
     } else {
       return this.fields;
@@ -296,7 +296,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
         return null;  // No displayed component
       case 'in':
       case 'not in':
-        return type == 'category' || type == 'boolean' ? 'multiselect' : type;
+        return type === 'category' || type === 'boolean' ? 'multiselect' : type;
       default:
         return type;
     }
@@ -317,12 +317,12 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
 
   getDefaultField(entity: Entity): Field {
     if (!entity) {
-      return null
+      return null;
     } else if (entity.defaultField !== undefined) {
       return this.getDefaultValue(entity.defaultField);
     } else {
-      const entityFields = this.fields.filter(field => {
-        return field && field.entity == entity.value;
+      const entityFields = this.fields.filter((field) => {
+        return field && field.entity === entity.value;
       });
       if (entityFields && entityFields.length) {
         return entityFields[0];
@@ -444,8 +444,8 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   }
 
   changeEntity(entityValue: string, rule: Rule): void {
-    const entity: Entity = this.entities.find(e => e.value === entityValue);
-    const defaultField: Field = this.getDefaultField(entity)
+    const entity: Entity = this.entities.find((e) => e.value === entityValue);
+    const defaultField: Field = this.getDefaultField(entity);
 
     if (defaultField) {
       this.changeField(defaultField.value, rule);
