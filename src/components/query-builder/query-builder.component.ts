@@ -101,7 +101,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     category: ['=', '!=', 'in', 'not in'],
     boolean: ['=']
   };
-  public data: RuleSet = { condition: 'and', rules: [] };
+  @Input() data: RuleSet = { condition: 'and', rules: [] };
 
   // For ControlValueAccessor interface
   public onChangeCallback: () => void;
@@ -158,7 +158,13 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
         field.value = field.value || value;
         return field;
       });
-      this.entities = config.entities;
+      if (config.entities) {
+        this.entities = Object.keys(config.entities).map((value) => {
+          const entity = config.entities[value];
+          entity.value = entity.value || value;
+          return entity;
+        });
+      }
       this.operatorsCache = {};
     } else {
       throw new Error(`Expected 'config' must be a valid object, got ${type} instead.`);
@@ -188,10 +194,10 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
 
   // ----------ControlValueAccessor Implementation----------
 
+  @Input()
   get value(): RuleSet {
     return this.data;
   }
-
   set value(value: RuleSet) {
     // When component is initialized without a formControl, null is passed to value
     this.data = value || { condition: 'and', rules: [] };

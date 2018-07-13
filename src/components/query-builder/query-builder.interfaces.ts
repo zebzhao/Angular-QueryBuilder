@@ -23,7 +23,7 @@ export interface FieldMap {
 
 export interface Field {
   name: string;
-  value: string;
+  value?: string;
   type: string;
   nullable?: boolean;
   options?: Option[];
@@ -40,7 +40,7 @@ export interface LocalRuleMeta {
 }
 
 export interface EntityMap {
-  entities: Entity[];
+  [key: string]: Entity;
 }
 
 export interface Entity {
@@ -82,7 +82,7 @@ export interface QueryBuilderClassNames {
 
 export interface QueryBuilderConfig {
   fields: FieldMap;
-  entities?: Entity[];
+  entities?: EntityMap;
   allowEmptyRulesets?: boolean;
   getOperators?: (fieldName: string, field: Field) => string[];
   getInputType?: (field: string, operator: string) => string;

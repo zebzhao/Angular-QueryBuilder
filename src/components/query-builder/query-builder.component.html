@@ -131,7 +131,7 @@
 
         </ng-container>
         <query-builder *ngIf="local.ruleset"
-          [value]="rule"
+          [data]="rule"
           [parentTouchedCallback]="parentTouchedCallback || onTouchedCallback"
           [parentChangeCallback]="parentChangeCallback || onChangeCallback"
           [parentInputTemplates]="parentInputTemplates || inputTemplates"
