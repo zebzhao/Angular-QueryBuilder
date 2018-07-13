@@ -7,7 +7,7 @@ import { QueryBuilderClassNames, QueryBuilderConfig } from '../../lib';
   template: `
   <h2>Vanilla</h2>
   <br>
-  <query-builder [formControl]='queryCtrl' [config]='config'>
+  <query-builder [formControl]='queryCtrl' [config]='currentConfig'>
     <ng-container *queryInput="let rule; type: 'textarea'">
       <textarea class="text-input text-area" [(ngModel)]="rule.value"
         placeholder="Custom Textarea"></textarea>
@@ -29,7 +29,7 @@ import { QueryBuilderClassNames, QueryBuilderConfig } from '../../lib';
   <h2>Custom Material</h2>
   <br>
   <mat-card>
-  <query-builder [(ngModel)]='query' [config]='config'>
+  <query-builder [(ngModel)]='query' [config]='currentConfig'>
     <ng-container *queryButtonGroup="let ruleset; let addRule=addRule; let addRuleSet=addRuleSet; let removeRuleSet=removeRuleSet">
       <button mat-icon-button color="primary" (click)="addRule()">
         <mat-icon>add</mat-icon></button>
@@ -52,8 +52,8 @@ import { QueryBuilderClassNames, QueryBuilderConfig } from '../../lib';
     <ng-container *queryEntity="let rule; let entities=entities; let onChange=onChange">
       <mat-form-field>
         <mat-select [(ngModel)]="rule.entity" (ngModelChange)="onChange($event, rule)">
-          <mat-option *ngFor="let entity of entities" [value]="entity.name">
-          {{entity.description}}
+          <mat-option *ngFor="let entity of entities" [value]="entity.value">
+          {{entity.name}}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -126,7 +126,7 @@ import { QueryBuilderClassNames, QueryBuilderConfig } from '../../lib';
   <br>
   <h2>Bootstrap</h2>
   <br>
-  <query-builder [(ngModel)]='query' [classNames]='bootstrapClassNames' [config]='config'>
+  <query-builder [(ngModel)]='query' [classNames]='bootstrapClassNames' [config]='currentConfig'>
     <div class="col-auto" *queryInput="let rule; type: 'textarea'">
       <textarea class="form-control" [(ngModel)]="rule.value"
         placeholder="Custom Textarea"></textarea>
@@ -174,12 +174,13 @@ export class AppComponent {
     rule: 'border',
     ruleSet: 'border',
     invalidRuleSet: 'alert alert-danger',
+    emptyWarning: 'text-danger mx-auto',
     operatorControl: 'form-control',
-    operatorControlSize: 'col-auto px-0',
+    operatorControlSize: 'col-auto pr-0',
     fieldControl: 'form-control',
-    fieldControlSize: 'col-auto',
+    fieldControlSize: 'col-auto pr-0',
     entityControl: 'form-control',
-    entityControlSize: 'col-auto',
+    entityControlSize: 'col-auto pr-0',
     inputControl: 'form-control',
     inputControlSize: 'col-auto'
   };
@@ -187,40 +188,46 @@ export class AppComponent {
   public query = {
     condition: 'and',
     rules: [
-      {field: 'age', operator: '<=', entity: 'Entity01'},
-      {field: 'birthday', operator: '=', value: new Date(), entity: 'Entity02'},
+      {field: 'age', operator: '<=', entity: 'physical'},
+      {field: 'birthday', operator: '=', value: new Date(), entity: 'nonphysical'},
       {
         condition: 'or',
         rules: [
-          {field: 'gender', operator: '=', entity: 'Entity01'},
-          {field: 'occupation', operator: 'in', entity: 'Entity02'},
-          {field: 'school', operator: 'is null', entity: 'Entity02'},
-          {field: 'notes', operator: '=', entity: 'Entity02'}
+          {field: 'gender', operator: '=', entity: 'physical'},
+          {field: 'occupation', operator: 'in', entity: 'nonphysical'},
+          {field: 'school', operator: 'is null', entity: 'nonphysical'},
+          {field: 'notes', operator: '=', entity: 'nonphysical'}
         ]
       }
     ]
   };
 
   public entityConfig: QueryBuilderConfig = {
+    entities: {
+      physical: {name: 'Physical Attributes'},
+      nonphysical: {name: 'Nonphysical Attributes'}
+    },
     fields: {
-      age: {name: 'Age', type: 'number'},
+      age: {name: 'Age', type: 'number', entity: 'physical'},
       gender: {
         name: 'Gender',
+        entity: 'physical',
         type: 'category',
         options: [
           {name: 'Male', value: 'm'},
           {name: 'Female', value: 'f'}
         ]
       },
-      name: {name: 'Name', type: 'string'},
-      notes: {name: 'Notes', type: 'textarea', operators: ['=', '!=']},
-      educated: {name: 'College Degree?', type: 'boolean'},
+      name: {name: 'Name', type: 'string', entity: 'nonphysical'},
+      notes: {name: 'Notes', type: 'textarea', operators: ['=', '!='], entity: 'nonphysical'},
+      educated: {name: 'College Degree?', type: 'boolean', entity: 'nonphysical'},
       birthday: {name: 'Birthday', type: 'date', operators: ['=', '<=', '>'],
-        defaultValue: (() => new Date())
+        defaultValue: (() => new Date()), entity: 'nonphysical'
       },
-      school: {name: 'School', type: 'string', nullable: true},
+      school: {name: 'School', type: 'string', nullable: true, entity: 'nonphysical'},
       occupation: {
         name: 'Occupation',
+        entity: 'nonphysical',
         type: 'category',
         options: [
           {name: 'Student', value: 'student'},
