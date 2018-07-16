@@ -196,7 +196,7 @@ See [documentation](https://zebzhao.github.io/Angular-QueryBuilder/) for more de
 |`allowRuleset`|`boolean`|Optional|`true`| Displays the `+ Ruleset` button if `true`. |
 |`classNames`|`object`|Optional|| CSS class names for different child elements in `query-builder` component. |
 |`config`|`QueryBuilderConfig`|Required|| Configuration object for the main component. |
-|`data`| `Ruleset` |Optional|| *DEPRECATED* (Use `ngModel` or `value` instead.) |
+|`data`| `Ruleset` |Optional|| (Use `ngModel` or `value` instead.) |
 |`ngModel`| `Ruleset` |Optional|| Object that stores the state of the component. Supports 2-way binding. |
 |`operatorMap`|`{ [key: string]: string[] }`|Optional|| Used to map field types to list of operators. |
 |`value`| `Ruleset` |Optional|| Object that stores the state of the component. |
@@ -212,24 +212,35 @@ Use these directives to replace different parts of query builder with custom com
 |`$implicit`|`Rule`|Current rule object which contains the field, value, and operator|
 |`field`|`Field`|Current field object which contains the field's value and name|
 |`options`|`Option[]`|List of options for the field, returned by `getOptions`|
+|`onChange`|`() => void`|Callback to handle changes to the input component|
 
 #### `queryOperator`
 |Context Name|Type|Description|
 |:--- |:--- |:--- |
 |`$implicit`|`Rule`|Current rule object which contains the field, value, and operator|
 |`operators`|`string[]`|List of operators for the field, returned by `getOperators`|
+|`onChange`|`() => void`|Callback to handle changes to the operator component|
 
 #### `queryField`
 |Context Name|Type|Description|
 |:--- |:--- |:--- |
 |`$implicit`|`Rule`|Current rule object which contains the field, value, and operator|
+|`getFields`|`(entityName: string) => void`|Get the list of fields corresponding to an entity|
 |`fields`|`Field[]`|List of fields for the component, specified by `config`|
-|`changeField`|`(fieldName: string, rule: Rule) => void`|Function to handle changes to the field component|
+|`onChange`|`(fieldValue: string, rule: Rule) => void`|Callback to handle changes to the field component|
+
+#### `queryEntity`
+|Context Name|Type|Description|
+|:--- |:--- |:--- |
+|`$implicit`|`Rule`|Current rule object which contains the field, value, and operator|
+|`entities`|`Entity[]`|List of entities for the component, specified by `config`|
+|`onChange`|`(entityValue: string, rule: Rule) => void`|Callback to handle changes to the entity component|
 
 #### `querySwitchGroup`
 |Context Name|Type|Description|
 |:--- |:--- |:--- |
 |`$implicit`|`RuleSet`|Current rule set object which contain a list of child rules|
+|`onChange`|`() => void`|Callback to handle changes to the switch group component|
 
 #### `queryButtonGroup`
 |Context Name|Type|Description|
