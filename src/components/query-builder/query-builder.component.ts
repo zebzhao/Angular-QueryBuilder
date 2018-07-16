@@ -558,7 +558,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
    return {
      onChange: this.changeCondition.bind(this),
      $implicit: this.data
-   }
+   };
  }
 
   getOperatorContext(rule: Rule): OperatorContext {
