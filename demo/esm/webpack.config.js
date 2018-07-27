@@ -22,7 +22,7 @@ const config = {
         test: /\.ts$/,
         use: [
           {
-            loader: 'awesome-typescript-loader'
+            loader: 'ts-loader',
           }
         ]
       }
@@ -55,6 +55,17 @@ const config = {
       /angular(\\|\/)core(\\|\/)@angular/,
       path.resolve(__dirname, 'src'),
       {}
+    ),
+
+    /**
+     * Plugin: ContextReplacementPlugin
+     * Description: Provides context to Angular's use of System.import
+     *
+     * @see: https://github.com/angular/angular/issues/20357
+     */
+    new webpack.ContextReplacementPlugin(
+      /\@angular(\\|\/)core(\\|\/)esm5/,
+      path.resolve(__dirname, './client')
     ),
 
     /*

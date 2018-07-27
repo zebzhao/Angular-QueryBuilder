@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { QueryBuilderClassNames, QueryBuilderConfig } from '../../lib';
 
 @Component({
-  selector: 'my-app',
+  selector: 'my-app2',
   template: `
   <h2>Vanilla</h2>
   <br>
@@ -16,13 +16,13 @@ import { QueryBuilderClassNames, QueryBuilderConfig } from '../../lib';
   <br>
   <div>
     <div class="row">
-      <p class="col-6">Control Valid: {{ queryCtrl.valid }}</p>
+      <p class="col-6">Control Valid (Vanilla): {{ queryCtrl.valid }}</p>
       <div class="col-6">
         <input type="checkbox" (change)=switchModes($event)>
         <label>Entity Mode</label>
       </div>
     </div>
-    <p>Control Touched: {{ queryCtrl.touched }}</p>
+    <p>Control Touched (Vanilla): {{ queryCtrl.touched }}</p>
     <textarea class="output">{{query | json}}</textarea>
   </div>
   <br>
@@ -43,8 +43,8 @@ import { QueryBuilderClassNames, QueryBuilderConfig } from '../../lib';
         <mat-icon>remove</mat-icon>
       </button>
     </ng-container>
-    <ng-container *querySwitchGroup="let ruleset">
-      <mat-radio-group *ngIf="ruleset" [(ngModel)]="ruleset.condition">
+    <ng-container *querySwitchGroup="let ruleset; let onChange=onChange">
+      <mat-radio-group *ngIf="ruleset" [(ngModel)]="ruleset.condition" (ngModelChange)="onChange($event)">
         <mat-radio-button [style.padding.px]="10" value="and">And</mat-radio-button>
         <mat-radio-button [style.padding.px]="10" value="or">Or</mat-radio-button>
       </mat-radio-group>
@@ -67,57 +67,56 @@ import { QueryBuilderClassNames, QueryBuilderConfig } from '../../lib';
         </mat-select>
       </mat-form-field>
     </ng-container>
-    <ng-container *queryOperator="let rule; let operators=operators">
+    <ng-container *queryOperator="let rule; let operators=operators; let onChange=onChange">
       <mat-form-field [style.width.px]="90">
-        <mat-select [(ngModel)]="rule.operator">
+        <mat-select [(ngModel)]="rule.operator" (ngModelChange)="onChange()">
           <mat-option *ngFor="let value of operators" [value]="value">
             {{ value }}
           </mat-option>
         </mat-select>
       </mat-form-field>
     </ng-container>
-    <ng-container *queryInput="let rule; type: 'boolean'">
-      <mat-checkbox [(ngModel)]="rule.value"></mat-checkbox>
+    <ng-container *queryInput="let rule; type: 'boolean'; let onChange=onChange">
+      <mat-checkbox [(ngModel)]="rule.value" (ngModelChange)="onChange()"></mat-checkbox>
     </ng-container>
-    <ng-container *queryInput="let rule; let field=field; let options=options; type: 'category'">
+    <ng-container *queryInput="let rule; let field=field; let options=options; type: 'category'; let onChange=onChange">
       <mat-form-field>
-        <mat-select [(ngModel)]="rule.value" [placeholder]="field.name">
+        <mat-select [(ngModel)]="rule.value" (ngModelChange)="onChange()">
           <mat-option *ngFor="let opt of options" [value]="opt.value">
             {{ opt.name }}
           </mat-option>
         </mat-select>
       </mat-form-field>
     </ng-container>
-    <ng-container *queryInput="let rule; type: 'date'">
+    <ng-container *queryInput="let rule; type: 'date'; let onChange=onChange">
       <mat-form-field>
-        <input matInput [matDatepicker]="picker" [(ngModel)]="rule.value"
-          placeholder="Choose a date">
+        <input matInput [matDatepicker]="picker" [(ngModel)]="rule.value" (ngModelChange)="onChange()">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
     </ng-container>
-    <ng-container *queryInput="let rule; let options=options; type: 'multiselect'">
+    <ng-container *queryInput="let rule; let options=options; type: 'multiselect'; let onChange=onChange">
       <mat-form-field [style.width.px]="300">
-        <mat-select [(ngModel)]="rule.value" multiple>
+        <mat-select [(ngModel)]="rule.value" multiple (ngModelChange)="onChange()">
           <mat-option *ngFor="let opt of options" [value]="opt.value">
             {{ opt.name }}
           </mat-option>
         </mat-select>
       </mat-form-field>
     </ng-container>
-    <ng-container *queryInput="let rule; let field=field; type: 'number'">
+    <ng-container *queryInput="let rule; let field=field; type: 'number'; let onChange=onChange">
       <mat-form-field [style.width.px]="50">
-        <input matInput [(ngModel)]="rule.value" [placeholder]="field.name" type="number">
+        <input matInput [(ngModel)]="rule.value" type="number" (ngModelChange)="onChange()">
       </mat-form-field>
     </ng-container>
-    <ng-container *queryInput="let rule; let field=field; type: 'string'">
+    <ng-container *queryInput="let rule; let field=field; type: 'string'; let onChange=onChange">
       <mat-form-field>
-        <input matInput [(ngModel)]="rule.value" [placeholder]="field.name">
+        <input matInput [(ngModel)]="rule.value" (ngModelChange)="onChange()">
       </mat-form-field>
     </ng-container>
-    <ng-container *queryInput="let rule; let field=field; type: 'textarea'">
+    <ng-container *queryInput="let rule; let field=field; type: 'textarea'; let onChange=onChange">
       <mat-form-field>
-        <textarea matInput [(ngModel)]="rule.value" [placeholder]="field.name">
+        <textarea matInput [(ngModel)]="rule.value" (ngModelChange)="onChange()">
         </textarea>
       </mat-form-field>
     </ng-container>
@@ -137,6 +136,11 @@ import { QueryBuilderClassNames, QueryBuilderConfig } from '../../lib';
   /deep/ html {
     font: 14px sans-serif;
     margin: 30px;
+  }
+
+  .mat-form-field {
+    padding-left: 5px;
+    padding-right: 5px;
   }
 
   .text-input {
