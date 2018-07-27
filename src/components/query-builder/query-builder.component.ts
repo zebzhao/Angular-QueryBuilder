@@ -359,6 +359,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
       parent.rules = parent.rules.concat([{
         field: field.value,
         operator: this.getDefaultOperator(field),
+        value: this.getDefaultValue(field.defaultValue),
         entity: field.entity
       }]);
     }
