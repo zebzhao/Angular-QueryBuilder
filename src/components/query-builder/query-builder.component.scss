@@ -21,6 +21,7 @@
 
   .q-remove-button {
     color: #B3415D;
+    width: 31px;
   }
 
   .q-switch-group, .q-button-group {
@@ -34,13 +35,14 @@
 
   .q-button {
     margin-left: 8px;
-    padding: 2px 8px;
+    padding: 0 8px;
     background-color: white;
   }
 
   .q-control-size {
     display: inline-block;
     vertical-align: top;
+    padding-right: 10px;
   }
 
   .q-input-control, .q-operator-control, .q-field-control, .q-entity-control {
@@ -64,6 +66,7 @@
     float: left;
     margin-bottom: 0;
     font-size: 14px;
+    line-height: 30px;
     font-weight: normal;
     text-align: center;
     text-shadow: none;
@@ -78,7 +81,6 @@
 
   .q-switch-label {
     background-color: #e4e4e4;
-    line-height: 24px;
     padding: 0 8px;
   }
 
@@ -130,8 +132,8 @@
   }
 
   .q-row {
-    padding: 4px 6px;
-    margin-top: 4px;
+    padding: 6px 8px;
+    margin-top: 6px;
   }
 
   .q-connector {

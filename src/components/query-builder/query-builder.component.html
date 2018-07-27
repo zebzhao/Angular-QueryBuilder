@@ -28,12 +28,12 @@
   <ng-template #defaultSwitchGroup>
     <div [ngClass]="getClassNames('switchGroup', 'transition')" *ngIf="data">
       <div [ngClass]="getClassNames('switchControl')">
-        <input type="radio" [ngClass]="getClassNames('switchRadio')" [(ngModel)]="data.condition" (ngModelChange)="changeCondition()" value="and" #andOption/>
-        <label (click)="data.condition=andOption.value" [ngClass]="getClassNames('switchLabel')">AND</label>
+        <input type="radio" [ngClass]="getClassNames('switchRadio')" [(ngModel)]="data.condition" value="and" #andOption/>
+        <label (click)="changeCondition(andOption.value)" [ngClass]="getClassNames('switchLabel')">AND</label>
       </div>
       <div [ngClass]="getClassNames('switchControl')">
-        <input type="radio" [ngClass]="getClassNames('switchRadio')" [(ngModel)]="data.condition" (ngModelChange)="changeCondition()" value="or" #orOption/>
-        <label (click)="data.condition=orOption.value" [ngClass]="getClassNames('switchLabel')">OR</label>
+        <input type="radio" [ngClass]="getClassNames('switchRadio')" [(ngModel)]="data.condition" value="or" #orOption/>
+        <label (click)="changeCondition(orOption.value)" [ngClass]="getClassNames('switchLabel')">OR</label>
       </div>
     </div>
   </ng-template>

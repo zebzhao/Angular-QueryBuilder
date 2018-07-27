@@ -409,7 +409,8 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     this.handleDataChange();
   }
 
-  changeCondition(): void {
+  changeCondition(value: string): void {
+    this.data.condition = value;
     this.handleTouched();
     this.handleDataChange();
   }

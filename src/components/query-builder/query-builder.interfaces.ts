@@ -94,7 +94,7 @@ export interface QueryBuilderConfig {
 }
 
 export interface SwitchGroupContext {
-  onChange: () => void;
+  onChange: (conditionValue: string) => void;
   $implicit: RuleSet;
 }
 
