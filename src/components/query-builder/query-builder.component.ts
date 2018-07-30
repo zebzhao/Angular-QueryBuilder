@@ -356,7 +356,9 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   }
 
   addRule(parent?: RuleSet): void {
-    if (this.disabled) return;
+    if (this.disabled) {
+      return;
+    }
 
     parent = parent || this.data;
     if (this.config.addRule) {
@@ -376,7 +378,9 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   }
 
   removeRule(rule: Rule, parent?: RuleSet): void {
-    if (this.disabled) return;
+    if (this.disabled) {
+      return;
+    }
 
     parent = parent || this.data;
     if (this.config.removeRule) {
@@ -395,7 +399,9 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   }
 
   addRuleSet(parent?: RuleSet): void {
-    if (this.disabled) return;
+    if (this.disabled) {
+      return;
+    }
 
     parent = parent || this.data;
     if (this.config.addRuleSet) {
@@ -409,7 +415,9 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   }
 
   removeRuleSet(ruleset?: RuleSet, parent?: RuleSet): void {
-    if (this.disabled) return;
+    if (this.disabled) {
+      return;
+    }
 
     ruleset = ruleset || this.data;
     parent = parent || this.parentValue;
@@ -424,7 +432,9 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   }
 
   changeCondition(value: string): void {
-    if (this.disabled) return;
+    if (this.disabled) {
+      return;
+    }
 
     this.data.condition = value;
     this.handleTouched();
@@ -432,21 +442,27 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   }
 
   changeOperator(): void {
-    if (this.disabled) return;
+    if (this.disabled) {
+      return;
+    }
 
     this.handleTouched();
     this.handleDataChange();
   }
 
   changeInput(): void {
-    if (this.disabled) return;
+    if (this.disabled) {
+      return;
+    }
 
     this.handleTouched();
     this.handleDataChange();
   }
 
   changeField(fieldValue: string, rule: Rule): void {
-    if (this.disabled) return;
+    if (this.disabled) {
+      return;
+    }
 
     const field: Field = this.config.fields[fieldValue];
 
@@ -473,7 +489,9 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   }
 
   changeEntity(entityValue: string, rule: Rule): void {
-    if (this.disabled) return;
+    if (this.disabled) {
+      return;
+    }
 
     const entity: Entity = this.entities.find((e) => e.value === entityValue);
     const defaultField: Field = this.getDefaultField(entity);
