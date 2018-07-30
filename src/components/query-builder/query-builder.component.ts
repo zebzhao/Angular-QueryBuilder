@@ -63,7 +63,6 @@ export const VALIDATOR: any = {
   providers: [CONTROL_VALUE_ACCESSOR, VALIDATOR]
 })
 export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAccessor, Validator {
-  public disabled: boolean;
   public fields: Field[];
   public filterFields: Field[];
   public entities: Entity[];
@@ -102,6 +101,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     category: ['=', '!=', 'in', 'not in'],
     boolean: ['=']
   };
+  @Input() disabled: boolean;
   @Input() data: RuleSet = { condition: 'and', rules: [] };
 
   // For ControlValueAccessor interface
@@ -218,9 +218,14 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   }
   setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
+    this.changeDetectorRef.detectChanges();
   }
 
   // ----------END----------
+
+  getDisabledState(): boolean {
+    return this.disabled;
+  }
 
   findTemplateForRule(rule: Rule): TemplateRef<any> {
     const type = this.getInputType(rule.field, rule.operator);
@@ -351,6 +356,8 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   }
 
   addRule(parent?: RuleSet): void {
+    if (this.disabled) return;
+
     parent = parent || this.data;
     if (this.config.addRule) {
       this.config.addRule(parent);
@@ -369,6 +376,8 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   }
 
   removeRule(rule: Rule, parent?: RuleSet): void {
+    if (this.disabled) return;
+
     parent = parent || this.data;
     if (this.config.removeRule) {
       this.config.removeRule(rule, parent);
@@ -386,6 +395,8 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   }
 
   addRuleSet(parent?: RuleSet): void {
+    if (this.disabled) return;
+
     parent = parent || this.data;
     if (this.config.addRuleSet) {
       this.config.addRuleSet(parent);
@@ -398,6 +409,8 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   }
 
   removeRuleSet(ruleset?: RuleSet, parent?: RuleSet): void {
+    if (this.disabled) return;
+
     ruleset = ruleset || this.data;
     parent = parent || this.parentValue;
     if (this.config.removeRuleSet) {
@@ -411,22 +424,30 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   }
 
   changeCondition(value: string): void {
+    if (this.disabled) return;
+
     this.data.condition = value;
     this.handleTouched();
     this.handleDataChange();
   }
 
   changeOperator(): void {
+    if (this.disabled) return;
+
     this.handleTouched();
     this.handleDataChange();
   }
 
   changeInput(): void {
+    if (this.disabled) return;
+
     this.handleTouched();
     this.handleDataChange();
   }
 
   changeField(fieldValue: string, rule: Rule): void {
+    if (this.disabled) return;
+
     const field: Field = this.config.fields[fieldValue];
 
     if (field && field.defaultValue !== undefined) {
@@ -452,6 +473,8 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   }
 
   changeEntity(entityValue: string, rule: Rule): void {
+    if (this.disabled) return;
+
     const entity: Entity = this.entities.find((e) => e.value === entityValue);
     const defaultField: Field = this.getDefaultField(entity);
 
@@ -517,6 +540,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
         addRule: this.addRule.bind(this),
         addRuleSet: this.allowRuleset && this.addRuleSet.bind(this),
         removeRuleSet: this.allowRuleset && this.parentValue && this.removeRuleSet.bind(this),
+        getDisabledState: this.getDisabledState.bind(this),
         $implicit: this.data
       };
     }
@@ -527,6 +551,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     if (!this.removeButtonContextCache.has(rule)) {
       this.removeButtonContextCache.set(rule, {
         removeRule: this.removeRule.bind(this),
+        getDisabledState: this.getDisabledState.bind(this),
         $implicit: rule
       });
     }
@@ -538,6 +563,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
       this.fieldContextCache.set(rule, {
         onChange: this.changeField.bind(this),
         getFields: this.getFields.bind(this),
+        getDisabledState: this.getDisabledState.bind(this),
         fields: this.fields,
         $implicit: rule
       });
@@ -549,6 +575,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     if (!this.entityContextCache.has(rule)) {
       this.entityContextCache.set(rule, {
         onChange: this.changeEntity.bind(this),
+        getDisabledState: this.getDisabledState.bind(this),
         entities: this.entities,
         $implicit: rule
       });
@@ -559,6 +586,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
  getSwitchGroupContext(): SwitchGroupContext {
    return {
      onChange: this.changeCondition.bind(this),
+     getDisabledState: this.getDisabledState.bind(this),
      $implicit: this.data
    };
  }
@@ -567,6 +595,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     if (!this.operatorContextCache.has(rule)) {
       this.operatorContextCache.set(rule, {
         onChange: this.changeOperator.bind(this),
+        getDisabledState: this.getDisabledState.bind(this),
         operators: this.getOperators(rule.field),
         $implicit: rule
       });
@@ -578,6 +607,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     if (!this.inputContextCache.has(rule)) {
       this.inputContextCache.set(rule, {
         onChange: this.changeInput.bind(this),
+        getDisabledState: this.getDisabledState.bind(this),
         options: this.getOptions(rule.field),
         field: this.config.fields[rule.field],
         $implicit: rule

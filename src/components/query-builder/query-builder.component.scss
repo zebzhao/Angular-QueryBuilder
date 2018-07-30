@@ -37,6 +37,10 @@
     margin-left: 8px;
     padding: 0 8px;
     background-color: white;
+
+    &:disabled {
+      display: none;
+    }
   }
 
   .q-control-size {
@@ -55,6 +59,10 @@
     border-radius: 4px;
     box-sizing: border-box;
     width: auto;
+
+    &:disabled {
+      border-color: transparent;
+    }
   }
 
   .q-operator-control, .q-field-control,.q-entity-control, .q-input-control:not([type='checkbox']) {
@@ -96,6 +104,17 @@
       border: 1px solid rgb(97, 158, 215);
       background: white;
       color: rgb(49, 118, 179);
+    }
+
+    &:disabled + .q-switch-label {
+      display: none;
+    }
+
+    &:checked:disabled + .q-switch-label {
+      display: initial;
+      color: initial;
+      cursor: default;
+      border-color: transparent;
     }
   }
 

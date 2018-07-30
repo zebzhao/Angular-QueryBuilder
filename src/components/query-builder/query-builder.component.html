@@ -7,14 +7,14 @@
 
   <ng-template #defaultButtonGroup>
     <div [ngClass]="getClassNames('buttonGroup', 'rightAlign')">
-      <button (click)="addRule()" [ngClass]="getClassNames('button')">
+      <button (click)="addRule()" [ngClass]="getClassNames('button')" [disabled]=disabled>
         <i [ngClass]="getClassNames('addIcon')"></i> Rule
       </button>
-      <button (click)="addRuleSet()" [ngClass]="getClassNames('button')" *ngIf="allowRuleset">
+      <button (click)="addRuleSet()" [ngClass]="getClassNames('button')" *ngIf="allowRuleset" [disabled]=disabled>
         <i [ngClass]="getClassNames('addIcon')"></i> Ruleset
       </button>
       <ng-container *ngIf="!!parentValue && allowRuleset">
-        <button (click)="removeRuleSet()" [ngClass]="getClassNames('button', 'removeButton')">
+        <button (click)="removeRuleSet()" [ngClass]="getClassNames('button', 'removeButton')" [disabled]=disabled>
           <i [ngClass]="getClassNames('removeIcon')"></i>
         </button>
       </ng-container>
@@ -28,11 +28,11 @@
   <ng-template #defaultSwitchGroup>
     <div [ngClass]="getClassNames('switchGroup', 'transition')" *ngIf="data">
       <div [ngClass]="getClassNames('switchControl')">
-        <input type="radio" [ngClass]="getClassNames('switchRadio')" [(ngModel)]="data.condition" value="and" #andOption/>
+        <input type="radio" [ngClass]="getClassNames('switchRadio')" [(ngModel)]="data.condition" [disabled]=disabled value="and" #andOption/>
         <label (click)="changeCondition(andOption.value)" [ngClass]="getClassNames('switchLabel')">AND</label>
       </div>
       <div [ngClass]="getClassNames('switchControl')">
-        <input type="radio" [ngClass]="getClassNames('switchRadio')" [(ngModel)]="data.condition" value="or" #orOption/>
+        <input type="radio" [ngClass]="getClassNames('switchRadio')" [(ngModel)]="data.condition" [disabled]=disabled value="or" #orOption/>
         <label (click)="changeCondition(orOption.value)" [ngClass]="getClassNames('switchLabel')">OR</label>
       </div>
     </div>
@@ -53,7 +53,7 @@
 
           <ng-template #defaultRemoveButton>
             <div [ngClass]="getClassNames('removeButtonSize', 'rightAlign')">
-              <button [ngClass]="getClassNames('button', 'removeButton')" (click)="removeRule(rule, data)">
+              <button [ngClass]="getClassNames('button', 'removeButton')" (click)="removeRule(rule, data)" [disabled]=disabled>
                 <i [ngClass]="getClassNames('removeIcon')"></i>
               </button>
             </div>
@@ -67,7 +67,7 @@
 
           <ng-template #defaultEntity>
             <div [ngClass]="getClassNames('entityControlSize')">
-              <select [ngClass]="getClassNames('entityControl')" [(ngModel)]="rule.entity" (ngModelChange)="changeEntity($event, rule)">
+              <select [ngClass]="getClassNames('entityControl')" [(ngModel)]="rule.entity" (ngModelChange)="changeEntity($event, rule)" [disabled]="disabled">
                 <option *ngFor="let entity of entities" [ngValue]="entity.value">
                   {{entity.name}}
                 </option>
@@ -81,7 +81,7 @@
 
           <ng-template #defaultField>
             <div [ngClass]="getClassNames('fieldControlSize')">
-              <select [ngClass]="getClassNames('fieldControl')" [(ngModel)]="rule.field" (ngModelChange)="changeField($event, rule)">
+              <select [ngClass]="getClassNames('fieldControl')" [(ngModel)]="rule.field" (ngModelChange)="changeField($event, rule)" [disabled]="disabled">
                 <option *ngFor="let field of getFields(rule.entity)" [ngValue]="field.value">
                   {{field.name}}
                 </option>
@@ -95,7 +95,7 @@
 
           <ng-template #defaultOperator>
             <div [ngClass]="getClassNames('operatorControlSize')">
-              <select [ngClass]="getClassNames('operatorControl')" [(ngModel)]="rule.operator" (ngModelChange)="changeOperator()">
+              <select [ngClass]="getClassNames('operatorControl')" [(ngModel)]="rule.operator" (ngModelChange)="changeOperator()" [disabled]="disabled">
                 <option *ngFor="let operator of getOperators(rule.field)" [ngValue]="operator">
                   {{operator}}
                 </option>
@@ -109,29 +109,30 @@
 
           <ng-template #defaultInput>
             <div [ngClass]="getClassNames('inputControlSize')" [ngSwitch]="getInputType(rule.field, rule.operator)">
-              <input [ngClass]="getClassNames('inputControl')" [(ngModel)]="rule.value" (ngModelChange)="changeInput()" *ngSwitchCase="'string'" type="text">
-              <input [ngClass]="getClassNames('inputControl')" [(ngModel)]="rule.value" (ngModelChange)="changeInput()" *ngSwitchCase="'number'" type="number">
-              <input [ngClass]="getClassNames('inputControl')" [(ngModel)]="rule.value" (ngModelChange)="changeInput()" *ngSwitchCase="'date'" type="date">
-              <input [ngClass]="getClassNames('inputControl')" [(ngModel)]="rule.value" (ngModelChange)="changeInput()" *ngSwitchCase="'time'" type="time">
-              <select [ngClass]="getClassNames('inputControl')" [(ngModel)]="rule.value" (ngModelChange)="changeInput()" *ngSwitchCase="'category'">
+              <input [ngClass]="getClassNames('inputControl')" [(ngModel)]="rule.value" (ngModelChange)="changeInput()" [disabled]="disabled" *ngSwitchCase="'string'" type="text">
+              <input [ngClass]="getClassNames('inputControl')" [(ngModel)]="rule.value" (ngModelChange)="changeInput()" [disabled]="disabled" *ngSwitchCase="'number'" type="number">
+              <input [ngClass]="getClassNames('inputControl')" [(ngModel)]="rule.value" (ngModelChange)="changeInput()" [disabled]="disabled" *ngSwitchCase="'date'" type="date">
+              <input [ngClass]="getClassNames('inputControl')" [(ngModel)]="rule.value" (ngModelChange)="changeInput()" [disabled]="disabled" *ngSwitchCase="'time'" type="time">
+              <select [ngClass]="getClassNames('inputControl')" [(ngModel)]="rule.value" (ngModelChange)="changeInput()" [disabled]="disabled" *ngSwitchCase="'category'">
                 <option *ngFor="let opt of getOptions(rule.field)" [ngValue]="opt.value">
                   {{opt.name}}
                 </option>
               </select>
               <ng-container *ngSwitchCase="'multiselect'">
-                <select [ngClass]="getClassNames('inputControl')" [(ngModel)]="rule.value" (ngModelChange)="changeInput()" multiple>
+                <select [ngClass]="getClassNames('inputControl')" [(ngModel)]="rule.value" (ngModelChange)="changeInput()" [disabled]="disabled" multiple>
                   <option *ngFor="let opt of getOptions(rule.field)" [ngValue]="opt.value">
                     {{opt.name}}
                   </option>
                 </select>
               </ng-container>
-              <input [ngClass]="getClassNames('inputControl')" [(ngModel)]="rule.value" (ngModelChange)="changeInput()" *ngSwitchCase="'boolean'" type="checkbox">
+              <input [ngClass]="getClassNames('inputControl')" [(ngModel)]="rule.value" (ngModelChange)="changeInput()" [disabled]="disabled" *ngSwitchCase="'boolean'" type="checkbox">
             </div>
           </ng-template>
 
         </ng-container>
         <query-builder *ngIf="local.ruleset"
           [data]="rule"
+          [disabled]="disabled"
           [parentTouchedCallback]="parentTouchedCallback || onTouchedCallback"
           [parentChangeCallback]="parentChangeCallback || onChangeCallback"
           [parentInputTemplates]="parentInputTemplates || inputTemplates"

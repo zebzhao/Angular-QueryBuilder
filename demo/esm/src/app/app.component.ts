@@ -8,8 +8,8 @@ import { QueryBuilderClassNames, QueryBuilderConfig } from '../../lib';
   <h2>Vanilla</h2>
   <br>
   <query-builder [formControl]='queryCtrl' [config]='currentConfig'>
-    <ng-container *queryInput="let rule; type: 'textarea'">
-      <textarea class="text-input text-area" [(ngModel)]="rule.value"
+    <ng-container *queryInput="let rule; type: 'textarea'; let getDisabledState=getDisabledState">
+      <textarea class="text-input text-area" [(ngModel)]="rule.value" [disabled]=getDisabledState()
         placeholder="Custom Textarea"></textarea>
     </ng-container>
   </query-builder>
@@ -18,11 +18,15 @@ import { QueryBuilderClassNames, QueryBuilderConfig } from '../../lib';
     <div class="row">
       <p class="col-6">Control Valid (Vanilla): {{ queryCtrl.valid }}</p>
       <div class="col-6">
-        <input type="checkbox" (change)=switchModes($event)>
-        <label>Entity Mode</label>
+        <label><input type="checkbox" (change)=switchModes($event)>Entity Mode</label>
       </div>
     </div>
-    <p>Control Touched (Vanilla): {{ queryCtrl.touched }}</p>
+    <div class="row">
+      <p class="col-6">Control Touched (Vanilla): {{ queryCtrl.touched }}</p>
+      <div class="col-6">
+        <label><input type="checkbox" (change)=changeDisabled($event)>Disabled</label>
+      </div>
+    </div>
     <textarea class="output">{{query | json}}</textarea>
   </div>
   <br>
@@ -285,5 +289,9 @@ export class AppComponent {
 
   switchModes(event: Event) {
     this.currentConfig = (<HTMLInputElement>event.target).checked ? this.entityConfig : this.config;
+  }
+
+  changeDisabled(event: Event) {
+    (<HTMLInputElement>event.target).checked ? this.queryCtrl.disable() : this.queryCtrl.enable();
   }
 }

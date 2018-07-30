@@ -95,11 +95,13 @@ export interface QueryBuilderConfig {
 
 export interface SwitchGroupContext {
   onChange: (conditionValue: string) => void;
+  getDisabledState: () => boolean;
   $implicit: RuleSet;
 }
 
 export interface EntityContext {
   onChange: (entityValue: string, rule: Rule) => void;
+  getDisabledState: () => boolean;
   entities: Entity[];
   $implicit: Rule;
 }
@@ -107,18 +109,21 @@ export interface EntityContext {
 export interface FieldContext {
   onChange: (fieldValue: string, rule: Rule) => void;
   getFields: (entityName: string) => void;
+  getDisabledState: () => boolean;
   fields: Field[];
   $implicit: Rule;
 }
 
 export interface OperatorContext {
   onChange: () => void;
+  getDisabledState: () => boolean;
   operators: string[];
   $implicit: Rule;
 }
 
 export interface InputContext {
   onChange: () => void;
+  getDisabledState: () => boolean;
   options: Option[];
   field: Field;
   $implicit: Rule;
@@ -128,10 +133,12 @@ export interface ButtonGroupContext {
   addRule: () => void;
   addRuleSet: () => void;
   removeRuleSet: () => void;
+  getDisabledState: () => boolean;
   $implicit: RuleSet;
 }
 
 export interface RemoveButtonContext {
   removeRule: (rule: Rule) => void;
+  getDisabledState: () => boolean;
   $implicit: Rule;
 }
