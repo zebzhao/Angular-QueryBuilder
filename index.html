@@ -252,6 +252,9 @@
                     <li class="link">
                         <a href="interfaces/RuleSet.html" data-type="entity-link">RuleSet</a>
                     </li>
+                    <li class="link">
+                        <a href="interfaces/SwitchGroupContext.html" data-type="entity-link">SwitchGroupContext</a>
+                    </li>
             </ul>
         </li>
 
@@ -524,6 +527,9 @@
                     <li class="link">
                         <a href="interfaces/RuleSet.html" data-type="entity-link">RuleSet</a>
                     </li>
+                    <li class="link">
+                        <a href="interfaces/SwitchGroupContext.html" data-type="entity-link">SwitchGroupContext</a>
+                    </li>
             </ul>
         </li>
 
@@ -657,7 +663,7 @@ config: QueryBuilderConfig = {
   inputControl: &#39;form-control&#39;,
   inputControlSize: &#39;col-auto&#39;
 }</code></pre></div><h2 id="customizing-with-angular-material">Customizing with Angular Material</h2>
-<p>Example of how you can completely customize the query component with another library like Angular Material. For the full example, please look at the <a href="https://github.com/zebzhao/Angular-QueryBuilder/blob/master/demo/esm/src/app/app.component.ts">source code</a> provided in the demo.</p>
+<p>Example of how you can completely customize the query component with another library like Angular Material. For the full example, please look at the <a href="https://github.com/zebzhao/Angular-QueryBuilder/blob/master/demo/src/app/app.component.ts">source code</a> provided in the demo.</p>
 <h4 id="app-component-html"><code>app.component.html</code></h4>
 <div><pre class="line-numbers"><code class="language-html">&lt;query-builder [(ngModel)]=&#39;query&#39; [config]=&#39;config&#39;&gt;
   &lt;ng-container *queryButtonGroup=&quot;let ruleset; let addRule=addRule; let addRuleSet=addRuleSet; let removeRuleSet=removeRuleSet&quot;&gt;
@@ -745,7 +751,7 @@ config: QueryBuilderConfig = {
 <td style="text-align:left"><code>Ruleset</code></td>
 <td style="text-align:left">Optional</td>
 <td style="text-align:left"></td>
-<td style="text-align:left"><em>DEPRECATED</em> (Use <code>ngModel</code> or <code>value</code> instead.)</td>
+<td style="text-align:left">(Use <code>ngModel</code> or <code>value</code> instead.)</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>ngModel</code></td>
@@ -797,6 +803,11 @@ config: QueryBuilderConfig = {
 <td style="text-align:left"><code>Option[]</code></td>
 <td style="text-align:left">List of options for the field, returned by <code>getOptions</code></td>
 </tr>
+<tr>
+<td style="text-align:left"><code>onChange</code></td>
+<td style="text-align:left"><code>() =&gt; void</code></td>
+<td style="text-align:left">Callback to handle changes to the input component</td>
+</tr>
 </tbody>
 </table>
 <h4 id="queryoperator"><code>queryOperator</code></h4>
@@ -819,6 +830,11 @@ config: QueryBuilderConfig = {
 <td style="text-align:left"><code>string[]</code></td>
 <td style="text-align:left">List of operators for the field, returned by <code>getOperators</code></td>
 </tr>
+<tr>
+<td style="text-align:left"><code>onChange</code></td>
+<td style="text-align:left"><code>() =&gt; void</code></td>
+<td style="text-align:left">Callback to handle changes to the operator component</td>
+</tr>
 </tbody>
 </table>
 <h4 id="queryfield"><code>queryField</code></h4>
@@ -837,14 +853,46 @@ config: QueryBuilderConfig = {
 <td style="text-align:left">Current rule object which contains the field, value, and operator</td>
 </tr>
 <tr>
+<td style="text-align:left"><code>getFields</code></td>
+<td style="text-align:left"><code>(entityName: string) =&gt; void</code></td>
+<td style="text-align:left">Get the list of fields corresponding to an entity</td>
+</tr>
+<tr>
 <td style="text-align:left"><code>fields</code></td>
 <td style="text-align:left"><code>Field[]</code></td>
 <td style="text-align:left">List of fields for the component, specified by <code>config</code></td>
 </tr>
 <tr>
-<td style="text-align:left"><code>changeField</code></td>
-<td style="text-align:left"><code>(fieldName: string, rule: Rule) =&gt; void</code></td>
-<td style="text-align:left">Function to handle changes to the field component</td>
+<td style="text-align:left"><code>onChange</code></td>
+<td style="text-align:left"><code>(fieldValue: string, rule: Rule) =&gt; void</code></td>
+<td style="text-align:left">Callback to handle changes to the field component</td>
+</tr>
+</tbody>
+</table>
+<h4 id="queryentity"><code>queryEntity</code></h4>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th style="text-align:left">Context Name</th>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>$implicit</code></td>
+<td style="text-align:left"><code>Rule</code></td>
+<td style="text-align:left">Current rule object which contains the field, value, and operator</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>entities</code></td>
+<td style="text-align:left"><code>Entity[]</code></td>
+<td style="text-align:left">List of entities for the component, specified by <code>config</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>onChange</code></td>
+<td style="text-align:left"><code>(entityValue: string, rule: Rule) =&gt; void</code></td>
+<td style="text-align:left">Callback to handle changes to the entity component</td>
 </tr>
 </tbody>
 </table>
@@ -862,6 +910,11 @@ config: QueryBuilderConfig = {
 <td style="text-align:left"><code>$implicit</code></td>
 <td style="text-align:left"><code>RuleSet</code></td>
 <td style="text-align:left">Current rule set object which contain a list of child rules</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>onChange</code></td>
+<td style="text-align:left"><code>() =&gt; void</code></td>
+<td style="text-align:left">Callback to handle changes to the switch group component</td>
 </tr>
 </tbody>
 </table>

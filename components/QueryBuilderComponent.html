@@ -252,6 +252,9 @@
                     <li class="link">
                         <a href="interfaces/RuleSet.html" data-type="entity-link">RuleSet</a>
                     </li>
+                    <li class="link">
+                        <a href="interfaces/SwitchGroupContext.html" data-type="entity-link">SwitchGroupContext</a>
+                    </li>
             </ul>
         </li>
 
@@ -524,6 +527,9 @@
                     <li class="link">
                         <a href="interfaces/RuleSet.html" data-type="entity-link">RuleSet</a>
                     </li>
+                    <li class="link">
+                        <a href="interfaces/SwitchGroupContext.html" data-type="entity-link">SwitchGroupContext</a>
+                    </li>
             </ul>
         </li>
 
@@ -675,10 +681,6 @@
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#disabled">disabled</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
                                 <a href="#entities">entities</a>
                             </li>
                             <li>
@@ -734,6 +736,9 @@
                                 <a href="#addRuleSet">addRuleSet</a>
                             </li>
                             <li>
+                                <a href="#changeCondition">changeCondition</a>
+                            </li>
+                            <li>
                                 <a href="#changeEntity">changeEntity</a>
                             </li>
                             <li>
@@ -768,6 +773,9 @@
                             </li>
                             <li>
                                 <a href="#getDefaultValue">getDefaultValue</a>
+                            </li>
+                            <li>
+                                <a href="#getDisabledState">getDisabledState</a>
                             </li>
                             <li>
                                 <a href="#getEntityContext">getEntityContext</a>
@@ -810,6 +818,9 @@
                             </li>
                             <li>
                                 <a href="#getRemoveButtonTemplate">getRemoveButtonTemplate</a>
+                            </li>
+                            <li>
+                                <a href="#getSwitchGroupContext">getSwitchGroupContext</a>
                             </li>
                             <li>
                                 <a href="#getSwitchGroupTemplate">getSwitchGroupTemplate</a>
@@ -864,6 +875,9 @@
                             </li>
                             <li>
                                 <a href="#data">data</a>
+                            </li>
+                            <li>
+                                <a href="#disabled">disabled</a>
                             </li>
                             <li>
                                 <a href="#operatorMap">operatorMap</a>
@@ -923,7 +937,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="142" class="link-to-prism">src/components/query-builder/query-builder.component.ts:142</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="143" class="link-to-prism">src/components/query-builder/query-builder.component.ts:143</a></div>
                             </td>
                         </tr>
 
@@ -982,7 +996,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="110" class="link-to-prism">src/components/query-builder/query-builder.component.ts:110</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="111" class="link-to-prism">src/components/query-builder/query-builder.component.ts:111</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -1003,7 +1017,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="111" class="link-to-prism">src/components/query-builder/query-builder.component.ts:111</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="112" class="link-to-prism">src/components/query-builder/query-builder.component.ts:112</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -1027,7 +1041,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="114" class="link-to-prism">src/components/query-builder/query-builder.component.ts:114</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="115" class="link-to-prism">src/components/query-builder/query-builder.component.ts:115</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -1047,6 +1061,27 @@
                         <p>
                             <em>Default value: </em><code>{ condition: &#x27;and&#x27;, rules: [] }</code>
                         </p>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="105" class="link-to-prism">src/components/query-builder/query-builder.component.ts:105</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-2">
+                        <a name="disabled"></a>
+                        <code>disabled</code>
+                    </td>
+                    <td class="col-md-10">
+                            <p>
+                            <em>Type:</em>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                            </p>
                     </td>
                 </tr>
                         <tr>
@@ -1072,7 +1107,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="112" class="link-to-prism">src/components/query-builder/query-builder.component.ts:112</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="113" class="link-to-prism">src/components/query-builder/query-builder.component.ts:113</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -1093,7 +1128,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="120" class="link-to-prism">src/components/query-builder/query-builder.component.ts:120</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="121" class="link-to-prism">src/components/query-builder/query-builder.component.ts:121</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -1114,7 +1149,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="122" class="link-to-prism">src/components/query-builder/query-builder.component.ts:122</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="123" class="link-to-prism">src/components/query-builder/query-builder.component.ts:123</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -1135,7 +1170,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="118" class="link-to-prism">src/components/query-builder/query-builder.component.ts:118</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="119" class="link-to-prism">src/components/query-builder/query-builder.component.ts:119</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -1156,7 +1191,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="117" class="link-to-prism">src/components/query-builder/query-builder.component.ts:117</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="118" class="link-to-prism">src/components/query-builder/query-builder.component.ts:118</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -1177,7 +1212,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="115" class="link-to-prism">src/components/query-builder/query-builder.component.ts:115</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="116" class="link-to-prism">src/components/query-builder/query-builder.component.ts:116</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -1198,7 +1233,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="116" class="link-to-prism">src/components/query-builder/query-builder.component.ts:116</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="117" class="link-to-prism">src/components/query-builder/query-builder.component.ts:117</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -1219,7 +1254,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="121" class="link-to-prism">src/components/query-builder/query-builder.component.ts:121</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="122" class="link-to-prism">src/components/query-builder/query-builder.component.ts:122</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -1240,7 +1275,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="119" class="link-to-prism">src/components/query-builder/query-builder.component.ts:119</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="120" class="link-to-prism">src/components/query-builder/query-builder.component.ts:120</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -1261,7 +1296,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="123" class="link-to-prism">src/components/query-builder/query-builder.component.ts:123</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="124" class="link-to-prism">src/components/query-builder/query-builder.component.ts:124</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -1282,7 +1317,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="113" class="link-to-prism">src/components/query-builder/query-builder.component.ts:113</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="114" class="link-to-prism">src/components/query-builder/query-builder.component.ts:114</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -1303,7 +1338,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="200" class="link-to-prism">src/components/query-builder/query-builder.component.ts:200</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="201" class="link-to-prism">src/components/query-builder/query-builder.component.ts:201</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -1339,7 +1374,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="352" class="link-to-prism">src/components/query-builder/query-builder.component.ts:352</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="358" class="link-to-prism">src/components/query-builder/query-builder.component.ts:358</a></div>
                             </td>
                         </tr>
 
@@ -1408,7 +1443,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="386" class="link-to-prism">src/components/query-builder/query-builder.component.ts:386</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="401" class="link-to-prism">src/components/query-builder/query-builder.component.ts:401</a></div>
                             </td>
                         </tr>
 
@@ -1459,6 +1494,75 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
+                        <a name="changeCondition"></a>
+                        <span class="name">
+                            <b>
+                            changeCondition
+                            </b>
+                            <a href="#changeCondition"><span class="fa fa-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>changeCondition(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="434" class="link-to-prism">src/components/query-builder/query-builder.component.ts:434</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>value</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            no
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
                         <a name="changeEntity"></a>
                         <span class="name">
                             <b>
@@ -1477,7 +1581,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="446" class="link-to-prism">src/components/query-builder/query-builder.component.ts:446</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="491" class="link-to-prism">src/components/query-builder/query-builder.component.ts:491</a></div>
                             </td>
                         </tr>
 
@@ -1558,7 +1662,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="421" class="link-to-prism">src/components/query-builder/query-builder.component.ts:421</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="462" class="link-to-prism">src/components/query-builder/query-builder.component.ts:462</a></div>
                             </td>
                         </tr>
 
@@ -1632,14 +1736,14 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>changeInput(inputValue: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, rule: <a href="../interfaces/Rule.html">Rule</a>)</code>
+<code>changeInput()</code>
                     </td>
                 </tr>
 
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="416" class="link-to-prism">src/components/query-builder/query-builder.component.ts:416</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="453" class="link-to-prism">src/components/query-builder/query-builder.component.ts:453</a></div>
                             </td>
                         </tr>
 
@@ -1648,52 +1752,9 @@
                     <td class="col-md-4">
 
                             <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>inputValue</td>
-                                                        <td>
-                                                                    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            no
-                                                    </td>
-                                                    
-
-                                                </tr>
-                                                <tr>
-                                                        <td>rule</td>
-                                                        <td>
-                                                                    <code><a href="../interfaces/Rule.html" target="_self" >Rule</a></code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            no
-                                                    </td>
-                                                    
-
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
                                 <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                             </div>
-                                <div class="io-description">
-                                    
-                                </div>
                     </td>
                 </tr>
             </tbody>
@@ -1713,14 +1774,14 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-<code>changeOperator(operatorValue: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, rule: <a href="../interfaces/Rule.html">Rule</a>)</code>
+<code>changeOperator()</code>
                     </td>
                 </tr>
 
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="411" class="link-to-prism">src/components/query-builder/query-builder.component.ts:411</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="444" class="link-to-prism">src/components/query-builder/query-builder.component.ts:444</a></div>
                             </td>
                         </tr>
 
@@ -1729,52 +1790,9 @@
                     <td class="col-md-4">
 
                             <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>operatorValue</td>
-                                                        <td>
-                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            no
-                                                    </td>
-                                                    
-
-                                                </tr>
-                                                <tr>
-                                                        <td>rule</td>
-                                                        <td>
-                                                                    <code><a href="../interfaces/Rule.html" target="_self" >Rule</a></code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            no
-                                                    </td>
-                                                    
-
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
                                 <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                             </div>
-                                <div class="io-description">
-                                    
-                                </div>
                     </td>
                 </tr>
             </tbody>
@@ -1801,7 +1819,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="239" class="link-to-prism">src/components/query-builder/query-builder.component.ts:239</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="245" class="link-to-prism">src/components/query-builder/query-builder.component.ts:245</a></div>
                             </td>
                         </tr>
 
@@ -1870,7 +1888,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="224" class="link-to-prism">src/components/query-builder/query-builder.component.ts:224</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="230" class="link-to-prism">src/components/query-builder/query-builder.component.ts:230</a></div>
                             </td>
                         </tr>
 
@@ -1939,7 +1957,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="506" class="link-to-prism">src/components/query-builder/query-builder.component.ts:506</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="555" class="link-to-prism">src/components/query-builder/query-builder.component.ts:555</a></div>
                             </td>
                         </tr>
 
@@ -1977,7 +1995,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="482" class="link-to-prism">src/components/query-builder/query-builder.component.ts:482</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="531" class="link-to-prism">src/components/query-builder/query-builder.component.ts:531</a></div>
                             </td>
                         </tr>
 
@@ -2015,7 +2033,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="312" class="link-to-prism">src/components/query-builder/query-builder.component.ts:312</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="318" class="link-to-prism">src/components/query-builder/query-builder.component.ts:318</a></div>
                             </td>
                         </tr>
 
@@ -2052,7 +2070,7 @@
                             <div>
                             </div>
                             <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                             </div>
                                 <div class="io-description">
@@ -2084,7 +2102,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="318" class="link-to-prism">src/components/query-builder/query-builder.component.ts:318</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="324" class="link-to-prism">src/components/query-builder/query-builder.component.ts:324</a></div>
                             </td>
                         </tr>
 
@@ -2153,7 +2171,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="337" class="link-to-prism">src/components/query-builder/query-builder.component.ts:337</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="343" class="link-to-prism">src/components/query-builder/query-builder.component.ts:343</a></div>
                             </td>
                         </tr>
 
@@ -2190,7 +2208,7 @@
                             <div>
                             </div>
                             <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                             </div>
                                 <div class="io-description">
@@ -2222,7 +2240,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="458" class="link-to-prism">src/components/query-builder/query-builder.component.ts:458</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="507" class="link-to-prism">src/components/query-builder/query-builder.component.ts:507</a></div>
                             </td>
                         </tr>
 
@@ -2273,6 +2291,44 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
+                        <a name="getDisabledState"></a>
+                        <span class="name">
+                            <b>
+                            getDisabledState
+                            </b>
+                            <a href="#getDisabledState"><span class="fa fa-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>getDisabledState()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="226" class="link-to-prism">src/components/query-builder/query-builder.component.ts:226</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
                         <a name="getEntityContext"></a>
                         <span class="name">
                             <b>
@@ -2291,7 +2347,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="540" class="link-to-prism">src/components/query-builder/query-builder.component.ts:540</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="592" class="link-to-prism">src/components/query-builder/query-builder.component.ts:592</a></div>
                             </td>
                         </tr>
 
@@ -2360,7 +2416,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="477" class="link-to-prism">src/components/query-builder/query-builder.component.ts:477</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="526" class="link-to-prism">src/components/query-builder/query-builder.component.ts:526</a></div>
                             </td>
                         </tr>
 
@@ -2398,7 +2454,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="528" class="link-to-prism">src/components/query-builder/query-builder.component.ts:528</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="579" class="link-to-prism">src/components/query-builder/query-builder.component.ts:579</a></div>
                             </td>
                         </tr>
 
@@ -2467,7 +2523,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="278" class="link-to-prism">src/components/query-builder/query-builder.component.ts:278</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="284" class="link-to-prism">src/components/query-builder/query-builder.component.ts:284</a></div>
                             </td>
                         </tr>
 
@@ -2536,7 +2592,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="472" class="link-to-prism">src/components/query-builder/query-builder.component.ts:472</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="521" class="link-to-prism">src/components/query-builder/query-builder.component.ts:521</a></div>
                             </td>
                         </tr>
 
@@ -2574,7 +2630,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="562" class="link-to-prism">src/components/query-builder/query-builder.component.ts:562</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="624" class="link-to-prism">src/components/query-builder/query-builder.component.ts:624</a></div>
                             </td>
                         </tr>
 
@@ -2643,7 +2699,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="288" class="link-to-prism">src/components/query-builder/query-builder.component.ts:288</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="294" class="link-to-prism">src/components/query-builder/query-builder.component.ts:294</a></div>
                             </td>
                         </tr>
 
@@ -2724,7 +2780,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="551" class="link-to-prism">src/components/query-builder/query-builder.component.ts:551</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="612" class="link-to-prism">src/components/query-builder/query-builder.component.ts:612</a></div>
                             </td>
                         </tr>
 
@@ -2793,7 +2849,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="244" class="link-to-prism">src/components/query-builder/query-builder.component.ts:244</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="250" class="link-to-prism">src/components/query-builder/query-builder.component.ts:250</a></div>
                             </td>
                         </tr>
 
@@ -2862,7 +2918,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="467" class="link-to-prism">src/components/query-builder/query-builder.component.ts:467</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="516" class="link-to-prism">src/components/query-builder/query-builder.component.ts:516</a></div>
                             </td>
                         </tr>
 
@@ -2900,7 +2956,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="305" class="link-to-prism">src/components/query-builder/query-builder.component.ts:305</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="311" class="link-to-prism">src/components/query-builder/query-builder.component.ts:311</a></div>
                             </td>
                         </tr>
 
@@ -2969,7 +3025,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="497" class="link-to-prism">src/components/query-builder/query-builder.component.ts:497</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="546" class="link-to-prism">src/components/query-builder/query-builder.component.ts:546</a></div>
                             </td>
                         </tr>
 
@@ -3038,7 +3094,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="518" class="link-to-prism">src/components/query-builder/query-builder.component.ts:518</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="568" class="link-to-prism">src/components/query-builder/query-builder.component.ts:568</a></div>
                             </td>
                         </tr>
 
@@ -3107,7 +3163,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="492" class="link-to-prism">src/components/query-builder/query-builder.component.ts:492</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="541" class="link-to-prism">src/components/query-builder/query-builder.component.ts:541</a></div>
                             </td>
                         </tr>
 
@@ -3117,6 +3173,44 @@
 
                             <div class="io-description">
                                 <b>Returns : </b>    <code>TemplateRef&lt;any&gt;</code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getSwitchGroupContext"></a>
+                        <span class="name">
+                            <b>
+                            getSwitchGroupContext
+                            </b>
+                            <a href="#getSwitchGroupContext"><span class="fa fa-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>getSwitchGroupContext()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="604" class="link-to-prism">src/components/query-builder/query-builder.component.ts:604</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="../interfaces/SwitchGroupContext.html" target="_self" >SwitchGroupContext</a></code>
 
                             </div>
                     </td>
@@ -3145,7 +3239,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="487" class="link-to-prism">src/components/query-builder/query-builder.component.ts:487</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="536" class="link-to-prism">src/components/query-builder/query-builder.component.ts:536</a></div>
                             </td>
                         </tr>
 
@@ -3183,7 +3277,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="152" class="link-to-prism">src/components/query-builder/query-builder.component.ts:152</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="153" class="link-to-prism">src/components/query-builder/query-builder.component.ts:153</a></div>
                             </td>
                         </tr>
 
@@ -3252,7 +3346,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="148" class="link-to-prism">src/components/query-builder/query-builder.component.ts:148</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="149" class="link-to-prism">src/components/query-builder/query-builder.component.ts:149</a></div>
                             </td>
                         </tr>
 
@@ -3290,7 +3384,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="212" class="link-to-prism">src/components/query-builder/query-builder.component.ts:212</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="213" class="link-to-prism">src/components/query-builder/query-builder.component.ts:213</a></div>
                             </td>
                         </tr>
 
@@ -3359,7 +3453,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="215" class="link-to-prism">src/components/query-builder/query-builder.component.ts:215</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="216" class="link-to-prism">src/components/query-builder/query-builder.component.ts:216</a></div>
                             </td>
                         </tr>
 
@@ -3428,7 +3522,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="369" class="link-to-prism">src/components/query-builder/query-builder.component.ts:369</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="380" class="link-to-prism">src/components/query-builder/query-builder.component.ts:380</a></div>
                             </td>
                         </tr>
 
@@ -3509,7 +3603,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="398" class="link-to-prism">src/components/query-builder/query-builder.component.ts:398</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="417" class="link-to-prism">src/components/query-builder/query-builder.component.ts:417</a></div>
                             </td>
                         </tr>
 
@@ -3590,7 +3684,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="218" class="link-to-prism">src/components/query-builder/query-builder.component.ts:218</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="219" class="link-to-prism">src/components/query-builder/query-builder.component.ts:219</a></div>
                             </td>
                         </tr>
 
@@ -3659,7 +3753,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="178" class="link-to-prism">src/components/query-builder/query-builder.component.ts:178</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="179" class="link-to-prism">src/components/query-builder/query-builder.component.ts:179</a></div>
                             </td>
                         </tr>
 
@@ -3728,7 +3822,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="209" class="link-to-prism">src/components/query-builder/query-builder.component.ts:209</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="210" class="link-to-prism">src/components/query-builder/query-builder.component.ts:210</a></div>
                             </td>
                         </tr>
 
@@ -3814,7 +3908,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="125" class="link-to-prism">src/components/query-builder/query-builder.component.ts:125</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="126" class="link-to-prism">src/components/query-builder/query-builder.component.ts:126</a></div>
                             </td>
                         </tr>
 
@@ -3938,41 +4032,6 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="disabled"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                            disabled
-                            </b>
-                            <a href="#disabled"><span class="fa fa-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <span class="modifier-icon fa fa-reset"></span><code>disabled:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/components/query-builder/query-builder.component.ts:65</a></div>
-                            </td>
-                        </tr>
-
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
                         <a name="entities"></a>
                         <span class="name">
                             <b>
@@ -4036,7 +4095,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="128" class="link-to-prism">src/components/query-builder/query-builder.component.ts:128</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="129" class="link-to-prism">src/components/query-builder/query-builder.component.ts:129</a></div>
                             </td>
                         </tr>
 
@@ -4110,7 +4169,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="127" class="link-to-prism">src/components/query-builder/query-builder.component.ts:127</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="128" class="link-to-prism">src/components/query-builder/query-builder.component.ts:128</a></div>
                             </td>
                         </tr>
 
@@ -4184,7 +4243,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="131" class="link-to-prism">src/components/query-builder/query-builder.component.ts:131</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="132" class="link-to-prism">src/components/query-builder/query-builder.component.ts:132</a></div>
                             </td>
                         </tr>
 
@@ -4219,7 +4278,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="107" class="link-to-prism">src/components/query-builder/query-builder.component.ts:107</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="108" class="link-to-prism">src/components/query-builder/query-builder.component.ts:108</a></div>
                             </td>
                         </tr>
 
@@ -4254,7 +4313,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="108" class="link-to-prism">src/components/query-builder/query-builder.component.ts:108</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="109" class="link-to-prism">src/components/query-builder/query-builder.component.ts:109</a></div>
                             </td>
                         </tr>
 
@@ -4293,7 +4352,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="129" class="link-to-prism">src/components/query-builder/query-builder.component.ts:129</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="130" class="link-to-prism">src/components/query-builder/query-builder.component.ts:130</a></div>
                             </td>
                         </tr>
 
@@ -4332,7 +4391,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="130" class="link-to-prism">src/components/query-builder/query-builder.component.ts:130</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="131" class="link-to-prism">src/components/query-builder/query-builder.component.ts:131</a></div>
                             </td>
                         </tr>
 
@@ -4371,7 +4430,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="126" class="link-to-prism">src/components/query-builder/query-builder.component.ts:126</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="127" class="link-to-prism">src/components/query-builder/query-builder.component.ts:127</a></div>
                             </td>
                         </tr>
 
@@ -4401,7 +4460,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="203" class="link-to-prism">src/components/query-builder/query-builder.component.ts:203</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="204" class="link-to-prism">src/components/query-builder/query-builder.component.ts:204</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -4462,6 +4521,7 @@ import { QueryRemoveButtonDirective } from &#x27;./query-remove-button.directive
 import {
     ButtonGroupContext,
     Field,
+    SwitchGroupContext,
     EntityContext,
     FieldContext,
     InputContext,
@@ -4508,7 +4568,6 @@ export const VALIDATOR: any &#x3D; {
   providers: [CONTROL_VALUE_ACCESSOR, VALIDATOR]
 })
 export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAccessor, Validator {
-  public disabled: boolean;
   public fields: Field[];
   public filterFields: Field[];
   public entities: Entity[];
@@ -4547,6 +4606,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     category: [&#x27;&#x3D;&#x27;, &#x27;!&#x3D;&#x27;, &#x27;in&#x27;, &#x27;not in&#x27;],
     boolean: [&#x27;&#x3D;&#x27;]
   };
+  @Input() disabled: boolean;
   @Input() data: RuleSet &#x3D; { condition: &#x27;and&#x27;, rules: [] };
 
   // For ControlValueAccessor interface
@@ -4663,9 +4723,14 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   }
   setDisabledState(isDisabled: boolean): void {
     this.disabled &#x3D; isDisabled;
+    this.changeDetectorRef.detectChanges();
   }
 
   // ----------END----------
+
+  getDisabledState(): boolean {
+    return this.disabled;
+  }
 
   findTemplateForRule(rule: Rule): TemplateRef&lt;any&gt; {
     const type &#x3D; this.getInputType(rule.field, rule.operator);
@@ -4723,8 +4788,8 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
 
   getFields(entity: string): Field[] {
     if (this.entities &amp;&amp; entity) {
-      return this.fields.filter(field &#x3D;&gt; {
-        return field &amp;&amp; field.entity &#x3D;&#x3D; entity;
+      return this.fields.filter((field) &#x3D;&gt; {
+        return field &amp;&amp; field.entity &#x3D;&#x3D;&#x3D; entity;
       });
     } else {
       return this.fields;
@@ -4742,7 +4807,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
         return null;  // No displayed component
       case &#x27;in&#x27;:
       case &#x27;not in&#x27;:
-        return type &#x3D;&#x3D; &#x27;category&#x27; || type &#x3D;&#x3D; &#x27;boolean&#x27; ? &#x27;multiselect&#x27; : type;
+        return type &#x3D;&#x3D;&#x3D; &#x27;category&#x27; || type &#x3D;&#x3D;&#x3D; &#x27;boolean&#x27; ? &#x27;multiselect&#x27; : type;
       default:
         return type;
     }
@@ -4755,7 +4820,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     return this.config.fields[field].options || this.defaultEmptyList;
   }
 
-  getClassNames(...args) {
+  getClassNames(...args): string {
     const clsLookup &#x3D; this.classNames ? this.classNames : this.defaultClassNames;
     const classNames &#x3D; args.map((id) &#x3D;&gt; clsLookup[id] || this.defaultClassNames[id]).filter((c) &#x3D;&gt; !!c);
     return classNames.length ? classNames.join(&#x27; &#x27;)  : null;
@@ -4763,12 +4828,12 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
 
   getDefaultField(entity: Entity): Field {
     if (!entity) {
-      return null
+      return null;
     } else if (entity.defaultField !&#x3D;&#x3D; undefined) {
       return this.getDefaultValue(entity.defaultField);
     } else {
-      const entityFields &#x3D; this.fields.filter(field &#x3D;&gt; {
-        return field &amp;&amp; field.entity &#x3D;&#x3D; entity.value;
+      const entityFields &#x3D; this.fields.filter((field) &#x3D;&gt; {
+        return field &amp;&amp; field.entity &#x3D;&#x3D;&#x3D; entity.value;
       });
       if (entityFields &amp;&amp; entityFields.length) {
         return entityFields[0];
@@ -4780,7 +4845,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     }
   }
 
-  getDefaultOperator(field: Field) {
+  getDefaultOperator(field: Field): string {
     if (field &amp;&amp; field.defaultOperator !&#x3D;&#x3D; undefined) {
       return this.getDefaultValue(field.defaultOperator);
     } else {
@@ -4796,6 +4861,10 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   }
 
   addRule(parent?: RuleSet): void {
+    if (this.disabled) {
+      return;
+    }
+
     parent &#x3D; parent || this.data;
     if (this.config.addRule) {
       this.config.addRule(parent);
@@ -4804,6 +4873,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
       parent.rules &#x3D; parent.rules.concat([{
         field: field.value,
         operator: this.getDefaultOperator(field),
+        value: this.getDefaultValue(field.defaultValue),
         entity: field.entity
       }]);
     }
@@ -4813,6 +4883,10 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   }
 
   removeRule(rule: Rule, parent?: RuleSet): void {
+    if (this.disabled) {
+      return;
+    }
+
     parent &#x3D; parent || this.data;
     if (this.config.removeRule) {
       this.config.removeRule(rule, parent);
@@ -4830,6 +4904,10 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   }
 
   addRuleSet(parent?: RuleSet): void {
+    if (this.disabled) {
+      return;
+    }
+
     parent &#x3D; parent || this.data;
     if (this.config.addRuleSet) {
       this.config.addRuleSet(parent);
@@ -4842,6 +4920,10 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   }
 
   removeRuleSet(ruleset?: RuleSet, parent?: RuleSet): void {
+    if (this.disabled) {
+      return;
+    }
+
     ruleset &#x3D; ruleset || this.data;
     parent &#x3D; parent || this.parentValue;
     if (this.config.removeRuleSet) {
@@ -4854,17 +4936,39 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     this.handleDataChange();
   }
 
-  changeOperator(operatorValue: string, rule: Rule): void {
+  changeCondition(value: string): void {
+    if (this.disabled) {
+      return;
+    }
+
+    this.data.condition &#x3D; value;
     this.handleTouched();
     this.handleDataChange();
   }
 
-  changeInput(inputValue: any, rule: Rule): void {
+  changeOperator(): void {
+    if (this.disabled) {
+      return;
+    }
+
+    this.handleTouched();
+    this.handleDataChange();
+  }
+
+  changeInput(): void {
+    if (this.disabled) {
+      return;
+    }
+
     this.handleTouched();
     this.handleDataChange();
   }
 
   changeField(fieldValue: string, rule: Rule): void {
+    if (this.disabled) {
+      return;
+    }
+
     const field: Field &#x3D; this.config.fields[fieldValue];
 
     if (field &amp;&amp; field.defaultValue !&#x3D;&#x3D; undefined) {
@@ -4890,8 +4994,12 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   }
 
   changeEntity(entityValue: string, rule: Rule): void {
-    const entity: Entity &#x3D; this.entities.find(e &#x3D;&gt; e.value &#x3D;&#x3D;&#x3D; entityValue);
-    const defaultField: Field &#x3D; this.getDefaultField(entity)
+    if (this.disabled) {
+      return;
+    }
+
+    const entity: Entity &#x3D; this.entities.find((e) &#x3D;&gt; e.value &#x3D;&#x3D;&#x3D; entityValue);
+    const defaultField: Field &#x3D; this.getDefaultField(entity);
 
     if (defaultField) {
       this.changeField(defaultField.value, rule);
@@ -4955,6 +5063,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
         addRule: this.addRule.bind(this),
         addRuleSet: this.allowRuleset &amp;&amp; this.addRuleSet.bind(this),
         removeRuleSet: this.allowRuleset &amp;&amp; this.parentValue &amp;&amp; this.removeRuleSet.bind(this),
+        getDisabledState: this.getDisabledState.bind(this),
         $implicit: this.data
       };
     }
@@ -4965,6 +5074,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     if (!this.removeButtonContextCache.has(rule)) {
       this.removeButtonContextCache.set(rule, {
         removeRule: this.removeRule.bind(this),
+        getDisabledState: this.getDisabledState.bind(this),
         $implicit: rule
       });
     }
@@ -4976,6 +5086,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
       this.fieldContextCache.set(rule, {
         onChange: this.changeField.bind(this),
         getFields: this.getFields.bind(this),
+        getDisabledState: this.getDisabledState.bind(this),
         fields: this.fields,
         $implicit: rule
       });
@@ -4987,6 +5098,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     if (!this.entityContextCache.has(rule)) {
       this.entityContextCache.set(rule, {
         onChange: this.changeEntity.bind(this),
+        getDisabledState: this.getDisabledState.bind(this),
         entities: this.entities,
         $implicit: rule
       });
@@ -4994,10 +5106,19 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     return this.entityContextCache.get(rule);
  }
 
+ getSwitchGroupContext(): SwitchGroupContext {
+   return {
+     onChange: this.changeCondition.bind(this),
+     getDisabledState: this.getDisabledState.bind(this),
+     $implicit: this.data
+   };
+ }
+
   getOperatorContext(rule: Rule): OperatorContext {
     if (!this.operatorContextCache.has(rule)) {
       this.operatorContextCache.set(rule, {
         onChange: this.changeOperator.bind(this),
+        getDisabledState: this.getDisabledState.bind(this),
         operators: this.getOperators(rule.field),
         $implicit: rule
       });
@@ -5009,6 +5130,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     if (!this.inputContextCache.has(rule)) {
       this.inputContextCache.set(rule, {
         onChange: this.changeInput.bind(this),
+        getDisabledState: this.getDisabledState.bind(this),
         options: this.getOptions(rule.field),
         field: this.config.fields[rule.field],
         $implicit: rule
@@ -5049,7 +5171,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     }
   }
 
-  private handleDataChange() {
+  private handleDataChange(): void {
     this.changeDetectorRef.markForCheck();
     if (this.onChangeCallback) {
       this.onChangeCallback();
@@ -5059,7 +5181,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     }
   }
 
-  private handleTouched() {
+  private handleTouched(): void {
     if (this.onTouchedCallback) {
       this.onTouchedCallback();
     }
@@ -5081,14 +5203,14 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
 
   &lt;ng-template #defaultButtonGroup&gt;
     &lt;div [ngClass]&#x3D;&quot;getClassNames(&#x27;buttonGroup&#x27;, &#x27;rightAlign&#x27;)&quot;&gt;
-      &lt;button (click)&#x3D;&quot;addRule()&quot; [ngClass]&#x3D;&quot;getClassNames(&#x27;button&#x27;)&quot;&gt;
+      &lt;button (click)&#x3D;&quot;addRule()&quot; [ngClass]&#x3D;&quot;getClassNames(&#x27;button&#x27;)&quot; [disabled]&#x3D;disabled&gt;
         &lt;i [ngClass]&#x3D;&quot;getClassNames(&#x27;addIcon&#x27;)&quot;&gt;&lt;/i&gt; Rule
       &lt;/button&gt;
-      &lt;button (click)&#x3D;&quot;addRuleSet()&quot; [ngClass]&#x3D;&quot;getClassNames(&#x27;button&#x27;)&quot; *ngIf&#x3D;&quot;allowRuleset&quot;&gt;
+      &lt;button (click)&#x3D;&quot;addRuleSet()&quot; [ngClass]&#x3D;&quot;getClassNames(&#x27;button&#x27;)&quot; *ngIf&#x3D;&quot;allowRuleset&quot; [disabled]&#x3D;disabled&gt;
         &lt;i [ngClass]&#x3D;&quot;getClassNames(&#x27;addIcon&#x27;)&quot;&gt;&lt;/i&gt; Ruleset
       &lt;/button&gt;
       &lt;ng-container *ngIf&#x3D;&quot;!!parentValue &amp;&amp; allowRuleset&quot;&gt;
-        &lt;button (click)&#x3D;&quot;removeRuleSet()&quot; [ngClass]&#x3D;&quot;getClassNames(&#x27;button&#x27;, &#x27;removeButton&#x27;)&quot;&gt;
+        &lt;button (click)&#x3D;&quot;removeRuleSet()&quot; [ngClass]&#x3D;&quot;getClassNames(&#x27;button&#x27;, &#x27;removeButton&#x27;)&quot; [disabled]&#x3D;disabled&gt;
           &lt;i [ngClass]&#x3D;&quot;getClassNames(&#x27;removeIcon&#x27;)&quot;&gt;&lt;/i&gt;
         &lt;/button&gt;
       &lt;/ng-container&gt;
@@ -5096,18 +5218,18 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   &lt;/ng-template&gt;
 
   &lt;ng-container *ngIf&#x3D;&quot;getSwitchGroupTemplate() as template; else defaultSwitchGroup&quot;&gt;
-    &lt;ng-container *ngTemplateOutlet&#x3D;&quot;template; context: {$implicit: data}&quot;&gt;&lt;/ng-container&gt;
+    &lt;ng-container *ngTemplateOutlet&#x3D;&quot;template; context: getSwitchGroupContext()&quot;&gt;&lt;/ng-container&gt;
   &lt;/ng-container&gt;
 
   &lt;ng-template #defaultSwitchGroup&gt;
     &lt;div [ngClass]&#x3D;&quot;getClassNames(&#x27;switchGroup&#x27;, &#x27;transition&#x27;)&quot; *ngIf&#x3D;&quot;data&quot;&gt;
       &lt;div [ngClass]&#x3D;&quot;getClassNames(&#x27;switchControl&#x27;)&quot;&gt;
-        &lt;input type&#x3D;&quot;radio&quot; [ngClass]&#x3D;&quot;getClassNames(&#x27;switchRadio&#x27;)&quot; [(ngModel)]&#x3D;&quot;data.condition&quot; value&#x3D;&quot;and&quot; #andOption/&gt;
-        &lt;label (click)&#x3D;&quot;data.condition&#x3D;andOption.value&quot; [ngClass]&#x3D;&quot;getClassNames(&#x27;switchLabel&#x27;)&quot;&gt;AND&lt;/label&gt;
+        &lt;input type&#x3D;&quot;radio&quot; [ngClass]&#x3D;&quot;getClassNames(&#x27;switchRadio&#x27;)&quot; [(ngModel)]&#x3D;&quot;data.condition&quot; [disabled]&#x3D;disabled value&#x3D;&quot;and&quot; #andOption/&gt;
+        &lt;label (click)&#x3D;&quot;changeCondition(andOption.value)&quot; [ngClass]&#x3D;&quot;getClassNames(&#x27;switchLabel&#x27;)&quot;&gt;AND&lt;/label&gt;
       &lt;/div&gt;
       &lt;div [ngClass]&#x3D;&quot;getClassNames(&#x27;switchControl&#x27;)&quot;&gt;
-        &lt;input type&#x3D;&quot;radio&quot; [ngClass]&#x3D;&quot;getClassNames(&#x27;switchRadio&#x27;)&quot; [(ngModel)]&#x3D;&quot;data.condition&quot; value&#x3D;&quot;or&quot; #orOption/&gt;
-        &lt;label (click)&#x3D;&quot;data.condition&#x3D;orOption.value&quot; [ngClass]&#x3D;&quot;getClassNames(&#x27;switchLabel&#x27;)&quot;&gt;OR&lt;/label&gt;
+        &lt;input type&#x3D;&quot;radio&quot; [ngClass]&#x3D;&quot;getClassNames(&#x27;switchRadio&#x27;)&quot; [(ngModel)]&#x3D;&quot;data.condition&quot; [disabled]&#x3D;disabled value&#x3D;&quot;or&quot; #orOption/&gt;
+        &lt;label (click)&#x3D;&quot;changeCondition(orOption.value)&quot; [ngClass]&#x3D;&quot;getClassNames(&#x27;switchLabel&#x27;)&quot;&gt;OR&lt;/label&gt;
       &lt;/div&gt;
     &lt;/div&gt;
   &lt;/ng-template&gt;
@@ -5127,7 +5249,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
 
           &lt;ng-template #defaultRemoveButton&gt;
             &lt;div [ngClass]&#x3D;&quot;getClassNames(&#x27;removeButtonSize&#x27;, &#x27;rightAlign&#x27;)&quot;&gt;
-              &lt;button [ngClass]&#x3D;&quot;getClassNames(&#x27;button&#x27;, &#x27;removeButton&#x27;)&quot; (click)&#x3D;&quot;removeRule(rule, data)&quot;&gt;
+              &lt;button [ngClass]&#x3D;&quot;getClassNames(&#x27;button&#x27;, &#x27;removeButton&#x27;)&quot; (click)&#x3D;&quot;removeRule(rule, data)&quot; [disabled]&#x3D;disabled&gt;
                 &lt;i [ngClass]&#x3D;&quot;getClassNames(&#x27;removeIcon&#x27;)&quot;&gt;&lt;/i&gt;
               &lt;/button&gt;
             &lt;/div&gt;
@@ -5141,7 +5263,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
 
           &lt;ng-template #defaultEntity&gt;
             &lt;div [ngClass]&#x3D;&quot;getClassNames(&#x27;entityControlSize&#x27;)&quot;&gt;
-              &lt;select [ngClass]&#x3D;&quot;getClassNames(&#x27;entityControl&#x27;)&quot; [(ngModel)]&#x3D;&quot;rule.entity&quot; (ngModelChange)&#x3D;&quot;changeEntity($event, rule)&quot;&gt;
+              &lt;select [ngClass]&#x3D;&quot;getClassNames(&#x27;entityControl&#x27;)&quot; [(ngModel)]&#x3D;&quot;rule.entity&quot; (ngModelChange)&#x3D;&quot;changeEntity($event, rule)&quot; [disabled]&#x3D;&quot;disabled&quot;&gt;
                 &lt;option *ngFor&#x3D;&quot;let entity of entities&quot; [ngValue]&#x3D;&quot;entity.value&quot;&gt;
                   {{entity.name}}
                 &lt;/option&gt;
@@ -5155,7 +5277,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
 
           &lt;ng-template #defaultField&gt;
             &lt;div [ngClass]&#x3D;&quot;getClassNames(&#x27;fieldControlSize&#x27;)&quot;&gt;
-              &lt;select [ngClass]&#x3D;&quot;getClassNames(&#x27;fieldControl&#x27;)&quot; [(ngModel)]&#x3D;&quot;rule.field&quot; (ngModelChange)&#x3D;&quot;changeField($event, rule)&quot;&gt;
+              &lt;select [ngClass]&#x3D;&quot;getClassNames(&#x27;fieldControl&#x27;)&quot; [(ngModel)]&#x3D;&quot;rule.field&quot; (ngModelChange)&#x3D;&quot;changeField($event, rule)&quot; [disabled]&#x3D;&quot;disabled&quot;&gt;
                 &lt;option *ngFor&#x3D;&quot;let field of getFields(rule.entity)&quot; [ngValue]&#x3D;&quot;field.value&quot;&gt;
                   {{field.name}}
                 &lt;/option&gt;
@@ -5169,7 +5291,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
 
           &lt;ng-template #defaultOperator&gt;
             &lt;div [ngClass]&#x3D;&quot;getClassNames(&#x27;operatorControlSize&#x27;)&quot;&gt;
-              &lt;select [ngClass]&#x3D;&quot;getClassNames(&#x27;operatorControl&#x27;)&quot; [(ngModel)]&#x3D;&quot;rule.operator&quot; (ngModelChange)&#x3D;&quot;changeOperator($event, rule)&quot;&gt;
+              &lt;select [ngClass]&#x3D;&quot;getClassNames(&#x27;operatorControl&#x27;)&quot; [(ngModel)]&#x3D;&quot;rule.operator&quot; (ngModelChange)&#x3D;&quot;changeOperator()&quot; [disabled]&#x3D;&quot;disabled&quot;&gt;
                 &lt;option *ngFor&#x3D;&quot;let operator of getOperators(rule.field)&quot; [ngValue]&#x3D;&quot;operator&quot;&gt;
                   {{operator}}
                 &lt;/option&gt;
@@ -5183,29 +5305,30 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
 
           &lt;ng-template #defaultInput&gt;
             &lt;div [ngClass]&#x3D;&quot;getClassNames(&#x27;inputControlSize&#x27;)&quot; [ngSwitch]&#x3D;&quot;getInputType(rule.field, rule.operator)&quot;&gt;
-              &lt;input [ngClass]&#x3D;&quot;getClassNames(&#x27;inputControl&#x27;)&quot; [(ngModel)]&#x3D;&quot;rule.value&quot; (ngModelChange)&#x3D;&quot;changeInput($event, rule)&quot; *ngSwitchCase&#x3D;&quot;&#x27;string&#x27;&quot; type&#x3D;&quot;text&quot;&gt;
-              &lt;input [ngClass]&#x3D;&quot;getClassNames(&#x27;inputControl&#x27;)&quot; [(ngModel)]&#x3D;&quot;rule.value&quot; (ngModelChange)&#x3D;&quot;changeInput($event, rule)&quot; *ngSwitchCase&#x3D;&quot;&#x27;number&#x27;&quot; type&#x3D;&quot;number&quot;&gt;
-              &lt;input [ngClass]&#x3D;&quot;getClassNames(&#x27;inputControl&#x27;)&quot; [(ngModel)]&#x3D;&quot;rule.value&quot; (ngModelChange)&#x3D;&quot;changeInput($event, rule)&quot; *ngSwitchCase&#x3D;&quot;&#x27;date&#x27;&quot; type&#x3D;&quot;date&quot;&gt;
-              &lt;input [ngClass]&#x3D;&quot;getClassNames(&#x27;inputControl&#x27;)&quot; [(ngModel)]&#x3D;&quot;rule.value&quot; (ngModelChange)&#x3D;&quot;changeInput($event, rule)&quot; *ngSwitchCase&#x3D;&quot;&#x27;time&#x27;&quot; type&#x3D;&quot;time&quot;&gt;
-              &lt;select [ngClass]&#x3D;&quot;getClassNames(&#x27;inputControl&#x27;)&quot; [(ngModel)]&#x3D;&quot;rule.value&quot; (ngModelChange)&#x3D;&quot;changeInput($event, rule)&quot; *ngSwitchCase&#x3D;&quot;&#x27;category&#x27;&quot;&gt;
+              &lt;input [ngClass]&#x3D;&quot;getClassNames(&#x27;inputControl&#x27;)&quot; [(ngModel)]&#x3D;&quot;rule.value&quot; (ngModelChange)&#x3D;&quot;changeInput()&quot; [disabled]&#x3D;&quot;disabled&quot; *ngSwitchCase&#x3D;&quot;&#x27;string&#x27;&quot; type&#x3D;&quot;text&quot;&gt;
+              &lt;input [ngClass]&#x3D;&quot;getClassNames(&#x27;inputControl&#x27;)&quot; [(ngModel)]&#x3D;&quot;rule.value&quot; (ngModelChange)&#x3D;&quot;changeInput()&quot; [disabled]&#x3D;&quot;disabled&quot; *ngSwitchCase&#x3D;&quot;&#x27;number&#x27;&quot; type&#x3D;&quot;number&quot;&gt;
+              &lt;input [ngClass]&#x3D;&quot;getClassNames(&#x27;inputControl&#x27;)&quot; [(ngModel)]&#x3D;&quot;rule.value&quot; (ngModelChange)&#x3D;&quot;changeInput()&quot; [disabled]&#x3D;&quot;disabled&quot; *ngSwitchCase&#x3D;&quot;&#x27;date&#x27;&quot; type&#x3D;&quot;date&quot;&gt;
+              &lt;input [ngClass]&#x3D;&quot;getClassNames(&#x27;inputControl&#x27;)&quot; [(ngModel)]&#x3D;&quot;rule.value&quot; (ngModelChange)&#x3D;&quot;changeInput()&quot; [disabled]&#x3D;&quot;disabled&quot; *ngSwitchCase&#x3D;&quot;&#x27;time&#x27;&quot; type&#x3D;&quot;time&quot;&gt;
+              &lt;select [ngClass]&#x3D;&quot;getClassNames(&#x27;inputControl&#x27;)&quot; [(ngModel)]&#x3D;&quot;rule.value&quot; (ngModelChange)&#x3D;&quot;changeInput()&quot; [disabled]&#x3D;&quot;disabled&quot; *ngSwitchCase&#x3D;&quot;&#x27;category&#x27;&quot;&gt;
                 &lt;option *ngFor&#x3D;&quot;let opt of getOptions(rule.field)&quot; [ngValue]&#x3D;&quot;opt.value&quot;&gt;
                   {{opt.name}}
                 &lt;/option&gt;
               &lt;/select&gt;
               &lt;ng-container *ngSwitchCase&#x3D;&quot;&#x27;multiselect&#x27;&quot;&gt;
-                &lt;select [ngClass]&#x3D;&quot;getClassNames(&#x27;inputControl&#x27;)&quot; [(ngModel)]&#x3D;&quot;rule.value&quot; (ngModelChange)&#x3D;&quot;changeInput($event, rule)&quot; multiple&gt;
+                &lt;select [ngClass]&#x3D;&quot;getClassNames(&#x27;inputControl&#x27;)&quot; [(ngModel)]&#x3D;&quot;rule.value&quot; (ngModelChange)&#x3D;&quot;changeInput()&quot; [disabled]&#x3D;&quot;disabled&quot; multiple&gt;
                   &lt;option *ngFor&#x3D;&quot;let opt of getOptions(rule.field)&quot; [ngValue]&#x3D;&quot;opt.value&quot;&gt;
                     {{opt.name}}
                   &lt;/option&gt;
                 &lt;/select&gt;
               &lt;/ng-container&gt;
-              &lt;input [ngClass]&#x3D;&quot;getClassNames(&#x27;inputControl&#x27;)&quot; [(ngModel)]&#x3D;&quot;rule.value&quot; (ngModelChange)&#x3D;&quot;changeInput($event, rule)&quot; *ngSwitchCase&#x3D;&quot;&#x27;boolean&#x27;&quot; type&#x3D;&quot;checkbox&quot;&gt;
+              &lt;input [ngClass]&#x3D;&quot;getClassNames(&#x27;inputControl&#x27;)&quot; [(ngModel)]&#x3D;&quot;rule.value&quot; (ngModelChange)&#x3D;&quot;changeInput()&quot; [disabled]&#x3D;&quot;disabled&quot; *ngSwitchCase&#x3D;&quot;&#x27;boolean&#x27;&quot; type&#x3D;&quot;checkbox&quot;&gt;
             &lt;/div&gt;
           &lt;/ng-template&gt;
 
         &lt;/ng-container&gt;
         &lt;query-builder *ngIf&#x3D;&quot;local.ruleset&quot;
           [data]&#x3D;&quot;rule&quot;
+          [disabled]&#x3D;&quot;disabled&quot;
           [parentTouchedCallback]&#x3D;&quot;parentTouchedCallback || onTouchedCallback&quot;
           [parentChangeCallback]&#x3D;&quot;parentChangeCallback || onChangeCallback&quot;
           [parentInputTemplates]&#x3D;&quot;parentInputTemplates || inputTemplates&quot;
@@ -5254,7 +5377,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div [ngClass]="getClassNames(\'switchRow\')">  <ng-container *ngIf="getButtonGroupTemplate() as template; else defaultButtonGroup">    <div [ngClass]="getClassNames(\'buttonGroup\', \'rightAlign\')">      <ng-container *ngTemplateOutlet="template; context: getButtonGroupContext()"></ng-container>    </div>  </ng-container>  <ng-template #defaultButtonGroup>    <div [ngClass]="getClassNames(\'buttonGroup\', \'rightAlign\')">      <button (click)="addRule()" [ngClass]="getClassNames(\'button\')">        <i [ngClass]="getClassNames(\'addIcon\')"></i> Rule      </button>      <button (click)="addRuleSet()" [ngClass]="getClassNames(\'button\')" *ngIf="allowRuleset">        <i [ngClass]="getClassNames(\'addIcon\')"></i> Ruleset      </button>      <ng-container *ngIf="!!parentValue && allowRuleset">        <button (click)="removeRuleSet()" [ngClass]="getClassNames(\'button\', \'removeButton\')">          <i [ngClass]="getClassNames(\'removeIcon\')"></i>        </button>      </ng-container>    </div>  </ng-template>  <ng-container *ngIf="getSwitchGroupTemplate() as template; else defaultSwitchGroup">    <ng-container *ngTemplateOutlet="template; context: {$implicit: data}"></ng-container>  </ng-container>  <ng-template #defaultSwitchGroup>    <div [ngClass]="getClassNames(\'switchGroup\', \'transition\')" *ngIf="data">      <div [ngClass]="getClassNames(\'switchControl\')">        <input type="radio" [ngClass]="getClassNames(\'switchRadio\')" [(ngModel)]="data.condition" value="and" #andOption/>        <label (click)="data.condition=andOption.value" [ngClass]="getClassNames(\'switchLabel\')">AND</label>      </div>      <div [ngClass]="getClassNames(\'switchControl\')">        <input type="radio" [ngClass]="getClassNames(\'switchRadio\')" [(ngModel)]="data.condition" value="or" #orOption/>        <label (click)="data.condition=orOption.value" [ngClass]="getClassNames(\'switchLabel\')">OR</label>      </div>    </div>  </ng-template></div><ul [ngClass]="getClassNames(\'tree\')" *ngIf="data && data.rules">  <ng-container *ngFor="let rule of data.rules">    <ng-container *ngIf="{ruleset: !!rule.rules, invalid: !config.allowEmptyRulesets && rule.rules && rule.rules.length === 0} as local">      <li [ngClass]="getQueryItemClassName(local)">        <ng-container *ngIf="!local.ruleset">          <ng-container *ngIf="getRemoveButtonTemplate() as template; else defaultRemoveButton">            <div [ngClass]="getClassNames(\'buttonGroup\', \'rightAlign\')">              <ng-container *ngTemplateOutlet="template; context: getRemoveButtonContext(rule)"></ng-container>            </div>          </ng-container>          <ng-template #defaultRemoveButton>            <div [ngClass]="getClassNames(\'removeButtonSize\', \'rightAlign\')">              <button [ngClass]="getClassNames(\'button\', \'removeButton\')" (click)="removeRule(rule, data)">                <i [ngClass]="getClassNames(\'removeIcon\')"></i>              </button>            </div>          </ng-template>          <div *ngIf="entities?.length > 0" class="q-inline-block-display" >            <ng-container *ngIf="getEntityTemplate() as template; else defaultEntity">              <ng-container *ngTemplateOutlet="template; context: getEntityContext(rule)"></ng-container>            </ng-container>          </div>          <ng-template #defaultEntity>            <div [ngClass]="getClassNames(\'entityControlSize\')">              <select [ngClass]="getClassNames(\'entityControl\')" [(ngModel)]="rule.entity" (ngModelChange)="changeEntity($event, rule)">                <option *ngFor="let entity of entities" [ngValue]="entity.value">                  {{entity.name}}                </option>              </select>            </div>          </ng-template>          <ng-container *ngIf="getFieldTemplate() as template; else defaultField">            <ng-container *ngTemplateOutlet="template; context: getFieldContext(rule)"></ng-container>          </ng-container>          <ng-template #defaultField>            <div [ngClass]="getClassNames(\'fieldControlSize\')">              <select [ngClass]="getClassNames(\'fieldControl\')" [(ngModel)]="rule.field" (ngModelChange)="changeField($event, rule)">                <option *ngFor="let field of getFields(rule.entity)" [ngValue]="field.value">                  {{field.name}}                </option>              </select>            </div>          </ng-template>          <ng-container *ngIf="getOperatorTemplate() as template; else defaultOperator">            <ng-container *ngTemplateOutlet="template; context: getOperatorContext(rule)"></ng-container>          </ng-container>          <ng-template #defaultOperator>            <div [ngClass]="getClassNames(\'operatorControlSize\')">              <select [ngClass]="getClassNames(\'operatorControl\')" [(ngModel)]="rule.operator" (ngModelChange)="changeOperator($event, rule)">                <option *ngFor="let operator of getOperators(rule.field)" [ngValue]="operator">                  {{operator}}                </option>              </select>            </div>          </ng-template>          <ng-container *ngIf="findTemplateForRule(rule) as template; else defaultInput">            <ng-container *ngTemplateOutlet="template; context: getInputContext(rule)"></ng-container>          </ng-container>          <ng-template #defaultInput>            <div [ngClass]="getClassNames(\'inputControlSize\')" [ngSwitch]="getInputType(rule.field, rule.operator)">              <input [ngClass]="getClassNames(\'inputControl\')" [(ngModel)]="rule.value" (ngModelChange)="changeInput($event, rule)" *ngSwitchCase="\'string\'" type="text">              <input [ngClass]="getClassNames(\'inputControl\')" [(ngModel)]="rule.value" (ngModelChange)="changeInput($event, rule)" *ngSwitchCase="\'number\'" type="number">              <input [ngClass]="getClassNames(\'inputControl\')" [(ngModel)]="rule.value" (ngModelChange)="changeInput($event, rule)" *ngSwitchCase="\'date\'" type="date">              <input [ngClass]="getClassNames(\'inputControl\')" [(ngModel)]="rule.value" (ngModelChange)="changeInput($event, rule)" *ngSwitchCase="\'time\'" type="time">              <select [ngClass]="getClassNames(\'inputControl\')" [(ngModel)]="rule.value" (ngModelChange)="changeInput($event, rule)" *ngSwitchCase="\'category\'">                <option *ngFor="let opt of getOptions(rule.field)" [ngValue]="opt.value">                  {{opt.name}}                </option>              </select>              <ng-container *ngSwitchCase="\'multiselect\'">                <select [ngClass]="getClassNames(\'inputControl\')" [(ngModel)]="rule.value" (ngModelChange)="changeInput($event, rule)" multiple>                  <option *ngFor="let opt of getOptions(rule.field)" [ngValue]="opt.value">                    {{opt.name}}                  </option>                </select>              </ng-container>              <input [ngClass]="getClassNames(\'inputControl\')" [(ngModel)]="rule.value" (ngModelChange)="changeInput($event, rule)" *ngSwitchCase="\'boolean\'" type="checkbox">            </div>          </ng-template>        </ng-container>        <query-builder *ngIf="local.ruleset"          [data]="rule"          [parentTouchedCallback]="parentTouchedCallback || onTouchedCallback"          [parentChangeCallback]="parentChangeCallback || onChangeCallback"          [parentInputTemplates]="parentInputTemplates || inputTemplates"          [parentOperatorTemplate]="parentOperatorTemplate || operatorTemplate"          [parentFieldTemplate]="parentFieldTemplate || fieldTemplate"          [parentEntityTemplate]="parentEntityTemplate || entityTemplate"          [parentSwitchGroupTemplate]="parentSwitchGroupTemplate || switchGroupTemplate"          [parentButtonGroupTemplate]="parentButtonGroupTemplate || buttonGroupTemplate"          [parentRemoveButtonTemplate]="parentRemoveButtonTemplate || removeButtonTemplate"          [parentValue]="data"          [classNames]="classNames"          [config]="config"          [allowRuleset]="allowRuleset"          [operatorMap]="operatorMap">        </query-builder>        <p [ngClass]="getClassNames(\'emptyWarning\')" *ngIf="local.invalid">A ruleset cannot be empty. Please add a rule or remove it all together.</p>      </li>    </ng-container>  </ng-container></ul></div>'
+        var COMPONENT_TEMPLATE = '<div><div [ngClass]="getClassNames(\'switchRow\')">  <ng-container *ngIf="getButtonGroupTemplate() as template; else defaultButtonGroup">    <div [ngClass]="getClassNames(\'buttonGroup\', \'rightAlign\')">      <ng-container *ngTemplateOutlet="template; context: getButtonGroupContext()"></ng-container>    </div>  </ng-container>  <ng-template #defaultButtonGroup>    <div [ngClass]="getClassNames(\'buttonGroup\', \'rightAlign\')">      <button (click)="addRule()" [ngClass]="getClassNames(\'button\')" [disabled]=disabled>        <i [ngClass]="getClassNames(\'addIcon\')"></i> Rule      </button>      <button (click)="addRuleSet()" [ngClass]="getClassNames(\'button\')" *ngIf="allowRuleset" [disabled]=disabled>        <i [ngClass]="getClassNames(\'addIcon\')"></i> Ruleset      </button>      <ng-container *ngIf="!!parentValue && allowRuleset">        <button (click)="removeRuleSet()" [ngClass]="getClassNames(\'button\', \'removeButton\')" [disabled]=disabled>          <i [ngClass]="getClassNames(\'removeIcon\')"></i>        </button>      </ng-container>    </div>  </ng-template>  <ng-container *ngIf="getSwitchGroupTemplate() as template; else defaultSwitchGroup">    <ng-container *ngTemplateOutlet="template; context: getSwitchGroupContext()"></ng-container>  </ng-container>  <ng-template #defaultSwitchGroup>    <div [ngClass]="getClassNames(\'switchGroup\', \'transition\')" *ngIf="data">      <div [ngClass]="getClassNames(\'switchControl\')">        <input type="radio" [ngClass]="getClassNames(\'switchRadio\')" [(ngModel)]="data.condition" [disabled]=disabled value="and" #andOption/>        <label (click)="changeCondition(andOption.value)" [ngClass]="getClassNames(\'switchLabel\')">AND</label>      </div>      <div [ngClass]="getClassNames(\'switchControl\')">        <input type="radio" [ngClass]="getClassNames(\'switchRadio\')" [(ngModel)]="data.condition" [disabled]=disabled value="or" #orOption/>        <label (click)="changeCondition(orOption.value)" [ngClass]="getClassNames(\'switchLabel\')">OR</label>      </div>    </div>  </ng-template></div><ul [ngClass]="getClassNames(\'tree\')" *ngIf="data && data.rules">  <ng-container *ngFor="let rule of data.rules">    <ng-container *ngIf="{ruleset: !!rule.rules, invalid: !config.allowEmptyRulesets && rule.rules && rule.rules.length === 0} as local">      <li [ngClass]="getQueryItemClassName(local)">        <ng-container *ngIf="!local.ruleset">          <ng-container *ngIf="getRemoveButtonTemplate() as template; else defaultRemoveButton">            <div [ngClass]="getClassNames(\'buttonGroup\', \'rightAlign\')">              <ng-container *ngTemplateOutlet="template; context: getRemoveButtonContext(rule)"></ng-container>            </div>          </ng-container>          <ng-template #defaultRemoveButton>            <div [ngClass]="getClassNames(\'removeButtonSize\', \'rightAlign\')">              <button [ngClass]="getClassNames(\'button\', \'removeButton\')" (click)="removeRule(rule, data)" [disabled]=disabled>                <i [ngClass]="getClassNames(\'removeIcon\')"></i>              </button>            </div>          </ng-template>          <div *ngIf="entities?.length > 0" class="q-inline-block-display" >            <ng-container *ngIf="getEntityTemplate() as template; else defaultEntity">              <ng-container *ngTemplateOutlet="template; context: getEntityContext(rule)"></ng-container>            </ng-container>          </div>          <ng-template #defaultEntity>            <div [ngClass]="getClassNames(\'entityControlSize\')">              <select [ngClass]="getClassNames(\'entityControl\')" [(ngModel)]="rule.entity" (ngModelChange)="changeEntity($event, rule)" [disabled]="disabled">                <option *ngFor="let entity of entities" [ngValue]="entity.value">                  {{entity.name}}                </option>              </select>            </div>          </ng-template>          <ng-container *ngIf="getFieldTemplate() as template; else defaultField">            <ng-container *ngTemplateOutlet="template; context: getFieldContext(rule)"></ng-container>          </ng-container>          <ng-template #defaultField>            <div [ngClass]="getClassNames(\'fieldControlSize\')">              <select [ngClass]="getClassNames(\'fieldControl\')" [(ngModel)]="rule.field" (ngModelChange)="changeField($event, rule)" [disabled]="disabled">                <option *ngFor="let field of getFields(rule.entity)" [ngValue]="field.value">                  {{field.name}}                </option>              </select>            </div>          </ng-template>          <ng-container *ngIf="getOperatorTemplate() as template; else defaultOperator">            <ng-container *ngTemplateOutlet="template; context: getOperatorContext(rule)"></ng-container>          </ng-container>          <ng-template #defaultOperator>            <div [ngClass]="getClassNames(\'operatorControlSize\')">              <select [ngClass]="getClassNames(\'operatorControl\')" [(ngModel)]="rule.operator" (ngModelChange)="changeOperator()" [disabled]="disabled">                <option *ngFor="let operator of getOperators(rule.field)" [ngValue]="operator">                  {{operator}}                </option>              </select>            </div>          </ng-template>          <ng-container *ngIf="findTemplateForRule(rule) as template; else defaultInput">            <ng-container *ngTemplateOutlet="template; context: getInputContext(rule)"></ng-container>          </ng-container>          <ng-template #defaultInput>            <div [ngClass]="getClassNames(\'inputControlSize\')" [ngSwitch]="getInputType(rule.field, rule.operator)">              <input [ngClass]="getClassNames(\'inputControl\')" [(ngModel)]="rule.value" (ngModelChange)="changeInput()" [disabled]="disabled" *ngSwitchCase="\'string\'" type="text">              <input [ngClass]="getClassNames(\'inputControl\')" [(ngModel)]="rule.value" (ngModelChange)="changeInput()" [disabled]="disabled" *ngSwitchCase="\'number\'" type="number">              <input [ngClass]="getClassNames(\'inputControl\')" [(ngModel)]="rule.value" (ngModelChange)="changeInput()" [disabled]="disabled" *ngSwitchCase="\'date\'" type="date">              <input [ngClass]="getClassNames(\'inputControl\')" [(ngModel)]="rule.value" (ngModelChange)="changeInput()" [disabled]="disabled" *ngSwitchCase="\'time\'" type="time">              <select [ngClass]="getClassNames(\'inputControl\')" [(ngModel)]="rule.value" (ngModelChange)="changeInput()" [disabled]="disabled" *ngSwitchCase="\'category\'">                <option *ngFor="let opt of getOptions(rule.field)" [ngValue]="opt.value">                  {{opt.name}}                </option>              </select>              <ng-container *ngSwitchCase="\'multiselect\'">                <select [ngClass]="getClassNames(\'inputControl\')" [(ngModel)]="rule.value" (ngModelChange)="changeInput()" [disabled]="disabled" multiple>                  <option *ngFor="let opt of getOptions(rule.field)" [ngValue]="opt.value">                    {{opt.name}}                  </option>                </select>              </ng-container>              <input [ngClass]="getClassNames(\'inputControl\')" [(ngModel)]="rule.value" (ngModelChange)="changeInput()" [disabled]="disabled" *ngSwitchCase="\'boolean\'" type="checkbox">            </div>          </ng-template>        </ng-container>        <query-builder *ngIf="local.ruleset"          [data]="rule"          [disabled]="disabled"          [parentTouchedCallback]="parentTouchedCallback || onTouchedCallback"          [parentChangeCallback]="parentChangeCallback || onChangeCallback"          [parentInputTemplates]="parentInputTemplates || inputTemplates"          [parentOperatorTemplate]="parentOperatorTemplate || operatorTemplate"          [parentFieldTemplate]="parentFieldTemplate || fieldTemplate"          [parentEntityTemplate]="parentEntityTemplate || entityTemplate"          [parentSwitchGroupTemplate]="parentSwitchGroupTemplate || switchGroupTemplate"          [parentButtonGroupTemplate]="parentButtonGroupTemplate || buttonGroupTemplate"          [parentRemoveButtonTemplate]="parentRemoveButtonTemplate || removeButtonTemplate"          [parentValue]="data"          [classNames]="classNames"          [config]="config"          [allowRuleset]="allowRuleset"          [operatorMap]="operatorMap">        </query-builder>        <p [ngClass]="getClassNames(\'emptyWarning\')" *ngIf="local.invalid">A ruleset cannot be empty. Please add a rule or remove it all together.</p>      </li>    </ng-container>  </ng-container></ul></div>'
     var COMPONENTS = [{'name': 'QueryBuilderComponent', 'selector': 'query-builder'}];
     var DIRECTIVES = [{'name': 'QueryButtonGroupDirective', 'selector': '[queryButtonGroup]'},{'name': 'QueryEntityDirective', 'selector': '[queryEntity]'},{'name': 'QueryFieldDirective', 'selector': '[queryField]'},{'name': 'QueryInputDirective', 'selector': '[queryInput]'},{'name': 'QueryOperatorDirective', 'selector': '[queryOperator]'},{'name': 'QueryRemoveButtonDirective', 'selector': '[queryRemoveButton]'},{'name': 'QuerySwitchGroupDirective', 'selector': '[querySwitchGroup]'}];
     var ACTUAL_COMPONENT = {'name': 'QueryBuilderComponent'};

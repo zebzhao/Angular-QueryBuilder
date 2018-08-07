@@ -252,6 +252,9 @@
                     <li class="link">
                         <a href="interfaces/RuleSet.html" data-type="entity-link">RuleSet</a>
                     </li>
+                    <li class="link">
+                        <a href="interfaces/SwitchGroupContext.html" data-type="entity-link">SwitchGroupContext</a>
+                    </li>
             </ul>
         </li>
 
@@ -523,6 +526,9 @@
                     </li>
                     <li class="link">
                         <a href="interfaces/RuleSet.html" data-type="entity-link">RuleSet</a>
+                    </li>
+                    <li class="link">
+                        <a href="interfaces/SwitchGroupContext.html" data-type="entity-link">SwitchGroupContext</a>
                     </li>
             </ul>
         </li>
@@ -1087,14 +1093,15 @@ export interface QueryBuilderConfig {
   removeRule?: (rule: Rule, parent: RuleSet) &#x3D;&gt; void;
 }
 
-export interface OperatorContext {
-  onChange: (operatorValue: string, rule: Rule) &#x3D;&gt; void;
-  operators: string[];
-  $implicit: Rule;
+export interface SwitchGroupContext {
+  onChange: (conditionValue: string) &#x3D;&gt; void;
+  getDisabledState: () &#x3D;&gt; boolean;
+  $implicit: RuleSet;
 }
 
 export interface EntityContext {
   onChange: (entityValue: string, rule: Rule) &#x3D;&gt; void;
+  getDisabledState: () &#x3D;&gt; boolean;
   entities: Entity[];
   $implicit: Rule;
 }
@@ -1102,12 +1109,21 @@ export interface EntityContext {
 export interface FieldContext {
   onChange: (fieldValue: string, rule: Rule) &#x3D;&gt; void;
   getFields: (entityName: string) &#x3D;&gt; void;
+  getDisabledState: () &#x3D;&gt; boolean;
   fields: Field[];
   $implicit: Rule;
 }
 
+export interface OperatorContext {
+  onChange: () &#x3D;&gt; void;
+  getDisabledState: () &#x3D;&gt; boolean;
+  operators: string[];
+  $implicit: Rule;
+}
+
 export interface InputContext {
-  onChange: (inputValue: any, rule: Rule) &#x3D;&gt; void;
+  onChange: () &#x3D;&gt; void;
+  getDisabledState: () &#x3D;&gt; boolean;
   options: Option[];
   field: Field;
   $implicit: Rule;
@@ -1117,11 +1133,13 @@ export interface ButtonGroupContext {
   addRule: () &#x3D;&gt; void;
   addRuleSet: () &#x3D;&gt; void;
   removeRuleSet: () &#x3D;&gt; void;
+  getDisabledState: () &#x3D;&gt; boolean;
   $implicit: RuleSet;
 }
 
 export interface RemoveButtonContext {
   removeRule: (rule: Rule) &#x3D;&gt; void;
+  getDisabledState: () &#x3D;&gt; boolean;
   $implicit: Rule;
 }
 </code></pre>
