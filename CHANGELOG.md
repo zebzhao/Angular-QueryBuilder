@@ -1,6 +1,14 @@
 Angular2-QueryBuilder Changelog
 ===============
 
+Version 0.3.1
+-----------
+- Change: add Rule will use `defaultValue` of `Field` as the default
+- Updated Angular Materials to 6.0 in demos
+- Fix touched state not being updated when changing the query condition (AND/OR)
+- Add `[disabled]` feature #61
+- Tweaks to Vanilla CSS styling
+
 Version 0.3.0
 -----------
 - Breaking: Renamed `changeField` callback to `onChange` for `queryField` directive.
