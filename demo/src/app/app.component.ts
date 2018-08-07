@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { QueryBuilderClassNames, QueryBuilderConfig } from '../../lib';
 
 @Component({
-  selector: 'my-app2',
+  selector: 'app-root',
   template: `
   <h2>Vanilla</h2>
   <br>

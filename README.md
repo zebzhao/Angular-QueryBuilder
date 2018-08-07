@@ -132,7 +132,7 @@ classNames: QueryBuilderClassNames = {
 
 ## Customizing with Angular Material
 
-Example of how you can completely customize the query component with another library like Angular Material. For the full example, please look at the [source code](https://github.com/zebzhao/Angular-QueryBuilder/blob/master/demo/esm/src/app/app.component.ts) provided in the demo.
+Example of how you can completely customize the query component with another library like Angular Material. For the full example, please look at the [source code](https://github.com/zebzhao/Angular-QueryBuilder/blob/master/demo/src/app/app.component.ts) provided in the demo.
 
 #### `app.component.html`
 
