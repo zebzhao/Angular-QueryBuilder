@@ -150,7 +150,7 @@ Example of how you can completely customize the query component with another lib
   </ng-container>
   <ng-container *querySwitchGroup="let ruleset">
     <mat-radio-group *ngIf="ruleset" [(ngModel)]="ruleset.condition">
-      <mat-radio-buttonvalue="and">And</mat-radio-button>
+      <mat-radio-button value="and">And</mat-radio-button>
       <mat-radio-button value="or">Or</mat-radio-button>
     </mat-radio-group>
   </ng-container>
