@@ -58,6 +58,14 @@ gulp.task('copy:demo', () => {
 });
 
 /**
+ * Copy editor demo to docs folder for gh-pages
+ */
+gulp.task('copy:editor-demo', () => {
+  return gulp.src('editor-demo/**/*')
+    .pipe(gulp.dest('docs/editor-demo'));
+});
+
+/**
  * Compile SASS to CSS.
  * @see https://github.com/ludohenin/gulp-inline-ng2-template
  * @see https://github.com/sass/node-sass
