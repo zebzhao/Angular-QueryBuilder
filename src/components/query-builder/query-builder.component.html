@@ -148,7 +148,18 @@
           [allowRuleset]="allowRuleset"
           [operatorMap]="operatorMap">
         </query-builder>
-        <p [ngClass]="getClassNames('emptyWarning')" *ngIf="local.invalid">A ruleset cannot be empty. Please add a rule or remove it all together.</p>
+
+        <ng-container *ngIf="getEmptyWarningTemplate() as template; else defaultEmptyWarning">
+          </ng-container *ngIf="local.invalid">
+            <ng-container *ngTemplateOutlet="template; context: getSwitchGroupContext()"></ng-container>
+          </ng-container>
+        </ng-container>
+
+        <ng-template #defaultEmptyWarning>
+          <p [ngClass]="getClassNames('emptyWarning')" *ngIf="local.invalid">
+            {{getEmptyMessage()}}
+          </p>
+        </ng-template>
       </li>
     </ng-container>
   </ng-container>

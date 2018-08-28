@@ -13,6 +13,7 @@ import { QuerySwitchGroupDirective } from './query-switch-group.directive';
 import { QueryButtonGroupDirective } from './query-button-group.directive';
 import { QueryInputDirective } from './query-input.directive';
 import { QueryRemoveButtonDirective } from './query-remove-button.directive';
+import { QueryEmptyWarningDirective } from './query-empty-warning.directive';
 import {
     ButtonGroupContext,
     Field,
@@ -28,6 +29,7 @@ import {
     RemoveButtonContext,
     Rule,
     RuleSet,
+    EmptyWarningContext,
 } from './query-builder.interfaces';
 import {
     ChangeDetectorRef,
@@ -120,6 +122,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   @Input() parentSwitchGroupTemplate: QuerySwitchGroupDirective;
   @Input() parentButtonGroupTemplate: QueryButtonGroupDirective;
   @Input() parentRemoveButtonTemplate: QueryRemoveButtonDirective;
+  @Input() parentEmptyWarningTemplate: QueryEmptyWarningDirective;
   @Input() parentChangeCallback: () => void;
   @Input() parentTouchedCallback: () => void;
 
@@ -129,6 +132,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   @ContentChild(QueryEntityDirective) entityTemplate: QueryEntityDirective;
   @ContentChild(QueryOperatorDirective) operatorTemplate: QueryOperatorDirective;
   @ContentChild(QueryRemoveButtonDirective) removeButtonTemplate: QueryRemoveButtonDirective;
+  @ContentChild(QueryEmptyWarningDirective) emptyWarningTemplate: QueryEmptyWarningDirective;
   @ContentChildren(QueryInputDirective) inputTemplates: QueryList<QueryInputDirective>;
 
   private defaultTemplateTypes: string[] = [
@@ -355,6 +359,14 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     }
   }
 
+  getEmptyMessage(): string {
+    if (this.config.getEmptyMessage) {
+      return this.config.getEmptyMessage();
+    } else {
+      return 'A ruleset cannot be empty. Please add a rule or remove it all together.';
+    }
+  }
+
   addRule(parent?: RuleSet): void {
     if (this.disabled) {
       return;
@@ -543,6 +555,11 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     return t ? t.template : null;
   }
 
+  getEmptyWarningTemplate(): TemplateRef<any> {
+    const t = this.parentEmptyWarningTemplate || this.emptyWarningTemplate;
+    return t ? t.template : null;
+  }
+
   getQueryItemClassName(local: LocalRuleMeta): string {
     let cls = this.getClassNames('row', 'connector', 'transition');
     cls += ' ' + this.getClassNames(local.ruleset ? 'ruleSet' : 'rule');
@@ -599,15 +616,22 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
       });
     }
     return this.entityContextCache.get(rule);
- }
+  }
 
- getSwitchGroupContext(): SwitchGroupContext {
-   return {
-     onChange: this.changeCondition.bind(this),
-     getDisabledState: this.getDisabledState.bind(this),
-     $implicit: this.data
-   };
- }
+  getSwitchGroupContext(): SwitchGroupContext {
+    return {
+      onChange: this.changeCondition.bind(this),
+      getDisabledState: this.getDisabledState.bind(this),
+      $implicit: this.data
+    };
+  }
+
+  getEmptyWarningContext(): EmptyWarningContext {
+    return {
+      getDisabledState: this.getDisabledState.bind(this),
+      $implicit: this.data
+    };
+  }
 
   getOperatorContext(rule: Rule): OperatorContext {
     if (!this.operatorContextCache.has(rule)) {
