@@ -14,6 +14,8 @@ var files = [{
   <script>
     System.import('./app/main')
   </script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
   <my-app>Loading...</my-app>
@@ -51,19 +53,17 @@ System.config({
     'npm:': 'https://unpkg.com/'
   },
   map: {
-    '@angular/core':                     'npm:@angular/core' + angularVersion + '/bundles/core.umd.js',
-    '@angular/common':                   'npm:@angular/common' + angularVersion + '/bundles/common.umd.js',
-    '@angular/compiler':                 'npm:@angular/compiler' + angularVersion + '/bundles/compiler.umd.js',
-    '@angular/forms':                    'npm:@angular/forms' + angularVersion + '/bundles/forms.umd.js',
-    '@angular/http':                     'npm:@angular/http' + angularVersion + '/bundles/http.umd.js',
-    '@angular/router':                   'npm:@angular/router' + angularVersion + '/bundles/router.umd.js',
+    '@angular/core':                     'npm:@angular/core' + angularVersion + '/bundles/core.umd.min.js',
+    '@angular/common':                   'npm:@angular/common' + angularVersion + '/bundles/common.umd.min.js',
+    '@angular/compiler':                 'npm:@angular/compiler' + angularVersion + '/bundles/compiler.umd.min.js',
+    '@angular/forms':                    'npm:@angular/forms' + angularVersion + '/bundles/forms.umd.min.js',
     '@angular/platform-browser':         'npm:@angular/platform-browser' + angularVersion + '/bundles/platform-browser.umd.js',
     '@angular/platform-browser-dynamic': 'npm:@angular/platform-browser-dynamic' + angularVersion + '/bundles/platform-browser-dynamic.umd.js',
     'rxjs':                              'npm:rxjs@6.2.1',
     'rxjs-compat':                       'npm:rxjs-compat@6.2.1',
     'ts':                                'npm:plugin-typescript@8.0.0/lib/plugin.js',
     'typescript':                        'npm:typescript@2.9.2/lib/typescript.js',
-    'angular2-query-builder':            'npm:angular2-query-builder@0.3.2/dist/index.umd.js'
+    'angular2-query-builder':            'npm:angular2-query-builder@0.3.1/dist/index.umd.js'
   }
 });
 */})}, {
@@ -78,28 +78,29 @@ platform.bootstrapModule(AppModule);
 */})}, {
   path: 'app/app.module.ts',
   text: multiline(function () {/*
-import { NgModule }      from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { QueryBuilderModule } from "angular2-query-builder";
 import { AppComponent } from './app.component';
+import { QueryBuilderModule } from 'angular2-query-builder';
 
 @NgModule({
-  imports:      [BrowserModule, QueryBuilderModule],
-  declarations: [AppComponent],
-  bootstrap:    [AppComponent]
+  imports: [
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    QueryBuilderModule
+  ],
+  declarations: [ AppComponent ],
+  bootstrap: [ AppComponent ]
 })
-export class AppModule { }
+export class AppModule {}
 */})}, {
   path: 'app/app.component.scss',
   text: multiline(function () {/*
 /deep/ html {
   font: 14px sans-serif;
   margin: 30px;
-}
-
-.mat-form-field {
-  padding-left: 5px;
-  padding-right: 5px;
 }
 
 .text-input {
@@ -118,7 +119,7 @@ export class AppModule { }
   height: 300px;
 }
 */})}, {
-  path: 'app.component.html',
+  path: 'app/app.component.html',
   text: multiline(function () {/*
 <h2>Vanilla</h2>
 <br>
@@ -145,103 +146,6 @@ export class AppModule { }
   <textarea class="output">{{query | json}}</textarea>
 </div>
 <br>
-<h2>Custom Material</h2>
-<br>
-<mat-card>
-<query-builder [(ngModel)]='query' [config]='currentConfig'>
-  <ng-container *queryButtonGroup="let ruleset; let addRule=addRule; let addRuleSet=addRuleSet; let removeRuleSet=removeRuleSet">
-    <button mat-icon-button color="primary" (click)="addRule()">
-      <mat-icon>add</mat-icon></button>
-    <button mat-icon-button color="primary" *ngIf="addRuleSet" (click)="addRuleSet()">
-      <mat-icon>add_circle_outline</mat-icon></button>
-    <button mat-icon-button color="accent" *ngIf="removeRuleSet" (click)="removeRuleSet()">
-      <mat-icon>remove_circle_outline</mat-icon></button>
-  </ng-container>
-  <ng-container *queryRemoveButton="let rule; let removeRule=removeRule">
-    <button mat-icon-button color="accent" (click)="removeRule(rule)">
-      <mat-icon>remove</mat-icon>
-    </button>
-  </ng-container>
-  <ng-container *querySwitchGroup="let ruleset; let onChange=onChange">
-    <mat-radio-group *ngIf="ruleset" [(ngModel)]="ruleset.condition" (ngModelChange)="onChange($event)">
-      <mat-radio-button [style.padding.px]="10" value="and">And</mat-radio-button>
-      <mat-radio-button [style.padding.px]="10" value="or">Or</mat-radio-button>
-    </mat-radio-group>
-  </ng-container>
-  <ng-container *queryEntity="let rule; let entities=entities; let onChange=onChange">
-    <mat-form-field>
-      <mat-select [(ngModel)]="rule.entity" (ngModelChange)="onChange($event, rule)">
-        <mat-option *ngFor="let entity of entities" [value]="entity.value">
-        {{entity.name}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </ng-container>
-  <ng-container *queryField="let rule; let fields=fields; let onChange=onChange; let getFields = getFields">
-    <mat-form-field>
-      <mat-select [(ngModel)]="rule.field" (ngModelChange)="onChange($event, rule)">
-        <mat-option *ngFor="let field of getFields(rule.entity)" [value]="field.value">
-          {{ field.name }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </ng-container>
-  <ng-container *queryOperator="let rule; let operators=operators; let onChange=onChange">
-    <mat-form-field [style.width.px]="90">
-      <mat-select [(ngModel)]="rule.operator" (ngModelChange)="onChange()">
-        <mat-option *ngFor="let value of operators" [value]="value">
-          {{ value }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </ng-container>
-  <ng-container *queryInput="let rule; type: 'boolean'; let onChange=onChange">
-    <mat-checkbox [(ngModel)]="rule.value" (ngModelChange)="onChange()"></mat-checkbox>
-  </ng-container>
-  <ng-container *queryInput="let rule; let field=field; let options=options; type: 'category'; let onChange=onChange">
-    <mat-form-field>
-      <mat-select [(ngModel)]="rule.value" (ngModelChange)="onChange()">
-        <mat-option *ngFor="let opt of options" [value]="opt.value">
-          {{ opt.name }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </ng-container>
-  <ng-container *queryInput="let rule; type: 'date'; let onChange=onChange">
-    <mat-form-field>
-      <input matInput [matDatepicker]="picker" [(ngModel)]="rule.value" (ngModelChange)="onChange()">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-  </ng-container>
-  <ng-container *queryInput="let rule; let options=options; type: 'multiselect'; let onChange=onChange">
-    <mat-form-field [style.width.px]="300">
-      <mat-select [(ngModel)]="rule.value" multiple (ngModelChange)="onChange()">
-        <mat-option *ngFor="let opt of options" [value]="opt.value">
-          {{ opt.name }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </ng-container>
-  <ng-container *queryInput="let rule; let field=field; type: 'number'; let onChange=onChange">
-    <mat-form-field [style.width.px]="50">
-      <input matInput [(ngModel)]="rule.value" type="number" (ngModelChange)="onChange()">
-    </mat-form-field>
-  </ng-container>
-  <ng-container *queryInput="let rule; let field=field; type: 'string'; let onChange=onChange">
-    <mat-form-field>
-      <input matInput [(ngModel)]="rule.value" (ngModelChange)="onChange()">
-    </mat-form-field>
-  </ng-container>
-  <ng-container *queryInput="let rule; let field=field; type: 'textarea'; let onChange=onChange">
-    <mat-form-field>
-      <textarea matInput [(ngModel)]="rule.value" (ngModelChange)="onChange()">
-      </textarea>
-    </mat-form-field>
-  </ng-container>
-</query-builder>
-</mat-card>
-<br>
 <h2>Bootstrap</h2>
 <br>
 <query-builder [(ngModel)]='query' [classNames]='bootstrapClassNames' [config]='currentConfig'>
@@ -251,64 +155,150 @@ export class AppModule { }
   </div>
 </query-builder>
 */})}, {
-  path: 'app.component.ts',
+  path: 'app/app.component.ts',
   text: multiline(function () {/*
+import { FormBuilder, FormControl } from '@angular/forms';
 import { Component } from '@angular/core';
-import { QueryBuilderConfig } from "angular2-query-builder";
+import { QueryBuilderConfig, QueryBuilderClassNames } from "angular2-query-builder";
+
+declare const __moduleName: string;
 
 @Component({
   selector: 'my-app',
-  template: `<query-builder class="margin30" [data]="query" [config]="config"></query-builder>
-<div class="margin30">
-  <textarea >{{query | json}}</textarea>
-</div>`,
+  moduleId: __moduleName,
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  styles: ['.margin30 { margin: 30px; }', 'textarea { width: 100%; height: 250px; }' ]
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  query = {
+  public queryCtrl: FormControl;
+
+  public bootstrapClassNames: QueryBuilderClassNames = {
+    removeIcon: 'fa fa-minus',
+    addIcon: 'fa fa-plus',
+    button: 'btn',
+    buttonGroup: 'btn-group',
+    rightAlign: 'order-12 ml-auto',
+    switchRow: 'd-flex px-2',
+    switchGroup: 'd-flex align-items-center',
+    switchRadio: 'custom-control-input',
+    switchLabel: 'custom-control-label',
+    switchControl: 'custom-control custom-radio custom-control-inline',
+    row: 'row p-2 m-1',
+    rule: 'border',
+    ruleSet: 'border',
+    invalidRuleSet: 'alert alert-danger',
+    emptyWarning: 'text-danger mx-auto',
+    operatorControl: 'form-control',
+    operatorControlSize: 'col-auto pr-0',
+    fieldControl: 'form-control',
+    fieldControlSize: 'col-auto pr-0',
+    entityControl: 'form-control',
+    entityControlSize: 'col-auto pr-0',
+    inputControl: 'form-control',
+    inputControlSize: 'col-auto'
+  };
+
+  public query = {
     condition: 'and',
     rules: [
-      {field: "age", operator: "<="},
-      {field: "birthday", operator: ">="},
+      {field: 'age', operator: '<=', entity: 'physical'},
+      {field: 'birthday', operator: '=', value: new Date(), entity: 'nonphysical'},
       {
         condition: 'or',
         rules: [
-          {field: "gender", operator: "="},
-          {field: "occupation", operator: "in"},
-          {field: "school", operator: "is null"}
+          {field: 'gender', operator: '=', entity: 'physical'},
+          {field: 'occupation', operator: 'in', entity: 'nonphysical'},
+          {field: 'school', operator: 'is null', entity: 'nonphysical'},
+          {field: 'notes', operator: '=', entity: 'nonphysical'}
         ]
       }
     ]
   };
-  config: QueryBuilderConfig = {
+
+  public entityConfig: QueryBuilderConfig = {
+    entities: {
+      physical: {name: 'Physical Attributes'},
+      nonphysical: {name: 'Nonphysical Attributes'}
+    },
     fields: {
-      "age": {name: "Age", type: 'number'},
-      "gender": {
-        name: "Gender",
+      age: {name: 'Age', type: 'number', entity: 'physical'},
+      gender: {
+        name: 'Gender',
+        entity: 'physical',
         type: 'category',
         options: [
-          {name: "Male", value: "m"},
-          {name: "Female", value: "f"}
+          {name: 'Male', value: 'm'},
+          {name: 'Female', value: 'f'}
         ]
       },
-      "name": {name: "Name", type: 'string'},
-      "educated": {name: "College Degree?", type: 'boolean'},
-      "birthday": {name: "Birthday", type: 'date'},
-      "school": {name: "School", type: 'string', nullable: true},
-      "occupation": {
-        name: "Occupation",
-        type: 'string',
+      name: {name: 'Name', type: 'string', entity: 'nonphysical'},
+      notes: {name: 'Notes', type: 'textarea', operators: ['=', '!='], entity: 'nonphysical'},
+      educated: {name: 'College Degree?', type: 'boolean', entity: 'nonphysical'},
+      birthday: {name: 'Birthday', type: 'date', operators: ['=', '<=', '>'],
+        defaultValue: (() => new Date()), entity: 'nonphysical'
+      },
+      school: {name: 'School', type: 'string', nullable: true, entity: 'nonphysical'},
+      occupation: {
+        name: 'Occupation',
+        entity: 'nonphysical',
+        type: 'category',
         options: [
-          {name: "Student", value: "student"},
-          {name: "Teacher", value: "teacher"},
-          {name: "Unemployed", value: "unemployed"},
-          {name: "Scientist", value: "scientist"}
+          {name: 'Student', value: 'student'},
+          {name: 'Teacher', value: 'teacher'},
+          {name: 'Unemployed', value: 'unemployed'},
+          {name: 'Scientist', value: 'scientist'}
         ]
       }
     }
   };
+
+  public config: QueryBuilderConfig = {
+    fields: {
+      age: {name: 'Age', type: 'number'},
+      gender: {
+        name: 'Gender',
+        type: 'category',
+        options: [
+          {name: 'Male', value: 'm'},
+          {name: 'Female', value: 'f'}
+        ]
+      },
+      name: {name: 'Name', type: 'string'},
+      notes: {name: 'Notes', type: 'textarea', operators: ['=', '!=']},
+      educated: {name: 'College Degree?', type: 'boolean'},
+      birthday: {name: 'Birthday', type: 'date', operators: ['=', '<=', '>'],
+        defaultValue: (() => new Date())
+      },
+      school: {name: 'School', type: 'string', nullable: true},
+      occupation: {
+        name: 'Occupation',
+        type: 'category',
+        options: [
+          {name: 'Student', value: 'student'},
+          {name: 'Teacher', value: 'teacher'},
+          {name: 'Unemployed', value: 'unemployed'},
+          {name: 'Scientist', value: 'scientist'}
+        ]
+      }
+    }
+  };
+
+  public currentConfig: QueryBuilderConfig;
+
+  constructor(
+    private formBuilder: FormBuilder
+  ) {
+    this.queryCtrl = this.formBuilder.control(this.query);
+    this.currentConfig = this.config;
+  }
+
+  switchModes(event: Event) {
+    this.currentConfig = (<HTMLInputElement>event.target).checked ? this.entityConfig : this.config;
+  }
+
+  changeDisabled(event: Event) {
+    (<HTMLInputElement>event.target).checked ? this.queryCtrl.disable() : this.queryCtrl.enable();
+  }
 }
 */})}
 ];
@@ -316,7 +306,7 @@ export class AppComponent {
 editor.connect(function () {
   editor.configure({
     files: files,
-    defaultFile: 'app.component.ts'
+    defaultFile: 'app/app.component.ts'
   });
 });
 
