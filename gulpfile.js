@@ -53,8 +53,8 @@ gulp.task('build:esm:watch', ['build:esm'], () => {
  * Copy demo builds to docs folder for gh-pages
  */
 gulp.task('copy:demo', () => {
-  return gulp.src('demo/dist/demo/**/*')
-    .pipe(gulp.dest('docs/demo'));
+  return gulp.src('demo/dist/**/*', {base: 'demo/dist'})
+    .pipe(gulp.dest('docs'));
 });
 
 /**
