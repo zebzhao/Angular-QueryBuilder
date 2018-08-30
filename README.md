@@ -242,6 +242,11 @@ Use these directives to replace different parts of query builder with custom com
 |`$implicit`|`RuleSet`|Current rule set object which contain a list of child rules|
 |`onChange`|`() => void`|Callback to handle changes to the switch group component|
 
+#### `queryEmptyWarning`
+|Context Name|Type|Description|
+|:--- |:--- |:--- |
+|`$implicit`|`RuleSet`|Current rule set object which contain a list of child rules|
+
 #### `queryButtonGroup`
 |Context Name|Type|Description|
 |:--- |:--- |:--- |

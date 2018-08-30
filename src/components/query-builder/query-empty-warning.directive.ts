@@ -1,6 +1,6 @@
 import { Directive, TemplateRef } from '@angular/core';
 
-@Directive({selector: '[querySwitchGroup]'})
-export class QuerySwitchGroupDirective {
+@Directive({selector: '[queryEmptyWarning]'})
+export class QueryEmptyWarningDirective {
   constructor(public template: TemplateRef<any>) {}
 }
