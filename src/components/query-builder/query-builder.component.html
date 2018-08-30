@@ -146,18 +146,19 @@
           [classNames]="classNames"
           [config]="config"
           [allowRuleset]="allowRuleset"
+          [emptyMessage]="emptyMessage"
           [operatorMap]="operatorMap">
         </query-builder>
 
         <ng-container *ngIf="getEmptyWarningTemplate() as template; else defaultEmptyWarning">
-          </ng-container *ngIf="local.invalid">
-            <ng-container *ngTemplateOutlet="template; context: getSwitchGroupContext()"></ng-container>
+          <ng-container *ngIf="local.invalid">
+            <ng-container *ngTemplateOutlet="template; context: getEmptyWarningContext()"></ng-container>
           </ng-container>
         </ng-container>
 
         <ng-template #defaultEmptyWarning>
           <p [ngClass]="getClassNames('emptyWarning')" *ngIf="local.invalid">
-            {{getEmptyMessage()}}
+            {{emptyMessage}}
           </p>
         </ng-template>
       </li>

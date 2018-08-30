@@ -1,6 +1,11 @@
 Angular2-QueryBuilder Changelog
 ===============
 
+Version 0.3.2
+-----------
+- Add `queryEmptyMessage` directive for customizing empty warning messages
+- Add `[emptyMessage]` to change the default empty message text
+
 Version 0.3.1
 -----------
 - Change: add Rule will use `defaultValue` of `Field` as the default

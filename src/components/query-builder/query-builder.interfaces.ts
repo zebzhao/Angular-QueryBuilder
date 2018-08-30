@@ -84,7 +84,6 @@ export interface QueryBuilderConfig {
   fields: FieldMap;
   entities?: EntityMap;
   allowEmptyRulesets?: boolean;
-  getEmptyMessage?: () => string;
   getOperators?: (fieldName: string, field: Field) => string[];
   getInputType?: (field: string, operator: string) => string;
   getOptions?: (field: string) => Option[];
@@ -102,6 +101,7 @@ export interface SwitchGroupContext {
 
 export interface EmptyWarningContext {
   getDisabledState: () => boolean;
+  message: string;
   $implicit: RuleSet;
 }
 

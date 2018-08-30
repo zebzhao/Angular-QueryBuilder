@@ -4,12 +4,13 @@
   "scripts": {
     "ng": "ng",
     "start": "concurrently --raw \"gulp copy-lib:watch\" \"ng serve\"",
-    "build": "npm run build:aot && npm run build:jit",
+    "build": "npm run build:aot && npm run build:jit && npm run copy-editor",
     "build:aot": "ng build --aot",
     "build:jit": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "copy-editor": "copyfiles \"./editor/**/*\" dist",
     "copy-lib": "copyfiles --up 2 \"../dist/**/*\" lib",
     "prebuild:aot": "npm run copy-lib",
     "prebuild:jit": "npm run copy-lib"

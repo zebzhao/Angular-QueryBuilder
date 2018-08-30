@@ -111,6 +111,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   public onTouchedCallback: () => any;
 
   @Input() allowRuleset: boolean = true;
+  @Input() emptyMessage: string = 'A ruleset cannot be empty. Please add a rule or remove it all together.';
   @Input() classNames: QueryBuilderClassNames;
   @Input() operatorMap: {[key: string]: string[]};
   @Input() parentValue: RuleSet;
@@ -356,14 +357,6 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
         `A 'defaultOperator' is also not specified on the field config. Operator value will default to null.`);
         return null;
       }
-    }
-  }
-
-  getEmptyMessage(): string {
-    if (this.config.getEmptyMessage) {
-      return this.config.getEmptyMessage();
-    } else {
-      return 'A ruleset cannot be empty. Please add a rule or remove it all together.';
     }
   }
 
@@ -629,6 +622,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   getEmptyWarningContext(): EmptyWarningContext {
     return {
       getDisabledState: this.getDisabledState.bind(this),
+      message: this.emptyMessage,
       $implicit: this.data
     };
   }

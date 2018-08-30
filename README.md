@@ -9,6 +9,8 @@ A modernized Angular 4+ query builder based on jQuery QueryBuilder. Support for 
 ## Demo
 Play with the [demo here](https://zebzhao.github.io/Angular-QueryBuilder/demo/).
 
+[Editable demo](https://zebzhao.github.io/Angular-QueryBuilder/editor/)
+
 [See the Plunker](https://plnkr.co/edit/vtzerj4oFQLB6ukcxb9D?p=preview)
 
 ## Documentation
@@ -196,7 +198,8 @@ See [documentation](https://zebzhao.github.io/Angular-QueryBuilder/) for more de
 |`allowRuleset`|`boolean`|Optional|`true`| Displays the `+ Ruleset` button if `true`. |
 |`classNames`|`object`|Optional|| CSS class names for different child elements in `query-builder` component. |
 |`config`|`QueryBuilderConfig`|Required|| Configuration object for the main component. |
-|`data`| `Ruleset` |Optional|| (Use `ngModel` or `value` instead.) |
+|`data`|`Ruleset`|Optional|| (Use `ngModel` or `value` instead.) |
+|`emptyMessage`|`string`|Optional| Message to display for an empty Ruleset if empty rulesets are not allowed. |
 |`ngModel`| `Ruleset` |Optional|| Object that stores the state of the component. Supports 2-way binding. |
 |`operatorMap`|`{ [key: string]: string[] }`|Optional|| Used to map field types to list of operators. |
 |`value`| `Ruleset` |Optional|| Object that stores the state of the component. |

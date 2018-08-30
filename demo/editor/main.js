@@ -63,7 +63,7 @@ System.config({
     'rxjs-compat':                       'npm:rxjs-compat@6.2.1',
     'ts':                                'npm:plugin-typescript@8.0.0/lib/plugin.js',
     'typescript':                        'npm:typescript@2.9.2/lib/typescript.js',
-    'angular2-query-builder':            'npm:angular2-query-builder@0.3.1/dist/index.umd.js'
+    'angular2-query-builder':            'npm:angular2-query-builder@0.3.2/dist/index.umd.js'
   }
 });
 */})}, {

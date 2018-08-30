@@ -7,3 +7,4 @@ export * from './query-input.directive';
 export * from './query-operator.directive';
 export * from './query-switch-group.directive';
 export * from './query-remove-button.directive';
+export * from './query-empty-warning.directive';
