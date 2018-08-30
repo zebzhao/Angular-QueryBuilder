@@ -7,13 +7,13 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
-	      <link rel="stylesheet" href="./styles/style.css">
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
     </head>
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="./" class="navbar-brand">angular2-query-builder documentation</a>
+            <a href="../" class="navbar-brand">angular2-query-builder documentation</a>
             <button type="button" class="btn btn-default btn-menu fa fa-bars" id="btn-menu"></button>
         </div>
 
@@ -583,449 +583,193 @@
 </nav>
                </div>
                <!-- START CONTENT -->
-               <div class="content getting-started">
+               <div class="content directive">
                    <div class="content-data">
 
-<h1 id="angular-querybuilder">Angular-QueryBuilder</h1>
-<p>A modernized Angular 4+ query builder based on jQuery QueryBuilder. Support for heavy customization with Angular components and provides a flexible way to handle custom data types.</p>
-<h1 id="getting-started">Getting Started</h1>
-<h2 id="install">Install</h2>
-<p><code>npm install angular2-query-builder</code></p>
-<h2 id="demo">Demo</h2>
-<p>Play with the <a href="https://zebzhao.github.io/Angular-QueryBuilder/demo/">demo here</a>.</p>
-<p><a href="https://zebzhao.github.io/Angular-QueryBuilder/editor/">Editable demo</a></p>
-<p><a href="https://plnkr.co/edit/vtzerj4oFQLB6ukcxb9D?p=preview">See the Plunker</a></p>
-<h2 id="documentation">Documentation</h2>
-<p><a href="https://zebzhao.github.io/Angular-QueryBuilder/">Documentation link</a></p>
-<h1 id="examples">Examples</h1>
-<h2 id="basic-usage">Basic Usage</h2>
-<h5 id="app-module-ts"><code>app.module.ts</code></h5>
-<div><pre class="line-numbers"><code class="language-javascript">import { QueryBuilderModule } from &quot;angular2-query-builder&quot;;
-import { AppComponent } from &quot;./app.component&quot;
 
-&#64;NgModule(imports: [
-  ...,
-  QueryBuilderModule,
-  IonicModule.forRoot(AppComponent) // (Optional) for IonicFramework 2+
-])
-export class AppModule { }</code></pre></div><h5 id="app-component-html"><code>app.component.html</code></h5>
-<div><pre class="line-numbers"><code class="language-html">...
-&lt;query-builder [(ngModel)]=&#39;query&#39; [config]=&#39;config&#39;&gt;&lt;/query-builder&gt;
-...</code></pre></div><h5 id="app-component-ts"><code>app.component.ts</code></h5>
-<div><pre class="line-numbers"><code class="language-javascript">import { QueryBuilderConfig } from &#39;angular2-query-builder&#39;;
 
-export class AppComponent {
-  query = {
-    condition: &#39;and&#39;,
-    rules: [
-      {field: &#39;age&#39;, operator: &#39;&lt;=&#39;, value: &#39;Bob&#39;},
-      {field: &#39;gender&#39;, operator: &#39;&gt;=&#39;, value: &#39;m&#39;}
-    ]
-  };
 
-  config: QueryBuilderConfig = {
-    fields: {
-      age: {name: &#39;Age&#39;, type: &#39;number&#39;},
-      gender: {
-        name: &#39;Gender&#39;,
-        type: &#39;category&#39;,
-        options: [
-          {name: &#39;Male&#39;, value: &#39;m&#39;},
-          {name: &#39;Female&#39;, value: &#39;f&#39;}
-        ]
-      }
-    }
-  }
-}</code></pre></div><h2 id="custom-input-components">Custom Input Components</h2>
-<h5 id="app-component-html"><code>app.component.html</code></h5>
-<div><pre class="line-numbers"><code class="language-html">&lt;query-builder [(ngModel)]=&#39;query&#39; [config]=&#39;config&#39;&gt;
-  &lt;ng-container *queryInput=&quot;let rule; type: &#39;date&#39;&quot;&gt;
-    &lt;custom-datepicker [(ngModel)]=&quot;rule.value&quot;&gt;&lt;/custom-datepicker&gt;
-  &lt;/ng-container&gt;
-&lt;/query-builder&gt;</code></pre></div><h5 id="app-component-ts"><code>app.component.ts</code></h5>
-<div><pre class="line-numbers"><code class="language-javascript">query = {
-  condition: &#39;and&#39;,
-  rules: [
-    {field: &#39;birthday&#39;, operator: &#39;=&#39;, value: new Date()}
-  ]
-};
 
-config: QueryBuilderConfig = {
-  fields: {
-    birthday: {name: &#39;Birthday&#39;, type: &#39;date&#39;, operators: [&#39;=&#39;, &#39;&lt;=&#39;, &#39;&gt;&#39;]
-      defaultValue: (() =&gt; return new Date())
-    },
-  }
-}</code></pre></div><h2 id="custom-styling-with-bootstrap-4-">Custom Styling (with Bootstrap 4)</h2>
-<p><a href="https://zebzhao.github.io/Angular-QueryBuilder/demo/">Bootstrap demo</a>.</p>
-<h5 id="app-component-html"><code>app.component.html</code></h5>
-<div><pre class="line-numbers"><code class="language-html">&lt;query-builder [(ngModel)]=&#39;query&#39; [config]=&#39;config&#39; [classNames]=&#39;classNames&#39;&gt;&lt;/query-builder&gt;</code></pre></div><h5 id="app-component-ts"><code>app.component.ts</code></h5>
-<div><pre class="line-numbers"><code class="language-javascript">classNames: QueryBuilderClassNames = {
-  removeIcon: &#39;fa fa-minus&#39;,
-  addIcon: &#39;fa fa-plus&#39;,
-  button: &#39;btn&#39;,
-  buttonGroup: &#39;btn-group&#39;,
-  rightAlign: &#39;order-12 ml-auto&#39;,
-  switchRow: &#39;d-flex px-2&#39;,
-  switchGroup: &#39;d-flex align-items-center&#39;,
-  switchRadio: &#39;custom-control-input&#39;,
-  switchLabel: &#39;custom-control-label&#39;,
-  switchControl: &#39;custom-control custom-radio custom-control-inline&#39;,
-  row: &#39;row p-2 m-1&#39;,
-  rule: &#39;border&#39;,
-  ruleSet: &#39;border&#39;,
-  invalidRuleSet: &#39;alert alert-danger&#39;,
-  operatorControl: &#39;form-control&#39;,
-  operatorControlSize: &#39;col-auto px-0&#39;,
-  fieldControl: &#39;form-control&#39;,
-  fieldControlSize: &#39;col-auto&#39;,
-  inputControl: &#39;form-control&#39;,
-  inputControlSize: &#39;col-auto&#39;
-}</code></pre></div><h2 id="customizing-with-angular-material">Customizing with Angular Material</h2>
-<p>Example of how you can completely customize the query component with another library like Angular Material. For the full example, please look at the <a href="https://github.com/zebzhao/Angular-QueryBuilder/blob/master/demo/src/app/app.component.ts">source code</a> provided in the demo.</p>
-<h4 id="app-component-html"><code>app.component.html</code></h4>
-<div><pre class="line-numbers"><code class="language-html">&lt;query-builder [(ngModel)]=&#39;query&#39; [config]=&#39;config&#39;&gt;
-  &lt;ng-container *queryButtonGroup=&quot;let ruleset; let addRule=addRule; let addRuleSet=addRuleSet; let removeRuleSet=removeRuleSet&quot;&gt;
-    &lt;button mat-button (click)=&quot;addRule()&quot;&gt;+ Rule&lt;/button&gt;
-    &lt;button mat-button (click)=&quot;addRuleSet()&quot;&gt;+ Ruleset&lt;/button&gt;
-    &lt;button mat-button (click)=&quot;removeRuleSet()&quot;&gt;- Ruleset&lt;/button&gt;
-  &lt;/ng-container&gt;
-  &lt;ng-container *queryRemoveButton=&quot;let rule; let removeRule=removeRule&quot;&gt;
-    &lt;button mat-icon-button color=&quot;accent&quot; (click)=&quot;removeRule(rule)&quot;&gt;
-      &lt;mat-icon&gt;remove&lt;/mat-icon&gt;
-    &lt;/button&gt;
-  &lt;/ng-container&gt;
-  &lt;ng-container *querySwitchGroup=&quot;let ruleset&quot;&gt;
-    &lt;mat-radio-group *ngIf=&quot;ruleset&quot; [(ngModel)]=&quot;ruleset.condition&quot;&gt;
-      &lt;mat-radio-button value=&quot;and&quot;&gt;And&lt;/mat-radio-button&gt;
-      &lt;mat-radio-button value=&quot;or&quot;&gt;Or&lt;/mat-radio-button&gt;
-    &lt;/mat-radio-group&gt;
-  &lt;/ng-container&gt;
-  &lt;ng-container *queryField=&quot;let rule; let fields=fields; let changeField=changeField&quot;&gt;
-    &lt;mat-form-field&gt;
-      &lt;mat-select [(ngModel)]=&quot;rule.field&quot; (ngModelChange)=&quot;changeField($event, rule)&quot;&gt;
-        &lt;mat-option *ngFor=&quot;let field of fields&quot; [value]=&quot;field.value&quot;&gt;{{field.name}}&lt;/mat-option&gt;
-      &lt;/mat-select&gt;
-    &lt;/mat-form-field&gt;
-  &lt;/ng-container&gt;
-  &lt;ng-container *queryOperator=&quot;let rule; let operators=operators&quot;&gt;
-    &lt;mat-form-field&gt;
-      &lt;mat-select [(ngModel)]=&quot;rule.operator&quot;&gt;
-        &lt;mat-option *ngFor=&quot;let value of operators&quot; [value]=&quot;value&quot;&gt;{{value}}&lt;/mat-option&gt;
-      &lt;/mat-select&gt;
-    &lt;/mat-form-field&gt;
-  &lt;/ng-container&gt;
-  &lt;!-- Override input component for &#39;boolean&#39; type --&gt;
-  &lt;ng-container *queryInput=&quot;let rule; type: &#39;boolean&#39;&quot;&gt;
-    &lt;mat-checkbox [(ngModel)]=&quot;rule.value&quot;&gt;&lt;/mat-checkbox&gt;
-  &lt;/ng-container&gt;
-  &lt;!-- Override input component for &#39;category&#39; type --&gt;
-  &lt;ng-container *queryInput=&quot;let rule; let field=field; let options=options; type: &#39;category&#39;&quot;&gt;
-    &lt;mat-form-field&gt;
-      &lt;mat-select [(ngModel)]=&quot;rule.value&quot; [placeholder]=&quot;field.name&quot;&gt;
-        &lt;mat-option *ngFor=&quot;let opt of options&quot; [value]=&quot;opt.value&quot;&gt;
-          {{ opt.name }}
-        &lt;/mat-option&gt;
-      &lt;/mat-select&gt;
-    &lt;/mat-form-field&gt;
-  &lt;/ng-container&gt;
-  ...
-&lt;/query-builder&gt;</code></pre></div><h2 id="property-bindings-quick-reference">Property Bindings Quick Reference</h2>
-<p>See <a href="https://zebzhao.github.io/Angular-QueryBuilder/">documentation</a> for more details on interfaces and properties.</p>
-<h4 id="query-builder"><code>query-builder</code></h4>
-<table class="table table-bordered compodoc-table">
-<thead>
-<tr>
-<th style="text-align:left">Name</th>
-<th style="text-align:left">Type</th>
-<th style="text-align:left">Required</th>
-<th style="text-align:left">Default</th>
-<th style="text-align:left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><code>allowRuleset</code></td>
-<td style="text-align:left"><code>boolean</code></td>
-<td style="text-align:left">Optional</td>
-<td style="text-align:left"><code>true</code></td>
-<td style="text-align:left">Displays the <code>+ Ruleset</code> button if <code>true</code>.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>classNames</code></td>
-<td style="text-align:left"><code>object</code></td>
-<td style="text-align:left">Optional</td>
-<td style="text-align:left"></td>
-<td style="text-align:left">CSS class names for different child elements in <code>query-builder</code> component.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>config</code></td>
-<td style="text-align:left"><code>QueryBuilderConfig</code></td>
-<td style="text-align:left">Required</td>
-<td style="text-align:left"></td>
-<td style="text-align:left">Configuration object for the main component.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>data</code></td>
-<td style="text-align:left"><code>Ruleset</code></td>
-<td style="text-align:left">Optional</td>
-<td style="text-align:left"></td>
-<td style="text-align:left">(Use <code>ngModel</code> or <code>value</code> instead.)</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>emptyMessage</code></td>
-<td style="text-align:left"><code>string</code></td>
-<td style="text-align:left">Optional</td>
-<td style="text-align:left">Message to display for an empty Ruleset if empty rulesets are not allowed.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>ngModel</code></td>
-<td style="text-align:left"><code>Ruleset</code></td>
-<td style="text-align:left">Optional</td>
-<td style="text-align:left"></td>
-<td style="text-align:left">Object that stores the state of the component. Supports 2-way binding.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>operatorMap</code></td>
-<td style="text-align:left"><code>{ [key: string]: string[] }</code></td>
-<td style="text-align:left">Optional</td>
-<td style="text-align:left"></td>
-<td style="text-align:left">Used to map field types to list of operators.</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>value</code></td>
-<td style="text-align:left"><code>Ruleset</code></td>
-<td style="text-align:left">Optional</td>
-<td style="text-align:left"></td>
-<td style="text-align:left">Object that stores the state of the component.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="structural-directives">Structural Directives</h2>
-<p>Use these directives to replace different parts of query builder with custom components.</p>
-<h4 id="queryinput"><code>queryInput</code></h4>
-<table class="table table-bordered compodoc-table">
-<thead>
-<tr>
-<th style="text-align:left">Context Name</th>
-<th style="text-align:left">Type</th>
-<th style="text-align:left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><code>$implicit</code></td>
-<td style="text-align:left"><code>Rule</code></td>
-<td style="text-align:left">Current rule object which contains the field, value, and operator</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>field</code></td>
-<td style="text-align:left"><code>Field</code></td>
-<td style="text-align:left">Current field object which contains the field&#39;s value and name</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>options</code></td>
-<td style="text-align:left"><code>Option[]</code></td>
-<td style="text-align:left">List of options for the field, returned by <code>getOptions</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><code>onChange</code></td>
-<td style="text-align:left"><code>() =&gt; void</code></td>
-<td style="text-align:left">Callback to handle changes to the input component</td>
-</tr>
-</tbody>
-</table>
-<h4 id="queryoperator"><code>queryOperator</code></h4>
-<table class="table table-bordered compodoc-table">
-<thead>
-<tr>
-<th style="text-align:left">Context Name</th>
-<th style="text-align:left">Type</th>
-<th style="text-align:left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><code>$implicit</code></td>
-<td style="text-align:left"><code>Rule</code></td>
-<td style="text-align:left">Current rule object which contains the field, value, and operator</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>operators</code></td>
-<td style="text-align:left"><code>string[]</code></td>
-<td style="text-align:left">List of operators for the field, returned by <code>getOperators</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><code>onChange</code></td>
-<td style="text-align:left"><code>() =&gt; void</code></td>
-<td style="text-align:left">Callback to handle changes to the operator component</td>
-</tr>
-</tbody>
-</table>
-<h4 id="queryfield"><code>queryField</code></h4>
-<table class="table table-bordered compodoc-table">
-<thead>
-<tr>
-<th style="text-align:left">Context Name</th>
-<th style="text-align:left">Type</th>
-<th style="text-align:left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><code>$implicit</code></td>
-<td style="text-align:left"><code>Rule</code></td>
-<td style="text-align:left">Current rule object which contains the field, value, and operator</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>getFields</code></td>
-<td style="text-align:left"><code>(entityName: string) =&gt; void</code></td>
-<td style="text-align:left">Get the list of fields corresponding to an entity</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>fields</code></td>
-<td style="text-align:left"><code>Field[]</code></td>
-<td style="text-align:left">List of fields for the component, specified by <code>config</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><code>onChange</code></td>
-<td style="text-align:left"><code>(fieldValue: string, rule: Rule) =&gt; void</code></td>
-<td style="text-align:left">Callback to handle changes to the field component</td>
-</tr>
-</tbody>
-</table>
-<h4 id="queryentity"><code>queryEntity</code></h4>
-<table class="table table-bordered compodoc-table">
-<thead>
-<tr>
-<th style="text-align:left">Context Name</th>
-<th style="text-align:left">Type</th>
-<th style="text-align:left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><code>$implicit</code></td>
-<td style="text-align:left"><code>Rule</code></td>
-<td style="text-align:left">Current rule object which contains the field, value, and operator</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>entities</code></td>
-<td style="text-align:left"><code>Entity[]</code></td>
-<td style="text-align:left">List of entities for the component, specified by <code>config</code></td>
-</tr>
-<tr>
-<td style="text-align:left"><code>onChange</code></td>
-<td style="text-align:left"><code>(entityValue: string, rule: Rule) =&gt; void</code></td>
-<td style="text-align:left">Callback to handle changes to the entity component</td>
-</tr>
-</tbody>
-</table>
-<h4 id="queryswitchgroup"><code>querySwitchGroup</code></h4>
-<table class="table table-bordered compodoc-table">
-<thead>
-<tr>
-<th style="text-align:left">Context Name</th>
-<th style="text-align:left">Type</th>
-<th style="text-align:left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><code>$implicit</code></td>
-<td style="text-align:left"><code>RuleSet</code></td>
-<td style="text-align:left">Current rule set object which contain a list of child rules</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>onChange</code></td>
-<td style="text-align:left"><code>() =&gt; void</code></td>
-<td style="text-align:left">Callback to handle changes to the switch group component</td>
-</tr>
-</tbody>
-</table>
-<h4 id="queryemptywarning"><code>queryEmptyWarning</code></h4>
-<table class="table table-bordered compodoc-table">
-<thead>
-<tr>
-<th style="text-align:left">Context Name</th>
-<th style="text-align:left">Type</th>
-<th style="text-align:left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><code>$implicit</code></td>
-<td style="text-align:left"><code>RuleSet</code></td>
-<td style="text-align:left">Current rule set object which contain a list of child rules</td>
-</tr>
-</tbody>
-</table>
-<h4 id="querybuttongroup"><code>queryButtonGroup</code></h4>
-<table class="table table-bordered compodoc-table">
-<thead>
-<tr>
-<th style="text-align:left">Context Name</th>
-<th style="text-align:left">Type</th>
-<th style="text-align:left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><code>$implicit</code></td>
-<td style="text-align:left"><code>RuleSet</code></td>
-<td style="text-align:left">Current rule set object which contain a list of child rules</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>addRule</code></td>
-<td style="text-align:left"><code>() =&gt; void</code></td>
-<td style="text-align:left">Function to handle adding a new rule</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>addRuleSet</code></td>
-<td style="text-align:left"><code>() =&gt; void</code></td>
-<td style="text-align:left">Function to handle adding a new rule set</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>removeRuleSet</code></td>
-<td style="text-align:left"><code>() =&gt; void</code></td>
-<td style="text-align:left">Function to handle removing the current rule set</td>
-</tr>
-</tbody>
-</table>
-<h4 id="queryremovebutton"><code>queryRemoveButton</code></h4>
-<table class="table table-bordered compodoc-table">
-<thead>
-<tr>
-<th style="text-align:left">Context Name</th>
-<th style="text-align:left">Type</th>
-<th style="text-align:left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><code>$implicit</code></td>
-<td style="text-align:left"><code>Rule</code></td>
-<td style="text-align:left">Current rule object which contains the field, value, and operator</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>removeRule</code></td>
-<td style="text-align:left"><code>(rule: Rule) =&gt; void</code></td>
-<td style="text-align:left">Function to handle removing a rule</td>
-</tr>
-</tbody>
-</table>
-<h2 id="dependencies">Dependencies</h2>
-<ul>
-<li>Angular 4+</li>
+<ol class="breadcrumb">
+  <li>Directives</li>
+  <li>QueryEmptyWarningDirective</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
 </ul>
-<p>That&#39;s it.</p>
-<h1 id="workflow">Workflow</h1>
-<p>See the <a href="https://github.com/trekhleb/angular-library-seed">angular-library-seed</a> project for details on how to build and run tests.</p>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/components/query-builder/query-empty-warning.directive.ts</code>
+        </p>
+
+
+
+
+        <section>
+            <h3>Metadata</h3>
+            <table class="table table-sm table-hover">
+                <tbody>
+
+                    <tr>
+                        <td class="col-md-3">selector</td>
+                        <td class="col-md-9"><code>[queryEmptyWarning]</code></td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </section>
+
+            <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#template">template</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
 
 
 
 
+
+        </tbody>
+    </table>
+</section>
+
+            <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(template: TemplateRef<any>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="4" class="link-to-prism">src/components/query-builder/query-empty-warning.directive.ts:4</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>template</td>
+                                                  
+                                                        <td>
+                                                                    <code>TemplateRef&lt;any&gt;</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            no
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+
+            <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="template"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            template
+                            </b>
+                            <a href="#template"><span class="fa fa-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon fa fa-reset"></span><code>template:     <code>TemplateRef&lt;any&gt;</code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>TemplateRef&lt;any&gt;</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="5" class="link-to-prism">src/components/query-builder/query-empty-warning.directive.ts:5</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Directive, TemplateRef } from &#x27;@angular/core&#x27;;
+
+@Directive({selector: &#x27;[queryEmptyWarning]&#x27;})
+export class QueryEmptyWarningDirective {
+  constructor(public template: TemplateRef&lt;any&gt;) {}
+}
+</code></pre>
+    </div>
+
+</div>
 
 
 
@@ -1050,30 +794,30 @@ config: QueryBuilderConfig = {
            </div>
        </div>
 
-       <script src="./js/libs/bootstrap-native.js"></script>
+       <script src="../js/libs/bootstrap-native.js"></script>
 
-       <script src="./js/libs/es6-shim.min.js"></script>
-       <script src="./js/libs/EventDispatcher.js"></script>
-       <script src="./js/libs/promise.min.js"></script>
-       <script src="./js/libs/zepto.min.js"></script>
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
 
-       <script src="./js/compodoc.js"></script>
+       <script src="../js/compodoc.js"></script>
 
         <script>
-            var COMPODOC_CURRENT_PAGE_DEPTH = 0;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'getting-started';
-            var COMPODOC_CURRENT_PAGE_URL = 'index.html';
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'directive';
+            var COMPODOC_CURRENT_PAGE_URL = 'QueryEmptyWarningDirective.html';
         </script>
 
-       <script src="./js/search/search.js"></script>
-       <script src="./js/search/lunr.min.js"></script>
-       <script src="./js/search/search-lunr.js"></script>
+       <script src="../js/search/search.js"></script>
+       <script src="../js/search/lunr.min.js"></script>
+       <script src="../js/search/search-lunr.js"></script>
 
-       <script src="./js/tabs.js"></script>
-       <script src="./js/menu.js"></script>
-       <script src="./js/libs/prism.js"></script>
-       <script src="./js/sourceCode.js"></script>
-       <script src="./js/search/search_index.js"></script>
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+       <script src="../js/search/search_index.js"></script>
 
 
     </body>

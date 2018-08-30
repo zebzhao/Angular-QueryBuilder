@@ -4,7 +4,7 @@
 /*!*********************************!*\
   !*** ./lib/components/index.js ***!
   \*********************************/
-/*! exports provided: CONTROL_VALUE_ACCESSOR, VALIDATOR, QueryBuilderComponent, QueryButtonGroupDirective, QueryEntityDirective, QueryFieldDirective, QueryInputDirective, QueryOperatorDirective, QuerySwitchGroupDirective, QueryRemoveButtonDirective */
+/*! exports provided: CONTROL_VALUE_ACCESSOR, VALIDATOR, QueryBuilderComponent, QueryButtonGroupDirective, QueryEntityDirective, QueryFieldDirective, QueryInputDirective, QueryOperatorDirective, QuerySwitchGroupDirective, QueryRemoveButtonDirective, QueryEmptyWarningDirective */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -30,6 +30,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "QueryRemoveButtonDirective", function() { return _query_builder__WEBPACK_IMPORTED_MODULE_0__["QueryRemoveButtonDirective"]; });
 
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "QueryEmptyWarningDirective", function() { return _query_builder__WEBPACK_IMPORTED_MODULE_0__["QueryEmptyWarningDirective"]; });
+
 
 //# sourceMappingURL=index.js.map
 
@@ -39,7 +41,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!***********************************************!*\
   !*** ./lib/components/query-builder/index.js ***!
   \***********************************************/
-/*! exports provided: CONTROL_VALUE_ACCESSOR, VALIDATOR, QueryBuilderComponent, QueryButtonGroupDirective, QueryEntityDirective, QueryFieldDirective, QueryInputDirective, QueryOperatorDirective, QuerySwitchGroupDirective, QueryRemoveButtonDirective */
+/*! exports provided: CONTROL_VALUE_ACCESSOR, VALIDATOR, QueryBuilderComponent, QueryButtonGroupDirective, QueryEntityDirective, QueryFieldDirective, QueryInputDirective, QueryOperatorDirective, QuerySwitchGroupDirective, QueryRemoveButtonDirective, QueryEmptyWarningDirective */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -71,6 +73,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony import */ var _query_remove_button_directive__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./query-remove-button.directive */ "./lib/components/query-builder/query-remove-button.directive.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "QueryRemoveButtonDirective", function() { return _query_remove_button_directive__WEBPACK_IMPORTED_MODULE_7__["QueryRemoveButtonDirective"]; });
+
+/* harmony import */ var _query_empty_warning_directive__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./query-empty-warning.directive */ "./lib/components/query-builder/query-empty-warning.directive.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "QueryEmptyWarningDirective", function() { return _query_empty_warning_directive__WEBPACK_IMPORTED_MODULE_8__["QueryEmptyWarningDirective"]; });
+
 
 
 
@@ -104,7 +110,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _query_button_group_directive__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./query-button-group.directive */ "./lib/components/query-builder/query-button-group.directive.js");
 /* harmony import */ var _query_input_directive__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./query-input.directive */ "./lib/components/query-builder/query-input.directive.js");
 /* harmony import */ var _query_remove_button_directive__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./query-remove-button.directive */ "./lib/components/query-builder/query-remove-button.directive.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _query_empty_warning_directive__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./query-empty-warning.directive */ "./lib/components/query-builder/query-empty-warning.directive.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+
 
 
 
@@ -116,12 +124,12 @@ __webpack_require__.r(__webpack_exports__);
 
 var CONTROL_VALUE_ACCESSOR = {
     provide: _angular_forms__WEBPACK_IMPORTED_MODULE_0__["NG_VALUE_ACCESSOR"],
-    useExisting: Object(_angular_core__WEBPACK_IMPORTED_MODULE_8__["forwardRef"])(function () { return QueryBuilderComponent; }),
+    useExisting: Object(_angular_core__WEBPACK_IMPORTED_MODULE_9__["forwardRef"])(function () { return QueryBuilderComponent; }),
     multi: true
 };
 var VALIDATOR = {
     provide: _angular_forms__WEBPACK_IMPORTED_MODULE_0__["NG_VALIDATORS"],
-    useExisting: Object(_angular_core__WEBPACK_IMPORTED_MODULE_8__["forwardRef"])(function () { return QueryBuilderComponent; }),
+    useExisting: Object(_angular_core__WEBPACK_IMPORTED_MODULE_9__["forwardRef"])(function () { return QueryBuilderComponent; }),
     multi: true
 };
 var QueryBuilderComponent = /** @class */ (function () {
@@ -164,6 +172,7 @@ var QueryBuilderComponent = /** @class */ (function () {
         };
         this.data = { condition: 'and', rules: [] };
         this.allowRuleset = true;
+        this.emptyMessage = 'A ruleset cannot be empty. Please add a rule or remove it all together.';
         this.config = { fields: {} };
         this.defaultTemplateTypes = [
             'string', 'number', 'time', 'date', 'category', 'boolean', 'multiselect'
@@ -539,6 +548,10 @@ var QueryBuilderComponent = /** @class */ (function () {
         var t = this.parentRemoveButtonTemplate || this.removeButtonTemplate;
         return t ? t.template : null;
     };
+    QueryBuilderComponent.prototype.getEmptyWarningTemplate = function () {
+        var t = this.parentEmptyWarningTemplate || this.emptyWarningTemplate;
+        return t ? t.template : null;
+    };
     QueryBuilderComponent.prototype.getQueryItemClassName = function (local) {
         var cls = this.getClassNames('row', 'connector', 'transition');
         cls += ' ' + this.getClassNames(local.ruleset ? 'ruleSet' : 'rule');
@@ -596,6 +609,13 @@ var QueryBuilderComponent = /** @class */ (function () {
         return {
             onChange: this.changeCondition.bind(this),
             getDisabledState: this.getDisabledState.bind(this),
+            $implicit: this.data
+        };
+    };
+    QueryBuilderComponent.prototype.getEmptyWarningContext = function () {
+        return {
+            getDisabledState: this.getDisabledState.bind(this),
+            message: this.emptyMessage,
             $implicit: this.data
         };
     };
@@ -675,42 +695,45 @@ var QueryBuilderComponent = /** @class */ (function () {
         }
     };
     QueryBuilderComponent.decorators = [
-        { type: _angular_core__WEBPACK_IMPORTED_MODULE_8__["Component"], args: [{
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["Component"], args: [{
                     selector: 'query-builder',
-                    template: "\n    <div [ngClass]=\"getClassNames('switchRow')\">\n      <ng-container *ngIf=\"getButtonGroupTemplate() as template; else defaultButtonGroup\">\n        <div [ngClass]=\"getClassNames('buttonGroup', 'rightAlign')\">\n          <ng-container *ngTemplateOutlet=\"template; context: getButtonGroupContext()\"></ng-container>\n        </div>\n      </ng-container>\n\n      <ng-template #defaultButtonGroup>\n        <div [ngClass]=\"getClassNames('buttonGroup', 'rightAlign')\">\n          <button (click)=\"addRule()\" [ngClass]=\"getClassNames('button')\" [disabled]=disabled>\n            <i [ngClass]=\"getClassNames('addIcon')\"></i> Rule\n          </button>\n          <button (click)=\"addRuleSet()\" [ngClass]=\"getClassNames('button')\" *ngIf=\"allowRuleset\" [disabled]=disabled>\n            <i [ngClass]=\"getClassNames('addIcon')\"></i> Ruleset\n          </button>\n          <ng-container *ngIf=\"!!parentValue && allowRuleset\">\n            <button (click)=\"removeRuleSet()\" [ngClass]=\"getClassNames('button', 'removeButton')\" [disabled]=disabled>\n              <i [ngClass]=\"getClassNames('removeIcon')\"></i>\n            </button>\n          </ng-container>\n        </div>\n      </ng-template>\n\n      <ng-container *ngIf=\"getSwitchGroupTemplate() as template; else defaultSwitchGroup\">\n        <ng-container *ngTemplateOutlet=\"template; context: getSwitchGroupContext()\"></ng-container>\n      </ng-container>\n\n      <ng-template #defaultSwitchGroup>\n        <div [ngClass]=\"getClassNames('switchGroup', 'transition')\" *ngIf=\"data\">\n          <div [ngClass]=\"getClassNames('switchControl')\">\n            <input type=\"radio\" [ngClass]=\"getClassNames('switchRadio')\" [(ngModel)]=\"data.condition\" [disabled]=disabled value=\"and\" #andOption/>\n            <label (click)=\"changeCondition(andOption.value)\" [ngClass]=\"getClassNames('switchLabel')\">AND</label>\n          </div>\n          <div [ngClass]=\"getClassNames('switchControl')\">\n            <input type=\"radio\" [ngClass]=\"getClassNames('switchRadio')\" [(ngModel)]=\"data.condition\" [disabled]=disabled value=\"or\" #orOption/>\n            <label (click)=\"changeCondition(orOption.value)\" [ngClass]=\"getClassNames('switchLabel')\">OR</label>\n          </div>\n        </div>\n      </ng-template>\n    </div>\n\n    <ul [ngClass]=\"getClassNames('tree')\" *ngIf=\"data && data.rules\">\n      <ng-container *ngFor=\"let rule of data.rules\">\n        <ng-container *ngIf=\"{ruleset: !!rule.rules, invalid: !config.allowEmptyRulesets && rule.rules && rule.rules.length === 0} as local\">\n          <li [ngClass]=\"getQueryItemClassName(local)\">\n            <ng-container *ngIf=\"!local.ruleset\">\n\n              <ng-container *ngIf=\"getRemoveButtonTemplate() as template; else defaultRemoveButton\">\n                <div [ngClass]=\"getClassNames('buttonGroup', 'rightAlign')\">\n                  <ng-container *ngTemplateOutlet=\"template; context: getRemoveButtonContext(rule)\"></ng-container>\n                </div>\n              </ng-container>\n\n              <ng-template #defaultRemoveButton>\n                <div [ngClass]=\"getClassNames('removeButtonSize', 'rightAlign')\">\n                  <button [ngClass]=\"getClassNames('button', 'removeButton')\" (click)=\"removeRule(rule, data)\" [disabled]=disabled>\n                    <i [ngClass]=\"getClassNames('removeIcon')\"></i>\n                  </button>\n                </div>\n              </ng-template>\n\n              <div *ngIf=\"entities?.length > 0\" class=\"q-inline-block-display\" >\n                <ng-container *ngIf=\"getEntityTemplate() as template; else defaultEntity\">\n                  <ng-container *ngTemplateOutlet=\"template; context: getEntityContext(rule)\"></ng-container>\n                </ng-container>\n              </div>\n\n              <ng-template #defaultEntity>\n                <div [ngClass]=\"getClassNames('entityControlSize')\">\n                  <select [ngClass]=\"getClassNames('entityControl')\" [(ngModel)]=\"rule.entity\" (ngModelChange)=\"changeEntity($event, rule)\" [disabled]=\"disabled\">\n                    <option *ngFor=\"let entity of entities\" [ngValue]=\"entity.value\">\n                      {{entity.name}}\n                    </option>\n                  </select>\n                </div>\n              </ng-template>\n\n              <ng-container *ngIf=\"getFieldTemplate() as template; else defaultField\">\n                <ng-container *ngTemplateOutlet=\"template; context: getFieldContext(rule)\"></ng-container>\n              </ng-container>\n\n              <ng-template #defaultField>\n                <div [ngClass]=\"getClassNames('fieldControlSize')\">\n                  <select [ngClass]=\"getClassNames('fieldControl')\" [(ngModel)]=\"rule.field\" (ngModelChange)=\"changeField($event, rule)\" [disabled]=\"disabled\">\n                    <option *ngFor=\"let field of getFields(rule.entity)\" [ngValue]=\"field.value\">\n                      {{field.name}}\n                    </option>\n                  </select>\n                </div>\n              </ng-template>\n\n              <ng-container *ngIf=\"getOperatorTemplate() as template; else defaultOperator\">\n                <ng-container *ngTemplateOutlet=\"template; context: getOperatorContext(rule)\"></ng-container>\n              </ng-container>\n\n              <ng-template #defaultOperator>\n                <div [ngClass]=\"getClassNames('operatorControlSize')\">\n                  <select [ngClass]=\"getClassNames('operatorControl')\" [(ngModel)]=\"rule.operator\" (ngModelChange)=\"changeOperator()\" [disabled]=\"disabled\">\n                    <option *ngFor=\"let operator of getOperators(rule.field)\" [ngValue]=\"operator\">\n                      {{operator}}\n                    </option>\n                  </select>\n                </div>\n              </ng-template>\n\n              <ng-container *ngIf=\"findTemplateForRule(rule) as template; else defaultInput\">\n                <ng-container *ngTemplateOutlet=\"template; context: getInputContext(rule)\"></ng-container>\n              </ng-container>\n\n              <ng-template #defaultInput>\n                <div [ngClass]=\"getClassNames('inputControlSize')\" [ngSwitch]=\"getInputType(rule.field, rule.operator)\">\n                  <input [ngClass]=\"getClassNames('inputControl')\" [(ngModel)]=\"rule.value\" (ngModelChange)=\"changeInput()\" [disabled]=\"disabled\" *ngSwitchCase=\"'string'\" type=\"text\">\n                  <input [ngClass]=\"getClassNames('inputControl')\" [(ngModel)]=\"rule.value\" (ngModelChange)=\"changeInput()\" [disabled]=\"disabled\" *ngSwitchCase=\"'number'\" type=\"number\">\n                  <input [ngClass]=\"getClassNames('inputControl')\" [(ngModel)]=\"rule.value\" (ngModelChange)=\"changeInput()\" [disabled]=\"disabled\" *ngSwitchCase=\"'date'\" type=\"date\">\n                  <input [ngClass]=\"getClassNames('inputControl')\" [(ngModel)]=\"rule.value\" (ngModelChange)=\"changeInput()\" [disabled]=\"disabled\" *ngSwitchCase=\"'time'\" type=\"time\">\n                  <select [ngClass]=\"getClassNames('inputControl')\" [(ngModel)]=\"rule.value\" (ngModelChange)=\"changeInput()\" [disabled]=\"disabled\" *ngSwitchCase=\"'category'\">\n                    <option *ngFor=\"let opt of getOptions(rule.field)\" [ngValue]=\"opt.value\">\n                      {{opt.name}}\n                    </option>\n                  </select>\n                  <ng-container *ngSwitchCase=\"'multiselect'\">\n                    <select [ngClass]=\"getClassNames('inputControl')\" [(ngModel)]=\"rule.value\" (ngModelChange)=\"changeInput()\" [disabled]=\"disabled\" multiple>\n                      <option *ngFor=\"let opt of getOptions(rule.field)\" [ngValue]=\"opt.value\">\n                        {{opt.name}}\n                      </option>\n                    </select>\n                  </ng-container>\n                  <input [ngClass]=\"getClassNames('inputControl')\" [(ngModel)]=\"rule.value\" (ngModelChange)=\"changeInput()\" [disabled]=\"disabled\" *ngSwitchCase=\"'boolean'\" type=\"checkbox\">\n                </div>\n              </ng-template>\n\n            </ng-container>\n            <query-builder *ngIf=\"local.ruleset\"\n              [data]=\"rule\"\n              [disabled]=\"disabled\"\n              [parentTouchedCallback]=\"parentTouchedCallback || onTouchedCallback\"\n              [parentChangeCallback]=\"parentChangeCallback || onChangeCallback\"\n              [parentInputTemplates]=\"parentInputTemplates || inputTemplates\"\n              [parentOperatorTemplate]=\"parentOperatorTemplate || operatorTemplate\"\n              [parentFieldTemplate]=\"parentFieldTemplate || fieldTemplate\"\n              [parentEntityTemplate]=\"parentEntityTemplate || entityTemplate\"\n              [parentSwitchGroupTemplate]=\"parentSwitchGroupTemplate || switchGroupTemplate\"\n              [parentButtonGroupTemplate]=\"parentButtonGroupTemplate || buttonGroupTemplate\"\n              [parentRemoveButtonTemplate]=\"parentRemoveButtonTemplate || removeButtonTemplate\"\n              [parentValue]=\"data\"\n              [classNames]=\"classNames\"\n              [config]=\"config\"\n              [allowRuleset]=\"allowRuleset\"\n              [operatorMap]=\"operatorMap\">\n            </query-builder>\n            <p [ngClass]=\"getClassNames('emptyWarning')\" *ngIf=\"local.invalid\">A ruleset cannot be empty. Please add a rule or remove it all together.</p>\n          </li>\n        </ng-container>\n      </ng-container>\n    </ul>\n  ",
+                    template: "\n    <div [ngClass]=\"getClassNames('switchRow')\">\n      <ng-container *ngIf=\"getButtonGroupTemplate() as template; else defaultButtonGroup\">\n        <div [ngClass]=\"getClassNames('buttonGroup', 'rightAlign')\">\n          <ng-container *ngTemplateOutlet=\"template; context: getButtonGroupContext()\"></ng-container>\n        </div>\n      </ng-container>\n\n      <ng-template #defaultButtonGroup>\n        <div [ngClass]=\"getClassNames('buttonGroup', 'rightAlign')\">\n          <button (click)=\"addRule()\" [ngClass]=\"getClassNames('button')\" [disabled]=disabled>\n            <i [ngClass]=\"getClassNames('addIcon')\"></i> Rule\n          </button>\n          <button (click)=\"addRuleSet()\" [ngClass]=\"getClassNames('button')\" *ngIf=\"allowRuleset\" [disabled]=disabled>\n            <i [ngClass]=\"getClassNames('addIcon')\"></i> Ruleset\n          </button>\n          <ng-container *ngIf=\"!!parentValue && allowRuleset\">\n            <button (click)=\"removeRuleSet()\" [ngClass]=\"getClassNames('button', 'removeButton')\" [disabled]=disabled>\n              <i [ngClass]=\"getClassNames('removeIcon')\"></i>\n            </button>\n          </ng-container>\n        </div>\n      </ng-template>\n\n      <ng-container *ngIf=\"getSwitchGroupTemplate() as template; else defaultSwitchGroup\">\n        <ng-container *ngTemplateOutlet=\"template; context: getSwitchGroupContext()\"></ng-container>\n      </ng-container>\n\n      <ng-template #defaultSwitchGroup>\n        <div [ngClass]=\"getClassNames('switchGroup', 'transition')\" *ngIf=\"data\">\n          <div [ngClass]=\"getClassNames('switchControl')\">\n            <input type=\"radio\" [ngClass]=\"getClassNames('switchRadio')\" [(ngModel)]=\"data.condition\" [disabled]=disabled value=\"and\" #andOption/>\n            <label (click)=\"changeCondition(andOption.value)\" [ngClass]=\"getClassNames('switchLabel')\">AND</label>\n          </div>\n          <div [ngClass]=\"getClassNames('switchControl')\">\n            <input type=\"radio\" [ngClass]=\"getClassNames('switchRadio')\" [(ngModel)]=\"data.condition\" [disabled]=disabled value=\"or\" #orOption/>\n            <label (click)=\"changeCondition(orOption.value)\" [ngClass]=\"getClassNames('switchLabel')\">OR</label>\n          </div>\n        </div>\n      </ng-template>\n    </div>\n\n    <ul [ngClass]=\"getClassNames('tree')\" *ngIf=\"data && data.rules\">\n      <ng-container *ngFor=\"let rule of data.rules\">\n        <ng-container *ngIf=\"{ruleset: !!rule.rules, invalid: !config.allowEmptyRulesets && rule.rules && rule.rules.length === 0} as local\">\n          <li [ngClass]=\"getQueryItemClassName(local)\">\n            <ng-container *ngIf=\"!local.ruleset\">\n\n              <ng-container *ngIf=\"getRemoveButtonTemplate() as template; else defaultRemoveButton\">\n                <div [ngClass]=\"getClassNames('buttonGroup', 'rightAlign')\">\n                  <ng-container *ngTemplateOutlet=\"template; context: getRemoveButtonContext(rule)\"></ng-container>\n                </div>\n              </ng-container>\n\n              <ng-template #defaultRemoveButton>\n                <div [ngClass]=\"getClassNames('removeButtonSize', 'rightAlign')\">\n                  <button [ngClass]=\"getClassNames('button', 'removeButton')\" (click)=\"removeRule(rule, data)\" [disabled]=disabled>\n                    <i [ngClass]=\"getClassNames('removeIcon')\"></i>\n                  </button>\n                </div>\n              </ng-template>\n\n              <div *ngIf=\"entities?.length > 0\" class=\"q-inline-block-display\" >\n                <ng-container *ngIf=\"getEntityTemplate() as template; else defaultEntity\">\n                  <ng-container *ngTemplateOutlet=\"template; context: getEntityContext(rule)\"></ng-container>\n                </ng-container>\n              </div>\n\n              <ng-template #defaultEntity>\n                <div [ngClass]=\"getClassNames('entityControlSize')\">\n                  <select [ngClass]=\"getClassNames('entityControl')\" [(ngModel)]=\"rule.entity\" (ngModelChange)=\"changeEntity($event, rule)\" [disabled]=\"disabled\">\n                    <option *ngFor=\"let entity of entities\" [ngValue]=\"entity.value\">\n                      {{entity.name}}\n                    </option>\n                  </select>\n                </div>\n              </ng-template>\n\n              <ng-container *ngIf=\"getFieldTemplate() as template; else defaultField\">\n                <ng-container *ngTemplateOutlet=\"template; context: getFieldContext(rule)\"></ng-container>\n              </ng-container>\n\n              <ng-template #defaultField>\n                <div [ngClass]=\"getClassNames('fieldControlSize')\">\n                  <select [ngClass]=\"getClassNames('fieldControl')\" [(ngModel)]=\"rule.field\" (ngModelChange)=\"changeField($event, rule)\" [disabled]=\"disabled\">\n                    <option *ngFor=\"let field of getFields(rule.entity)\" [ngValue]=\"field.value\">\n                      {{field.name}}\n                    </option>\n                  </select>\n                </div>\n              </ng-template>\n\n              <ng-container *ngIf=\"getOperatorTemplate() as template; else defaultOperator\">\n                <ng-container *ngTemplateOutlet=\"template; context: getOperatorContext(rule)\"></ng-container>\n              </ng-container>\n\n              <ng-template #defaultOperator>\n                <div [ngClass]=\"getClassNames('operatorControlSize')\">\n                  <select [ngClass]=\"getClassNames('operatorControl')\" [(ngModel)]=\"rule.operator\" (ngModelChange)=\"changeOperator()\" [disabled]=\"disabled\">\n                    <option *ngFor=\"let operator of getOperators(rule.field)\" [ngValue]=\"operator\">\n                      {{operator}}\n                    </option>\n                  </select>\n                </div>\n              </ng-template>\n\n              <ng-container *ngIf=\"findTemplateForRule(rule) as template; else defaultInput\">\n                <ng-container *ngTemplateOutlet=\"template; context: getInputContext(rule)\"></ng-container>\n              </ng-container>\n\n              <ng-template #defaultInput>\n                <div [ngClass]=\"getClassNames('inputControlSize')\" [ngSwitch]=\"getInputType(rule.field, rule.operator)\">\n                  <input [ngClass]=\"getClassNames('inputControl')\" [(ngModel)]=\"rule.value\" (ngModelChange)=\"changeInput()\" [disabled]=\"disabled\" *ngSwitchCase=\"'string'\" type=\"text\">\n                  <input [ngClass]=\"getClassNames('inputControl')\" [(ngModel)]=\"rule.value\" (ngModelChange)=\"changeInput()\" [disabled]=\"disabled\" *ngSwitchCase=\"'number'\" type=\"number\">\n                  <input [ngClass]=\"getClassNames('inputControl')\" [(ngModel)]=\"rule.value\" (ngModelChange)=\"changeInput()\" [disabled]=\"disabled\" *ngSwitchCase=\"'date'\" type=\"date\">\n                  <input [ngClass]=\"getClassNames('inputControl')\" [(ngModel)]=\"rule.value\" (ngModelChange)=\"changeInput()\" [disabled]=\"disabled\" *ngSwitchCase=\"'time'\" type=\"time\">\n                  <select [ngClass]=\"getClassNames('inputControl')\" [(ngModel)]=\"rule.value\" (ngModelChange)=\"changeInput()\" [disabled]=\"disabled\" *ngSwitchCase=\"'category'\">\n                    <option *ngFor=\"let opt of getOptions(rule.field)\" [ngValue]=\"opt.value\">\n                      {{opt.name}}\n                    </option>\n                  </select>\n                  <ng-container *ngSwitchCase=\"'multiselect'\">\n                    <select [ngClass]=\"getClassNames('inputControl')\" [(ngModel)]=\"rule.value\" (ngModelChange)=\"changeInput()\" [disabled]=\"disabled\" multiple>\n                      <option *ngFor=\"let opt of getOptions(rule.field)\" [ngValue]=\"opt.value\">\n                        {{opt.name}}\n                      </option>\n                    </select>\n                  </ng-container>\n                  <input [ngClass]=\"getClassNames('inputControl')\" [(ngModel)]=\"rule.value\" (ngModelChange)=\"changeInput()\" [disabled]=\"disabled\" *ngSwitchCase=\"'boolean'\" type=\"checkbox\">\n                </div>\n              </ng-template>\n\n            </ng-container>\n            <query-builder *ngIf=\"local.ruleset\"\n              [data]=\"rule\"\n              [disabled]=\"disabled\"\n              [parentTouchedCallback]=\"parentTouchedCallback || onTouchedCallback\"\n              [parentChangeCallback]=\"parentChangeCallback || onChangeCallback\"\n              [parentInputTemplates]=\"parentInputTemplates || inputTemplates\"\n              [parentOperatorTemplate]=\"parentOperatorTemplate || operatorTemplate\"\n              [parentFieldTemplate]=\"parentFieldTemplate || fieldTemplate\"\n              [parentEntityTemplate]=\"parentEntityTemplate || entityTemplate\"\n              [parentSwitchGroupTemplate]=\"parentSwitchGroupTemplate || switchGroupTemplate\"\n              [parentButtonGroupTemplate]=\"parentButtonGroupTemplate || buttonGroupTemplate\"\n              [parentRemoveButtonTemplate]=\"parentRemoveButtonTemplate || removeButtonTemplate\"\n              [parentValue]=\"data\"\n              [classNames]=\"classNames\"\n              [config]=\"config\"\n              [allowRuleset]=\"allowRuleset\"\n              [emptyMessage]=\"emptyMessage\"\n              [operatorMap]=\"operatorMap\">\n            </query-builder>\n\n            <ng-container *ngIf=\"getEmptyWarningTemplate() as template; else defaultEmptyWarning\">\n              <ng-container *ngIf=\"local.invalid\">\n                <ng-container *ngTemplateOutlet=\"template; context: getEmptyWarningContext()\"></ng-container>\n              </ng-container>\n            </ng-container>\n\n            <ng-template #defaultEmptyWarning>\n              <p [ngClass]=\"getClassNames('emptyWarning')\" *ngIf=\"local.invalid\">\n                {{emptyMessage}}\n              </p>\n            </ng-template>\n          </li>\n        </ng-container>\n      </ng-container>\n    </ul>\n  ",
                     styles: ["\n    \uFEFF:host{display:block;width:100%}:host .q-icon{font-style:normal;font-size:12px}:host .q-remove-icon::before{content:'\u274C'}:host .q-add-icon{color:#555}:host .q-add-icon::before{content:'\u2795'}:host .q-remove-button{color:#B3415D;width:31px}:host .q-switch-group,:host .q-button-group{font-family:\"Lucida Grande\", Tahoma, Verdana, sans-serif;overflow:hidden}:host .q-right-align{float:right}:host .q-button{margin-left:8px;padding:0 8px;background-color:white}:host .q-button:disabled{display:none}:host .q-control-size{display:inline-block;vertical-align:top;padding-right:10px}:host .q-input-control,:host .q-operator-control,:host .q-field-control,:host .q-entity-control{display:inline-block;padding:5px 8px;color:#555;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:4px;box-sizing:border-box;width:auto}:host .q-input-control:disabled,:host .q-operator-control:disabled,:host .q-field-control:disabled,:host .q-entity-control:disabled{border-color:transparent}:host .q-operator-control,:host .q-field-control,:host .q-entity-control,:host .q-input-control:not([type='checkbox']){min-height:32px;-webkit-appearance:none}:host .q-switch-label,:host .q-button{float:left;margin-bottom:0;font-size:14px;line-height:30px;font-weight:normal;text-align:center;text-shadow:none;border:1px solid rgba(0,0,0,0.2);box-sizing:border-box}:host .q-switch-label:hover,:host .q-button:hover{cursor:pointer;background-color:#F0F0F0}:host .q-switch-label{background-color:#e4e4e4;padding:0 8px}:host .q-switch-radio{position:absolute;clip:rect(0, 0, 0, 0);height:1px;width:1px;border:0;overflow:hidden}:host .q-switch-radio:checked+.q-switch-label{border:1px solid #619ed7;background:white;color:#3176b3}:host .q-switch-radio:disabled+.q-switch-label{display:none}:host .q-switch-radio:checked:disabled+.q-switch-label{display:initial;color:initial;cursor:default;border-color:transparent}:host .q-invalid-ruleset{border:1px solid rgba(179,65,93,0.5) !important;background:rgba(179,65,93,0.1) !important}:host .q-empty-warning{color:#8d252e;text-align:center}:host .q-ruleset{border:1px solid #CCC}:host .q-rule{border:1px solid #CCC;background:white}:host .q-transition{-webkit-transition:all 0.1s ease-in-out;-moz-transition:all 0.1s ease-in-out;-ms-transition:all 0.1s ease-in-out;-o-transition:all 0.1s ease-in-out;transition:all 0.1s ease-in-out}:host .q-tree{list-style:none;margin:4px 0 2px}:host .q-row{padding:6px 8px;margin-top:6px}:host .q-connector{position:relative}:host .q-connector::before{top:-5px;border-width:0 0 2px 2px}:host .q-connector::after{border-width:0 0 0 2px;top:50%}:host .q-connector::before,:host .q-connector::after{content:'';left:-12px;border-color:#CCC;border-style:solid;width:9px;height:calc(50% + 6px);position:absolute}:host .q-connector:last-child::after{content:none}:host .q-inline-block-display{display:inline-block;vertical-align:top}\n  "],
                     providers: [CONTROL_VALUE_ACCESSOR, VALIDATOR]
                 },] },
     ];
     /** @nocollapse */
     QueryBuilderComponent.ctorParameters = function () { return [
-        { type: _angular_core__WEBPACK_IMPORTED_MODULE_8__["ChangeDetectorRef"], },
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["ChangeDetectorRef"], },
     ]; };
     QueryBuilderComponent.propDecorators = {
-        'disabled': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_8__["Input"] },],
-        'data': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_8__["Input"] },],
-        'allowRuleset': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_8__["Input"] },],
-        'classNames': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_8__["Input"] },],
-        'operatorMap': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_8__["Input"] },],
-        'parentValue': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_8__["Input"] },],
-        'config': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_8__["Input"] },],
-        'parentInputTemplates': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_8__["Input"] },],
-        'parentOperatorTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_8__["Input"] },],
-        'parentFieldTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_8__["Input"] },],
-        'parentEntityTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_8__["Input"] },],
-        'parentSwitchGroupTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_8__["Input"] },],
-        'parentButtonGroupTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_8__["Input"] },],
-        'parentRemoveButtonTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_8__["Input"] },],
-        'parentChangeCallback': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_8__["Input"] },],
-        'parentTouchedCallback': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_8__["Input"] },],
-        'buttonGroupTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_8__["ContentChild"], args: [_query_button_group_directive__WEBPACK_IMPORTED_MODULE_5__["QueryButtonGroupDirective"],] },],
-        'switchGroupTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_8__["ContentChild"], args: [_query_switch_group_directive__WEBPACK_IMPORTED_MODULE_4__["QuerySwitchGroupDirective"],] },],
-        'fieldTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_8__["ContentChild"], args: [_query_field_directive__WEBPACK_IMPORTED_MODULE_2__["QueryFieldDirective"],] },],
-        'entityTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_8__["ContentChild"], args: [_query_entity_directive__WEBPACK_IMPORTED_MODULE_3__["QueryEntityDirective"],] },],
-        'operatorTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_8__["ContentChild"], args: [_query_operator_directive__WEBPACK_IMPORTED_MODULE_1__["QueryOperatorDirective"],] },],
-        'removeButtonTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_8__["ContentChild"], args: [_query_remove_button_directive__WEBPACK_IMPORTED_MODULE_7__["QueryRemoveButtonDirective"],] },],
-        'inputTemplates': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_8__["ContentChildren"], args: [_query_input_directive__WEBPACK_IMPORTED_MODULE_6__["QueryInputDirective"],] },],
-        'value': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_8__["Input"] },],
+        'disabled': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["Input"] },],
+        'data': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["Input"] },],
+        'allowRuleset': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["Input"] },],
+        'emptyMessage': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["Input"] },],
+        'classNames': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["Input"] },],
+        'operatorMap': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["Input"] },],
+        'parentValue': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["Input"] },],
+        'config': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["Input"] },],
+        'parentInputTemplates': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["Input"] },],
+        'parentOperatorTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["Input"] },],
+        'parentFieldTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["Input"] },],
+        'parentEntityTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["Input"] },],
+        'parentSwitchGroupTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["Input"] },],
+        'parentButtonGroupTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["Input"] },],
+        'parentRemoveButtonTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["Input"] },],
+        'parentEmptyWarningTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["Input"] },],
+        'parentChangeCallback': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["Input"] },],
+        'parentTouchedCallback': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["Input"] },],
+        'buttonGroupTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["ContentChild"], args: [_query_button_group_directive__WEBPACK_IMPORTED_MODULE_5__["QueryButtonGroupDirective"],] },],
+        'switchGroupTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["ContentChild"], args: [_query_switch_group_directive__WEBPACK_IMPORTED_MODULE_4__["QuerySwitchGroupDirective"],] },],
+        'fieldTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["ContentChild"], args: [_query_field_directive__WEBPACK_IMPORTED_MODULE_2__["QueryFieldDirective"],] },],
+        'entityTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["ContentChild"], args: [_query_entity_directive__WEBPACK_IMPORTED_MODULE_3__["QueryEntityDirective"],] },],
+        'operatorTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["ContentChild"], args: [_query_operator_directive__WEBPACK_IMPORTED_MODULE_1__["QueryOperatorDirective"],] },],
+        'removeButtonTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["ContentChild"], args: [_query_remove_button_directive__WEBPACK_IMPORTED_MODULE_7__["QueryRemoveButtonDirective"],] },],
+        'emptyWarningTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["ContentChild"], args: [_query_empty_warning_directive__WEBPACK_IMPORTED_MODULE_8__["QueryEmptyWarningDirective"],] },],
+        'inputTemplates': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["ContentChildren"], args: [_query_input_directive__WEBPACK_IMPORTED_MODULE_6__["QueryInputDirective"],] },],
+        'value': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["Input"] },],
     };
     return QueryBuilderComponent;
 }());
@@ -746,6 +769,36 @@ var QueryButtonGroupDirective = /** @class */ (function () {
 }());
 
 //# sourceMappingURL=query-button-group.directive.js.map
+
+/***/ }),
+
+/***/ "./lib/components/query-builder/query-empty-warning.directive.js":
+/*!***********************************************************************!*\
+  !*** ./lib/components/query-builder/query-empty-warning.directive.js ***!
+  \***********************************************************************/
+/*! exports provided: QueryEmptyWarningDirective */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "QueryEmptyWarningDirective", function() { return QueryEmptyWarningDirective; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+
+var QueryEmptyWarningDirective = /** @class */ (function () {
+    function QueryEmptyWarningDirective(template) {
+        this.template = template;
+    }
+    QueryEmptyWarningDirective.decorators = [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Directive"], args: [{ selector: '[queryEmptyWarning]' },] },
+    ];
+    /** @nocollapse */
+    QueryEmptyWarningDirective.ctorParameters = function () { return [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["TemplateRef"], },
+    ]; };
+    return QueryEmptyWarningDirective;
+}());
+
+//# sourceMappingURL=query-empty-warning.directive.js.map
 
 /***/ }),
 
@@ -1002,7 +1055,8 @@ var QueryBuilderModule = /** @class */ (function () {
                         _components__WEBPACK_IMPORTED_MODULE_3__["QueryEntityDirective"],
                         _components__WEBPACK_IMPORTED_MODULE_3__["QueryButtonGroupDirective"],
                         _components__WEBPACK_IMPORTED_MODULE_3__["QuerySwitchGroupDirective"],
-                        _components__WEBPACK_IMPORTED_MODULE_3__["QueryRemoveButtonDirective"]
+                        _components__WEBPACK_IMPORTED_MODULE_3__["QueryRemoveButtonDirective"],
+                        _components__WEBPACK_IMPORTED_MODULE_3__["QueryEmptyWarningDirective"]
                     ],
                     exports: [
                         _components__WEBPACK_IMPORTED_MODULE_3__["QueryBuilderComponent"],
@@ -1012,7 +1066,8 @@ var QueryBuilderModule = /** @class */ (function () {
                         _components__WEBPACK_IMPORTED_MODULE_3__["QueryEntityDirective"],
                         _components__WEBPACK_IMPORTED_MODULE_3__["QueryButtonGroupDirective"],
                         _components__WEBPACK_IMPORTED_MODULE_3__["QuerySwitchGroupDirective"],
-                        _components__WEBPACK_IMPORTED_MODULE_3__["QueryRemoveButtonDirective"]
+                        _components__WEBPACK_IMPORTED_MODULE_3__["QueryRemoveButtonDirective"],
+                        _components__WEBPACK_IMPORTED_MODULE_3__["QueryEmptyWarningDirective"]
                     ]
                 },] },
     ];
