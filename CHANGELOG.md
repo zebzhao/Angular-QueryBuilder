@@ -3,7 +3,11 @@ Angular2-QueryBuilder Changelog
 
 Version 0.3.2
 -----------
-- Add `queryEmptyMessage` directive for customizing empty warning messages
+- Fix `queryEmptyWarning` directive not being passed to nested rules
+
+Version 0.3.2
+-----------
+- Add `queryEmptyWarning` directive for customizing empty warning messages
 - Add `[emptyMessage]` to change the default empty message text
 
 Version 0.3.1
