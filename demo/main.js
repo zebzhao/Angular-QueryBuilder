@@ -4,7 +4,7 @@
 /*!*********************************!*\
   !*** ./lib/components/index.js ***!
   \*********************************/
-/*! exports provided: CONTROL_VALUE_ACCESSOR, VALIDATOR, QueryBuilderComponent, QueryButtonGroupDirective, QueryEntityDirective, QueryFieldDirective, QueryInputDirective, QueryOperatorDirective, QuerySwitchGroupDirective, QueryRemoveButtonDirective, QueryEmptyWarningDirective */
+/*! exports provided: CONTROL_VALUE_ACCESSOR, VALIDATOR, QueryBuilderComponent, QueryButtonGroupDirective, QueryEntityDirective, QueryFieldDirective, QueryInputDirective, QueryOperatorDirective, QuerySwitchGroupDirective, QueryRemoveButtonDirective, QueryEmptyWarningDirective, QueryArrowIconDirective */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -32,6 +32,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "QueryEmptyWarningDirective", function() { return _query_builder__WEBPACK_IMPORTED_MODULE_0__["QueryEmptyWarningDirective"]; });
 
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "QueryArrowIconDirective", function() { return _query_builder__WEBPACK_IMPORTED_MODULE_0__["QueryArrowIconDirective"]; });
+
 
 //# sourceMappingURL=index.js.map
 
@@ -41,7 +43,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!***********************************************!*\
   !*** ./lib/components/query-builder/index.js ***!
   \***********************************************/
-/*! exports provided: CONTROL_VALUE_ACCESSOR, VALIDATOR, QueryBuilderComponent, QueryButtonGroupDirective, QueryEntityDirective, QueryFieldDirective, QueryInputDirective, QueryOperatorDirective, QuerySwitchGroupDirective, QueryRemoveButtonDirective, QueryEmptyWarningDirective */
+/*! exports provided: CONTROL_VALUE_ACCESSOR, VALIDATOR, QueryBuilderComponent, QueryButtonGroupDirective, QueryEntityDirective, QueryFieldDirective, QueryInputDirective, QueryOperatorDirective, QuerySwitchGroupDirective, QueryRemoveButtonDirective, QueryEmptyWarningDirective, QueryArrowIconDirective */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -77,6 +79,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _query_empty_warning_directive__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./query-empty-warning.directive */ "./lib/components/query-builder/query-empty-warning.directive.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "QueryEmptyWarningDirective", function() { return _query_empty_warning_directive__WEBPACK_IMPORTED_MODULE_8__["QueryEmptyWarningDirective"]; });
 
+/* harmony import */ var _query_arrow_icon_directive__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./query-arrow-icon.directive */ "./lib/components/query-builder/query-arrow-icon.directive.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "QueryArrowIconDirective", function() { return _query_arrow_icon_directive__WEBPACK_IMPORTED_MODULE_9__["QueryArrowIconDirective"]; });
+
+
 
 
 
@@ -87,6 +93,36 @@ __webpack_require__.r(__webpack_exports__);
 
 
 //# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ "./lib/components/query-builder/query-arrow-icon.directive.js":
+/*!********************************************************************!*\
+  !*** ./lib/components/query-builder/query-arrow-icon.directive.js ***!
+  \********************************************************************/
+/*! exports provided: QueryArrowIconDirective */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "QueryArrowIconDirective", function() { return QueryArrowIconDirective; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+
+var QueryArrowIconDirective = /** @class */ (function () {
+    function QueryArrowIconDirective(template) {
+        this.template = template;
+    }
+    QueryArrowIconDirective.decorators = [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Directive"], args: [{ selector: '[queryArrowIcon]' },] },
+    ];
+    /** @nocollapse */
+    QueryArrowIconDirective.ctorParameters = function () { return [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["TemplateRef"], },
+    ]; };
+    return QueryArrowIconDirective;
+}());
+
+//# sourceMappingURL=query-arrow-icon.directive.js.map
 
 /***/ }),
 
@@ -111,7 +147,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _query_input_directive__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./query-input.directive */ "./lib/components/query-builder/query-input.directive.js");
 /* harmony import */ var _query_remove_button_directive__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./query-remove-button.directive */ "./lib/components/query-builder/query-remove-button.directive.js");
 /* harmony import */ var _query_empty_warning_directive__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./query-empty-warning.directive */ "./lib/components/query-builder/query-empty-warning.directive.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _query_arrow_icon_directive__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./query-arrow-icon.directive */ "./lib/components/query-builder/query-arrow-icon.directive.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+
 
 
 
@@ -124,18 +162,21 @@ __webpack_require__.r(__webpack_exports__);
 
 var CONTROL_VALUE_ACCESSOR = {
     provide: _angular_forms__WEBPACK_IMPORTED_MODULE_0__["NG_VALUE_ACCESSOR"],
-    useExisting: Object(_angular_core__WEBPACK_IMPORTED_MODULE_9__["forwardRef"])(function () { return QueryBuilderComponent; }),
+    useExisting: Object(_angular_core__WEBPACK_IMPORTED_MODULE_10__["forwardRef"])(function () { return QueryBuilderComponent; }),
     multi: true
 };
 var VALIDATOR = {
     provide: _angular_forms__WEBPACK_IMPORTED_MODULE_0__["NG_VALIDATORS"],
-    useExisting: Object(_angular_core__WEBPACK_IMPORTED_MODULE_9__["forwardRef"])(function () { return QueryBuilderComponent; }),
+    useExisting: Object(_angular_core__WEBPACK_IMPORTED_MODULE_10__["forwardRef"])(function () { return QueryBuilderComponent; }),
     multi: true
 };
 var QueryBuilderComponent = /** @class */ (function () {
     function QueryBuilderComponent(changeDetectorRef) {
+        var _this = this;
         this.changeDetectorRef = changeDetectorRef;
         this.defaultClassNames = {
+            arrowIconButton: 'q-arrow-icon-button',
+            arrowIcon: 'q-icon q-arrow-icon',
             removeIcon: 'q-icon q-remove-icon',
             addIcon: 'q-icon q-add-icon',
             button: 'q-button',
@@ -146,6 +187,8 @@ var QueryBuilderComponent = /** @class */ (function () {
             switchRadio: 'q-switch-radio',
             rightAlign: 'q-right-align',
             transition: 'q-transition',
+            collapsed: 'q-collapsed',
+            treeContainer: 'q-tree-container',
             tree: 'q-tree',
             row: 'q-row',
             connector: 'q-connector',
@@ -172,6 +215,7 @@ var QueryBuilderComponent = /** @class */ (function () {
         };
         this.data = { condition: 'and', rules: [] };
         this.allowRuleset = true;
+        this.allowCollapse = false;
         this.emptyMessage = 'A ruleset cannot be empty. Please add a rule or remove it all together.';
         this.config = { fields: {} };
         this.defaultTemplateTypes = [
@@ -183,6 +227,10 @@ var QueryBuilderComponent = /** @class */ (function () {
         this.fieldContextCache = new Map();
         this.entityContextCache = new Map();
         this.removeButtonContextCache = new Map();
+        // ----------END----------
+        this.getDisabledState = function () {
+            return _this.disabled;
+        };
     }
     // ----------OnInit Implementation----------
     QueryBuilderComponent.prototype.ngOnInit = function () { };
@@ -255,10 +303,6 @@ var QueryBuilderComponent = /** @class */ (function () {
     QueryBuilderComponent.prototype.setDisabledState = function (isDisabled) {
         this.disabled = isDisabled;
         this.changeDetectorRef.detectChanges();
-    };
-    // ----------END----------
-    QueryBuilderComponent.prototype.getDisabledState = function () {
-        return this.disabled;
     };
     QueryBuilderComponent.prototype.findTemplateForRule = function (rule) {
         var type = this.getInputType(rule.field, rule.operator);
@@ -456,6 +500,22 @@ var QueryBuilderComponent = /** @class */ (function () {
         this.handleTouched();
         this.handleDataChange();
     };
+    QueryBuilderComponent.prototype.transitionEnd = function (e) {
+        this.treeContainer.nativeElement.style.maxHeight = null;
+    };
+    QueryBuilderComponent.prototype.toggleCollapse = function () {
+        var _this = this;
+        this.computedTreeContainerHeight();
+        setTimeout(function () {
+            _this.data.collapsed = !_this.data.collapsed;
+        }, 100);
+    };
+    QueryBuilderComponent.prototype.computedTreeContainerHeight = function () {
+        var nativeElement = this.treeContainer.nativeElement;
+        if (nativeElement && nativeElement.firstElementChild) {
+            nativeElement.style.maxHeight = (nativeElement.firstElementChild.clientHeight + 8) + 'px';
+        }
+    };
     QueryBuilderComponent.prototype.changeCondition = function (value) {
         if (this.disabled) {
             return;
@@ -464,12 +524,25 @@ var QueryBuilderComponent = /** @class */ (function () {
         this.handleTouched();
         this.handleDataChange();
     };
-    QueryBuilderComponent.prototype.changeOperator = function () {
+    QueryBuilderComponent.prototype.changeOperator = function (rule) {
         if (this.disabled) {
             return;
         }
+        if (this.config.coerceValueForOperator) {
+            rule.value = this.config.coerceValueForOperator(rule.operator, rule.value, rule);
+        }
+        else {
+            rule.value = this.coerceValueForOperator(rule.operator, rule.value, rule);
+        }
         this.handleTouched();
         this.handleDataChange();
+    };
+    QueryBuilderComponent.prototype.coerceValueForOperator = function (operator, value, rule) {
+        var inputType = this.getInputType(rule.field, operator);
+        if (inputType === 'multiselect' && !Array.isArray(value)) {
+            return [value];
+        }
+        return value;
     };
     QueryBuilderComponent.prototype.changeInput = function () {
         if (this.disabled) {
@@ -536,6 +609,10 @@ var QueryBuilderComponent = /** @class */ (function () {
         var t = this.parentEntityTemplate || this.entityTemplate;
         return t ? t.template : null;
     };
+    QueryBuilderComponent.prototype.getArrowIconTemplate = function () {
+        var t = this.parentArrowIconTemplate || this.arrowIconTemplate;
+        return t ? t.template : null;
+    };
     QueryBuilderComponent.prototype.getButtonGroupTemplate = function () {
         var t = this.parentButtonGroupTemplate || this.buttonGroupTemplate;
         return t ? t.template : null;
@@ -566,7 +643,7 @@ var QueryBuilderComponent = /** @class */ (function () {
                 addRule: this.addRule.bind(this),
                 addRuleSet: this.allowRuleset && this.addRuleSet.bind(this),
                 removeRuleSet: this.allowRuleset && this.parentValue && this.removeRuleSet.bind(this),
-                getDisabledState: this.getDisabledState.bind(this),
+                getDisabledState: this.getDisabledState,
                 $implicit: this.data
             };
         }
@@ -576,7 +653,7 @@ var QueryBuilderComponent = /** @class */ (function () {
         if (!this.removeButtonContextCache.has(rule)) {
             this.removeButtonContextCache.set(rule, {
                 removeRule: this.removeRule.bind(this),
-                getDisabledState: this.getDisabledState.bind(this),
+                getDisabledState: this.getDisabledState,
                 $implicit: rule
             });
         }
@@ -587,7 +664,7 @@ var QueryBuilderComponent = /** @class */ (function () {
             this.fieldContextCache.set(rule, {
                 onChange: this.changeField.bind(this),
                 getFields: this.getFields.bind(this),
-                getDisabledState: this.getDisabledState.bind(this),
+                getDisabledState: this.getDisabledState,
                 fields: this.fields,
                 $implicit: rule
             });
@@ -598,7 +675,7 @@ var QueryBuilderComponent = /** @class */ (function () {
         if (!this.entityContextCache.has(rule)) {
             this.entityContextCache.set(rule, {
                 onChange: this.changeEntity.bind(this),
-                getDisabledState: this.getDisabledState.bind(this),
+                getDisabledState: this.getDisabledState,
                 entities: this.entities,
                 $implicit: rule
             });
@@ -608,13 +685,19 @@ var QueryBuilderComponent = /** @class */ (function () {
     QueryBuilderComponent.prototype.getSwitchGroupContext = function () {
         return {
             onChange: this.changeCondition.bind(this),
-            getDisabledState: this.getDisabledState.bind(this),
+            getDisabledState: this.getDisabledState,
+            $implicit: this.data
+        };
+    };
+    QueryBuilderComponent.prototype.getArrowIconContext = function () {
+        return {
+            getDisabledState: this.getDisabledState,
             $implicit: this.data
         };
     };
     QueryBuilderComponent.prototype.getEmptyWarningContext = function () {
         return {
-            getDisabledState: this.getDisabledState.bind(this),
+            getDisabledState: this.getDisabledState,
             message: this.emptyMessage,
             $implicit: this.data
         };
@@ -623,7 +706,7 @@ var QueryBuilderComponent = /** @class */ (function () {
         if (!this.operatorContextCache.has(rule)) {
             this.operatorContextCache.set(rule, {
                 onChange: this.changeOperator.bind(this),
-                getDisabledState: this.getDisabledState.bind(this),
+                getDisabledState: this.getDisabledState,
                 operators: this.getOperators(rule.field),
                 $implicit: rule
             });
@@ -634,7 +717,7 @@ var QueryBuilderComponent = /** @class */ (function () {
         if (!this.inputContextCache.has(rule)) {
             this.inputContextCache.set(rule, {
                 onChange: this.changeInput.bind(this),
-                getDisabledState: this.getDisabledState.bind(this),
+                getDisabledState: this.getDisabledState,
                 options: this.getOptions(rule.field),
                 field: this.config.fields[rule.field],
                 $implicit: rule
@@ -695,45 +778,49 @@ var QueryBuilderComponent = /** @class */ (function () {
         }
     };
     QueryBuilderComponent.decorators = [
-        { type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["Component"], args: [{
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_10__["Component"], args: [{
                     selector: 'query-builder',
-                    template: "\n    <div [ngClass]=\"getClassNames('switchRow')\">\n      <ng-container *ngIf=\"getButtonGroupTemplate() as template; else defaultButtonGroup\">\n        <div [ngClass]=\"getClassNames('buttonGroup', 'rightAlign')\">\n          <ng-container *ngTemplateOutlet=\"template; context: getButtonGroupContext()\"></ng-container>\n        </div>\n      </ng-container>\n\n      <ng-template #defaultButtonGroup>\n        <div [ngClass]=\"getClassNames('buttonGroup', 'rightAlign')\">\n          <button (click)=\"addRule()\" [ngClass]=\"getClassNames('button')\" [disabled]=disabled>\n            <i [ngClass]=\"getClassNames('addIcon')\"></i> Rule\n          </button>\n          <button (click)=\"addRuleSet()\" [ngClass]=\"getClassNames('button')\" *ngIf=\"allowRuleset\" [disabled]=disabled>\n            <i [ngClass]=\"getClassNames('addIcon')\"></i> Ruleset\n          </button>\n          <ng-container *ngIf=\"!!parentValue && allowRuleset\">\n            <button (click)=\"removeRuleSet()\" [ngClass]=\"getClassNames('button', 'removeButton')\" [disabled]=disabled>\n              <i [ngClass]=\"getClassNames('removeIcon')\"></i>\n            </button>\n          </ng-container>\n        </div>\n      </ng-template>\n\n      <ng-container *ngIf=\"getSwitchGroupTemplate() as template; else defaultSwitchGroup\">\n        <ng-container *ngTemplateOutlet=\"template; context: getSwitchGroupContext()\"></ng-container>\n      </ng-container>\n\n      <ng-template #defaultSwitchGroup>\n        <div [ngClass]=\"getClassNames('switchGroup', 'transition')\" *ngIf=\"data\">\n          <div [ngClass]=\"getClassNames('switchControl')\">\n            <input type=\"radio\" [ngClass]=\"getClassNames('switchRadio')\" [(ngModel)]=\"data.condition\" [disabled]=disabled value=\"and\" #andOption/>\n            <label (click)=\"changeCondition(andOption.value)\" [ngClass]=\"getClassNames('switchLabel')\">AND</label>\n          </div>\n          <div [ngClass]=\"getClassNames('switchControl')\">\n            <input type=\"radio\" [ngClass]=\"getClassNames('switchRadio')\" [(ngModel)]=\"data.condition\" [disabled]=disabled value=\"or\" #orOption/>\n            <label (click)=\"changeCondition(orOption.value)\" [ngClass]=\"getClassNames('switchLabel')\">OR</label>\n          </div>\n        </div>\n      </ng-template>\n    </div>\n\n    <ul [ngClass]=\"getClassNames('tree')\" *ngIf=\"data && data.rules\">\n      <ng-container *ngFor=\"let rule of data.rules\">\n        <ng-container *ngIf=\"{ruleset: !!rule.rules, invalid: !config.allowEmptyRulesets && rule.rules && rule.rules.length === 0} as local\">\n          <li [ngClass]=\"getQueryItemClassName(local)\">\n            <ng-container *ngIf=\"!local.ruleset\">\n\n              <ng-container *ngIf=\"getRemoveButtonTemplate() as template; else defaultRemoveButton\">\n                <div [ngClass]=\"getClassNames('buttonGroup', 'rightAlign')\">\n                  <ng-container *ngTemplateOutlet=\"template; context: getRemoveButtonContext(rule)\"></ng-container>\n                </div>\n              </ng-container>\n\n              <ng-template #defaultRemoveButton>\n                <div [ngClass]=\"getClassNames('removeButtonSize', 'rightAlign')\">\n                  <button [ngClass]=\"getClassNames('button', 'removeButton')\" (click)=\"removeRule(rule, data)\" [disabled]=disabled>\n                    <i [ngClass]=\"getClassNames('removeIcon')\"></i>\n                  </button>\n                </div>\n              </ng-template>\n\n              <div *ngIf=\"entities?.length > 0\" class=\"q-inline-block-display\" >\n                <ng-container *ngIf=\"getEntityTemplate() as template; else defaultEntity\">\n                  <ng-container *ngTemplateOutlet=\"template; context: getEntityContext(rule)\"></ng-container>\n                </ng-container>\n              </div>\n\n              <ng-template #defaultEntity>\n                <div [ngClass]=\"getClassNames('entityControlSize')\">\n                  <select [ngClass]=\"getClassNames('entityControl')\" [(ngModel)]=\"rule.entity\" (ngModelChange)=\"changeEntity($event, rule)\" [disabled]=\"disabled\">\n                    <option *ngFor=\"let entity of entities\" [ngValue]=\"entity.value\">\n                      {{entity.name}}\n                    </option>\n                  </select>\n                </div>\n              </ng-template>\n\n              <ng-container *ngIf=\"getFieldTemplate() as template; else defaultField\">\n                <ng-container *ngTemplateOutlet=\"template; context: getFieldContext(rule)\"></ng-container>\n              </ng-container>\n\n              <ng-template #defaultField>\n                <div [ngClass]=\"getClassNames('fieldControlSize')\">\n                  <select [ngClass]=\"getClassNames('fieldControl')\" [(ngModel)]=\"rule.field\" (ngModelChange)=\"changeField($event, rule)\" [disabled]=\"disabled\">\n                    <option *ngFor=\"let field of getFields(rule.entity)\" [ngValue]=\"field.value\">\n                      {{field.name}}\n                    </option>\n                  </select>\n                </div>\n              </ng-template>\n\n              <ng-container *ngIf=\"getOperatorTemplate() as template; else defaultOperator\">\n                <ng-container *ngTemplateOutlet=\"template; context: getOperatorContext(rule)\"></ng-container>\n              </ng-container>\n\n              <ng-template #defaultOperator>\n                <div [ngClass]=\"getClassNames('operatorControlSize')\">\n                  <select [ngClass]=\"getClassNames('operatorControl')\" [(ngModel)]=\"rule.operator\" (ngModelChange)=\"changeOperator()\" [disabled]=\"disabled\">\n                    <option *ngFor=\"let operator of getOperators(rule.field)\" [ngValue]=\"operator\">\n                      {{operator}}\n                    </option>\n                  </select>\n                </div>\n              </ng-template>\n\n              <ng-container *ngIf=\"findTemplateForRule(rule) as template; else defaultInput\">\n                <ng-container *ngTemplateOutlet=\"template; context: getInputContext(rule)\"></ng-container>\n              </ng-container>\n\n              <ng-template #defaultInput>\n                <div [ngClass]=\"getClassNames('inputControlSize')\" [ngSwitch]=\"getInputType(rule.field, rule.operator)\">\n                  <input [ngClass]=\"getClassNames('inputControl')\" [(ngModel)]=\"rule.value\" (ngModelChange)=\"changeInput()\" [disabled]=\"disabled\" *ngSwitchCase=\"'string'\" type=\"text\">\n                  <input [ngClass]=\"getClassNames('inputControl')\" [(ngModel)]=\"rule.value\" (ngModelChange)=\"changeInput()\" [disabled]=\"disabled\" *ngSwitchCase=\"'number'\" type=\"number\">\n                  <input [ngClass]=\"getClassNames('inputControl')\" [(ngModel)]=\"rule.value\" (ngModelChange)=\"changeInput()\" [disabled]=\"disabled\" *ngSwitchCase=\"'date'\" type=\"date\">\n                  <input [ngClass]=\"getClassNames('inputControl')\" [(ngModel)]=\"rule.value\" (ngModelChange)=\"changeInput()\" [disabled]=\"disabled\" *ngSwitchCase=\"'time'\" type=\"time\">\n                  <select [ngClass]=\"getClassNames('inputControl')\" [(ngModel)]=\"rule.value\" (ngModelChange)=\"changeInput()\" [disabled]=\"disabled\" *ngSwitchCase=\"'category'\">\n                    <option *ngFor=\"let opt of getOptions(rule.field)\" [ngValue]=\"opt.value\">\n                      {{opt.name}}\n                    </option>\n                  </select>\n                  <ng-container *ngSwitchCase=\"'multiselect'\">\n                    <select [ngClass]=\"getClassNames('inputControl')\" [(ngModel)]=\"rule.value\" (ngModelChange)=\"changeInput()\" [disabled]=\"disabled\" multiple>\n                      <option *ngFor=\"let opt of getOptions(rule.field)\" [ngValue]=\"opt.value\">\n                        {{opt.name}}\n                      </option>\n                    </select>\n                  </ng-container>\n                  <input [ngClass]=\"getClassNames('inputControl')\" [(ngModel)]=\"rule.value\" (ngModelChange)=\"changeInput()\" [disabled]=\"disabled\" *ngSwitchCase=\"'boolean'\" type=\"checkbox\">\n                </div>\n              </ng-template>\n\n            </ng-container>\n            <query-builder *ngIf=\"local.ruleset\"\n              [data]=\"rule\"\n              [disabled]=\"disabled\"\n              [parentTouchedCallback]=\"parentTouchedCallback || onTouchedCallback\"\n              [parentChangeCallback]=\"parentChangeCallback || onChangeCallback\"\n              [parentInputTemplates]=\"parentInputTemplates || inputTemplates\"\n              [parentOperatorTemplate]=\"parentOperatorTemplate || operatorTemplate\"\n              [parentFieldTemplate]=\"parentFieldTemplate || fieldTemplate\"\n              [parentEntityTemplate]=\"parentEntityTemplate || entityTemplate\"\n              [parentSwitchGroupTemplate]=\"parentSwitchGroupTemplate || switchGroupTemplate\"\n              [parentButtonGroupTemplate]=\"parentButtonGroupTemplate || buttonGroupTemplate\"\n              [parentRemoveButtonTemplate]=\"parentRemoveButtonTemplate || removeButtonTemplate\"\n              [parentValue]=\"data\"\n              [classNames]=\"classNames\"\n              [config]=\"config\"\n              [allowRuleset]=\"allowRuleset\"\n              [emptyMessage]=\"emptyMessage\"\n              [operatorMap]=\"operatorMap\">\n            </query-builder>\n\n            <ng-container *ngIf=\"getEmptyWarningTemplate() as template; else defaultEmptyWarning\">\n              <ng-container *ngIf=\"local.invalid\">\n                <ng-container *ngTemplateOutlet=\"template; context: getEmptyWarningContext()\"></ng-container>\n              </ng-container>\n            </ng-container>\n\n            <ng-template #defaultEmptyWarning>\n              <p [ngClass]=\"getClassNames('emptyWarning')\" *ngIf=\"local.invalid\">\n                {{emptyMessage}}\n              </p>\n            </ng-template>\n          </li>\n        </ng-container>\n      </ng-container>\n    </ul>\n  ",
-                    styles: ["\n    \uFEFF:host{display:block;width:100%}:host .q-icon{font-style:normal;font-size:12px}:host .q-remove-icon::before{content:'\u274C'}:host .q-add-icon{color:#555}:host .q-add-icon::before{content:'\u2795'}:host .q-remove-button{color:#B3415D;width:31px}:host .q-switch-group,:host .q-button-group{font-family:\"Lucida Grande\", Tahoma, Verdana, sans-serif;overflow:hidden}:host .q-right-align{float:right}:host .q-button{margin-left:8px;padding:0 8px;background-color:white}:host .q-button:disabled{display:none}:host .q-control-size{display:inline-block;vertical-align:top;padding-right:10px}:host .q-input-control,:host .q-operator-control,:host .q-field-control,:host .q-entity-control{display:inline-block;padding:5px 8px;color:#555;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:4px;box-sizing:border-box;width:auto}:host .q-input-control:disabled,:host .q-operator-control:disabled,:host .q-field-control:disabled,:host .q-entity-control:disabled{border-color:transparent}:host .q-operator-control,:host .q-field-control,:host .q-entity-control,:host .q-input-control:not([type='checkbox']){min-height:32px;-webkit-appearance:none}:host .q-switch-label,:host .q-button{float:left;margin-bottom:0;font-size:14px;line-height:30px;font-weight:normal;text-align:center;text-shadow:none;border:1px solid rgba(0,0,0,0.2);box-sizing:border-box}:host .q-switch-label:hover,:host .q-button:hover{cursor:pointer;background-color:#F0F0F0}:host .q-switch-label{background-color:#e4e4e4;padding:0 8px}:host .q-switch-radio{position:absolute;clip:rect(0, 0, 0, 0);height:1px;width:1px;border:0;overflow:hidden}:host .q-switch-radio:checked+.q-switch-label{border:1px solid #619ed7;background:white;color:#3176b3}:host .q-switch-radio:disabled+.q-switch-label{display:none}:host .q-switch-radio:checked:disabled+.q-switch-label{display:initial;color:initial;cursor:default;border-color:transparent}:host .q-invalid-ruleset{border:1px solid rgba(179,65,93,0.5) !important;background:rgba(179,65,93,0.1) !important}:host .q-empty-warning{color:#8d252e;text-align:center}:host .q-ruleset{border:1px solid #CCC}:host .q-rule{border:1px solid #CCC;background:white}:host .q-transition{-webkit-transition:all 0.1s ease-in-out;-moz-transition:all 0.1s ease-in-out;-ms-transition:all 0.1s ease-in-out;-o-transition:all 0.1s ease-in-out;transition:all 0.1s ease-in-out}:host .q-tree{list-style:none;margin:4px 0 2px}:host .q-row{padding:6px 8px;margin-top:6px}:host .q-connector{position:relative}:host .q-connector::before{top:-5px;border-width:0 0 2px 2px}:host .q-connector::after{border-width:0 0 0 2px;top:50%}:host .q-connector::before,:host .q-connector::after{content:'';left:-12px;border-color:#CCC;border-style:solid;width:9px;height:calc(50% + 6px);position:absolute}:host .q-connector:last-child::after{content:none}:host .q-inline-block-display{display:inline-block;vertical-align:top}\n  "],
+                    template: "\n    <div [ngClass]=\"getClassNames('switchRow')\">\n      <ng-template #defaultArrowIcon>\n        <i [ngClass]=\"getClassNames('arrowIcon')\"></i>\n      </ng-template>\n\n      <a *ngIf=\"allowCollapse\" (click)=\"toggleCollapse()\" [ngClass]=\"getClassNames('arrowIconButton', data.collapsed ? 'collapsed' : null)\">\n        <ng-container *ngIf=\"getArrowIconTemplate() as template; else defaultArrowIcon\">\n          <ng-container *ngTemplateOutlet=\"template; context: getArrowIconContext()\"></ng-container>\n        </ng-container>\n      </a>\n\n      <ng-container *ngIf=\"getButtonGroupTemplate() as template; else defaultButtonGroup\">\n        <div [ngClass]=\"getClassNames('buttonGroup', 'rightAlign')\">\n          <ng-container *ngTemplateOutlet=\"template; context: getButtonGroupContext()\"></ng-container>\n        </div>\n      </ng-container>\n\n      <ng-template #defaultButtonGroup>\n        <div [ngClass]=\"getClassNames('buttonGroup', 'rightAlign')\">\n          <button (click)=\"addRule()\" [ngClass]=\"getClassNames('button')\" [disabled]=disabled>\n            <i [ngClass]=\"getClassNames('addIcon')\"></i> Rule\n          </button>\n          <button (click)=\"addRuleSet()\" [ngClass]=\"getClassNames('button')\" *ngIf=\"allowRuleset\" [disabled]=disabled>\n            <i [ngClass]=\"getClassNames('addIcon')\"></i> Ruleset\n          </button>\n          <ng-container *ngIf=\"!!parentValue && allowRuleset\">\n            <button (click)=\"removeRuleSet()\" [ngClass]=\"getClassNames('button', 'removeButton')\" [disabled]=disabled>\n              <i [ngClass]=\"getClassNames('removeIcon')\"></i>\n            </button>\n          </ng-container>\n        </div>\n      </ng-template>\n\n      <ng-container *ngIf=\"getSwitchGroupTemplate() as template; else defaultSwitchGroup\">\n        <ng-container *ngTemplateOutlet=\"template; context: getSwitchGroupContext()\"></ng-container>\n      </ng-container>\n\n      <ng-template #defaultSwitchGroup>\n        <div [ngClass]=\"getClassNames('switchGroup', 'transition')\" *ngIf=\"data\">\n          <div [ngClass]=\"getClassNames('switchControl')\">\n            <input type=\"radio\" [ngClass]=\"getClassNames('switchRadio')\" [(ngModel)]=\"data.condition\" [disabled]=disabled value=\"and\"\n              #andOption/>\n            <label (click)=\"changeCondition(andOption.value)\" [ngClass]=\"getClassNames('switchLabel')\">AND</label>\n          </div>\n          <div [ngClass]=\"getClassNames('switchControl')\">\n            <input type=\"radio\" [ngClass]=\"getClassNames('switchRadio')\" [(ngModel)]=\"data.condition\" [disabled]=disabled value=\"or\"\n              #orOption/>\n            <label (click)=\"changeCondition(orOption.value)\" [ngClass]=\"getClassNames('switchLabel')\">OR</label>\n          </div>\n        </div>\n      </ng-template>\n    </div>\n\n    <div #treeContainer (transitionend)=\"transitionEnd($event)\" [ngClass]=\"getClassNames('treeContainer', data.collapsed ? 'collapsed' : null)\">\n      <ul [ngClass]=\"getClassNames('tree')\" *ngIf=\"data && data.rules\">\n        <ng-container *ngFor=\"let rule of data.rules\">\n          <ng-container *ngIf=\"{ruleset: !!rule.rules, invalid: !config.allowEmptyRulesets && rule.rules && rule.rules.length === 0} as local\">\n            <li [ngClass]=\"getQueryItemClassName(local)\">\n              <ng-container *ngIf=\"!local.ruleset\">\n\n                <ng-container *ngIf=\"getRemoveButtonTemplate() as template; else defaultRemoveButton\">\n                  <div [ngClass]=\"getClassNames('buttonGroup', 'rightAlign')\">\n                    <ng-container *ngTemplateOutlet=\"template; context: getRemoveButtonContext(rule)\"></ng-container>\n                  </div>\n                </ng-container>\n\n                <ng-template #defaultRemoveButton>\n                  <div [ngClass]=\"getClassNames('removeButtonSize', 'rightAlign')\">\n                    <button [ngClass]=\"getClassNames('button', 'removeButton')\" (click)=\"removeRule(rule, data)\" [disabled]=disabled>\n                      <i [ngClass]=\"getClassNames('removeIcon')\"></i>\n                    </button>\n                  </div>\n                </ng-template>\n\n                <div *ngIf=\"entities?.length > 0\" class=\"q-inline-block-display\">\n                  <ng-container *ngIf=\"getEntityTemplate() as template; else defaultEntity\">\n                    <ng-container *ngTemplateOutlet=\"template; context: getEntityContext(rule)\"></ng-container>\n                  </ng-container>\n                </div>\n\n                <ng-template #defaultEntity>\n                  <div [ngClass]=\"getClassNames('entityControlSize')\">\n                    <select [ngClass]=\"getClassNames('entityControl')\" [(ngModel)]=\"rule.entity\" (ngModelChange)=\"changeEntity($event, rule)\"\n                      [disabled]=\"disabled\">\n                      <option *ngFor=\"let entity of entities\" [ngValue]=\"entity.value\">\n                        {{entity.name}}\n                      </option>\n                    </select>\n                  </div>\n                </ng-template>\n\n                <ng-container *ngIf=\"getFieldTemplate() as template; else defaultField\">\n                  <ng-container *ngTemplateOutlet=\"template; context: getFieldContext(rule)\"></ng-container>\n                </ng-container>\n\n                <ng-template #defaultField>\n                  <div [ngClass]=\"getClassNames('fieldControlSize')\">\n                    <select [ngClass]=\"getClassNames('fieldControl')\" [(ngModel)]=\"rule.field\" (ngModelChange)=\"changeField($event, rule)\" [disabled]=\"disabled\">\n                      <option *ngFor=\"let field of getFields(rule.entity)\" [ngValue]=\"field.value\">\n                        {{field.name}}\n                      </option>\n                    </select>\n                  </div>\n                </ng-template>\n\n                <ng-container *ngIf=\"getOperatorTemplate() as template; else defaultOperator\">\n                  <ng-container *ngTemplateOutlet=\"template; context: getOperatorContext(rule)\"></ng-container>\n                </ng-container>\n\n                <ng-template #defaultOperator>\n                  <div [ngClass]=\"getClassNames('operatorControlSize')\">\n                    <select [ngClass]=\"getClassNames('operatorControl')\" [(ngModel)]=\"rule.operator\" (ngModelChange)=\"changeOperator(rule)\" [disabled]=\"disabled\">\n                      <option *ngFor=\"let operator of getOperators(rule.field)\" [ngValue]=\"operator\">\n                        {{operator}}\n                      </option>\n                    </select>\n                  </div>\n                </ng-template>\n\n                <ng-container *ngIf=\"findTemplateForRule(rule) as template; else defaultInput\">\n                  <ng-container *ngTemplateOutlet=\"template; context: getInputContext(rule)\"></ng-container>\n                </ng-container>\n\n                <ng-template #defaultInput>\n                  <div [ngClass]=\"getClassNames('inputControlSize')\" [ngSwitch]=\"getInputType(rule.field, rule.operator)\">\n                    <input [ngClass]=\"getClassNames('inputControl')\" [(ngModel)]=\"rule.value\" (ngModelChange)=\"changeInput()\" [disabled]=\"disabled\"\n                      *ngSwitchCase=\"'string'\" type=\"text\">\n                    <input [ngClass]=\"getClassNames('inputControl')\" [(ngModel)]=\"rule.value\" (ngModelChange)=\"changeInput()\" [disabled]=\"disabled\"\n                      *ngSwitchCase=\"'number'\" type=\"number\">\n                    <input [ngClass]=\"getClassNames('inputControl')\" [(ngModel)]=\"rule.value\" (ngModelChange)=\"changeInput()\" [disabled]=\"disabled\"\n                      *ngSwitchCase=\"'date'\" type=\"date\">\n                    <input [ngClass]=\"getClassNames('inputControl')\" [(ngModel)]=\"rule.value\" (ngModelChange)=\"changeInput()\" [disabled]=\"disabled\"\n                      *ngSwitchCase=\"'time'\" type=\"time\">\n                    <select [ngClass]=\"getClassNames('inputControl')\" [(ngModel)]=\"rule.value\" (ngModelChange)=\"changeInput()\" [disabled]=\"disabled\"\n                      *ngSwitchCase=\"'category'\">\n                      <option *ngFor=\"let opt of getOptions(rule.field)\" [ngValue]=\"opt.value\">\n                        {{opt.name}}\n                      </option>\n                    </select>\n                    <ng-container *ngSwitchCase=\"'multiselect'\">\n                      <select [ngClass]=\"getClassNames('inputControl')\" [(ngModel)]=\"rule.value\" (ngModelChange)=\"changeInput()\" [disabled]=\"disabled\"\n                        multiple>\n                        <option *ngFor=\"let opt of getOptions(rule.field)\" [ngValue]=\"opt.value\">\n                          {{opt.name}}\n                        </option>\n                      </select>\n                    </ng-container>\n                    <input [ngClass]=\"getClassNames('inputControl')\" [(ngModel)]=\"rule.value\" (ngModelChange)=\"changeInput()\" [disabled]=\"disabled\"\n                      *ngSwitchCase=\"'boolean'\" type=\"checkbox\">\n                  </div>\n                </ng-template>\n\n              </ng-container>\n              <query-builder *ngIf=\"local.ruleset\" [data]=\"rule\" [disabled]=\"disabled\" [parentTouchedCallback]=\"parentTouchedCallback || onTouchedCallback\"\n                [parentChangeCallback]=\"parentChangeCallback || onChangeCallback\" [parentInputTemplates]=\"parentInputTemplates || inputTemplates\"\n                [parentOperatorTemplate]=\"parentOperatorTemplate || operatorTemplate\" [parentFieldTemplate]=\"parentFieldTemplate || fieldTemplate\"\n                [parentEntityTemplate]=\"parentEntityTemplate || entityTemplate\" [parentSwitchGroupTemplate]=\"parentSwitchGroupTemplate || switchGroupTemplate\"\n                [parentButtonGroupTemplate]=\"parentButtonGroupTemplate || buttonGroupTemplate\" [parentRemoveButtonTemplate]=\"parentRemoveButtonTemplate || removeButtonTemplate\"\n                [parentEmptyWarningTemplate]=\"parentEmptyWarningTemplate || emptyWarningTemplate\" [parentArrowIconTemplate]=\"parentArrowIconTemplate || arrowIconTemplate\"\n                [parentValue]=\"data\" [classNames]=\"classNames\" [config]=\"config\" [allowRuleset]=\"allowRuleset\" [allowCollapse]=\"allowCollapse\"\n                [emptyMessage]=\"emptyMessage\" [operatorMap]=\"operatorMap\">\n              </query-builder>\n\n              <ng-container *ngIf=\"getEmptyWarningTemplate() as template; else defaultEmptyWarning\">\n                <ng-container *ngIf=\"local.invalid\">\n                  <ng-container *ngTemplateOutlet=\"template; context: getEmptyWarningContext()\"></ng-container>\n                </ng-container>\n              </ng-container>\n\n              <ng-template #defaultEmptyWarning>\n                <p [ngClass]=\"getClassNames('emptyWarning')\" *ngIf=\"local.invalid\">\n                  {{emptyMessage}}\n                </p>\n              </ng-template>\n            </li>\n          </ng-container>\n        </ng-container>\n      </ul>\n    </div>\n  ",
+                    styles: ["\n    \uFEFF:host{display:block;width:100%}:host .q-icon{font-style:normal;font-size:12px}:host .q-remove-icon::before{content:'\u274C'}:host .q-arrow-icon-button{float:left;margin:4px 6px 4px 0;transform:rotate(90deg);transition:linear 0.25s transform;cursor:pointer}:host .q-arrow-icon-button.q-collapsed{transform:rotate(0)}:host .q-arrow-icon::before{content:'\u25B6'}:host .q-add-icon{color:#555}:host .q-add-icon::before{content:'\u2795'}:host .q-remove-button{color:#B3415D;width:31px}:host .q-switch-group,:host .q-button-group{font-family:\"Lucida Grande\", Tahoma, Verdana, sans-serif;overflow:hidden}:host .q-right-align{float:right}:host .q-button{margin-left:8px;padding:0 8px;background-color:white}:host .q-button:disabled{display:none}:host .q-control-size{display:inline-block;vertical-align:top;padding-right:10px}:host .q-input-control,:host .q-operator-control,:host .q-field-control,:host .q-entity-control{display:inline-block;padding:5px 8px;color:#555;background-color:#fff;background-image:none;border:1px solid #ccc;border-radius:4px;box-sizing:border-box;width:auto}:host .q-input-control:disabled,:host .q-operator-control:disabled,:host .q-field-control:disabled,:host .q-entity-control:disabled{border-color:transparent}:host .q-operator-control,:host .q-field-control,:host .q-entity-control,:host .q-input-control:not([type='checkbox']){min-height:32px;-webkit-appearance:none}:host .q-switch-label,:host .q-button{float:left;margin-bottom:0;font-size:14px;line-height:30px;font-weight:normal;text-align:center;text-shadow:none;border:1px solid rgba(0,0,0,0.2);box-sizing:border-box}:host .q-switch-label:hover,:host .q-button:hover{cursor:pointer;background-color:#F0F0F0}:host .q-switch-label{background-color:#e4e4e4;padding:0 8px}:host .q-switch-radio{position:absolute;clip:rect(0, 0, 0, 0);height:1px;width:1px;border:0;overflow:hidden}:host .q-switch-radio:checked+.q-switch-label{border:1px solid #619ed7;background:white;color:#3176b3}:host .q-switch-radio:disabled+.q-switch-label{display:none}:host .q-switch-radio:checked:disabled+.q-switch-label{display:initial;color:initial;cursor:default;border-color:transparent}:host .q-invalid-ruleset{border:1px solid rgba(179,65,93,0.5) !important;background:rgba(179,65,93,0.1) !important}:host .q-empty-warning{color:#8d252e;text-align:center}:host .q-ruleset{border:1px solid #CCC}:host .q-rule{border:1px solid #CCC;background:white}:host .q-transition{-webkit-transition:all 0.1s ease-in-out;-moz-transition:all 0.1s ease-in-out;-ms-transition:all 0.1s ease-in-out;-o-transition:all 0.1s ease-in-out;transition:all 0.1s ease-in-out}:host .q-tree-container{width:100%;overflow:hidden;transition:ease-in 0.25s max-height}:host .q-tree-container.q-collapsed{max-height:0 !important}:host .q-tree{list-style:none;margin:4px 0 2px}:host .q-row{padding:6px 8px;margin-top:6px}:host .q-connector{position:relative}:host .q-connector::before{top:-5px;border-width:0 0 2px 2px}:host .q-connector::after{border-width:0 0 0 2px;top:50%}:host .q-connector::before,:host .q-connector::after{content:'';left:-12px;border-color:#CCC;border-style:solid;width:9px;height:calc(50% + 6px);position:absolute}:host .q-connector:last-child::after{content:none}:host .q-inline-block-display{display:inline-block;vertical-align:top}\n  "],
                     providers: [CONTROL_VALUE_ACCESSOR, VALIDATOR]
                 },] },
     ];
     /** @nocollapse */
     QueryBuilderComponent.ctorParameters = function () { return [
-        { type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["ChangeDetectorRef"], },
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_10__["ChangeDetectorRef"], },
     ]; };
     QueryBuilderComponent.propDecorators = {
-        'disabled': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["Input"] },],
-        'data': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["Input"] },],
-        'allowRuleset': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["Input"] },],
-        'emptyMessage': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["Input"] },],
-        'classNames': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["Input"] },],
-        'operatorMap': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["Input"] },],
-        'parentValue': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["Input"] },],
-        'config': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["Input"] },],
-        'parentInputTemplates': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["Input"] },],
-        'parentOperatorTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["Input"] },],
-        'parentFieldTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["Input"] },],
-        'parentEntityTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["Input"] },],
-        'parentSwitchGroupTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["Input"] },],
-        'parentButtonGroupTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["Input"] },],
-        'parentRemoveButtonTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["Input"] },],
-        'parentEmptyWarningTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["Input"] },],
-        'parentChangeCallback': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["Input"] },],
-        'parentTouchedCallback': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["Input"] },],
-        'buttonGroupTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["ContentChild"], args: [_query_button_group_directive__WEBPACK_IMPORTED_MODULE_5__["QueryButtonGroupDirective"],] },],
-        'switchGroupTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["ContentChild"], args: [_query_switch_group_directive__WEBPACK_IMPORTED_MODULE_4__["QuerySwitchGroupDirective"],] },],
-        'fieldTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["ContentChild"], args: [_query_field_directive__WEBPACK_IMPORTED_MODULE_2__["QueryFieldDirective"],] },],
-        'entityTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["ContentChild"], args: [_query_entity_directive__WEBPACK_IMPORTED_MODULE_3__["QueryEntityDirective"],] },],
-        'operatorTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["ContentChild"], args: [_query_operator_directive__WEBPACK_IMPORTED_MODULE_1__["QueryOperatorDirective"],] },],
-        'removeButtonTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["ContentChild"], args: [_query_remove_button_directive__WEBPACK_IMPORTED_MODULE_7__["QueryRemoveButtonDirective"],] },],
-        'emptyWarningTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["ContentChild"], args: [_query_empty_warning_directive__WEBPACK_IMPORTED_MODULE_8__["QueryEmptyWarningDirective"],] },],
-        'inputTemplates': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["ContentChildren"], args: [_query_input_directive__WEBPACK_IMPORTED_MODULE_6__["QueryInputDirective"],] },],
-        'value': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_9__["Input"] },],
+        'disabled': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_10__["Input"] },],
+        'data': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_10__["Input"] },],
+        'allowRuleset': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_10__["Input"] },],
+        'allowCollapse': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_10__["Input"] },],
+        'emptyMessage': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_10__["Input"] },],
+        'classNames': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_10__["Input"] },],
+        'operatorMap': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_10__["Input"] },],
+        'parentValue': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_10__["Input"] },],
+        'config': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_10__["Input"] },],
+        'parentArrowIconTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_10__["Input"] },],
+        'parentInputTemplates': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_10__["Input"] },],
+        'parentOperatorTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_10__["Input"] },],
+        'parentFieldTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_10__["Input"] },],
+        'parentEntityTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_10__["Input"] },],
+        'parentSwitchGroupTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_10__["Input"] },],
+        'parentButtonGroupTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_10__["Input"] },],
+        'parentRemoveButtonTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_10__["Input"] },],
+        'parentEmptyWarningTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_10__["Input"] },],
+        'parentChangeCallback': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_10__["Input"] },],
+        'parentTouchedCallback': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_10__["Input"] },],
+        'treeContainer': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_10__["ViewChild"], args: ['treeContainer',] },],
+        'buttonGroupTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_10__["ContentChild"], args: [_query_button_group_directive__WEBPACK_IMPORTED_MODULE_5__["QueryButtonGroupDirective"],] },],
+        'switchGroupTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_10__["ContentChild"], args: [_query_switch_group_directive__WEBPACK_IMPORTED_MODULE_4__["QuerySwitchGroupDirective"],] },],
+        'fieldTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_10__["ContentChild"], args: [_query_field_directive__WEBPACK_IMPORTED_MODULE_2__["QueryFieldDirective"],] },],
+        'entityTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_10__["ContentChild"], args: [_query_entity_directive__WEBPACK_IMPORTED_MODULE_3__["QueryEntityDirective"],] },],
+        'operatorTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_10__["ContentChild"], args: [_query_operator_directive__WEBPACK_IMPORTED_MODULE_1__["QueryOperatorDirective"],] },],
+        'removeButtonTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_10__["ContentChild"], args: [_query_remove_button_directive__WEBPACK_IMPORTED_MODULE_7__["QueryRemoveButtonDirective"],] },],
+        'emptyWarningTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_10__["ContentChild"], args: [_query_empty_warning_directive__WEBPACK_IMPORTED_MODULE_8__["QueryEmptyWarningDirective"],] },],
+        'inputTemplates': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_10__["ContentChildren"], args: [_query_input_directive__WEBPACK_IMPORTED_MODULE_6__["QueryInputDirective"],] },],
+        'arrowIconTemplate': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_10__["ContentChild"], args: [_query_arrow_icon_directive__WEBPACK_IMPORTED_MODULE_9__["QueryArrowIconDirective"],] },],
+        'value': [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_10__["Input"] },],
     };
     return QueryBuilderComponent;
 }());
@@ -1056,7 +1143,8 @@ var QueryBuilderModule = /** @class */ (function () {
                         _components__WEBPACK_IMPORTED_MODULE_3__["QueryButtonGroupDirective"],
                         _components__WEBPACK_IMPORTED_MODULE_3__["QuerySwitchGroupDirective"],
                         _components__WEBPACK_IMPORTED_MODULE_3__["QueryRemoveButtonDirective"],
-                        _components__WEBPACK_IMPORTED_MODULE_3__["QueryEmptyWarningDirective"]
+                        _components__WEBPACK_IMPORTED_MODULE_3__["QueryEmptyWarningDirective"],
+                        _components__WEBPACK_IMPORTED_MODULE_3__["QueryArrowIconDirective"]
                     ],
                     exports: [
                         _components__WEBPACK_IMPORTED_MODULE_3__["QueryBuilderComponent"],
@@ -1067,7 +1155,8 @@ var QueryBuilderModule = /** @class */ (function () {
                         _components__WEBPACK_IMPORTED_MODULE_3__["QueryButtonGroupDirective"],
                         _components__WEBPACK_IMPORTED_MODULE_3__["QuerySwitchGroupDirective"],
                         _components__WEBPACK_IMPORTED_MODULE_3__["QueryRemoveButtonDirective"],
-                        _components__WEBPACK_IMPORTED_MODULE_3__["QueryEmptyWarningDirective"]
+                        _components__WEBPACK_IMPORTED_MODULE_3__["QueryEmptyWarningDirective"],
+                        _components__WEBPACK_IMPORTED_MODULE_3__["QueryArrowIconDirective"]
                     ]
                 },] },
     ];
@@ -1132,6 +1221,7 @@ var AppComponent = /** @class */ (function () {
         this.bootstrapClassNames = {
             removeIcon: 'fa fa-minus',
             addIcon: 'fa fa-plus',
+            arrowIcon: 'fa fa-chevron-right px-2',
             button: 'btn',
             buttonGroup: 'btn-group',
             rightAlign: 'order-12 ml-auto',
@@ -1236,6 +1326,7 @@ var AppComponent = /** @class */ (function () {
                 }
             }
         };
+        this.allowRuleset = true;
         this.queryCtrl = this.formBuilder.control(this.query);
         this.currentConfig = this.config;
     }
@@ -1248,8 +1339,8 @@ var AppComponent = /** @class */ (function () {
     AppComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-root',
-            template: "\n  <h2>Vanilla</h2>\n  <br>\n  <query-builder [formControl]='queryCtrl' [config]='currentConfig'>\n    <ng-container *queryInput=\"let rule; type: 'textarea'; let getDisabledState=getDisabledState\">\n      <textarea class=\"text-input text-area\" [(ngModel)]=\"rule.value\" [disabled]=getDisabledState()\n        placeholder=\"Custom Textarea\"></textarea>\n    </ng-container>\n  </query-builder>\n  <br>\n  <div>\n    <div class=\"row\">\n      <p class=\"col-6\">Control Valid (Vanilla): {{ queryCtrl.valid }}</p>\n      <div class=\"col-6\">\n        <label><input type=\"checkbox\" (change)=switchModes($event)>Entity Mode</label>\n      </div>\n    </div>\n    <div class=\"row\">\n      <p class=\"col-6\">Control Touched (Vanilla): {{ queryCtrl.touched }}</p>\n      <div class=\"col-6\">\n        <label><input type=\"checkbox\" (change)=changeDisabled($event)>Disabled</label>\n      </div>\n    </div>\n    <textarea class=\"output\">{{query | json}}</textarea>\n  </div>\n  <br>\n  <h2>Custom Material</h2>\n  <br>\n  <mat-card>\n  <query-builder [(ngModel)]='query' [config]='currentConfig'>\n    <ng-container *queryButtonGroup=\"let ruleset; let addRule=addRule; let addRuleSet=addRuleSet; let removeRuleSet=removeRuleSet\">\n      <button mat-icon-button color=\"primary\" (click)=\"addRule()\">\n        <mat-icon>add</mat-icon></button>\n      <button mat-icon-button color=\"primary\" *ngIf=\"addRuleSet\" (click)=\"addRuleSet()\">\n        <mat-icon>add_circle_outline</mat-icon></button>\n      <button mat-icon-button color=\"accent\" *ngIf=\"removeRuleSet\" (click)=\"removeRuleSet()\">\n        <mat-icon>remove_circle_outline</mat-icon></button>\n    </ng-container>\n    <ng-container *queryRemoveButton=\"let rule; let removeRule=removeRule\">\n      <button mat-icon-button color=\"accent\" (click)=\"removeRule(rule)\">\n        <mat-icon>remove</mat-icon>\n      </button>\n    </ng-container>\n    <ng-container *querySwitchGroup=\"let ruleset; let onChange=onChange\">\n      <mat-radio-group *ngIf=\"ruleset\" [(ngModel)]=\"ruleset.condition\" (ngModelChange)=\"onChange($event)\">\n        <mat-radio-button [style.padding.px]=\"10\" value=\"and\">And</mat-radio-button>\n        <mat-radio-button [style.padding.px]=\"10\" value=\"or\">Or</mat-radio-button>\n      </mat-radio-group>\n    </ng-container>\n    <ng-container *queryEntity=\"let rule; let entities=entities; let onChange=onChange\">\n      <mat-form-field>\n        <mat-select [(ngModel)]=\"rule.entity\" (ngModelChange)=\"onChange($event, rule)\">\n          <mat-option *ngFor=\"let entity of entities\" [value]=\"entity.value\">\n          {{entity.name}}\n          </mat-option>\n        </mat-select>\n      </mat-form-field>\n    </ng-container>\n    <ng-container *queryField=\"let rule; let fields=fields; let onChange=onChange; let getFields = getFields\">\n      <mat-form-field>\n        <mat-select [(ngModel)]=\"rule.field\" (ngModelChange)=\"onChange($event, rule)\">\n          <mat-option *ngFor=\"let field of getFields(rule.entity)\" [value]=\"field.value\">\n            {{ field.name }}\n          </mat-option>\n        </mat-select>\n      </mat-form-field>\n    </ng-container>\n    <ng-container *queryOperator=\"let rule; let operators=operators; let onChange=onChange\">\n      <mat-form-field [style.width.px]=\"90\">\n        <mat-select [(ngModel)]=\"rule.operator\" (ngModelChange)=\"onChange()\">\n          <mat-option *ngFor=\"let value of operators\" [value]=\"value\">\n            {{ value }}\n          </mat-option>\n        </mat-select>\n      </mat-form-field>\n    </ng-container>\n    <ng-container *queryInput=\"let rule; type: 'boolean'; let onChange=onChange\">\n      <mat-checkbox [(ngModel)]=\"rule.value\" (ngModelChange)=\"onChange()\"></mat-checkbox>\n    </ng-container>\n    <ng-container *queryInput=\"let rule; let field=field; let options=options; type: 'category'; let onChange=onChange\">\n      <mat-form-field>\n        <mat-select [(ngModel)]=\"rule.value\" (ngModelChange)=\"onChange()\">\n          <mat-option *ngFor=\"let opt of options\" [value]=\"opt.value\">\n            {{ opt.name }}\n          </mat-option>\n        </mat-select>\n      </mat-form-field>\n    </ng-container>\n    <ng-container *queryInput=\"let rule; type: 'date'; let onChange=onChange\">\n      <mat-form-field>\n        <input matInput [matDatepicker]=\"picker\" [(ngModel)]=\"rule.value\" (ngModelChange)=\"onChange()\">\n        <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\n        <mat-datepicker #picker></mat-datepicker>\n      </mat-form-field>\n    </ng-container>\n    <ng-container *queryInput=\"let rule; let options=options; type: 'multiselect'; let onChange=onChange\">\n      <mat-form-field [style.width.px]=\"300\">\n        <mat-select [(ngModel)]=\"rule.value\" multiple (ngModelChange)=\"onChange()\">\n          <mat-option *ngFor=\"let opt of options\" [value]=\"opt.value\">\n            {{ opt.name }}\n          </mat-option>\n        </mat-select>\n      </mat-form-field>\n    </ng-container>\n    <ng-container *queryInput=\"let rule; let field=field; type: 'number'; let onChange=onChange\">\n      <mat-form-field [style.width.px]=\"50\">\n        <input matInput [(ngModel)]=\"rule.value\" type=\"number\" (ngModelChange)=\"onChange()\">\n      </mat-form-field>\n    </ng-container>\n    <ng-container *queryInput=\"let rule; let field=field; type: 'string'; let onChange=onChange\">\n      <mat-form-field>\n        <input matInput [(ngModel)]=\"rule.value\" (ngModelChange)=\"onChange()\">\n      </mat-form-field>\n    </ng-container>\n    <ng-container *queryInput=\"let rule; let field=field; type: 'textarea'; let onChange=onChange\">\n      <mat-form-field>\n        <textarea matInput [(ngModel)]=\"rule.value\" (ngModelChange)=\"onChange()\">\n        </textarea>\n      </mat-form-field>\n    </ng-container>\n  </query-builder>\n  </mat-card>\n  <br>\n  <h2>Bootstrap</h2>\n  <br>\n  <query-builder [(ngModel)]='query' [classNames]='bootstrapClassNames' [config]='currentConfig'>\n    <div class=\"col-auto\" *queryInput=\"let rule; type: 'textarea'\">\n      <textarea class=\"form-control\" [(ngModel)]=\"rule.value\"\n        placeholder=\"Custom Textarea\"></textarea>\n    </div>\n  </query-builder>\n  ",
-            styles: ["\n  /deep/ html {\n    font: 14px sans-serif;\n    margin: 30px;\n  }\n\n  .mat-form-field {\n    padding-left: 5px;\n    padding-right: 5px;\n  }\n\n  .text-input {\n    padding: 4px 8px;\n    border-radius: 4px;\n    border: 1px solid #ccc;\n  }\n\n  .text-area {\n    width: 300px;\n    height: 100px;\n  }\n\n  .output {\n    width: 100%;\n    height: 300px;\n  }\n  "]
+            template: "\n  <h2>Vanilla</h2>\n  <br>\n  <query-builder [formControl]='queryCtrl' [config]='currentConfig' [allowRuleset]='allowRuleset' [allowCollapse]='allowCollapse'>\n    <ng-container *queryInput=\"let rule; type: 'textarea'; let getDisabledState=getDisabledState\">\n      <textarea class=\"text-input text-area\" [(ngModel)]=\"rule.value\" [disabled]=getDisabledState()\n        placeholder=\"Custom Textarea\"></textarea>\n    </ng-container>\n  </query-builder>\n  <br>\n  <div>\n    <div class=\"row\">\n      <p class=\"col-6\">Control Valid (Vanilla): {{ queryCtrl.valid }}</p>\n      <div class=\"col-6\">\n        <label><input type=\"checkbox\" (change)=switchModes($event)>Entity Mode</label>\n      </div>\n    </div>\n    <div class=\"row\">\n      <p class=\"col-6\">Control Touched (Vanilla): {{ queryCtrl.touched }}</p>\n      <div class=\"col-6\">\n        <label><input type=\"checkbox\" (change)=changeDisabled($event)>Disabled</label>\n      </div>\n    </div>\n    <div class=\"row\">\n      <div class=\"col-6\">\n        <label><input type=\"checkbox\" [(ngModel)]='allowRuleset'>Allow Ruleset</label>\n      </div>\n      <div class=\"col-6\">\n        <label><input type=\"checkbox\" [(ngModel)]='allowCollapse'>Allow Collapse</label>\n      </div>\n    </div>\n    <textarea class=\"output\">{{query | json}}</textarea>\n  </div>\n  <br>\n  <h2>Custom Material</h2>\n  <br>\n  <mat-card>\n  <query-builder [(ngModel)]='query' [config]='currentConfig' [allowRuleset]='allowRuleset' [allowCollapse]='allowCollapse'>\n    <ng-container *queryButtonGroup=\"let ruleset; let addRule=addRule; let addRuleSet=addRuleSet; let removeRuleSet=removeRuleSet\">\n      <button mat-icon-button color=\"primary\" (click)=\"addRule()\">\n        <mat-icon>add</mat-icon></button>\n      <button mat-icon-button color=\"primary\" *ngIf=\"addRuleSet\" (click)=\"addRuleSet()\">\n        <mat-icon>add_circle_outline</mat-icon></button>\n      <button mat-icon-button color=\"accent\" *ngIf=\"removeRuleSet\" (click)=\"removeRuleSet()\">\n        <mat-icon>remove_circle_outline</mat-icon></button>\n    </ng-container>\n    <ng-container *queryArrowIcon>\n      <mat-icon ngClass=\"mat-arrow-icon\">chevron_right</mat-icon>\n    </ng-container>\n    <ng-container *queryRemoveButton=\"let rule; let removeRule=removeRule\">\n      <button mat-icon-button color=\"accent\" (click)=\"removeRule(rule)\">\n        <mat-icon>remove</mat-icon>\n      </button>\n    </ng-container>\n    <ng-container *querySwitchGroup=\"let ruleset; let onChange=onChange\">\n      <mat-radio-group *ngIf=\"ruleset\" [(ngModel)]=\"ruleset.condition\" (ngModelChange)=\"onChange($event)\">\n        <mat-radio-button [style.padding.px]=\"10\" value=\"and\">And</mat-radio-button>\n        <mat-radio-button [style.padding.px]=\"10\" value=\"or\">Or</mat-radio-button>\n      </mat-radio-group>\n    </ng-container>\n    <ng-container *queryEntity=\"let rule; let entities=entities; let onChange=onChange\">\n      <mat-form-field>\n        <mat-select [(ngModel)]=\"rule.entity\" (ngModelChange)=\"onChange($event, rule)\">\n          <mat-option *ngFor=\"let entity of entities\" [value]=\"entity.value\">\n          {{entity.name}}\n          </mat-option>\n        </mat-select>\n      </mat-form-field>\n    </ng-container>\n    <ng-container *queryField=\"let rule; let fields=fields; let onChange=onChange; let getFields = getFields\">\n      <mat-form-field>\n        <mat-select [(ngModel)]=\"rule.field\" (ngModelChange)=\"onChange($event, rule)\">\n          <mat-option *ngFor=\"let field of getFields(rule.entity)\" [value]=\"field.value\">\n            {{ field.name }}\n          </mat-option>\n        </mat-select>\n      </mat-form-field>\n    </ng-container>\n    <ng-container *queryOperator=\"let rule; let operators=operators; let onChange=onChange\">\n      <mat-form-field [style.width.px]=\"90\">\n        <mat-select [(ngModel)]=\"rule.operator\" (ngModelChange)=\"onChange()\">\n          <mat-option *ngFor=\"let value of operators\" [value]=\"value\">\n            {{ value }}\n          </mat-option>\n        </mat-select>\n      </mat-form-field>\n    </ng-container>\n    <ng-container *queryInput=\"let rule; type: 'boolean'; let onChange=onChange\">\n      <mat-checkbox [(ngModel)]=\"rule.value\" (ngModelChange)=\"onChange()\"></mat-checkbox>\n    </ng-container>\n    <ng-container *queryInput=\"let rule; let field=field; let options=options; type: 'category'; let onChange=onChange\">\n      <mat-form-field>\n        <mat-select [(ngModel)]=\"rule.value\" (ngModelChange)=\"onChange()\">\n          <mat-option *ngFor=\"let opt of options\" [value]=\"opt.value\">\n            {{ opt.name }}\n          </mat-option>\n        </mat-select>\n      </mat-form-field>\n    </ng-container>\n    <ng-container *queryInput=\"let rule; type: 'date'; let onChange=onChange\">\n      <mat-form-field>\n        <input matInput [matDatepicker]=\"picker\" [(ngModel)]=\"rule.value\" (ngModelChange)=\"onChange()\">\n        <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\n        <mat-datepicker #picker></mat-datepicker>\n      </mat-form-field>\n    </ng-container>\n    <ng-container *queryInput=\"let rule; let options=options; type: 'multiselect'; let onChange=onChange\">\n      <mat-form-field [style.width.px]=\"300\">\n        <mat-select [(ngModel)]=\"rule.value\" multiple (ngModelChange)=\"onChange()\">\n          <mat-option *ngFor=\"let opt of options\" [value]=\"opt.value\">\n            {{ opt.name }}\n          </mat-option>\n        </mat-select>\n      </mat-form-field>\n    </ng-container>\n    <ng-container *queryInput=\"let rule; let field=field; type: 'number'; let onChange=onChange\">\n      <mat-form-field [style.width.px]=\"50\">\n        <input matInput [(ngModel)]=\"rule.value\" type=\"number\" (ngModelChange)=\"onChange()\">\n      </mat-form-field>\n    </ng-container>\n    <ng-container *queryInput=\"let rule; let field=field; type: 'string'; let onChange=onChange\">\n      <mat-form-field>\n        <input matInput [(ngModel)]=\"rule.value\" (ngModelChange)=\"onChange()\">\n      </mat-form-field>\n    </ng-container>\n    <ng-container *queryInput=\"let rule; let field=field; type: 'textarea'; let onChange=onChange\">\n      <mat-form-field>\n        <textarea matInput [(ngModel)]=\"rule.value\" (ngModelChange)=\"onChange()\">\n        </textarea>\n      </mat-form-field>\n    </ng-container>\n  </query-builder>\n  </mat-card>\n  <br>\n  <h2>Bootstrap</h2>\n  <br>\n  <query-builder [(ngModel)]='query' [classNames]='bootstrapClassNames' [config]='currentConfig' [allowRuleset]='allowRuleset' [allowCollapse]='allowCollapse'>\n    <div class=\"col-auto\" *queryInput=\"let rule; type: 'textarea'\">\n      <textarea class=\"form-control\" [(ngModel)]=\"rule.value\"\n        placeholder=\"Custom Textarea\"></textarea>\n    </div>\n  </query-builder>\n  ",
+            styles: ["\n  /deep/ html {\n    font: 14px sans-serif;\n    margin: 30px;\n  }\n\n  .mat-icon-button {\n    outline: none;\n  }\n\n  .mat-arrow-icon {\n    outline: none;\n    line-height: 32px;\n  }\n\n  .mat-form-field {\n    padding-left: 5px;\n    padding-right: 5px;\n  }\n\n  .text-input {\n    padding: 4px 8px;\n    border-radius: 4px;\n    border: 1px solid #ccc;\n  }\n\n  .text-area {\n    width: 300px;\n    height: 100px;\n  }\n\n  .output {\n    width: 100%;\n    height: 300px;\n  }\n  "]
         }),
         __metadata("design:paramtypes", [_angular_forms__WEBPACK_IMPORTED_MODULE_0__["FormBuilder"]])
     ], AppComponent);

@@ -308,7 +308,7 @@ editor.connect(function () {
     files: files,
     defaultFile: 'app/app.component.ts'
   });
-});
+}, null, {maxTries: 30, interval: 750});
 
 function multiline(f) {
   return f.toString()
