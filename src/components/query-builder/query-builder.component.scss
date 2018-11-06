@@ -12,6 +12,25 @@
       content: '❌'
     }
   }
+
+  .q-arrow-icon-button {
+    float: left;
+    margin: 4px 6px 4px 0;
+    transform: rotate(90deg);
+    transition: linear 0.25s transform;
+    cursor: pointer;
+
+    &.q-collapsed {
+      transform: rotate(0);
+    }
+  }
+
+  .q-arrow-icon {
+    &::before {
+      content: '▶'
+    }
+  }
+
   .q-add-icon {
     color: #555;
     &::before {
@@ -143,6 +162,16 @@
     -ms-transition:     all 0.1s ease-in-out;
     -o-transition:      all 0.1s ease-in-out;
     transition:         all 0.1s ease-in-out;
+  }
+
+  .q-tree-container {
+    width: 100%;
+    overflow: hidden;
+    transition: ease-in 0.25s max-height;
+
+    &.q-collapsed {
+      max-height: 0 !important;
+    }
   }
 
   .q-tree {

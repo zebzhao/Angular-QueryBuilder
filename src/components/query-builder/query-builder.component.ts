@@ -14,8 +14,10 @@ import { QueryButtonGroupDirective } from './query-button-group.directive';
 import { QueryInputDirective } from './query-input.directive';
 import { QueryRemoveButtonDirective } from './query-remove-button.directive';
 import { QueryEmptyWarningDirective } from './query-empty-warning.directive';
+import { QueryArrowIconDirective } from './query-arrow-icon.directive';
 import {
     ButtonGroupContext,
+    Entity,
     Field,
     SwitchGroupContext,
     EntityContext,
@@ -27,6 +29,7 @@ import {
     QueryBuilderClassNames,
     QueryBuilderConfig,
     RemoveButtonContext,
+    ArrowIconContext,
     Rule,
     RuleSet,
     EmptyWarningContext,
@@ -40,11 +43,13 @@ import {
     Input,
     OnChanges,
     OnInit,
+    AfterViewChecked,
     QueryList,
     SimpleChanges,
     TemplateRef,
+    ViewChild,
+    ElementRef
 } from '@angular/core';
-import { Entity } from '../index';
 
 export const CONTROL_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
@@ -69,6 +74,8 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   public filterFields: Field[];
   public entities: Entity[];
   public defaultClassNames: QueryBuilderClassNames = {
+    arrowIconButton: 'q-arrow-icon-button',
+    arrowIcon: 'q-icon q-arrow-icon',
     removeIcon: 'q-icon q-remove-icon',
     addIcon: 'q-icon q-add-icon',
     button: 'q-button',
@@ -79,6 +86,8 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     switchRadio: 'q-switch-radio',
     rightAlign: 'q-right-align',
     transition: 'q-transition',
+    collapsed: 'q-collapsed',
+    treeContainer: 'q-tree-container',
     tree: 'q-tree',
     row: 'q-row',
     connector: 'q-connector',
@@ -111,11 +120,13 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   public onTouchedCallback: () => any;
 
   @Input() allowRuleset: boolean = true;
+  @Input() allowCollapse: boolean = false;
   @Input() emptyMessage: string = 'A ruleset cannot be empty. Please add a rule or remove it all together.';
   @Input() classNames: QueryBuilderClassNames;
   @Input() operatorMap: {[key: string]: string[]};
   @Input() parentValue: RuleSet;
   @Input() config: QueryBuilderConfig = { fields: {} };
+  @Input() parentArrowIconTemplate: QueryArrowIconDirective;
   @Input() parentInputTemplates: QueryList<QueryInputDirective>;
   @Input() parentOperatorTemplate: QueryOperatorDirective;
   @Input() parentFieldTemplate: QueryFieldDirective;
@@ -127,6 +138,8 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   @Input() parentChangeCallback: () => void;
   @Input() parentTouchedCallback: () => void;
 
+  @ViewChild('treeContainer') treeContainer:ElementRef;
+
   @ContentChild(QueryButtonGroupDirective) buttonGroupTemplate: QueryButtonGroupDirective;
   @ContentChild(QuerySwitchGroupDirective) switchGroupTemplate: QuerySwitchGroupDirective;
   @ContentChild(QueryFieldDirective) fieldTemplate: QueryFieldDirective;
@@ -135,6 +148,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   @ContentChild(QueryRemoveButtonDirective) removeButtonTemplate: QueryRemoveButtonDirective;
   @ContentChild(QueryEmptyWarningDirective) emptyWarningTemplate: QueryEmptyWarningDirective;
   @ContentChildren(QueryInputDirective) inputTemplates: QueryList<QueryInputDirective>;
+  @ContentChild(QueryArrowIconDirective) arrowIconTemplate: QueryArrowIconDirective;
 
   private defaultTemplateTypes: string[] = [
     'string', 'number', 'time', 'date', 'category', 'boolean', 'multiselect'];
@@ -228,7 +242,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
 
   // ----------END----------
 
-  getDisabledState(): boolean {
+  getDisabledState = (): boolean => {
     return this.disabled;
   }
 
@@ -436,6 +450,24 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     this.handleDataChange();
   }
 
+  transitionEnd(e: Event){
+    this.treeContainer.nativeElement.style.maxHeight = null;
+  }
+
+  toggleCollapse(): void {
+    this.computedTreeContainerHeight();
+    setTimeout(() => {
+      this.data.collapsed = !this.data.collapsed;
+    }, 100);
+  }
+
+  computedTreeContainerHeight(): void {
+    const nativeElement: HTMLElement = this.treeContainer.nativeElement;
+    if (nativeElement && nativeElement.firstElementChild) {
+      nativeElement.style.maxHeight = (nativeElement.firstElementChild.clientHeight + 8) + 'px';
+    }
+  }
+
   changeCondition(value: string): void {
     if (this.disabled) {
       return;
@@ -446,13 +478,27 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     this.handleDataChange();
   }
 
-  changeOperator(): void {
+  changeOperator(rule: Rule): void {
     if (this.disabled) {
       return;
     }
 
+    if (this.config.coerceValueForOperator) {
+      rule.value = this.config.coerceValueForOperator(rule.operator, rule.value, rule);
+    } else {
+      rule.value = this.coerceValueForOperator(rule.operator, rule.value, rule);
+    }
+
     this.handleTouched();
     this.handleDataChange();
+  }
+
+  coerceValueForOperator(operator: string, value: any, rule: Rule): any {
+    const inputType: string = this.getInputType(rule.field, operator);
+    if (inputType === 'multiselect' && !Array.isArray(value)) {
+      return [value];
+    }
+    return value;
   }
 
   changeInput(): void {
@@ -533,6 +579,11 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     return t ? t.template : null;
   }
 
+  getArrowIconTemplate(): TemplateRef<any> {
+    const t = this.parentArrowIconTemplate || this.arrowIconTemplate;
+    return t ? t.template : null;
+  }
+
   getButtonGroupTemplate(): TemplateRef<any> {
     const t = this.parentButtonGroupTemplate || this.buttonGroupTemplate;
     return t ? t.template : null;
@@ -568,7 +619,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
         addRule: this.addRule.bind(this),
         addRuleSet: this.allowRuleset && this.addRuleSet.bind(this),
         removeRuleSet: this.allowRuleset && this.parentValue && this.removeRuleSet.bind(this),
-        getDisabledState: this.getDisabledState.bind(this),
+        getDisabledState: this.getDisabledState,
         $implicit: this.data
       };
     }
@@ -579,7 +630,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     if (!this.removeButtonContextCache.has(rule)) {
       this.removeButtonContextCache.set(rule, {
         removeRule: this.removeRule.bind(this),
-        getDisabledState: this.getDisabledState.bind(this),
+        getDisabledState: this.getDisabledState,
         $implicit: rule
       });
     }
@@ -591,7 +642,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
       this.fieldContextCache.set(rule, {
         onChange: this.changeField.bind(this),
         getFields: this.getFields.bind(this),
-        getDisabledState: this.getDisabledState.bind(this),
+        getDisabledState: this.getDisabledState,
         fields: this.fields,
         $implicit: rule
       });
@@ -603,7 +654,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     if (!this.entityContextCache.has(rule)) {
       this.entityContextCache.set(rule, {
         onChange: this.changeEntity.bind(this),
-        getDisabledState: this.getDisabledState.bind(this),
+        getDisabledState: this.getDisabledState,
         entities: this.entities,
         $implicit: rule
       });
@@ -614,14 +665,21 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   getSwitchGroupContext(): SwitchGroupContext {
     return {
       onChange: this.changeCondition.bind(this),
-      getDisabledState: this.getDisabledState.bind(this),
+      getDisabledState: this.getDisabledState,
+      $implicit: this.data
+    };
+  }
+
+  getArrowIconContext(): ArrowIconContext {
+    return {
+      getDisabledState: this.getDisabledState,
       $implicit: this.data
     };
   }
 
   getEmptyWarningContext(): EmptyWarningContext {
     return {
-      getDisabledState: this.getDisabledState.bind(this),
+      getDisabledState: this.getDisabledState,
       message: this.emptyMessage,
       $implicit: this.data
     };
@@ -631,7 +689,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     if (!this.operatorContextCache.has(rule)) {
       this.operatorContextCache.set(rule, {
         onChange: this.changeOperator.bind(this),
-        getDisabledState: this.getDisabledState.bind(this),
+        getDisabledState: this.getDisabledState,
         operators: this.getOperators(rule.field),
         $implicit: rule
       });
@@ -643,7 +701,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     if (!this.inputContextCache.has(rule)) {
       this.inputContextCache.set(rule, {
         onChange: this.changeInput.bind(this),
-        getDisabledState: this.getDisabledState.bind(this),
+        getDisabledState: this.getDisabledState,
         options: this.getOptions(rule.field),
         field: this.config.fields[rule.field],
         $implicit: rule

@@ -7,7 +7,7 @@ import { QueryBuilderClassNames, QueryBuilderConfig } from '../../lib';
   template: `
   <h2>Vanilla</h2>
   <br>
-  <query-builder [formControl]='queryCtrl' [config]='currentConfig'>
+  <query-builder [formControl]='queryCtrl' [config]='currentConfig' [allowRuleset]='allowRuleset' [allowCollapse]='allowCollapse'>
     <ng-container *queryInput="let rule; type: 'textarea'; let getDisabledState=getDisabledState">
       <textarea class="text-input text-area" [(ngModel)]="rule.value" [disabled]=getDisabledState()
         placeholder="Custom Textarea"></textarea>
@@ -27,13 +27,21 @@ import { QueryBuilderClassNames, QueryBuilderConfig } from '../../lib';
         <label><input type="checkbox" (change)=changeDisabled($event)>Disabled</label>
       </div>
     </div>
+    <div class="row">
+      <div class="col-6">
+        <label><input type="checkbox" [(ngModel)]='allowRuleset'>Allow Ruleset</label>
+      </div>
+      <div class="col-6">
+        <label><input type="checkbox" [(ngModel)]='allowCollapse'>Allow Collapse</label>
+      </div>
+    </div>
     <textarea class="output">{{query | json}}</textarea>
   </div>
   <br>
   <h2>Custom Material</h2>
   <br>
   <mat-card>
-  <query-builder [(ngModel)]='query' [config]='currentConfig'>
+  <query-builder [(ngModel)]='query' [config]='currentConfig' [allowRuleset]='allowRuleset' [allowCollapse]='allowCollapse'>
     <ng-container *queryButtonGroup="let ruleset; let addRule=addRule; let addRuleSet=addRuleSet; let removeRuleSet=removeRuleSet">
       <button mat-icon-button color="primary" (click)="addRule()">
         <mat-icon>add</mat-icon></button>
@@ -41,6 +49,9 @@ import { QueryBuilderClassNames, QueryBuilderConfig } from '../../lib';
         <mat-icon>add_circle_outline</mat-icon></button>
       <button mat-icon-button color="accent" *ngIf="removeRuleSet" (click)="removeRuleSet()">
         <mat-icon>remove_circle_outline</mat-icon></button>
+    </ng-container>
+    <ng-container *queryArrowIcon>
+      <mat-icon ngClass="mat-arrow-icon">chevron_right</mat-icon>
     </ng-container>
     <ng-container *queryRemoveButton="let rule; let removeRule=removeRule">
       <button mat-icon-button color="accent" (click)="removeRule(rule)">
@@ -129,7 +140,7 @@ import { QueryBuilderClassNames, QueryBuilderConfig } from '../../lib';
   <br>
   <h2>Bootstrap</h2>
   <br>
-  <query-builder [(ngModel)]='query' [classNames]='bootstrapClassNames' [config]='currentConfig'>
+  <query-builder [(ngModel)]='query' [classNames]='bootstrapClassNames' [config]='currentConfig' [allowRuleset]='allowRuleset' [allowCollapse]='allowCollapse'>
     <div class="col-auto" *queryInput="let rule; type: 'textarea'">
       <textarea class="form-control" [(ngModel)]="rule.value"
         placeholder="Custom Textarea"></textarea>
@@ -140,6 +151,15 @@ import { QueryBuilderClassNames, QueryBuilderConfig } from '../../lib';
   /deep/ html {
     font: 14px sans-serif;
     margin: 30px;
+  }
+
+  .mat-icon-button {
+    outline: none;
+  }
+
+  .mat-arrow-icon {
+    outline: none;
+    line-height: 32px;
   }
 
   .mat-form-field {
@@ -170,6 +190,7 @@ export class AppComponent {
   public bootstrapClassNames: QueryBuilderClassNames = {
     removeIcon: 'fa fa-minus',
     addIcon: 'fa fa-plus',
+    arrowIcon: 'fa fa-chevron-right px-2',
     button: 'btn',
     buttonGroup: 'btn-group',
     rightAlign: 'order-12 ml-auto',
@@ -279,6 +300,8 @@ export class AppComponent {
   };
 
   public currentConfig: QueryBuilderConfig;
+  public allowRuleset: boolean = true;
+  public allowCollapse: boolean;
 
   constructor(
     private formBuilder: FormBuilder

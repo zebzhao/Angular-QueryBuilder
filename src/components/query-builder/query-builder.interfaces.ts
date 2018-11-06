@@ -3,6 +3,7 @@ import { ValidationErrors } from '@angular/forms';
 export interface RuleSet {
   condition: string;
   rules: Array<RuleSet | Rule>;
+  collapsed?: boolean;
 }
 
 export interface Rule {
@@ -50,6 +51,8 @@ export interface Entity {
 }
 
 export interface QueryBuilderClassNames {
+  arrowIconButton?: string;
+  arrowIcon?: string;
   removeIcon?: string;
   addIcon?: string;
   button?: string;
@@ -63,6 +66,8 @@ export interface QueryBuilderClassNames {
   switchControl?: string;
   rightAlign?: string;
   transition?: string;
+  collapsed?: string;
+  treeContainer?: string;
   tree?: string;
   row?: string;
   connector?: string;
@@ -91,6 +96,7 @@ export interface QueryBuilderConfig {
   addRule?: (parent: RuleSet) => void;
   removeRuleSet?: (ruleset: RuleSet, parent: RuleSet) => void;
   removeRule?: (rule: Rule, parent: RuleSet) => void;
+  coerceValueForOperator?: (operator: string, value: any, rule: Rule) => any;
 }
 
 export interface SwitchGroupContext {
@@ -102,6 +108,11 @@ export interface SwitchGroupContext {
 export interface EmptyWarningContext {
   getDisabledState: () => boolean;
   message: string;
+  $implicit: RuleSet;
+}
+
+export interface ArrowIconContext {
+  getDisabledState: () => boolean;
   $implicit: RuleSet;
 }
 

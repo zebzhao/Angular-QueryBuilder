@@ -10,7 +10,8 @@ import {
     QueryButtonGroupDirective,
     QuerySwitchGroupDirective,
     QueryRemoveButtonDirective,
-    QueryEmptyWarningDirective
+    QueryEmptyWarningDirective,
+    QueryArrowIconDirective
 } from './components';
 
 @NgModule({
@@ -27,7 +28,8 @@ import {
     QueryButtonGroupDirective,
     QuerySwitchGroupDirective,
     QueryRemoveButtonDirective,
-    QueryEmptyWarningDirective
+    QueryEmptyWarningDirective,
+    QueryArrowIconDirective
   ],
   exports: [
     QueryBuilderComponent,
@@ -38,7 +40,8 @@ import {
     QueryButtonGroupDirective,
     QuerySwitchGroupDirective,
     QueryRemoveButtonDirective,
-    QueryEmptyWarningDirective
+    QueryEmptyWarningDirective,
+    QueryArrowIconDirective
   ]
 })
 export class QueryBuilderModule { }
