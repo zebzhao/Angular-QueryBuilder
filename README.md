@@ -204,7 +204,7 @@ See [documentation](https://zebzhao.github.io/Angular-QueryBuilder/) for more de
 |`classNames`|`object`|Optional|| CSS class names for different child elements in `query-builder` component. |
 |`config`|`QueryBuilderConfig`|Required|| Configuration object for the main component. |
 |`data`|`Ruleset`|Optional|| (Use `ngModel` or `value` instead.) |
-|`emptyMessage`|`string`|Optional| Message to display for an empty Ruleset if empty rulesets are not allowed. |
+|`emptyMessage`|`string`|Optional|| Message to display for an empty Ruleset if empty rulesets are not allowed. |
 |`ngModel`| `Ruleset` |Optional|| Object that stores the state of the component. Supports 2-way binding. |
 |`operatorMap`|`{ [key: string]: string[] }`|Optional|| Used to map field types to list of operators. |
 |`value`| `Ruleset` |Optional|| Object that stores the state of the component. |
