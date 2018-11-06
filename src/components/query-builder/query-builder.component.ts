@@ -138,7 +138,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   @Input() parentChangeCallback: () => void;
   @Input() parentTouchedCallback: () => void;
 
-  @ViewChild('treeContainer') treeContainer:ElementRef;
+  @ViewChild('treeContainer') treeContainer: ElementRef;
 
   @ContentChild(QueryButtonGroupDirective) buttonGroupTemplate: QueryButtonGroupDirective;
   @ContentChild(QuerySwitchGroupDirective) switchGroupTemplate: QuerySwitchGroupDirective;
@@ -450,7 +450,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     this.handleDataChange();
   }
 
-  transitionEnd(e: Event){
+  transitionEnd(e: Event): void {
     this.treeContainer.nativeElement.style.maxHeight = null;
   }
 
