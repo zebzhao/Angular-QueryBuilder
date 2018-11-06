@@ -111,6 +111,7 @@ config: QueryBuilderConfig = {
 classNames: QueryBuilderClassNames = {
   removeIcon: 'fa fa-minus',
   addIcon: 'fa fa-plus',
+  arrowIcon: 'fa fa-chevron-right px-2',
   button: 'btn',
   buttonGroup: 'btn-group',
   rightAlign: 'order-12 ml-auto',
@@ -123,10 +124,13 @@ classNames: QueryBuilderClassNames = {
   rule: 'border',
   ruleSet: 'border',
   invalidRuleSet: 'alert alert-danger',
+  emptyWarning: 'text-danger mx-auto',
   operatorControl: 'form-control',
-  operatorControlSize: 'col-auto px-0',
+  operatorControlSize: 'col-auto pr-0',
   fieldControl: 'form-control',
-  fieldControlSize: 'col-auto',
+  fieldControlSize: 'col-auto pr-0',
+  entityControl: 'form-control',
+  entityControlSize: 'col-auto pr-0',
   inputControl: 'form-control',
   inputControlSize: 'col-auto'
 }
@@ -196,6 +200,7 @@ See [documentation](https://zebzhao.github.io/Angular-QueryBuilder/) for more de
 |Name|Type|Required|Default|Description|
 |:--- |:--- |:--- |:--- |:--- |
 |`allowRuleset`|`boolean`|Optional|`true`| Displays the `+ Ruleset` button if `true`. |
+|`allowCollapse`|`boolean`|Optional|`false`| Enables collapsible rule sets if `true`. (See Demo) |
 |`classNames`|`object`|Optional|| CSS class names for different child elements in `query-builder` component. |
 |`config`|`QueryBuilderConfig`|Required|| Configuration object for the main component. |
 |`data`|`Ruleset`|Optional|| (Use `ngModel` or `value` instead.) |
@@ -210,6 +215,8 @@ Use these directives to replace different parts of query builder with custom com
 
 #### `queryInput`
 
+Used to replace the input component. Specify the type/queryInputType to match specific field types to input template. See example, or demo to see how it's done.
+
 |Context Name|Type|Description|
 |:--- |:--- |:--- |
 |`$implicit`|`Rule`|Current rule object which contains the field, value, and operator|
@@ -218,13 +225,20 @@ Use these directives to replace different parts of query builder with custom com
 |`onChange`|`() => void`|Callback to handle changes to the input component|
 
 #### `queryOperator`
+
+Used to replace the query operator selection component. See example, or demo to see how it's done.
+
 |Context Name|Type|Description|
 |:--- |:--- |:--- |
 |`$implicit`|`Rule`|Current rule object which contains the field, value, and operator|
 |`operators`|`string[]`|List of operators for the field, returned by `getOperators`|
 |`onChange`|`() => void`|Callback to handle changes to the operator component|
+|`type`|`string`|Input binding specifying the field type mapped to this input template, specified using syntax in above example|
 
 #### `queryField`
+
+Used to replace the query field selection component. See example, or demo to see how it's done.
+
 |Context Name|Type|Description|
 |:--- |:--- |:--- |
 |`$implicit`|`Rule`|Current rule object which contains the field, value, and operator|
@@ -233,6 +247,9 @@ Use these directives to replace different parts of query builder with custom com
 |`onChange`|`(fieldValue: string, rule: Rule) => void`|Callback to handle changes to the field component|
 
 #### `queryEntity`
+
+Used to replace the query entity selection component. See example, or demo to see how it's done.
+
 |Context Name|Type|Description|
 |:--- |:--- |:--- |
 |`$implicit`|`Rule`|Current rule object which contains the field, value, and operator|
@@ -240,17 +257,35 @@ Use these directives to replace different parts of query builder with custom com
 |`onChange`|`(entityValue: string, rule: Rule) => void`|Callback to handle changes to the entity component|
 
 #### `querySwitchGroup`
+
+Used to replace the switch controls, for example the AND/OR conditions. More custom conditions can be specified by using this directive to override the default component. See example, or demo to see how it's done.
+
 |Context Name|Type|Description|
 |:--- |:--- |:--- |
 |`$implicit`|`RuleSet`|Current rule set object which contain a list of child rules|
 |`onChange`|`() => void`|Callback to handle changes to the switch group component|
 
-#### `queryEmptyWarning`
+#### `queryArrowIcon`
+
+Used to replace the expand arrow used in collapse/accordion mode of the query builder. See example, or demo to see how it's done.
+
 |Context Name|Type|Description|
 |:--- |:--- |:--- |
 |`$implicit`|`RuleSet`|Current rule set object which contain a list of child rules|
 
+#### `queryEmptyWarning`
+
+Used to replace the default empty warning message component. See example, or demo to see how it's done.
+
+|Context Name|Type|Description|
+|:--- |:--- |:--- |
+|`$implicit`|`RuleSet`|Current rule set object which contain a list of child rules|
+|`message`|`string`|Value passed to `emptyMessage`|
+
 #### `queryButtonGroup`
+
+Used to replace the default button group for Add, Add Ruleset, Remove Ruleset buttons. See example, or demo to see how it's done.
+
 |Context Name|Type|Description|
 |:--- |:--- |:--- |
 |`$implicit`|`RuleSet`|Current rule set object which contain a list of child rules|
@@ -259,6 +294,9 @@ Use these directives to replace different parts of query builder with custom com
 |`removeRuleSet`|`() => void`|Function to handle removing the current rule set|
 
 #### `queryRemoveButton`
+
+Used to replace the default remove single rule button component. See example, or demo to see how it's done.
+
 |Context Name|Type|Description|
 |:--- |:--- |:--- |
 |`$implicit`|`Rule`|Current rule object which contains the field, value, and operator|
