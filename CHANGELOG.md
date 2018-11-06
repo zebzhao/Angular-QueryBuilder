@@ -1,7 +1,15 @@
 Angular2-QueryBuilder Changelog
 ===============
 
-Version 0.3.2
+Version 0.4.0
+-----------
+- Fix issue switching operators changing select to multiple and causing invalid value error. (#69)
+- Add a `coerceValueForOperator` to handle value changes between operator switches to `config` object.
+- Add `treeContainer`, `collapsed`, `arrowIcon`, `arrowIconButton` fields to `classNames` object.
+- Add `queryArrowIcon` structural directive to override collapse arrow icon.
+- Added `allowCollapse` to enable accordion/collapse mode. (#66)
+
+Version 0.3.3
 -----------
 - Fix `queryEmptyWarning` directive not being passed to nested rules
 
