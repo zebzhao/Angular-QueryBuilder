@@ -200,7 +200,7 @@ See [documentation](https://zebzhao.github.io/Angular-QueryBuilder/) for more de
 |Name|Type|Required|Default|Description|
 |:--- |:--- |:--- |:--- |:--- |
 |`allowRuleset`|`boolean`|Optional|`true`| Displays the `+ Ruleset` button if `true`. |
-|`allowCollapse`|`boolean`|Optional|`false`| Enables collapsible rule sets if `true`. (See Demo) |
+|`allowCollapse`|`boolean`|Optional|`false`| Enables collapsible rule sets if `true`. ([See Demo](https://zebzhao.github.io/Angular-QueryBuilder/demo/)) |
 |`classNames`|`object`|Optional|| CSS class names for different child elements in `query-builder` component. |
 |`config`|`QueryBuilderConfig`|Required|| Configuration object for the main component. |
 |`data`|`Ruleset`|Optional|| (Use `ngModel` or `value` instead.) |
@@ -211,11 +211,11 @@ See [documentation](https://zebzhao.github.io/Angular-QueryBuilder/) for more de
 
 ## Structural Directives
 
-Use these directives to replace different parts of query builder with custom components.
+Use these directives to replace different parts of query builder with custom components. See [example](#customizing-with-angular-material), or [demo](https://zebzhao.github.io/Angular-QueryBuilder/demo/) to see how it's done.
 
 #### `queryInput`
 
-Used to replace the input component. Specify the type/queryInputType to match specific field types to input template. See example, or demo to see how it's done.
+Used to replace the input component. Specify the type/queryInputType to match specific field types to input template.
 
 |Context Name|Type|Description|
 |:--- |:--- |:--- |
@@ -226,7 +226,7 @@ Used to replace the input component. Specify the type/queryInputType to match sp
 
 #### `queryOperator`
 
-Used to replace the query operator selection component. See example, or demo to see how it's done.
+Used to replace the query operator selection component.
 
 |Context Name|Type|Description|
 |:--- |:--- |:--- |
@@ -237,7 +237,7 @@ Used to replace the query operator selection component. See example, or demo to 
 
 #### `queryField`
 
-Used to replace the query field selection component. See example, or demo to see how it's done.
+Used this directive to replace the query field selection component.
 
 |Context Name|Type|Description|
 |:--- |:--- |:--- |
@@ -248,7 +248,7 @@ Used to replace the query field selection component. See example, or demo to see
 
 #### `queryEntity`
 
-Used to replace the query entity selection component. See example, or demo to see how it's done.
+Used to replace entity selection component.
 
 |Context Name|Type|Description|
 |:--- |:--- |:--- |
@@ -258,7 +258,7 @@ Used to replace the query entity selection component. See example, or demo to se
 
 #### `querySwitchGroup`
 
-Used to replace the switch controls, for example the AND/OR conditions. More custom conditions can be specified by using this directive to override the default component. See example, or demo to see how it's done.
+Useful for replacing the switch controls, for example the AND/OR conditions. More custom conditions can be specified by using this directive to override the default component.
 
 |Context Name|Type|Description|
 |:--- |:--- |:--- |
@@ -267,7 +267,7 @@ Used to replace the switch controls, for example the AND/OR conditions. More cus
 
 #### `queryArrowIcon`
 
-Used to replace the expand arrow used in collapse/accordion mode of the query builder. See example, or demo to see how it's done.
+Directive to replace the expand arrow used in collapse/accordion mode of the query builder.
 
 |Context Name|Type|Description|
 |:--- |:--- |:--- |
@@ -275,7 +275,7 @@ Used to replace the expand arrow used in collapse/accordion mode of the query bu
 
 #### `queryEmptyWarning`
 
-Used to replace the default empty warning message component. See example, or demo to see how it's done.
+Can be used to customize the default empty warning message, alternatively can specify the `emptyMessage` property binding.
 
 |Context Name|Type|Description|
 |:--- |:--- |:--- |
@@ -284,7 +284,7 @@ Used to replace the default empty warning message component. See example, or dem
 
 #### `queryButtonGroup`
 
-Used to replace the default button group for Add, Add Ruleset, Remove Ruleset buttons. See example, or demo to see how it's done.
+For replacing the default button group for Add, Add Ruleset, Remove Ruleset buttons.
 
 |Context Name|Type|Description|
 |:--- |:--- |:--- |
@@ -295,7 +295,7 @@ Used to replace the default button group for Add, Add Ruleset, Remove Ruleset bu
 
 #### `queryRemoveButton`
 
-Used to replace the default remove single rule button component. See example, or demo to see how it's done.
+Directive to replace the default remove single rule button component.
 
 |Context Name|Type|Description|
 |:--- |:--- |:--- |
