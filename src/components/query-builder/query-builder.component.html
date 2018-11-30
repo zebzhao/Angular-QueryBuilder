@@ -17,14 +17,14 @@
 
   <ng-template #defaultButtonGroup>
     <div [ngClass]="getClassNames('buttonGroup', 'rightAlign')">
-      <button (click)="addRule()" [ngClass]="getClassNames('button')" [disabled]=disabled>
+      <button type="button" (click)="addRule()" [ngClass]="getClassNames('button')" [disabled]=disabled>
         <i [ngClass]="getClassNames('addIcon')"></i> Rule
       </button>
-      <button (click)="addRuleSet()" [ngClass]="getClassNames('button')" *ngIf="allowRuleset" [disabled]=disabled>
+      <button type="button" (click)="addRuleSet()" [ngClass]="getClassNames('button')" *ngIf="allowRuleset" [disabled]=disabled>
         <i [ngClass]="getClassNames('addIcon')"></i> Ruleset
       </button>
       <ng-container *ngIf="!!parentValue && allowRuleset">
-        <button (click)="removeRuleSet()" [ngClass]="getClassNames('button', 'removeButton')" [disabled]=disabled>
+        <button type="button" (click)="removeRuleSet()" [ngClass]="getClassNames('button', 'removeButton')" [disabled]=disabled>
           <i [ngClass]="getClassNames('removeIcon')"></i>
         </button>
       </ng-container>
@@ -66,7 +66,7 @@
 
             <ng-template #defaultRemoveButton>
               <div [ngClass]="getClassNames('removeButtonSize', 'rightAlign')">
-                <button [ngClass]="getClassNames('button', 'removeButton')" (click)="removeRule(rule, data)" [disabled]=disabled>
+                <button type="button" [ngClass]="getClassNames('button', 'removeButton')" (click)="removeRule(rule, data)" [disabled]=disabled>
                   <i [ngClass]="getClassNames('removeIcon')"></i>
                 </button>
               </div>
