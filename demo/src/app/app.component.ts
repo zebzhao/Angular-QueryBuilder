@@ -43,18 +43,18 @@ import { QueryBuilderClassNames, QueryBuilderConfig } from '../../lib';
   <mat-card>
   <query-builder [(ngModel)]='query' [config]='currentConfig' [allowRuleset]='allowRuleset' [allowCollapse]='allowCollapse'>
     <ng-container *queryButtonGroup="let ruleset; let addRule=addRule; let addRuleSet=addRuleSet; let removeRuleSet=removeRuleSet">
-      <button mat-icon-button color="primary" (click)="addRule()">
+      <button type="button" mat-icon-button color="primary" (click)="addRule()">
         <mat-icon>add</mat-icon></button>
-      <button mat-icon-button color="primary" *ngIf="addRuleSet" (click)="addRuleSet()">
+      <button type="button" mat-icon-button color="primary" *ngIf="addRuleSet" (click)="addRuleSet()">
         <mat-icon>add_circle_outline</mat-icon></button>
-      <button mat-icon-button color="accent" *ngIf="removeRuleSet" (click)="removeRuleSet()">
+      <button type="button" mat-icon-button color="accent" *ngIf="removeRuleSet" (click)="removeRuleSet()">
         <mat-icon>remove_circle_outline</mat-icon></button>
     </ng-container>
     <ng-container *queryArrowIcon>
       <mat-icon ngClass="mat-arrow-icon">chevron_right</mat-icon>
     </ng-container>
     <ng-container *queryRemoveButton="let rule; let removeRule=removeRule">
-      <button mat-icon-button color="accent" (click)="removeRule(rule)">
+      <button type="button" mat-icon-button color="accent" (click)="removeRule(rule)">
         <mat-icon>remove</mat-icon>
       </button>
     </ng-container>

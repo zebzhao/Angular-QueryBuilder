@@ -145,12 +145,12 @@ Example of how you can completely customize the query component with another lib
 ```html
 <query-builder [(ngModel)]='query' [config]='config'>
   <ng-container *queryButtonGroup="let ruleset; let addRule=addRule; let addRuleSet=addRuleSet; let removeRuleSet=removeRuleSet">
-    <button mat-button (click)="addRule()">+ Rule</button>
-    <button mat-button (click)="addRuleSet()">+ Ruleset</button>
-    <button mat-button (click)="removeRuleSet()">- Ruleset</button>
+    <button type="button" mat-button (click)="addRule()">+ Rule</button>
+    <button type="button" mat-button (click)="addRuleSet()">+ Ruleset</button>
+    <button type="button" mat-button (click)="removeRuleSet()">- Ruleset</button>
   </ng-container>
   <ng-container *queryRemoveButton="let rule; let removeRule=removeRule">
-    <button mat-icon-button color="accent" (click)="removeRule(rule)">
+    <button type="button" mat-icon-button color="accent" (click)="removeRule(rule)">
       <mat-icon>remove</mat-icon>
     </button>
   </ng-container>
