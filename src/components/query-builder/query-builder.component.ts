@@ -1,10 +1,10 @@
 import {
-    AbstractControl,
-    ControlValueAccessor,
-    NG_VALUE_ACCESSOR,
-    NG_VALIDATORS,
-    ValidationErrors,
-    Validator
+  AbstractControl,
+  ControlValueAccessor,
+  NG_VALUE_ACCESSOR,
+  NG_VALIDATORS,
+  ValidationErrors,
+  Validator
 } from '@angular/forms';
 import { QueryOperatorDirective } from './query-operator.directive';
 import { QueryFieldDirective } from './query-field.directive';
@@ -16,39 +16,39 @@ import { QueryRemoveButtonDirective } from './query-remove-button.directive';
 import { QueryEmptyWarningDirective } from './query-empty-warning.directive';
 import { QueryArrowIconDirective } from './query-arrow-icon.directive';
 import {
-    ButtonGroupContext,
-    Entity,
-    Field,
-    SwitchGroupContext,
-    EntityContext,
-    FieldContext,
-    InputContext,
-    LocalRuleMeta,
-    OperatorContext,
-    Option,
-    QueryBuilderClassNames,
-    QueryBuilderConfig,
-    RemoveButtonContext,
-    ArrowIconContext,
-    Rule,
-    RuleSet,
-    EmptyWarningContext,
+  ButtonGroupContext,
+  Entity,
+  Field,
+  SwitchGroupContext,
+  EntityContext,
+  FieldContext,
+  InputContext,
+  LocalRuleMeta,
+  OperatorContext,
+  Option,
+  QueryBuilderClassNames,
+  QueryBuilderConfig,
+  RemoveButtonContext,
+  ArrowIconContext,
+  Rule,
+  RuleSet,
+  EmptyWarningContext,
 } from './query-builder.interfaces';
 import {
-    ChangeDetectorRef,
-    Component,
-    ContentChild,
-    ContentChildren,
-    forwardRef,
-    Input,
-    OnChanges,
-    OnInit,
-    AfterViewChecked,
-    QueryList,
-    SimpleChanges,
-    TemplateRef,
-    ViewChild,
-    ElementRef
+  ChangeDetectorRef,
+  Component,
+  ContentChild,
+  ContentChildren,
+  forwardRef,
+  Input,
+  OnChanges,
+  OnInit,
+  AfterViewChecked,
+  QueryList,
+  SimpleChanges,
+  TemplateRef,
+  ViewChild,
+  ElementRef
 } from '@angular/core';
 
 export const CONTROL_VALUE_ACCESSOR: any = {
@@ -104,7 +104,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     inputControl: 'q-input-control',
     inputControlSize: 'q-control-size'
   };
-  public defaultOperatorMap: {[key: string]: string[]} = {
+  public defaultOperatorMap: { [key: string]: string[] } = {
     string: ['=', '!=', 'contains', 'like'],
     number: ['=', '!=', '>', '>=', '<', '<='],
     time: ['=', '!=', '>', '>=', '<', '<='],
@@ -123,7 +123,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   @Input() allowCollapse: boolean = false;
   @Input() emptyMessage: string = 'A ruleset cannot be empty. Please add a rule or remove it all together.';
   @Input() classNames: QueryBuilderClassNames;
-  @Input() operatorMap: {[key: string]: string[]};
+  @Input() operatorMap: { [key: string]: string[] };
   @Input() parentValue: RuleSet;
   @Input() config: QueryBuilderConfig = { fields: {} };
   @Input() parentArrowIconTemplate: QueryArrowIconDirective;
@@ -153,7 +153,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   private defaultTemplateTypes: string[] = [
     'string', 'number', 'time', 'date', 'category', 'boolean', 'multiselect'];
   private defaultEmptyList: any[] = [];
-  private operatorsCache: {[key: string]: string[]};
+  private operatorsCache: { [key: string]: string[] };
   private inputContextCache = new Map<Rule, InputContext>();
   private operatorContextCache = new Map<Rule, OperatorContext>();
   private fieldContextCache = new Map<Rule, FieldContext>();
@@ -161,11 +161,11 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   private removeButtonContextCache = new Map<Rule, RemoveButtonContext>();
   private buttonGroupContext: ButtonGroupContext;
 
-  constructor(private changeDetectorRef: ChangeDetectorRef) {}
+  constructor(private changeDetectorRef: ChangeDetectorRef) { }
 
   // ----------OnInit Implementation----------
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   // ----------OnChanges Implementation----------
 
@@ -196,7 +196,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   // ----------Validator Implementation----------
 
   validate(control: AbstractControl): ValidationErrors | null {
-    const errors: {[key: string]: any} = {};
+    const errors: { [key: string]: any } = {};
     const ruleErrorStore = [];
     let hasErrors = false;
 
@@ -337,7 +337,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   getClassNames(...args): string {
     const clsLookup = this.classNames ? this.classNames : this.defaultClassNames;
     const classNames = args.map((id) => clsLookup[id] || this.defaultClassNames[id]).filter((c) => !!c);
-    return classNames.length ? classNames.join(' ')  : null;
+    return classNames.length ? classNames.join(' ') : null;
   }
 
   getDefaultField(entity: Entity): Field {
@@ -353,7 +353,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
         return entityFields[0];
       } else {
         console.warn(`No fields found for entity '${entity.name}'. ` +
-        `A 'defaultOperator' is also not specified on the field config. Operator value will default to null.`);
+          `A 'defaultOperator' is also not specified on the field config. Operator value will default to null.`);
         return null;
       }
     }
@@ -368,7 +368,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
         return operators[0];
       } else {
         console.warn(`No operators found for field '${field.value}'. ` +
-        `A 'defaultOperator' is also not specified on the field config. Operator value will default to null.`);
+          `A 'defaultOperator' is also not specified on the field config. Operator value will default to null.`);
         return null;
       }
     }
@@ -426,7 +426,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     if (this.config.addRuleSet) {
       this.config.addRuleSet(parent);
     } else {
-      parent.rules = parent.rules.concat([{condition: 'and', rules: []}]);
+      parent.rules = parent.rules.concat([{ condition: 'and', rules: [] }]);
     }
 
     this.handleTouched();
@@ -539,16 +539,22 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     this.handleDataChange();
   }
 
-  changeEntity(entityValue: string, rule: Rule): void {
+  changeEntity(entityValue: string, rule: Rule, index: number, data: RuleSet): void {
     if (this.disabled) {
       return;
     }
 
-    const entity: Entity = this.entities.find((e) => e.value === entityValue);
+    const entity: Entity = this.entities.find(e => e.value === entityValue);
     const defaultField: Field = this.getDefaultField(entity);
-
+    data.rules[index] = {
+      ...rule,
+      field: defaultField.value
+    }
     if (defaultField) {
-      this.changeField(defaultField.value, rule);
+      this.changeField(defaultField.value, {
+        ...rule,
+        field: defaultField.value
+      });
     } else {
       this.handleTouched();
       this.handleDataChange();
