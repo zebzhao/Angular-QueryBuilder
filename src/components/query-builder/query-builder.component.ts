@@ -314,6 +314,11 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     if (this.config.getInputType) {
       return this.config.getInputType(field, operator);
     }
+
+    if(!this.config.fields[field]) {
+      throw new Error(`No configuration for field '${field}' could be found! Please add it to config.fields.`);
+    }
+
     const type = this.config.fields[field].type;
     switch (operator) {
       case 'is null':
