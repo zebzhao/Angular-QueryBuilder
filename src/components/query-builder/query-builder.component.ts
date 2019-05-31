@@ -315,7 +315,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
       return this.config.getInputType(field, operator);
     }
 
-    if(!this.config.fields[field]) {
+    if (!this.config.fields[field]) {
       throw new Error(`No configuration for field '${field}' could be found! Please add it to config.fields.`);
     }
 
@@ -549,12 +549,12 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
       return;
     }
 
-    const entity: Entity = this.entities.find(e => e.value === entityValue);
+    const entity: Entity = this.entities.find((e) => e.value === entityValue);
     const defaultField: Field = this.getDefaultField(entity);
     data.rules[index] = {
       ...rule,
       field: defaultField.value
-    }
+    };
     if (defaultField) {
       this.changeField(defaultField.value, {
         ...rule,
