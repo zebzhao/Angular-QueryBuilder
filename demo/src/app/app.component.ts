@@ -84,7 +84,7 @@ import { QueryBuilderClassNames, QueryBuilderConfig } from '../../lib';
     </ng-container>
     <ng-container *queryOperator="let rule; let operators=operators; let onChange=onChange">
       <mat-form-field [style.width.px]="90">
-        <mat-select [(ngModel)]="rule.operator" (ngModelChange)="onChange()">
+        <mat-select [(ngModel)]="rule.operator" (ngModelChange)="onChange(rule)">
           <mat-option *ngFor="let value of operators" [value]="value">
             {{ value }}
           </mat-option>
