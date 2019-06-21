@@ -138,7 +138,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   @Input() parentChangeCallback: () => void;
   @Input() parentTouchedCallback: () => void;
 
-  @ViewChild('treeContainer') treeContainer: ElementRef;
+  @ViewChild('treeContainer', {static: true}) treeContainer: ElementRef;
 
   @ContentChild(QueryButtonGroupDirective) buttonGroupTemplate: QueryButtonGroupDirective;
   @ContentChild(QuerySwitchGroupDirective) switchGroupTemplate: QuerySwitchGroupDirective;
