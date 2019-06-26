@@ -138,17 +138,17 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   @Input() parentChangeCallback: () => void;
   @Input() parentTouchedCallback: () => void;
 
-  @ViewChild('treeContainer') treeContainer: ElementRef;
+  @ViewChild('treeContainer', {static: true}) treeContainer: ElementRef;
 
-  @ContentChild(QueryButtonGroupDirective) buttonGroupTemplate: QueryButtonGroupDirective;
-  @ContentChild(QuerySwitchGroupDirective) switchGroupTemplate: QuerySwitchGroupDirective;
-  @ContentChild(QueryFieldDirective) fieldTemplate: QueryFieldDirective;
-  @ContentChild(QueryEntityDirective) entityTemplate: QueryEntityDirective;
-  @ContentChild(QueryOperatorDirective) operatorTemplate: QueryOperatorDirective;
-  @ContentChild(QueryRemoveButtonDirective) removeButtonTemplate: QueryRemoveButtonDirective;
-  @ContentChild(QueryEmptyWarningDirective) emptyWarningTemplate: QueryEmptyWarningDirective;
+  @ContentChild(QueryButtonGroupDirective, {static: false}) buttonGroupTemplate: QueryButtonGroupDirective;
+  @ContentChild(QuerySwitchGroupDirective, {static: false}) switchGroupTemplate: QuerySwitchGroupDirective;
+  @ContentChild(QueryFieldDirective, {static: false}) fieldTemplate: QueryFieldDirective;
+  @ContentChild(QueryEntityDirective, {static: false}) entityTemplate: QueryEntityDirective;
+  @ContentChild(QueryOperatorDirective, {static: false}) operatorTemplate: QueryOperatorDirective;
+  @ContentChild(QueryRemoveButtonDirective, {static: false}) removeButtonTemplate: QueryRemoveButtonDirective;
+  @ContentChild(QueryEmptyWarningDirective, {static: false}) emptyWarningTemplate: QueryEmptyWarningDirective;
   @ContentChildren(QueryInputDirective) inputTemplates: QueryList<QueryInputDirective>;
-  @ContentChild(QueryArrowIconDirective) arrowIconTemplate: QueryArrowIconDirective;
+  @ContentChild(QueryArrowIconDirective, {static: false}) arrowIconTemplate: QueryArrowIconDirective;
 
   private defaultTemplateTypes: string[] = [
     'string', 'number', 'time', 'date', 'category', 'boolean', 'multiselect'];
