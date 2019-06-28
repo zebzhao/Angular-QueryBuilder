@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input, TemplateRef } from '@angular/core';
+import { Directive, TemplateRef } from '@angular/core';
 
 @Directive({selector: '[queryButtonGroup]'})
 export class QueryButtonGroupDirective {

@@ -1,7 +1,6 @@
 {
-  "compileOnSave": false,
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
-
     "outDir": "../../out-tsc/lib",
     "declaration": true,
     "inlineSources": true,
@@ -18,15 +17,20 @@
       "es5",
       "es6",
       "dom"
-    ],
-
-
-
-    "baseUrl": "./",
-    "downlevelIteration": true,
-    "importHelpers": true,
-    "typeRoots": [
-      "node_modules/@types"
     ]
-  }
+  },
+  "angularCompilerOptions": {
+    "annotateForClosureCompiler": true,
+    "skipTemplateCodegen": true,
+    "strictMetadataEmit": true,
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true,
+    "enableResourceInlining": true,
+    "debug": false,
+    "skipMetadataEmit": false
+  },
+  "exclude": [
+    "src/test.ts",
+    "**/*.spec.ts"
+  ]
 }

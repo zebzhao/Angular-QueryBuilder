@@ -1,5 +1,7 @@
 import { ValidationErrors } from '@angular/forms';
 
+export type DefaultValueType = () => any | any;
+
 export interface RuleSet {
   condition: string;
   rules: Array<RuleSet | Rule>;
@@ -29,8 +31,8 @@ export interface Field {
   nullable?: boolean;
   options?: Option[];
   operators?: string[];
-  defaultValue?: any;
-  defaultOperator?: any;
+  defaultValue?: DefaultValueType;
+  defaultOperator?: DefaultValueType;
   entity?: string;
   validator?: (rule: Rule, parent: RuleSet) => any | null;
 }
@@ -47,7 +49,7 @@ export interface EntityMap {
 export interface Entity {
   name: string;
   value?: string;
-  defaultField?: any;
+  defaultField?: DefaultValueType;
 }
 
 export interface QueryBuilderClassNames {
@@ -74,6 +76,7 @@ export interface QueryBuilderClassNames {
   rule?: string;
   ruleSet?: string;
   invalidRuleSet?: string;
+  invalidRule?: string;
   emptyWarning?: string;
   fieldControl?: string;
   fieldControlSize?: string;

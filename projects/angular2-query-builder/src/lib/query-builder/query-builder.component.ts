@@ -43,7 +43,6 @@ import {
   Input,
   OnChanges,
   OnInit,
-  AfterViewChecked,
   QueryList,
   SimpleChanges,
   TemplateRef,
