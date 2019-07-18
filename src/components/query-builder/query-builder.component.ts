@@ -525,7 +525,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     if (field && field.defaultValue !== undefined) {
       rule.value = this.getDefaultValue(field.defaultValue);
     } else {
-      delete rule.value;
+      //delete rule.value;
     }
 
     rule.operator = this.getDefaultOperator(field);
