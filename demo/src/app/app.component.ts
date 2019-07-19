@@ -7,7 +7,7 @@ import { QueryBuilderClassNames, QueryBuilderConfig } from '../../lib';
   template: `
   <h2>Vanilla</h2>
   <br>
-  <query-builder [formControl]='queryCtrl' [config]='currentConfig' [allowRuleset]='allowRuleset' [allowCollapse]='allowCollapse'>
+  <query-builder [formControl]='queryCtrl' [config]='currentConfig' [allowRuleset]='allowRuleset' [allowCollapse]='allowCollapse' [persistValueOnFieldChange]='persistValueOnFieldChange'>
     <ng-container *queryInput="let rule; type: 'textarea'; let getDisabledState=getDisabledState">
       <textarea class="text-input text-area" [(ngModel)]="rule.value" [disabled]=getDisabledState()
         placeholder="Custom Textarea"></textarea>
@@ -34,14 +34,18 @@ import { QueryBuilderClassNames, QueryBuilderConfig } from '../../lib';
       <div class="col-6">
         <label><input type="checkbox" [(ngModel)]='allowCollapse'>Allow Collapse</label>
       </div>
+      <div class="col-6">
+        <label><input type="checkbox" [(ngModel)]='persistValueOnFieldChange'>Persist Values on Field Change</label>
+      </div>
     </div>
+
     <textarea class="output">{{query | json}}</textarea>
   </div>
   <br>
   <h2>Custom Material</h2>
   <br>
   <mat-card>
-  <query-builder [(ngModel)]='query' [config]='currentConfig' [allowRuleset]='allowRuleset' [allowCollapse]='allowCollapse'>
+  <query-builder [(ngModel)]='query' [config]='currentConfig' [allowRuleset]='allowRuleset' [allowCollapse]='allowCollapse' [persistValueOnFieldChange]='persistValueOnFieldChange'>
     <ng-container *queryButtonGroup="let ruleset; let addRule=addRule; let addRuleSet=addRuleSet; let removeRuleSet=removeRuleSet">
       <button type="button" mat-icon-button color="primary" (click)="addRule()">
         <mat-icon>add</mat-icon></button>
@@ -140,7 +144,7 @@ import { QueryBuilderClassNames, QueryBuilderConfig } from '../../lib';
   <br>
   <h2>Bootstrap</h2>
   <br>
-  <query-builder [(ngModel)]='query' [classNames]='bootstrapClassNames' [config]='currentConfig' [allowRuleset]='allowRuleset' [allowCollapse]='allowCollapse'>
+  <query-builder [(ngModel)]='query' [classNames]='bootstrapClassNames' [config]='currentConfig' [allowRuleset]='allowRuleset' [allowCollapse]='allowCollapse' [persistValueOnFieldChange]='persistValueOnFieldChange'>
     <div class="col-auto" *queryInput="let rule; type: 'textarea'">
       <textarea class="form-control" [(ngModel)]="rule.value"
         placeholder="Custom Textarea"></textarea>
@@ -302,6 +306,7 @@ export class AppComponent {
   public currentConfig: QueryBuilderConfig;
   public allowRuleset: boolean = true;
   public allowCollapse: boolean;
+  public persistValueOnFieldChange: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder
