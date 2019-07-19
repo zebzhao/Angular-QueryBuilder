@@ -54,17 +54,17 @@
     "tslint": "tslint"
   },
   "peerDependencies": {
-    "@angular/common": ">=4.0.0",
-    "@angular/core": ">=4.0.0"
+    "@angular/common": ">=6.0.0",
+    "@angular/core": ">=6.0.0"
   },
   "devDependencies": {
-    "@angular/common": "^4.0.0",
-    "@angular/compiler": "^4.0.0",
-    "@angular/compiler-cli": "^4.0.0",
-    "@angular/core": "^4.0.0",
-    "@angular/forms": "^4.0.0",
-    "@angular/platform-browser": "^4.0.0",
-    "@angular/platform-browser-dynamic": "^4.0.0",
+    "@angular/common": "^8.0.0",
+    "@angular/compiler": "^8.0.0",
+    "@angular/compiler-cli": "^8.0.0",
+    "@angular/core": "^8.0.0",
+    "@angular/forms": "^8.0.0",
+    "@angular/platform-browser": "^8.0.0",
+    "@angular/platform-browser-dynamic": "^8.0.0",
     "@compodoc/compodoc": "^1.0.0-beta.9",
     "@types/jasmine": "^2.5.47",
     "@types/karma": "^1.7.0",
@@ -73,7 +73,6 @@
     "@types/webpack-env": "^1.13.0",
     "angular2-template-loader": "^0.6.2",
     "codecov": "^2.2.0",
-    "codelyzer": "^3.0.1",
     "concurrently": "^3.4.0",
     "css-loader": "^0.28.1",
     "gh-pages": "^1.0.0",
@@ -98,13 +97,13 @@
     "ts-loader": "^3.5.0",
     "ts-node": "^3.0.4",
     "tslint": "^5.2.0",
-    "typescript": "^2.3.2",
+    "typescript": ">=3.4 <3.5",
     "webpack": "^3.6.0",
     "webpack-angular-externals": "^1.0.2",
     "webpack-rxjs-externals": "^1.0.0",
-    "zone.js": "^0.8.10"
+    "zone.js": "^0.9.1"
   },
   "dependencies": {
-    "rxjs": "^5.4.2"
+    "rxjs": "^6.0.0"
   }
 }

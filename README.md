@@ -303,7 +303,7 @@ Directive to replace the default remove single rule button component.
 |`removeRule`|`(rule: Rule) => void`|Function to handle removing a rule|
 
 ## Dependencies
-- Angular 4+
+- Angular 6+
 
 That's it.
 
