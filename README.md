@@ -207,6 +207,8 @@ See [documentation](https://zebzhao.github.io/Angular-QueryBuilder/) for more de
 |`emptyMessage`|`string`|Optional|| Message to display for an empty Ruleset if empty rulesets are not allowed. |
 |`ngModel`| `Ruleset` |Optional|| Object that stores the state of the component. Supports 2-way binding. |
 |`operatorMap`|`{ [key: string]: string[] }`|Optional|| Used to map field types to list of operators. |
+|`persistValueOnFieldChange`|`boolean`|Optional|`false`| If `true`, when a field changes to another of the same type, and the type is one of: string, number, time, date, or boolean, persist the previous value. This option is ignored if config.calculateFieldChangeValue is provided. |
+|`config.calculateFieldChangeValue`|`(currentField: Field, nextField: Field, currentValue: any) => any`|Optional|| Used to calculate the new value when a rule's field changes. |
 |`value`| `Ruleset` |Optional|| Object that stores the state of the component. |
 
 ## Structural Directives
@@ -303,7 +305,7 @@ Directive to replace the default remove single rule button component.
 |`removeRule`|`(rule: Rule) => void`|Function to handle removing a rule|
 
 ## Dependencies
-- Angular 4+
+- Angular 6+
 
 That's it.
 

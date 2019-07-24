@@ -137,6 +137,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   @Input() parentEmptyWarningTemplate: QueryEmptyWarningDirective;
   @Input() parentChangeCallback: () => void;
   @Input() parentTouchedCallback: () => void;
+  @Input() persistValueOnFieldChange: boolean = false;
 
   @ViewChild('treeContainer', {static: true}) treeContainer: ElementRef;
 
@@ -152,6 +153,8 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
 
   private defaultTemplateTypes: string[] = [
     'string', 'number', 'time', 'date', 'category', 'boolean', 'multiselect'];
+  private defaultPersistValueTypes: string[] = [
+    'string', 'number', 'time', 'date', 'boolean'];
   private defaultEmptyList: any[] = [];
   private operatorsCache: { [key: string]: string[] };
   private inputContextCache = new Map<Rule, InputContext>();
@@ -520,15 +523,21 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
       return;
     }
 
-    const field: Field = this.config.fields[fieldValue];
+    const inputContext = this.inputContextCache.get(rule);
+    const currentField = inputContext && inputContext.field;
 
-    if (field && field.defaultValue !== undefined) {
-      rule.value = this.getDefaultValue(field.defaultValue);
+    const nextField: Field = this.config.fields[fieldValue];
+
+    const nextValue = this.calculateFieldChangeValue(
+      currentField, nextField, rule.value);
+
+    if (nextValue !== undefined) {
+      rule.value = nextValue;
     } else {
       delete rule.value;
     }
 
-    rule.operator = this.getDefaultOperator(field);
+    rule.operator = this.getDefaultOperator(nextField);
 
     // Create new context objects so templates will automatically update
     this.inputContextCache.delete(rule);
@@ -542,6 +551,36 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
 
     this.handleTouched();
     this.handleDataChange();
+  }
+
+  private calculateFieldChangeValue(
+    currentField: Field,
+    nextField: Field,
+    currentValue: any
+  ): any {
+
+    if (this.config.calculateFieldChangeValue != null) {
+      return this.config.calculateFieldChangeValue(
+        currentField, nextField, currentValue);
+    }
+
+    const canKeepValue = () => {
+      if (currentField == null || nextField == null) {
+        return false;
+      }
+      return currentField.type === nextField.type
+        && this.defaultPersistValueTypes.includes(currentField.type);
+    };
+
+    if (this.persistValueOnFieldChange && canKeepValue()) {
+      return currentValue;
+    }
+
+    if (nextField && nextField.defaultValue !== undefined) {
+      return this.getDefaultValue(nextField.defaultValue);
+    }
+    
+    return undefined;
   }
 
   changeEntity(entityValue: string, rule: Rule, index: number, data: RuleSet): void {
