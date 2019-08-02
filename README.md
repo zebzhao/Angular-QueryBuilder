@@ -160,9 +160,9 @@ Example of how you can completely customize the query component with another lib
       <mat-radio-button value="or">Or</mat-radio-button>
     </mat-radio-group>
   </ng-container>
-  <ng-container *queryField="let rule; let fields=fields; let changeField=changeField">
+  <ng-container *queryField="let rule; let fields=fields; let onChange=onChange">
     <mat-form-field>
-      <mat-select [(ngModel)]="rule.field" (ngModelChange)="changeField($event, rule)">
+      <mat-select [(ngModel)]="rule.field" (ngModelChange)="onChange($event, rule)">
         <mat-option *ngFor="let field of fields" [value]="field.value">{{field.name}}</mat-option>
       </mat-select>
     </mat-form-field>
