@@ -4,6 +4,7 @@ export interface RuleSet {
   condition: string;
   rules: Array<RuleSet | Rule>;
   collapsed?: boolean;
+  isChild?: boolean;
 }
 
 export interface Rule {
