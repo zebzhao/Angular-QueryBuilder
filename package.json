@@ -1,19 +1,20 @@
 {
+  "name": "angular2-query-builder",
   "version": "0.4.2",
   "description": "A modernized Angular 2+ query builder based on jquery QueryBuilder",
-  "main": "./dist/index.umd.js",
-  "module": "./dist/index.js",
-  "typings": "./dist/index.d.ts",
+  "main": "./dist/angular2-query-builder/bundles/angular2-query-builder.umd.js",
+  "module": "./dist/angular2-query-builder/esm5/angular2-query-builder.js",
+  "typings": "./dist/angular2-query-builder.d.ts",
   "license": "MIT",
   "private": false,
   "keywords": [
     "angular",
-    "angular2",
+    "angular8",
     "query",
     "builder",
     "jquery",
     "querybuilder",
-    "ng"
+    "visual"
   ],
   "author": {
     "name": "Zeb Zhao",
@@ -32,7 +33,7 @@
     "start": "ng serve",
     "build": "ng build angular2-query-builder",
     "build:watch": "ng build angular2-query-builder --watch=true",
-    "test": "ng test",
+    "test": "ng test --watch=false",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "ngcompile": "npm run build",
