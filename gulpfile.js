@@ -34,7 +34,7 @@ gulp.task('inline-templates', () => {
  * @see: https://github.com/angular/angular/issues/12867
  */
 gulp.task('build:esm', ['inline-templates'], (callback) => {
-  exec('npm run ngcompile', function (error, stdout, stderr) {
+  exec('npm run ng build angular2-query-builder', function (error, stdout, stderr) {
     console.log(stdout, stderr);
     callback(error)
   });

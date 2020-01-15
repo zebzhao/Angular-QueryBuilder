@@ -43,7 +43,6 @@ import {
   Input,
   OnChanges,
   OnInit,
-  AfterViewChecked,
   QueryList,
   SimpleChanges,
   TemplateRef,
@@ -569,7 +568,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
         return false;
       }
       return currentField.type === nextField.type
-        && this.defaultPersistValueTypes.includes(currentField.type);
+        && this.defaultPersistValueTypes.indexOf(currentField.type) !== -1;
     };
 
     if (this.persistValueOnFieldChange && canKeepValue()) {
@@ -579,7 +578,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     if (nextField && nextField.defaultValue !== undefined) {
       return this.getDefaultValue(nextField.defaultValue);
     }
-    
+
     return undefined;
   }
 

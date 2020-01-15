@@ -1,17 +1,19 @@
 # Angular-QueryBuilder
 A modernized Angular 4+ query builder based on jQuery QueryBuilder. Support for heavy customization with Angular components and provides a flexible way to handle custom data types.
 
+**For Angular 8+, use 0.5.0**
+**For Angular 6-7, use 0.4.2**
+**For Angular 4-5, use 0.3.2**
+
 # Getting Started
 
 ## Install
 `npm install angular2-query-builder`
 
 ## Demo
-Play with the [demo here](https://zebzhao.github.io/Angular-QueryBuilder/demo/).
+Play with the [Demo here](https://zebzhao.github.io/Angular-QueryBuilder/demo/).
 
-[Editable demo](https://zebzhao.github.io/Angular-QueryBuilder/editor/)
-
-[See the Plunker](https://plnkr.co/edit/vtzerj4oFQLB6ukcxb9D?p=preview)
+[Editable Demo](https://zebzhao.github.io/Angular-QueryBuilder/editor/)
 
 ## Documentation
 
@@ -305,7 +307,7 @@ Directive to replace the default remove single rule button component.
 |`removeRule`|`(rule: Rule) => void`|Function to handle removing a rule|
 
 ## Dependencies
-- Angular 6+
+- Angular 8+
 
 That's it.
 

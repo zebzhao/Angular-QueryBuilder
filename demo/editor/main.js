@@ -24,7 +24,7 @@ var files = [{
 */})}, {
   path: 'systemjs.config.js',
   text: multiline(function () {/*
-var angularVersion = '@6.0.7';
+var angularVersion = '@8.0.1';
 
 System.config({
   transpiler: 'ts',
@@ -63,7 +63,7 @@ System.config({
     'rxjs-compat':                       'npm:rxjs-compat@6.2.1',
     'ts':                                'npm:plugin-typescript@8.0.0/lib/plugin.js',
     'typescript':                        'npm:typescript@2.9.2/lib/typescript.js',
-    'angular2-query-builder':            'npm:angular2-query-builder@0.3.2/dist/index.umd.js'
+    'angular2-query-builder':            'npm:angular2-query-builder@0.5.0/dist/angular2-query-builder/bundles/angular2-query-builder.umd.js'
   }
 });
 */})}, {
@@ -303,12 +303,11 @@ export class AppComponent {
 */})}
 ];
 
-editor.connect(function () {
-  editor.configure({
-    files: files,
-    defaultFile: 'app/app.component.ts'
-  });
-}, null, {maxTries: 30, interval: 750});
+editor.connect().then(() => editor.send({
+  project: 'Angular-QueryBuilder',
+  files: files,
+  open: 'app/app.component.ts'
+}))
 
 function multiline(f) {
   return f.toString()
