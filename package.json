@@ -8,12 +8,12 @@
   "private": false,
   "keywords": [
     "angular",
-    "angular2",
+    "angular8",
     "query",
     "builder",
     "jquery",
     "querybuilder",
-    "ng"
+    "visual"
   ],
   "author": {
     "name": "Zeb Zhao",
@@ -32,7 +32,7 @@
     "start": "ng serve",
     "build": "ng build angular2-query-builder",
     "build:watch": "ng build angular2-query-builder --watch=true",
-    "test": "ng test",
+    "test": "ng test --watch=false",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "ngcompile": "npm run build",

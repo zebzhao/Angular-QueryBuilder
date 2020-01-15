@@ -552,36 +552,6 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     this.handleDataChange();
   }
 
-  private calculateFieldChangeValue(
-    currentField: Field,
-    nextField: Field,
-    currentValue: any
-  ): any {
-
-    if (this.config.calculateFieldChangeValue != null) {
-      return this.config.calculateFieldChangeValue(
-        currentField, nextField, currentValue);
-    }
-
-    const canKeepValue = () => {
-      if (currentField == null || nextField == null) {
-        return false;
-      }
-      return currentField.type === nextField.type
-        && this.defaultPersistValueTypes.indexOf(currentField.type) !== -1;
-    };
-
-    if (this.persistValueOnFieldChange && canKeepValue()) {
-      return currentValue;
-    }
-
-    if (nextField && nextField.defaultValue !== undefined) {
-      return this.getDefaultValue(nextField.defaultValue);
-    }
-
-    return undefined;
-  }
-
   changeEntity(entityValue: string, rule: Rule, index: number, data: RuleSet): void {
     if (this.disabled) {
       return;
@@ -757,6 +727,36 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
       });
     }
     return this.inputContextCache.get(rule);
+  }
+
+  private calculateFieldChangeValue(
+    currentField: Field,
+    nextField: Field,
+    currentValue: any
+  ): any {
+
+    if (this.config.calculateFieldChangeValue != null) {
+      return this.config.calculateFieldChangeValue(
+        currentField, nextField, currentValue);
+    }
+
+    const canKeepValue = () => {
+      if (currentField == null || nextField == null) {
+        return false;
+      }
+      return currentField.type === nextField.type
+        && this.defaultPersistValueTypes.indexOf(currentField.type) !== -1;
+    };
+
+    if (this.persistValueOnFieldChange && canKeepValue()) {
+      return currentValue;
+    }
+
+    if (nextField && nextField.defaultValue !== undefined) {
+      return this.getDefaultValue(nextField.defaultValue);
+    }
+
+    return undefined;
   }
 
   private checkEmptyRuleInRuleset(ruleset: RuleSet): boolean {
