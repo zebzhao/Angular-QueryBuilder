@@ -1,6 +1,11 @@
 Angular2-QueryBuilder Changelog
 ===============
 
+Version 0.5.0
+-----------
+- Upgrade to Angular 8
+- Add option to persist value on rule change (see documentation for details)
+
 Version 0.4.0
 -----------
 - Fix issue switching operators changing select to multiple and causing invalid value error. (#69)

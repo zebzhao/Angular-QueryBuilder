@@ -1,13 +1,14 @@
 # Angular-QueryBuilder
 A modernized Angular 4+ query builder based on jQuery QueryBuilder. Support for heavy customization with Angular components and provides a flexible way to handle custom data types.
 
-**For Angular 8+, use 0.5.0**
-**For Angular 6-7, use 0.4.2**
-**For Angular 4-5, use 0.3.2**
-
 # Getting Started
 
 ## Install
+
+- Angular 8+, use 0.5.0+
+- Angular 6-7, use 0.4.2
+- Angular 4-5, use 0.3.2
+
 `npm install angular2-query-builder`
 
 ## Demo
