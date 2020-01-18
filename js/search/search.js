@@ -23,7 +23,7 @@
             var ctx = this, args = arguments;
             if (!timeout) {
                 timeout = setTimeout(function() {
-                    timeout = undefined;
+                    timeout = null;
                     fn.apply(ctx, args);
                 }, wait);
             }
@@ -32,7 +32,6 @@
 
     function displayResults(res) {
         var noResults = res.count == 0;
-        var groups = {};
         $searchResults.toggleClass('no-results', noResults);
 
         // Clear old results
@@ -42,74 +41,30 @@
         $searchResultsCount.text(res.count);
         $searchQuery.text(res.query);
 
-        // Group result by context
+        // Create an <li> element for each result
         res.results.forEach(function(res) {
-            var context = res.title.split(' - ')[0];
-            if (typeof groups[context] === 'undefined') {
-                groups[context] = {
-                    results: [res]
-                }
-            } else {
-                groups[context].results.push(res)
-            }
-        });
-
-        var sortedGroups = Object.keys(groups).sort();
-
-        for (var i = 0; i < sortedGroups.length; i++) {
-            var property = sortedGroups[i];
-            
             var $li = $('<li>', {
-                'class': 'search-results-group'
+                'class': 'search-results-item'
             });
-            var finalPropertyLabel = '';
-            var propertyLabels = property.split('-');
-            
-            if (propertyLabels.length === 2 && propertyLabels[0] !== 'miscellaneous' && propertyLabels[0] !== 'additional') {
-                finalPropertyLabel = propertyLabels[0].charAt(0).toUpperCase() + propertyLabels[0].substring(1) + ' - ' + propertyLabels[1].charAt(0).toUpperCase() + propertyLabels[1].substring(1) + ' (' + groups[property].results.length + ')';
-            } else if (propertyLabels[0] === 'additional') {
-                finalPropertyLabel = 'Additional pages' + ' (' + groups[property].results.length + ')'
-            } else {
-                finalPropertyLabel = propertyLabels[0].charAt(0).toUpperCase() + propertyLabels[0].substring(1) + ' (' + groups[property].results.length + ')'
+
+            var $title = $('<h3>');
+
+            var $link = $('<a>', {
+                'href': res.url,
+                'text': res.title
+            });
+
+            var content = res.body.trim();
+            if (content.length > MAX_DESCRIPTION_SIZE) {
+                content = content.slice(0, MAX_DESCRIPTION_SIZE).trim()+'...';
             }
-            var $groupTitle = $('<h3>', {
-                'text': finalPropertyLabel
-            });
-            $groupTitle.appendTo($li);
+            var $content = $('<p>').html(content);
 
-            var $ulResults = $('<ul>', {
-                'class': 'search-results-list'
-            })
-
-            groups[property].results.forEach(function(res) {
-                var link = '';
-                var $liResult = $('<li>', {
-                    'class': 'search-results-item'
-                });
-                switch (COMPODOC_CURRENT_PAGE_DEPTH) {
-                    case 0:
-                        link = './';
-                        break;
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                    case 5:
-                        link = '../'.repeat(COMPODOC_CURRENT_PAGE_DEPTH);
-                        break;
-                };
-                var finalResLabel = res.title.split(' - ')[1].charAt(0).toUpperCase() + res.title.split(' - ')[1].substring(1);
-                var $link = $('<a>', {
-                    'href': link + res.url,
-                    'text': finalResLabel
-                });
-                $link.appendTo($liResult);
-                $liResult.appendTo($ulResults);
-            });
-            $ulResults.appendTo($li);
-
+            $link.appendTo($title);
+            $title.appendTo($li);
+            $content.appendTo($li);
             $li.appendTo($searchList);
-        }
+        });
     }
 
     function launchSearch(q) {
@@ -166,7 +121,6 @@
 
             if (q.length == 0) {
                 closeSearch();
-                window.location.href = window.location.href.replace(window.location.search, '');
             } else {
                 launchSearch(q);
             }
@@ -198,9 +152,7 @@
                 // Update history state
                 if (usePushState) {
                     var uri = updateQueryString('q', $(this).val());
-                    if ($(this).val() !== '') {
-                        history.pushState({ path: uri }, null, uri);
-                    }
+                    history.pushState({ path: uri }, null, uri);
                 }
             });
         });
