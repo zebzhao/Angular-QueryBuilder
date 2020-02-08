@@ -556,18 +556,18 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     if (this.disabled) {
       return;
     }
-
+    let i = index;
+    let rs = data;
     const entity: Entity = this.entities.find((e) => e.value === entityValue);
     const defaultField: Field = this.getDefaultField(entity);
-    data.rules[index] = {
-      ...rule,
-      field: defaultField.value
-    };
+    if (!rs) {
+      rs = this.data;
+      i = rs.rules.findIndex((x) => x === rule);
+    }
+    rule.field = defaultField.value;
+    rs.rules[i] = rule;
     if (defaultField) {
-      this.changeField(defaultField.value, {
-        ...rule,
-        field: defaultField.value
-      });
+      this.changeField(defaultField.value, rule);
     } else {
       this.handleTouched();
       this.handleDataChange();
