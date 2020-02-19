@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "concurrently --raw \"gulp copy-lib:watch\" \"ng serve\"",
+    "start": "concurrently --raw \"gulp copyLibWatch\" \"ng serve\"",
     "build": "npm run build:aot && npm run build:jit && npm run copy-editor",
     "build:aot": "ng build --prod",
     "build:jit": "ng build",
@@ -42,7 +42,7 @@
     "@types/jasminewd2": "^2.0.6",
     "@types/node": "~11.9.4",
     "codelyzer": "^5.0.1",
-    "concurrently": "^3.6.1",
+    "concurrently": "^5.1.0",
     "copyfiles": "^1.2.0",
     "gulp": "^3.9.1",
     "jasmine-core": "~3.3.0",
