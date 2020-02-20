@@ -767,7 +767,7 @@
                         </td>
                         <td class="col-md-10">
                               <p>
-                                <em>Type:</em>    <code>any</code>
+                                <em>Type:</em>    <code>QueryList&lt;QueryInputDirective&gt;</code>
 
                               </p>
                         </td>
@@ -891,7 +891,7 @@
                 <tbody>
                     <tr>
                         <td class="col-md-4">
-                            <code>constructor(changeDetectorRef: any)</code>
+                            <code>constructor(changeDetectorRef: <a href="https://angular.io/docs/ts/latest/api/core/index/ChangeDetectorRef-class.html" target="_blank" >ChangeDetectorRef</a>)</code>
                         </td>
                     </tr>
     
@@ -911,14 +911,14 @@
     
                     <tr>
                         <td class="col-md-4">
-    <code>validate(control: any)</code>
+    <code>validate(control: <a href="https://angular.io/docs/ts/latest/api/forms/index/AbstractControl-class.html" target="_blank" >AbstractControl</a>)</code>
                         </td>
                     </tr>
     
                     <tr>
                         <td class="col-md-4">
                                 <div class="io-description">
-                                    <b>Returns: </b>    <code>any</code>
+                                    <b>Returns: </b>    <code>ValidationErrors</code>
     
                                 </div>
                         </td>
@@ -942,7 +942,7 @@
                     <tr>
                         <td class="col-md-4">
                                 <div class="io-description">
-                                    <b>Returns: </b>    <code>any</code>
+                                    <b>Returns: </b>    <code>TemplateRef&lt;any&gt;</code>
     
                                 </div>
                         </td>
@@ -1494,7 +1494,7 @@
                     <tr>
                         <td class="col-md-4">
                                 <div class="io-description">
-                                    <b>Returns: </b>    <code>any</code>
+                                    <b>Returns: </b>    <code>TemplateRef&lt;any&gt;</code>
     
                                 </div>
                         </td>
@@ -1518,7 +1518,7 @@
                     <tr>
                         <td class="col-md-4">
                                 <div class="io-description">
-                                    <b>Returns: </b>    <code>any</code>
+                                    <b>Returns: </b>    <code>TemplateRef&lt;any&gt;</code>
     
                                 </div>
                         </td>
@@ -1542,7 +1542,7 @@
                     <tr>
                         <td class="col-md-4">
                                 <div class="io-description">
-                                    <b>Returns: </b>    <code>any</code>
+                                    <b>Returns: </b>    <code>TemplateRef&lt;any&gt;</code>
     
                                 </div>
                         </td>
@@ -1566,7 +1566,7 @@
                     <tr>
                         <td class="col-md-4">
                                 <div class="io-description">
-                                    <b>Returns: </b>    <code>any</code>
+                                    <b>Returns: </b>    <code>TemplateRef&lt;any&gt;</code>
     
                                 </div>
                         </td>
@@ -1590,7 +1590,7 @@
                     <tr>
                         <td class="col-md-4">
                                 <div class="io-description">
-                                    <b>Returns: </b>    <code>any</code>
+                                    <b>Returns: </b>    <code>TemplateRef&lt;any&gt;</code>
     
                                 </div>
                         </td>
@@ -1614,7 +1614,7 @@
                     <tr>
                         <td class="col-md-4">
                                 <div class="io-description">
-                                    <b>Returns: </b>    <code>any</code>
+                                    <b>Returns: </b>    <code>TemplateRef&lt;any&gt;</code>
     
                                 </div>
                         </td>
@@ -1638,7 +1638,7 @@
                     <tr>
                         <td class="col-md-4">
                                 <div class="io-description">
-                                    <b>Returns: </b>    <code>any</code>
+                                    <b>Returns: </b>    <code>TemplateRef&lt;any&gt;</code>
     
                                 </div>
                         </td>
@@ -1662,7 +1662,7 @@
                     <tr>
                         <td class="col-md-4">
                                 <div class="io-description">
-                                    <b>Returns: </b>    <code>any</code>
+                                    <b>Returns: </b>    <code>TemplateRef&lt;any&gt;</code>
     
                                 </div>
                         </td>
@@ -2327,7 +2327,7 @@
                     </tr>
                     <tr>
                         <td class="col-md-4">
-                            <code>inputTemplates:     <code>any</code>
+                            <code>inputTemplates:     <code>QueryList&lt;QueryInputDirective&gt;</code>
     </bcode>
                         </td>
                     </tr>
@@ -3029,18 +3029,18 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     if (this.disabled) {
       return;
     }
-
+    let i &#x3D; index;
+    let rs &#x3D; data;
     const entity: Entity &#x3D; this.entities.find((e) &#x3D;&gt; e.value &#x3D;&#x3D;&#x3D; entityValue);
     const defaultField: Field &#x3D; this.getDefaultField(entity);
-    data.rules[index] &#x3D; {
-      ...rule,
-      field: defaultField.value
-    };
+    if (!rs) {
+      rs &#x3D; this.data;
+      i &#x3D; rs.rules.findIndex((x) &#x3D;&gt; x &#x3D;&#x3D;&#x3D; rule);
+    }
+    rule.field &#x3D; defaultField.value;
+    rs.rules[i] &#x3D; rule;
     if (defaultField) {
-      this.changeField(defaultField.value, {
-        ...rule,
-        field: defaultField.value
-      });
+      this.changeField(defaultField.value, rule);
     } else {
       this.handleTouched();
       this.handleDataChange();
