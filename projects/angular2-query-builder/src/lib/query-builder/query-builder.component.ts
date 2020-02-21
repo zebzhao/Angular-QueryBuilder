@@ -140,15 +140,15 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
 
   @ViewChild('treeContainer', {static: true}) treeContainer: ElementRef;
 
-  @ContentChild(QueryButtonGroupDirective, {static: false}) buttonGroupTemplate: QueryButtonGroupDirective;
-  @ContentChild(QuerySwitchGroupDirective, {static: false}) switchGroupTemplate: QuerySwitchGroupDirective;
-  @ContentChild(QueryFieldDirective, {static: false}) fieldTemplate: QueryFieldDirective;
-  @ContentChild(QueryEntityDirective, {static: false}) entityTemplate: QueryEntityDirective;
-  @ContentChild(QueryOperatorDirective, {static: false}) operatorTemplate: QueryOperatorDirective;
-  @ContentChild(QueryRemoveButtonDirective, {static: false}) removeButtonTemplate: QueryRemoveButtonDirective;
-  @ContentChild(QueryEmptyWarningDirective, {static: false}) emptyWarningTemplate: QueryEmptyWarningDirective;
+  @ContentChild(QueryButtonGroupDirective) buttonGroupTemplate: QueryButtonGroupDirective;
+  @ContentChild(QuerySwitchGroupDirective) switchGroupTemplate: QuerySwitchGroupDirective;
+  @ContentChild(QueryFieldDirective) fieldTemplate: QueryFieldDirective;
+  @ContentChild(QueryEntityDirective) entityTemplate: QueryEntityDirective;
+  @ContentChild(QueryOperatorDirective) operatorTemplate: QueryOperatorDirective;
+  @ContentChild(QueryRemoveButtonDirective) removeButtonTemplate: QueryRemoveButtonDirective;
+  @ContentChild(QueryEmptyWarningDirective) emptyWarningTemplate: QueryEmptyWarningDirective;
   @ContentChildren(QueryInputDirective) inputTemplates: QueryList<QueryInputDirective>;
-  @ContentChild(QueryArrowIconDirective, {static: false}) arrowIconTemplate: QueryArrowIconDirective;
+  @ContentChild(QueryArrowIconDirective) arrowIconTemplate: QueryArrowIconDirective;
 
   private defaultTemplateTypes: string[] = [
     'string', 'number', 'time', 'date', 'category', 'boolean', 'multiselect'];

@@ -9,10 +9,10 @@ function copyLib(callback) {
 }
 
 function copyLibWatch() {
-  return gulp.watch(LIBRARY_SRC, ['copy-lib']);
+  return gulp.watch(LIBRARY_SRC, copyLib);
 }
 
-export {
+module.exports = {
   copyLib,
   copyLibWatch
 }
