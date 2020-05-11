@@ -103,13 +103,16 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     inputControl: 'q-input-control',
     inputControlSize: 'q-control-size'
   };
-  public defaultOperatorMap: { [key: string]: string[] } = {
-    string: ['=', '!=', 'contains', 'like'],
-    number: ['=', '!=', '>', '>=', '<', '<='],
-    time: ['=', '!=', '>', '>=', '<', '<='],
-    date: ['=', '!=', '>', '>=', '<', '<='],
-    category: ['=', '!=', 'in', 'not in'],
-    boolean: ['=']
+  public defaultOperatorMap: { [key: string]: Option[] } = {
+    string: [ {name: '=', value: '='}, {name: '!=', value: '!='}, {name: 'contains', value: 'contains'}, {name: 'like', value: 'like' }],
+    // tslint:disable-next-line:max-line-length
+    number: [ {name: '=', value: '='}, {name: '!=', value: '!='}, {name: '>', value: '>'}, {name: '>=', value: '>=' }, {name: '<', value: '<' }, {name: '<=', value: '<=' }],
+    // tslint:disable-next-line:max-line-length
+    time: [{name: '=', value: '='}, {name: '!=', value: '!='}, {name: '>', value: '>'}, {name: '>=', value: '>=' }, {name: '<', value: '<' }, {name: '<=', value: '<=' }],
+    // tslint:disable-next-line:max-line-length
+    date: [{name: '=', value: '='}, {name: '!=', value: '!='}, {name: '>', value: '>'}, {name: '>=', value: '>=' }, {name: '<', value: '<' }, {name: '<=', value: '<=' }],
+    category: [{name: '=', value: '='}, {name: '!=', value: '!='}, {name: 'in', value: 'in'}, {name: 'not in', value: 'not in' }],
+    boolean: [{name: '=', value: '='}]
   };
   @Input() disabled: boolean;
   @Input() data: RuleSet = { condition: 'and', rules: [] };
@@ -122,7 +125,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   @Input() allowCollapse: boolean = false;
   @Input() emptyMessage: string = 'A ruleset cannot be empty. Please add a rule or remove it all together.';
   @Input() classNames: QueryBuilderClassNames;
-  @Input() operatorMap: { [key: string]: string[] };
+  @Input() operatorMap: { [key: string]: Option[] };
   @Input() parentValue: RuleSet;
   @Input() config: QueryBuilderConfig = { fields: {} };
   @Input() parentArrowIconTemplate: QueryArrowIconDirective;
@@ -154,8 +157,8 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     'string', 'number', 'time', 'date', 'category', 'boolean', 'multiselect'];
   private defaultPersistValueTypes: string[] = [
     'string', 'number', 'time', 'date', 'boolean'];
-  private defaultEmptyList: any[] = [];
-  private operatorsCache: { [key: string]: string[] };
+  private defaultEmptyList: Option[] = [];
+  private operatorsCache: { [key: string]: Option[] };
   private inputContextCache = new Map<Rule, InputContext>();
   private operatorContextCache = new Map<Rule, OperatorContext>();
   private fieldContextCache = new Map<Rule, FieldContext>();
@@ -268,7 +271,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     return templates.find((item) => item.queryInputType === type);
   }
 
-  getOperators(field: string): string[] {
+  getOperators(field: string): Option[] {
     if (this.operatorsCache[field]) {
       return this.operatorsCache[field];
     }
@@ -291,7 +294,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
           `Please define an 'operators' property on the field or use the 'operatorMap' binding to fix this.`);
       }
       if (fieldObject.nullable) {
-        operators = operators.concat(['is null', 'is not null']);
+        operators = operators.concat([{name: 'is null', value: 'is null'}, {name: 'is not null', value: 'is not null'}]);
       }
     } else {
       console.warn(`No 'type' property found on field: '${field}'`);
@@ -312,7 +315,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     }
   }
 
-  getInputType(field: string, operator: string): string {
+  getInputType(field: string, operator: Option): string {
     if (this.config.getInputType) {
       return this.config.getInputType(field, operator);
     }
@@ -322,7 +325,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     }
 
     const type = this.config.fields[field].type;
-    switch (operator) {
+    switch (operator.value) {
       case 'is null':
       case 'is not null':
         return null;  // No displayed component
@@ -366,7 +369,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     }
   }
 
-  getDefaultOperator(field: Field): string {
+  getDefaultOperator(field: Field): Option {
     if (field && field.defaultOperator !== undefined) {
       return this.getDefaultValue(field.defaultOperator);
     } else {
@@ -500,7 +503,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     this.handleDataChange();
   }
 
-  coerceValueForOperator(operator: string, value: any, rule: Rule): any {
+  coerceValueForOperator(operator: Option, value: any, rule: Rule): any {
     const inputType: string = this.getInputType(rule.field, operator);
     if (inputType === 'multiselect' && !Array.isArray(value)) {
       return [value];
