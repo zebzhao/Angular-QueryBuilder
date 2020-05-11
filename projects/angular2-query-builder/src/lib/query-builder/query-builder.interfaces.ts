@@ -10,7 +10,7 @@ export interface RuleSet {
 export interface Rule {
   field: string;
   value?: any;
-  operator?: string;
+  operator?: Option;
   entity?: string;
 }
 
@@ -29,7 +29,7 @@ export interface Field {
   type: string;
   nullable?: boolean;
   options?: Option[];
-  operators?: string[];
+  operators?: Option[];
   defaultValue?: any;
   defaultOperator?: any;
   entity?: string;
@@ -90,14 +90,14 @@ export interface QueryBuilderConfig {
   fields: FieldMap;
   entities?: EntityMap;
   allowEmptyRulesets?: boolean;
-  getOperators?: (fieldName: string, field: Field) => string[];
-  getInputType?: (field: string, operator: string) => string;
+  getOperators?: (fieldName: string, field: Field) => Option[];
+  getInputType?: (field: string, operator: Option) => string;
   getOptions?: (field: string) => Option[];
   addRuleSet?: (parent: RuleSet) => void;
   addRule?: (parent: RuleSet) => void;
   removeRuleSet?: (ruleset: RuleSet, parent: RuleSet) => void;
   removeRule?: (rule: Rule, parent: RuleSet) => void;
-  coerceValueForOperator?: (operator: string, value: any, rule: Rule) => any;
+  coerceValueForOperator?: (operator: Option, value: any, rule: Rule) => any;
   calculateFieldChangeValue?: (currentField: Field,
                                nextField: Field,
                                currentValue: any) => any;
@@ -138,7 +138,7 @@ export interface FieldContext {
 export interface OperatorContext {
   onChange: () => void;
   getDisabledState: () => boolean;
-  operators: string[];
+  operators: Option[];
   $implicit: Rule;
 }
 
