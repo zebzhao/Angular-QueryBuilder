@@ -90,7 +90,7 @@ import { QueryBuilderClassNames, QueryBuilderConfig } from 'angular2-query-build
       <mat-form-field [style.width.px]="90">
         <mat-select [(ngModel)]="rule.operator" (ngModelChange)="onChange(rule)">
           <mat-option *ngFor="let operator of operators" [value]="operator.value">
-            {{ operator.label }}
+            {{ operator.name }}
           </mat-option>
         </mat-select>
       </mat-form-field>
