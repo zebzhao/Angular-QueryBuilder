@@ -113,8 +113,8 @@
               <div [ngClass]="getClassNames('operatorControlSize')">
                 <select [ngClass]="getClassNames('operatorControl')" [(ngModel)]="rule.operator" (ngModelChange)="changeOperator(rule)"
                   [disabled]="disabled">
-                  <option *ngFor="let operator of getOperators(rule.field)" [ngValue]="operator">
-                    {{operator}}
+                  <option *ngFor="let operator of getOperators(rule.field)" [ngValue]="operator.value">
+                    {{operator.label}}
                   </option>
                 </select>
               </div>

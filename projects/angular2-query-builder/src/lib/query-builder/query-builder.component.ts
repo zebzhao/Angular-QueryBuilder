@@ -103,13 +103,44 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     inputControl: 'q-input-control',
     inputControlSize: 'q-control-size'
   };
-  public defaultOperatorMap: { [key: string]: string[] } = {
-    string: ['=', '!=', 'contains', 'like'],
-    number: ['=', '!=', '>', '>=', '<', '<='],
-    time: ['=', '!=', '>', '>=', '<', '<='],
-    date: ['=', '!=', '>', '>=', '<', '<='],
-    category: ['=', '!=', 'in', 'not in'],
-    boolean: ['=']
+  public defaultOperatorMap: { [key: string]: Array<{ value: string, label: string }> } = {
+    string: [
+      { value: '=', label: '=' },
+      { value: '!=', label: '!=' },
+      { value: 'contains', label: 'contains' },
+      { value: 'like', label: 'like' }
+    ],
+    number: [
+      { value: '=', label: '=' },
+      { value: '!=', label: '!=' },
+      { value: '>', label: '>' },
+      { value: '>=', label: '>=' },
+      { value: '<', label: '<' },
+      { value: '<=', label: '<=' }
+    ],
+    time: [
+      { value: '=', label: '=' },
+      { value: '!=', label: '!=' },
+      { value: '>', label: '>' },
+      { value: '>=', label: '>=' },
+      { value: '<', label: '<' },
+      { value: '<=', label: '<=' }
+    ],
+    date: [
+      { value: '=', label: '=' },
+      { value: '!=', label: '!=' },
+      { value: '>', label: '>' },
+      { value: '>=', label: '>=' },
+      { value: '<', label: '<' },
+      { value: '<=', label: '<=' }
+    ],
+    category: [
+      { value: '=', label: '=' },
+      { value: '!=', label: '!=' },
+      { value: 'in', label: 'in' },
+      { value: 'not in', label: 'not in' }
+    ],
+    boolean: [ { value: '=', label: '=' } ]
   };
   @Input() disabled: boolean;
   @Input() data: RuleSet = { condition: 'and', rules: [] };
@@ -155,7 +186,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   private defaultPersistValueTypes: string[] = [
     'string', 'number', 'time', 'date', 'boolean'];
   private defaultEmptyList: any[] = [];
-  private operatorsCache: { [key: string]: string[] };
+  private operatorsCache: { [key: string]: Array<{ value: string, label: string }> };
   private inputContextCache = new Map<Rule, InputContext>();
   private operatorContextCache = new Map<Rule, OperatorContext>();
   private fieldContextCache = new Map<Rule, FieldContext>();
@@ -167,7 +198,21 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
 
   // ----------OnInit Implementation----------
 
-  ngOnInit() { }
+  ngOnInit() {
+    // Loop through all the fields and change the operators to value/label if they are just string arrays
+    for (const field in this.config.fields) {
+      if (this.config.fields[field].operators) {
+        this.config.fields[field].operators = (this.config.fields[field].operators as any[])
+        .map((operator: string | { value: string, label: string}) => {
+          if (typeof(operator) === 'string') {
+            return { value: operator, label: operator };
+          }
+
+          return operator;
+        });
+      }
+    }
+  }
 
   // ----------OnChanges Implementation----------
 
@@ -249,7 +294,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   }
 
   findTemplateForRule(rule: Rule): TemplateRef<any> {
-    const type = this.getInputType(rule.field, rule.operator);
+    const type = this.getInputType(rule.field, rule.operator.value);
     if (type) {
       const queryInput = this.findQueryInput(type);
       if (queryInput) {
@@ -268,7 +313,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     return templates.find((item) => item.queryInputType === type);
   }
 
-  getOperators(field: string): string[] {
+  getOperators(field: string): Array<{ value: string, label: string }> {
     if (this.operatorsCache[field]) {
       return this.operatorsCache[field];
     }
@@ -291,7 +336,10 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
           `Please define an 'operators' property on the field or use the 'operatorMap' binding to fix this.`);
       }
       if (fieldObject.nullable) {
-        operators = operators.concat(['is null', 'is not null']);
+        operators = operators.concat([
+          { value: 'is null', label: 'is null' },
+          { value: 'is not null', label: 'is not null' }
+        ]);
       }
     } else {
       console.warn(`No 'type' property found on field: '${field}'`);
@@ -366,7 +414,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     }
   }
 
-  getDefaultOperator(field: Field): string {
+  getDefaultOperator(field: Field): { value: string, label: string } {
     if (field && field.defaultOperator !== undefined) {
       return this.getDefaultValue(field.defaultOperator);
     } else {
@@ -491,9 +539,9 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     }
 
     if (this.config.coerceValueForOperator) {
-      rule.value = this.config.coerceValueForOperator(rule.operator, rule.value, rule);
+      rule.value = this.config.coerceValueForOperator(rule.operator.value, rule.value, rule);
     } else {
-      rule.value = this.coerceValueForOperator(rule.operator, rule.value, rule);
+      rule.value = this.coerceValueForOperator(rule.operator.value, rule.value, rule);
     }
 
     this.handleTouched();
