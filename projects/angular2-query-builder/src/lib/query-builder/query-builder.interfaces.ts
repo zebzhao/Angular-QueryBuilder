@@ -143,7 +143,6 @@ export interface FieldContext {
   getFields: (entityName: string) => void;
   getDisabledState: () => boolean;
   fields: Field[];
-  ruleSet: RuleSet;
   $implicit: Rule;
 }
 

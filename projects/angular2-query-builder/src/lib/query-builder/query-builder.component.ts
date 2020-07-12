@@ -708,7 +708,6 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
         getDisabledState: this.getDisabledState,
         fields: this.fields,
         $implicit: rule,
-        ruleSet: this.data,
       });
     }
     return this.fieldContextCache.get(rule);
