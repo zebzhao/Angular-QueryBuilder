@@ -5,6 +5,9 @@ export interface RuleSet {
   rules: Array<RuleSet | Rule>;
   collapsed?: boolean;
   isChild?: boolean;
+  depth?: number;
+  index?: number;
+  parentIndex?: number;
 }
 
 export interface Rule {
@@ -12,6 +15,9 @@ export interface Rule {
   value?: any;
   operator?: string;
   entity?: string;
+  depth?: number;
+  index?: number;
+  parentIndex?: number;
 }
 
 export interface Option {
@@ -98,13 +104,18 @@ export interface QueryBuilderConfig {
   removeRuleSet?: (ruleset: RuleSet, parent: RuleSet) => void;
   removeRule?: (rule: Rule, parent: RuleSet) => void;
   coerceValueForOperator?: (operator: string, value: any, rule: Rule) => any;
-  calculateFieldChangeValue?: (currentField: Field,
-                               nextField: Field,
-                               currentValue: any) => any;
+  calculateFieldChangeValue?: (
+    currentField: Field,
+    nextField: Field,
+    currentValue: any
+  ) => any;
+  getConditions?: (ruleset?: RuleSet) => string[];
+  getFields?: (rule: Rule, ruleSet: RuleSet) => Field[];
 }
 
 export interface SwitchGroupContext {
   onChange: (conditionValue: string) => void;
+  getConditions: (ruleset?: RuleSet) => string[];
   getDisabledState: () => boolean;
   $implicit: RuleSet;
 }
