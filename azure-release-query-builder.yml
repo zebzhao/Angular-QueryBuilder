@@ -10,17 +10,25 @@ pr: none
 pool:
   vmImage: 'ubuntu-latest'
 
-variables:
-  versionBase: 1
-
 steps:
 - task: NodeTool@0
   inputs:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
+
 - script: |
     npm install -g @angular/cli
     npm install
     ng build --prod
   displayName: 'npm install and build'
+
+  script: |
+    npm version minor
+  displayName: 'Bump version'
+
+- task: Npm@1
+  inputs:
+    command: 'publish'
+    publishRegistry: 'useFeed'
+    publishFeed: 'f9bc0907-731b-4968-8b3a-f3475b0970ef'
 
