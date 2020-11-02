@@ -22,9 +22,9 @@ steps:
     ng build --prod
   displayName: 'npm install and build'
 
-  script: |
+- script: |
     npm version minor
-  displayName: 'Bump version'
+  displayName: 'Bump version number'
 
 - task: Npm@1
   inputs:
