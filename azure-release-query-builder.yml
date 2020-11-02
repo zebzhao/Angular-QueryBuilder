@@ -23,7 +23,7 @@ steps:
   displayName: 'npm install and build'
 
 - script: |
-    npm version minor
+    npm version minor --watch=false --browsers=ChromeHeadless
   displayName: 'Bump version number'
 
 - task: Npm@1
