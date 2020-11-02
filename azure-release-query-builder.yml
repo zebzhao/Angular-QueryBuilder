@@ -10,6 +10,9 @@ pr: none
 pool:
   vmImage: 'ubuntu-latest'
 
+variables:
+  versionBase: 1
+
 steps:
 - task: NodeTool@0
   inputs:
