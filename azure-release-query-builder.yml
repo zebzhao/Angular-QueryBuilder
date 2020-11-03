@@ -17,7 +17,7 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
-    git checkout $(Build.SourceBranch)
+    git checkout $(Build.SourceBranchName)
     git pull
   displayName: 'Get git stuff'
 
