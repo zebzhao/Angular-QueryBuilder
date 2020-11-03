@@ -50,7 +50,6 @@
     "gh-pages": "rimraf docs && npm run docs && npm run copyDemo && gh-pages -d docs",
     "prebuild": "rimraf dist tmp",
     "prebuild:watch": "rimraf dist tmp",
-    "prepublishOnly": "npm run ci",
     "test:watch": "ng test --watch=true",
     "tslint": "ng lint"
   },
