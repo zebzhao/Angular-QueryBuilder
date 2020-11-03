@@ -38,10 +38,6 @@ steps:
     npm version $(RELEASETYPE)
   displayName: 'Bump version number'
 
-- script: |
-    git status
-  displayName: 'Get git stuff'
-
 - task: Npm@1
   inputs:
     command: 'publish'
@@ -50,5 +46,5 @@ steps:
   displayName: "Publish package to Azure Artifacts"
 
 - script: |
-    git push
+    git -c http.extraheader="AUTHORIZATION: Basic $(GITHUBPAT)" push
   displayName: 'Push changes to version number'
