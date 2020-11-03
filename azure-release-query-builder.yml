@@ -30,7 +30,7 @@ steps:
       git config --global user.name "DevOps Pipeline"
 
 - script: |
-    npm version build
+    npm version $(RELEASETYPE)
   displayName: 'Bump version number'
 
 - task: Npm@1
