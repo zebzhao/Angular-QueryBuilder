@@ -1,6 +1,6 @@
 {
   "name": "josie-query-builder",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "A modernized Angular 2+ query builder based on jquery QueryBuilder",
   "main": "./dist/angular2-query-builder/bundles/angular2-query-builder.umd.js",
   "module": "./dist/angular2-query-builder/esm5/angular2-query-builder.js",
