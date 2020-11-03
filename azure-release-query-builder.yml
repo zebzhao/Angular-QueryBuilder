@@ -35,12 +35,12 @@ steps:
       git config --global user.name "DevOps Pipeline"
 
 - script: |
-    git status
-  displayName: 'Get git stuff'
-
-- script: |
     npm version $(RELEASETYPE)
   displayName: 'Bump version number'
+
+- script: |
+    git status
+  displayName: 'Get git stuff'
 
 - task: Npm@1
   inputs:
