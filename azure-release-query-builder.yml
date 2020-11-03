@@ -22,8 +22,15 @@ steps:
     ng build --prod
   displayName: 'npm install and build'
 
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      git config --global user.email ""
+      git config --global user.name "DevOps Pipeline"
+
 - script: |
-    npm version minor --watch=false --browsers=ChromeHeadless
+    npm version build
   displayName: 'Bump version number'
 
 - task: Npm@1
