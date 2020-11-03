@@ -33,6 +33,7 @@ steps:
     script: |
       git config --global user.email ""
       git config --global user.name "DevOps Pipeline"
+  displayName: "Set git pipeline configuration"
 
 - script: |
     npm version $(RELEASETYPE)
@@ -46,5 +47,5 @@ steps:
   displayName: "Publish package to Azure Artifacts"
 
 - script: |
-    git -c http.extraheader="AUTHORIZATION: Basic $(GITHUBPAT)" push
+    git https://$(GITHUBPAT)@github.com/CybercentreCanada/Angular-QueryBuilder.git push
   displayName: 'Push changes to version number'
