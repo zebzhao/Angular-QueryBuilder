@@ -17,6 +17,11 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
+    git checkout $(Build.SourceBranch)
+    git pull
+  displayName: 'Get git stuff'
+
+- script: |
     npm install -g @angular/cli
     npm install
     ng build --prod
