@@ -47,5 +47,5 @@ steps:
   displayName: "Publish package to Azure Artifacts"
 
 - script: |
-    git https://$(GITHUBPAT)@github.com/CybercentreCanada/Angular-QueryBuilder.git push
+    git push -q https://$(GITHUBPAT)@github.com/CybercentreCanada/Angular-QueryBuilder.git
   displayName: 'Push changes to version number'
