@@ -1,6 +1,6 @@
 {
   "name": "josie-query-builder",
-  "version": "0.0.1",
+  "version": "2.0.0",
   "description": "A modernized Angular 2+ query builder based on jquery QueryBuilder",
   "main": "./dist/angular2-query-builder/bundles/angular2-query-builder.umd.js",
   "module": "./dist/angular2-query-builder/esm5/angular2-query-builder.js",
@@ -17,17 +17,17 @@
     "visual"
   ],
   "author": {
-    "name": "Zeb Zhao",
-    "url": "https://github.com/zebzhao/"
+    "name": "CSE AR",
+    "url": ""
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/zebzhao/Angular-QueryBuilder"
+    "url": "https://github.com/CybercentreCanada/Angular-QueryBuilder"
   },
   "bugs": {
-    "url": "https://github.com/zebzhao/Angular-QueryBuilder/issues"
+    "url": "https://cccs.atlassian.net/jira/software/projects/RESJOSIE/boards/165/backlog"
   },
-  "homepage": "https://github.com/zebzhao/Angular-QueryBuilder#readme",
+  "homepage": "https://github.com/CybercentreCanada/Angular-QueryBuilder#readme",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
