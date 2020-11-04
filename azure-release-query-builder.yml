@@ -1,10 +1,4 @@
-# Node.js with Angular
-# Build a Node.js project that uses Angular.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
-
 trigger: none
-
 pr: none
 
 pool:
@@ -20,7 +14,7 @@ steps:
     export branchname=`echo "$(Build.SourceBranch)" | cut -c 12-`
     git checkout $branchname
     git pull
-  displayName: 'Get git stuff'
+  displayName: 'Full checkout of current branch'
 
 - script: |
     npm install -g @angular/cli
@@ -28,13 +22,15 @@ steps:
     ng build --prod
   displayName: 'npm install and build'
 
+# May want to run full test suite?
+
 - task: Bash@3
   inputs:
     targetType: 'inline'
     script: |
       git config --global user.email ""
       git config --global user.name "DevOps Pipeline"
-  displayName: "Set git pipeline configuration"
+  displayName: "Setup git pipeline configuration"
 
 - script: |
     npm version $(RELEASETYPE)
