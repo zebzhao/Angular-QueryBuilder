@@ -17,7 +17,7 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
-    branchname=echo "$(Build.SourceBranch)" | cut -c 12-
+    export branchname=`echo "$(Build.SourceBranch)" | cut -c 12-`
     git checkout -b $branchname
     git pull
   displayName: 'Get git stuff'
