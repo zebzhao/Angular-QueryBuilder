@@ -16,8 +16,13 @@ steps:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
 
+- bash: |
+    branchname=echo "$(Build.SourceBranch)" | cut -c 12-
+    echo "##vso[task.setvariable variable=CONTAINER_BUILD_TIME]$branchname"
+  displayName: 'Get current branch name'
+
 - script: |
-    git checkout feature/RESJOSIE-245
+    git checkout $(branchname)
     git pull
   displayName: 'Get git stuff'
 
