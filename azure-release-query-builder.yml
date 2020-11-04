@@ -19,9 +19,11 @@ steps:
 - bash: |
     branchname=echo "$(Build.SourceBranch)" | cut -c 12-
     echo "##vso[task.setvariable variable=BRANCHNAME]$branchname"
+    echo $(BRANCHNAME)
   displayName: 'Get current branch name'
 
 - script: |
+    echo "Checking out $(BRANCHNAME)"
     git checkout $(BRANCHNAME)
     git pull
   displayName: 'Get git stuff'
