@@ -18,7 +18,7 @@ steps:
 
 - script: |
     export branchname=`echo "$(Build.SourceBranch)" | cut -c 12-`
-    git checkout -b $branchname
+    git checkout $branchname
     git pull
   displayName: 'Get git stuff'
 
