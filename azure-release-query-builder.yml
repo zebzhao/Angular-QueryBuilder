@@ -40,6 +40,13 @@ steps:
   inputs:
     command: 'publish'
     publishRegistry: 'useFeed'
+    publishFeed: 'f9bc0907-731b-4968-8b3a-f3475b0970ef'
+  displayName: "Publish package to JOSIE Artifacts"
+
+- task: Npm@1
+  inputs:
+    command: 'publish'
+    publishRegistry: 'useFeed'
     publishFeed: '08c311fe-7825-4aab-9b83-b903d9e00640/42335431-f3e9-43c3-a6a5-6088140dd368'
   displayName: "Publish package to Azure Artifacts"
 
