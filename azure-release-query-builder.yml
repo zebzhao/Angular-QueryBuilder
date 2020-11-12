@@ -1,0 +1,48 @@
+trigger: none
+pr: none
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '10.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    export branchname=`echo "$(Build.SourceBranch)" | cut -c 12-`
+    git checkout $branchname
+    git pull
+  displayName: 'Full checkout of current branch'
+
+- script: |
+    npm install -g @angular/cli
+    npm install
+    ng build --prod
+  displayName: 'npm install and build'
+
+# May want to run full test suite?
+
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      git config --global user.email ""
+      git config --global user.name "DevOps Pipeline"
+  displayName: "Setup git pipeline configuration"
+
+- script: |
+    npm version $(RELEASETYPE)
+  displayName: 'Bump version number'
+
+- task: Npm@1
+  inputs:
+    command: 'publish'
+    publishRegistry: 'useFeed'
+    publishFeed: 'f9bc0907-731b-4968-8b3a-f3475b0970ef'
+  displayName: "Publish package to JOSIE Artifacts"
+
+- script: |
+    git push -q https://$(GITHUBPAT)@github.com/CybercentreCanada/Angular-QueryBuilder.git
+  displayName: 'Push changes to version number'
