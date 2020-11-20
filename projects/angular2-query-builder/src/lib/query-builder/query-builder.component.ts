@@ -105,7 +105,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   };
   public defaultOperatorMap: { [key: string]: string[] } = {
     string: ['=', '!=', 'contains', 'like'],
-    number: ['=', '!=', '>', '>=', '<', '<='],
+    number: ['=', '!=', '>', '>=', '<', '<=', 'in between', 'not in between'],
     time: ['=', '!=', '>', '>=', '<', '<='],
     date: ['=', '!=', '>', '>=', '<', '<='],
     category: ['=', '!=', 'in', 'not in'],
@@ -151,7 +151,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   @ContentChild(QueryArrowIconDirective) arrowIconTemplate: QueryArrowIconDirective;
 
   private defaultTemplateTypes: string[] = [
-    'string', 'number', 'time', 'date', 'category', 'boolean', 'multiselect'];
+    'string', 'number', 'time', 'date', 'category', 'boolean', 'multiselect', 'numericrange'];
   private defaultPersistValueTypes: string[] = [
     'string', 'number', 'time', 'date', 'boolean'];
   private defaultEmptyList: any[] = [];
@@ -329,6 +329,9 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
       case 'in':
       case 'not in':
         return type === 'category' || type === 'boolean' ? 'multiselect' : type;
+      case 'not in between':
+      case 'in between':
+        return type === 'number' ? 'numericrange' : type;
       default:
         return type;
     }
@@ -502,7 +505,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
 
   coerceValueForOperator(operator: string, value: any, rule: Rule): any {
     const inputType: string = this.getInputType(rule.field, operator);
-    if (inputType === 'multiselect' && !Array.isArray(value)) {
+    if ((inputType === 'multiselect' || inputType === 'numericrange') && !Array.isArray(value)) {
       return [value];
     }
     return value;
