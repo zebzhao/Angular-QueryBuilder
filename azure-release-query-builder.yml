@@ -36,13 +36,13 @@ steps:
     npm version $(RELEASETYPE)
   displayName: 'Bump version number'
 
+- script: |
+    git push -q https://$(GITHUBPAT)@github.com/CybercentreCanada/Angular-QueryBuilder.git
+  displayName: 'Push changes to version number'
+
 - task: Npm@1
   inputs:
     command: 'publish'
     publishRegistry: 'useFeed'
     publishFeed: 'f9bc0907-731b-4968-8b3a-f3475b0970ef'
   displayName: "Publish package to JOSIE Artifacts"
-
-- script: |
-    git push -q https://$(GITHUBPAT)@github.com/CybercentreCanada/Angular-QueryBuilder.git
-  displayName: 'Push changes to version number'
