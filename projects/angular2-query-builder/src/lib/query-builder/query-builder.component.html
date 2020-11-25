@@ -153,8 +153,11 @@
                     and
                     <input [ngClass]="getClassNames('inputControl')" [(ngModel)]="rule.value[1]" (ngModelChange)="changeInput()" [disabled]="disabled" type="number">
                 </ng-container>
-                <input [ngClass]="getClassNames('inputControl')" [(ngModel)]="rule.value" (ngModelChange)="changeInput()"
-                  [disabled]="disabled" *ngSwitchCase="'boolean'" type="checkbox">
+                <select [ngClass]="getClassNames('inputControl')" [(ngModel)]="rule.value" (ngModelChange)="changeInput()"
+                  [disabled]="disabled" *ngSwitchCase="'boolean'">
+                  <option [ngValue]="true">True</option>
+                  <option [ngValue]="false">False</option>
+                </select>
               </div>
             </ng-template>
 
