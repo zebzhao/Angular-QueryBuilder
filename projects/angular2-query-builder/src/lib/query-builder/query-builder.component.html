@@ -155,8 +155,8 @@
                 </ng-container>
                 <select [ngClass]="getClassNames('inputControl')" [(ngModel)]="rule.value" (ngModelChange)="changeInput()"
                   [disabled]="disabled" *ngSwitchCase="'boolean'">
-                  <option [ngValue]="true">true</option>
-                  <option [ngValue]="false">false</option>
+                  <option [ngValue]="true">True</option>
+                  <option [ngValue]="false">False</option>
                 </select>
               </div>
             </ng-template>
