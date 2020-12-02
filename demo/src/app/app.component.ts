@@ -191,6 +191,63 @@ import { QueryBuilderClassNames, QueryBuilderConfig } from 'angular2-query-build
 export class AppComponent {
   public queryCtrl: FormControl;
 
+  public getCurrentDatetime():string {
+    let currentDatetime: string;
+    let date: Date = new Date();
+
+    let day: string = ('0'+date.getDate().toString()).slice(-2)
+    let month: string = ('0'+date.getMonth().toString()).slice(-2)
+    let year: string = date.getFullYear().toString();
+    let hours: string = ('0'+(date.getHours()+5).toString()).slice(-2)
+    let minutes: string = ('0'+date.getMinutes().toString()).slice(-2)
+    let seconds: string = ('0'+date.getSeconds().toString()).slice(-2)
+
+    currentDatetime = year +"/"+ month +"/"+ day +" "+ hours +":"+ minutes+":"+seconds;
+    //currentDatetime = date.toISOString();
+    return currentDatetime;
+  }
+
+  // Validates that the input string is a valid date/time formatted as "YYYY/MM/DD HH:MM:SS"
+  public isValidDate(dateString: string)
+  {
+      // First check for the pattern
+      if(!/^\d{4}\/\d{1,2}\/\d{1,2}\s\d{2}\:\d{2}\:\d{2}$/.test(dateString))
+          return false;
+  
+      // Parse the date parts to integers
+      var parts: string[] = dateString.split(" ");
+      var date: string = parts[0]
+      var time: string = parts[1]
+  
+      var dateParts: string[] = date.split("/");
+      var timeParts: string[] = time.split(":");
+  
+      var month: number = parseInt(dateParts[1], 10);
+      var year: number = parseInt(dateParts[0], 10);
+      var day: number = parseInt(dateParts[2], 10);
+  
+      var hour: number = parseInt(timeParts[0], 10);
+      var minutes: number = parseInt(timeParts[1], 10);
+      var seconds: number = parseInt(timeParts[2], 10);
+  
+      // Check the ranges of month and year
+      if(year < 1000 || year > 3000 || month == 0 || month > 12)
+          return false;
+  
+      var monthLength = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
+  
+      // Adjust for leap years
+      if(year % 400 == 0 || (year % 100 != 0 && year % 4 == 0))
+          monthLength[1] = 29;
+  
+      // Check time ranges
+      if(hour < 0 || hour > 23 || minutes < 0 || minutes > 59 || seconds < 0 || seconds > 59)
+          return false;
+  
+      // Check the range of the day
+      return day > 0 && day <= monthLength[month - 1];
+  }
+
   public bootstrapClassNames: QueryBuilderClassNames = {
     removeIcon: 'fa fa-minus',
     addIcon: 'fa fa-plus',
@@ -222,7 +279,8 @@ export class AppComponent {
     condition: 'and',
     rules: [
       {field: 'age', operator: '<=', entity: 'physical'},
-      {field: 'birthday', operator: '=', value: new Date(), entity: 'nonphysical'},
+      {field: 'birthday', operator: '=', value: this.getCurrentDatetime(), entity: 'nonphysical'},
+      //{field: 'birthday', operator: '=', value: new Date(), entity: 'nonphysical'},
       {
         condition: 'or',
         rules: [
@@ -255,7 +313,7 @@ export class AppComponent {
       notes: {name: 'Notes', type: 'textarea', operators: ['=', '!='], entity: 'nonphysical'},
       educated: {name: 'College Degree?', type: 'boolean', entity: 'nonphysical'},
       birthday: {name: 'Birthday', type: 'date', operators: ['=', '<=', '>'],
-        defaultValue: (() => new Date()), entity: 'nonphysical'
+       defaultValue: (() => new Date()), entity: 'nonphysical'
       },
       school: {name: 'School', type: 'string', nullable: true, entity: 'nonphysical'},
       occupation: {
@@ -286,8 +344,19 @@ export class AppComponent {
       name: {name: 'Name', type: 'string'},
       notes: {name: 'Notes', type: 'textarea', operators: ['=', '!=']},
       educated: {name: 'College Degree?', type: 'boolean'},
-      birthday: {name: 'Birthday', type: 'date', operators: ['=', '<=', '>'],
-        defaultValue: (() => new Date())
+      // birthday: {name: 'Birthday', type: 'date', operators: ['=', '<=', '>'],
+      //   defaultValue: (() => new Date())
+      // },
+      birthday: {name: 'Birthday', type: 'datetime', operators: ['=', '<=', '>'],
+      defaultValue: (() => this.getCurrentDatetime()), validator: (rule) => {
+        let dateValidity : boolean = this.isValidDate(rule.value)
+        if (dateValidity) {
+          return null
+        } else {
+          return("Date/time value is not valid.")
+        }
+        
+      }
       },
       school: {name: 'School', type: 'string', nullable: true},
       occupation: {

@@ -108,6 +108,7 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
     number: ['=', '!=', '>', '>=', '<', '<=', 'in between', 'not in between'],
     time: ['=', '!=', '>', '>=', '<', '<='],
     date: ['=', '!=', '>', '>=', '<', '<='],
+    datetime: ['=', '!=', '>', '>=', '<', '<='],
     category: ['=', '!=', 'in', 'not in'],
     boolean: ['=']
   };
@@ -151,9 +152,9 @@ export class QueryBuilderComponent implements OnInit, OnChanges, ControlValueAcc
   @ContentChild(QueryArrowIconDirective) arrowIconTemplate: QueryArrowIconDirective;
 
   private defaultTemplateTypes: string[] = [
-    'string', 'number', 'time', 'date', 'category', 'boolean', 'multiselect', 'numericrange'];
+    'string', 'number', 'time', 'date', 'datetime', 'category', 'boolean', 'multiselect', 'numericrange'];
   private defaultPersistValueTypes: string[] = [
-    'string', 'number', 'time', 'date', 'boolean'];
+    'string', 'number', 'time', 'date', 'datetime', 'boolean'];
   private defaultEmptyList: any[] = [];
   private operatorsCache: { [key: string]: string[] };
   private inputContextCache = new Map<Rule, InputContext>();

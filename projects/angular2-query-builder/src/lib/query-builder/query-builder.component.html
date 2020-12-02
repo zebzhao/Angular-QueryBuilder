@@ -133,6 +133,8 @@
                 <input [ngClass]="getClassNames('inputControl')" [(ngModel)]="rule.value" (ngModelChange)="changeInput()"
                   [disabled]="disabled" *ngSwitchCase="'date'" type="date">
                 <input [ngClass]="getClassNames('inputControl')" [(ngModel)]="rule.value" (ngModelChange)="changeInput()"
+                  [disabled]="disabled" *ngSwitchCase="'datetime'" type="datetime">
+                <input [ngClass]="getClassNames('inputControl')" [(ngModel)]="rule.value" (ngModelChange)="changeInput()"
                   [disabled]="disabled" *ngSwitchCase="'time'" type="time">
                 <select [ngClass]="getClassNames('inputControl')" [(ngModel)]="rule.value" (ngModelChange)="changeInput()"
                   [disabled]="disabled" *ngSwitchCase="'category'">
