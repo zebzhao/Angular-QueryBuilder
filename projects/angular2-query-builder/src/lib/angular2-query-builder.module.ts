@@ -13,6 +13,7 @@ import { QueryButtonGroupDirective } from './query-builder/query-button-group.di
 import { QuerySwitchGroupDirective } from './query-builder/query-switch-group.directive';
 import { QueryRemoveButtonDirective } from './query-builder/query-remove-button.directive';
 import { QueryEmptyWarningDirective } from './query-builder/query-empty-warning.directive';
+import {QueryBuilderExpressionPipe} from "./query-builder/query-builder-expression.pipe";
 
 @NgModule({
   imports: [
@@ -29,7 +30,8 @@ import { QueryEmptyWarningDirective } from './query-builder/query-empty-warning.
     QuerySwitchGroupDirective,
     QueryRemoveButtonDirective,
     QueryEmptyWarningDirective,
-    QueryArrowIconDirective
+    QueryArrowIconDirective,
+    QueryBuilderExpressionPipe
   ],
   exports: [
     QueryBuilderComponent,
@@ -41,7 +43,8 @@ import { QueryEmptyWarningDirective } from './query-builder/query-empty-warning.
     QuerySwitchGroupDirective,
     QueryRemoveButtonDirective,
     QueryEmptyWarningDirective,
-    QueryArrowIconDirective
+    QueryArrowIconDirective,
+    QueryBuilderExpressionPipe
   ]
 })
 export class QueryBuilderModule { }
