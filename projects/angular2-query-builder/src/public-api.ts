@@ -15,5 +15,7 @@ export * from './lib/query-builder/query-switch-group.directive';
 export * from './lib/query-builder/query-remove-button.directive';
 export * from './lib/query-builder/query-empty-warning.directive';
 export * from './lib/query-builder/query-arrow-icon.directive';
+export * from './lib/query-builder/query-builder-expression.pipe';
 
 export * from './lib/angular2-query-builder.module';
+

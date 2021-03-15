@@ -14,6 +14,8 @@ import { QueryBuilderClassNames, QueryBuilderConfig } from 'angular2-query-build
     </ng-container>
   </query-builder>
   <br>
+  <div><strong>Expression:</strong> {{query | expressionFormat:entityConfig}}</div>
+  <br>
   <div>
     <div class="row">
       <p class="col-6">Control Valid (Vanilla): {{ queryCtrl.valid }}</p>
