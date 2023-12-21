@@ -78,6 +78,7 @@
     border-radius: 4px;
     box-sizing: border-box;
     width: auto;
+    min-width: 180px;
 
     &:disabled {
       border-color: transparent;

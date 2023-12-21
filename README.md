@@ -1,39 +1,35 @@
-# Angular-QueryBuilder
-A modernized Angular 4+ query builder based on jQuery QueryBuilder. Support for heavy customization with Angular components and provides a flexible way to handle custom data types.
+# NgxAngularQueryBuilder
 
-# Getting Started
+The goal of this project is to enable Angular 12+ support for the original [angular2-query-builder](https://github.com/zebzhao/Angular-QueryBuilder). It is *not* production ready. This project may not be maintained. Should the original project become active again, this library may be abandoned.
 
-## Install
+## I suggest forking this project if it is critical to your project because I may not update this regularly. If you want to contribute to maintaining this project open an issue.
 
-- Angular 9, use 0.6.0
-- Angular 8, use 0.5.1
-- Angular 6-7, use 0.4.2
-- Angular 4-5, use 0.3.2
+This project uses code from https://github.com/designermanjeets/Angular-QueryBuilder a fork of https://github.com/zebzhao/Angular-QueryBuilder both developed under the MIT License.
 
-`npm install angular2-query-builder`
+# Versions
 
-## Demo
-Play with the [Demo here](https://zebzhao.github.io/Angular-QueryBuilder/demo/).
+Use the following versions depending upon your angular version
 
-[Editable Demo](https://zebzhao.github.io/Angular-QueryBuilder/editor/)
-
-## Documentation
-
-[Documentation link](https://zebzhao.github.io/Angular-QueryBuilder/)
+- Angular 12 & 13 - Versions ^0.0.5
+- Angular 13 - Versions 13.x.x
+- Angular 14 - Versions 14.x.x
+- Angular 15 - Versions 15.x.x
+- Angular 16 - Versions 16.x.x
 
 # Examples
+
+npm install ngx-angular-query-builder
 
 ## Basic Usage
 
 ##### `app.module.ts`
 ```javascript
-import { QueryBuilderModule } from "angular2-query-builder";
+import { NgxAngularQueryBuilderModule } from "ngx-angular-query-builder";
 import { AppComponent } from "./app.component"
 
 @NgModule(imports: [
   ...,
-  QueryBuilderModule,
-  IonicModule.forRoot(AppComponent) // (Optional) for IonicFramework 2+
+  NgxAngularQueryBuilderModule,
 ])
 export class AppModule { }
 ```
@@ -46,7 +42,7 @@ export class AppModule { }
 ```
 ##### `app.component.ts`
 ```javascript
-import { QueryBuilderConfig } from 'angular2-query-builder';
+import { QueryBuilderConfig } from 'ngx-angular-query-builder';
 
 export class AppComponent {
   query = {
@@ -56,7 +52,7 @@ export class AppComponent {
       {field: 'gender', operator: '>=', value: 'm'}
     ]
   };
-  
+
   config: QueryBuilderConfig = {
     fields: {
       age: {name: 'Age', type: 'number'},
@@ -309,9 +305,33 @@ Directive to replace the default remove single rule button component.
 |`removeRule`|`(rule: Rule) => void`|Function to handle removing a rule|
 
 ## Dependencies
-- Angular 8+
+- Angular 12+
 
-That's it.
 
-# Workflow
-See the [angular-library-seed](https://github.com/trekhleb/angular-library-seed) project for details on how to build and run tests.
+
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.13.
+
+## Development server
+
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+## Code scaffolding
+
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+
+## Build
+
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+
+## Running unit tests
+
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+## Running end-to-end tests
+
+Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+

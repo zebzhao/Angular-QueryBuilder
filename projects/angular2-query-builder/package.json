@@ -1,11 +1,13 @@
 {
-  "name": "angular2-query-builder",
-  "version": "0.0.1",
+  "name": "ngx-angular-query-builder",
+  "version": "16.0.0",
+  "description": "Port of angular2-query-builder from github.com/designermanjeets/Angular-QueryBuilder in order to support angular 12+",
+  "license": "MIT",
   "peerDependencies": {
-    "@angular/common": ">=8.0.0",
-    "@angular/core": ">=8.0.0",
-    "@angular/forms": ">=8.0.0",
-    "rxjs": ">=6.0.0",
-    "tslib": ">=1.8.0"
+    "@angular/common": "^16.0.0",
+    "@angular/core": "^16.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
   }
 }

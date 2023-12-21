@@ -3,7 +3,7 @@
     <i [ngClass]="getClassNames('arrowIcon')"></i>
   </ng-template>
 
-  <a *ngIf="allowCollapse" (click)="toggleCollapse()" [ngClass]="getClassNames('arrowIconButton', data.collapsed ? 'collapsed' : null)">
+  <a *ngIf="allowCollapse" (click)="toggleCollapse()" [ngClass]="getClassNames('arrowIconButton', data.collapsed ? 'collapsed' : '')">
     <ng-container *ngIf="getArrowIconTemplate() as template; else defaultArrowIcon">
       <ng-container *ngTemplateOutlet="template; context: getArrowIconContext()"></ng-container>
     </ng-container>
@@ -51,7 +51,7 @@
   </ng-template>
 </div>
 
-<div #treeContainer (transitionend)="transitionEnd($event)" [ngClass]="getClassNames('treeContainer', data.collapsed ? 'collapsed' : null)">
+<div #treeContainer (transitionend)="transitionEnd($event)" [ngClass]="getClassNames('treeContainer', data.collapsed ? 'collapsed' : '')">
   <ul [ngClass]="getClassNames('tree')" *ngIf="data && data.rules">
     <ng-container *ngFor="let rule of data.rules;let i=index">
 
@@ -73,7 +73,7 @@
               </div>
             </ng-template>
 
-            <div *ngIf="entities?.length > 0" class="q-inline-block-display">
+            <div *ngIf="entities?.length" class="q-inline-block-display">
               <ng-container *ngIf="getEntityTemplate() as template; else defaultEntity">
                 <ng-container *ngTemplateOutlet="template; context: getEntityContext(rule)"></ng-container>
               </ng-container>
